@@ -1,0 +1,88 @@
+	  Flow Select: A Time-Based Selection and Operation
+		    Technique for Sketching Tools
+
+		    Gabe Johnson       Mark Gross
+
+		       Computational Design Lab
+		      Carnegie Mellon University
+
+Abstract.
+
+Motivation.
+
+(the problem we are addressing)
+
+  - Editing two dimensional freehand drawings and curves (drawing, CAD?)
+  - WIMP interfaces are designed with the mouse in mind [Ramos]
+  - existing methods for editing curves (e.g., editing by control points, overtracing)
+               and what is wrong with these methods
+  - Flow select is used for operating on portions of a stroke. 
+  - Used to quickly select a portion of a drawn stroke and correct
+
+Technique.
+
+  - Pen input normalized to sequences of points of uniform distance
+  - Modeless interaction:
+    - Pen strokes are interpreted as ink until it has reason to reinterpret
+    - Holding the pen down at the same spot begins a flow select
+      - To account for shaky hands, pen must be held within some radius rather than at a single pixel location
+    - Point on a stroke nearest the pendown is the epicenter
+    - Before selection begins, each point along stroke is assigned an 'effort' value
+      - Most obvious 'effort' value is arc distance from pendown
+      - Less obvious 'distance' is function of arc distance and other things:
+        - Curvature (e.g. so selection progresses more slowly over a curve than a straight section)
+	- Corners (e.g. so selection stops temporarily or permanently at a sharp corner)
+      - effort function is pluggable for quick experimentation during prototyping
+      - effort function is nondecreasing from epicenter, which has zero effort
+    - Selection strength of each point
+      - Flows outward from epicenter as a function of time and (pt.effort / total.effort)
+      - Strength is 0..1 (0 means not selected, 1 means fully selected)
+      - A few selection strength functions, with x = pt.effort / total.effort
+      -  Linear: max (0, 1 - x)
+      -  Polynomial: max (0, 1 - x^y) for some value of y, such as 2
+      -  Trigonometric: 1 - ((-cos(π * x)) + 1) / 2 , for x <= 1, 0 for x > 1
+      - The trig function is the 'best' selector because it
+         asymptotically approaches full selection for 'near' points
+         and asymptotically approaches no selection for 'distant'
+         points -- it's first derivative is zero at x=0 and x=1
+    - Moving the pen causes flow selection to and and an operation to begin.
+    - Default operation is a move, which moves each point a scaled
+       amount according to its selection strength; if I move my mouse
+       by 2,1, a point that is .25 selected will move by .5, .25
+    - Holding the pen again shifts into a smoothing operation
+      - Smoothing is an iterative process that tweens a selected
+        region towards a natural cubic spline.
+      - If a sequence is close enough to the current spline, a new
+        spline with fewer control points is constructed based on the
+        current selection, until there is only a straight line
+      - Smoothing stops when the user either lifts the pen, or moves
+        it. If the user moves the stylus without lifting it, moving
+        back to the move operation
+  - After lifting the stylus, future scribbles are interpreted as ink  
+
+Applications.
+
+  - Users initial reaction is uniformly 'wow'
+  - Currently in early prototype phase, only have proof-of-concept
+  - Specific things we think this would be good for:
+
+    - The 'modeless' aspect lends itself to a more fluid user experience
+    - A quick correction technique for novices using a diagramming or
+      cartoon sketch tool
+    - Professional graphics packages (vector or raster)
+      - feathered selection
+      - controlling gradual operation functions such as brightness/contrast in context
+
+Future Work.
+  - extension to 3D; work with selecting not only curved lines but curved surfaces and volumes
+  - Gestures:
+    - flow select followed by a pen gesture to choose an operation
+    - pen gesture followed by flow select (followed by a pen gesture, and so on)
+    - example: south/north/hold ==> menu
+    - example: circle/hold ==> color chooser
+    - example: flow-select/pigtail ==> delete selection
+  - toolkit / application embedding
+
+acknowledgements
+
+references
