@@ -1,0 +1,15 @@
+Arvo, J. and Novins, K. 2005. Appearance-preserving manipulation of hand-drawn graphs. In Proceedings of the 3rd international Conference on Computer Graphics and interactive Techniques in Australasia and South East Asia (Dunedin, New Zealand, November 29 - December 02, 2005). GRAPHITE '05. ACM Press, New York, NY, 61-68. DOI= http://doi.acm.org/10.1145/1101389.1101400 
+
+Ramos, G., Boulos, M., and Balakrishnan, R. 2004. Pressure widgets. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (Vienna, Austria, April 24 - 29, 2004). CHI '04. ACM Press, New York, NY, 487-494. DOI= http://doi.acm.org/10.1145/985692.985754 
+
+Ren, X. and Moriya, S. 2000. Improving selection performance on pen-based systems: a study of pen-based interaction for selection tasks. ACM Trans. Comput.-Hum. Interact. 7, 3 (Sep. 2000), 384-416. DOI= http://doi.acm.org/10.1145/355324.355328 
+
+Hinckley, K., Baudisch, P., Ramos, G., and Guimbretiere, F. 2005. Design and analysis of delimiters for selection-action pen gesture phrases in scriboli. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (Portland, Oregon, USA, April 02 - 07, 2005). CHI '05. ACM Press, New York, NY, 451-460. DOI= http://doi.acm.org/10.1145/1054972.1055035 
+
+Kara, L. B. and Stahovich, T. F. 2004. Hierarchical parsing and recognition of hand-sketched diagrams. In Proceedings of the 17th Annual ACM Symposium on User interface Software and Technology (Santa Fe, NM, USA, October 24 - 27, 2004). UIST '04. ACM Press, New York, NY, 13-22. DOI= http://doi.acm.org/10.1145/1029632.1029636 
+
+Kurtenbach, G., Fitzmaurice, G., Baudel, T., and Buxton, B. 1997. The design of a GUI paradigm based on tablets, two-hands, and transparency. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (Atlanta, Georgia, United States, March 22 - 27, 1997). S. Pemberton, Ed. CHI '97. ACM Press, New York, NY, 35-42. DOI= http://doi.acm.org/10.1145/258549.258574 
+
+Saund, E. and Lank, E. 2003. Stylus input and editing without prior selection of mode. In Proceedings of the 16th Annual ACM Symposium on User interface Software and Technology (Vancouver, Canada, November 02 - 05, 2003). UIST '03. ACM Press, New York, NY, 213-216. DOI= http://doi.acm.org/10.1145/964696.964720 
+
+Saund, E. and Moran, T. P. 1994. A perceptually-supported sketch editor. In Proceedings of the 7th Annual ACM Symposium on User interface Software and Technology (Marina del Rey, California, United States, November 02 - 04, 1994). UIST '94. ACM Press, New York, NY, 175-184. DOI= http://doi.acm.org/10.1145/192426.192494 
