@@ -1,0 +1,40 @@
+#!/usr/bin/perl
+
+main:
+{
+
+    $argc = @ARGV;
+    if ($argc < 2) {
+        print "usage: ./sub old_string new_string file1 [file2 file3 ...]\n";
+        exit(0);
+    }
+    $old_string = shift(@ARGV);
+    $new_string = shift(@ARGV);
+ 
+    foreach $file (@ARGV){
+        update($file, $old_string, $new_string);
+    }
+ 
+    exit (0);
+
+}
+
+sub update {
+  local ($filename) = $_[0];
+  local ($old_string) = $_[1];
+  local ($new_string) = $_[2];
+  local (@lines, $file);
+   
+  open(FILE, $filename);
+  @lines = <FILE>;
+  $" = ""; # no spaces between elements when converting array to scalar
+  $file = "@lines";
+  close(FILE);
+ 
+  $file =~ s/$old_string/$new_string/gsi;
+ 
+  open(FILE, ">$filename");
+  print FILE $file;
+  close(FILE);
+}
+

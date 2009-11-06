@@ -1,0 +1,319 @@
+;; Gabe Johnson's .emacs file, most of which was stolen, plundered,
+;; and plagarized from various people on the Intertron.
+;;
+;; An updated version may or may not be found at http://six11.org.
+
+;; Add some things to the load path
+(setq exec-path (cons "/opt/local/bin" exec-path))
+(setq exec-path (cons "/opt/local/sbin" exec-path))
+
+(tool-bar-mode)
+(menu-bar-mode -1)
+
+;; Are we running XEmacs or Emacs?
+(defvar running-xemacs (string-match "XEmacs\\|Lucid" emacs-version))
+
+;; Avoid switching to nonexistant buffers
+(defadvice switch-to-buffer (before exiting-buffer
+				    activate compile)
+  "When interactive, switch to existing buffers only, unless given a prefix argument."
+  (interactive 
+   (list (read-buffer "Switch to buffer: "
+		      (other-buffer)
+		      (null current-prefix-arg)))))
+
+
+;;; My location for external packages.
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/"))
+
+(global-set-key [delete] 'delete-char)
+(global-set-key [kp-delete] 'delete-char)
+
+;; Turn on font-lock mode for Emacs
+(cond ((not running-xemacs)
+       (global-font-lock-mode t)
+))
+
+;; Visual feedback on selections
+(setq-default transient-mark-mode t)
+
+;; Always end a file with a newline
+(setq require-final-newline t)
+
+(setq inhibit-startup-message t)
+
+;; Stop at the end of the file, not just add lines
+(setq next-line-add-newlines nil)
+
+;; Enable wheelmouse support by default
+(cond (window-system
+       (mwheel-install)
+))
+
+;; The following requires the color-theme package from 
+;; http://www.nongnu.org/color-theme/
+(require 'color-theme)
+(color-theme-hober)
+
+(show-paren-mode)
+
+;(require 'html-helper-mode)
+(require 'sgml-mode)
+;(require 'cua)
+
+;; PMD is a static analizer for Java, and it is kind of cool, but you can
+;; remove this if you don't use it.
+(require 'pmd)
+
+
+;; Ruby stuff
+(autoload 'ruby-mode "ruby-mode"
+  "Mode for editing ruby source files" t)
+(setq auto-mode-alist
+      (append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
+(setq interpreter-mode-alist (append '(("ruby" . ruby-mode))
+                                     interpreter-mode-alist))
+(autoload 'run-ruby "inf-ruby"
+  "Run an inferior Ruby process")
+(autoload 'inf-ruby-keys "inf-ruby"
+  "Set local key defs for inf-ruby in ruby-mode")
+(add-hook 'ruby-mode-hook
+          '(lambda ()
+            (inf-ruby-keys)))
+
+;; Org-mode stuff
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+;;; Groovy stuff
+(autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
+(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
+(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+
+;; OpenGLSL stuff 
+(autoload 'glsl-mode "glsl-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.vp\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.fp\\'" . glsl-mode))
+
+;; Associate c-mode with the .js extension
+(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
+
+;; CSS stuff
+(autoload 'css-mode "css-mode")
+(setq auto-mode-alist       
+      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
+
+(autoload 'pmd-current-buffer "pmd" "PMD Mode" t)
+;(autoload 'pmd-current-dir "pmd" "PMD Mode" t)
+
+;(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
+(setq auto-mode-alist (cons '("\\.html$" . xml-mode) auto-mode-alist))
+
+;; ; Useful shortcuts
+(global-set-key "\C-\M-s" 'ispell-buffer)
+(global-set-key "\M-e" 'et-al)
+(global-set-key "\M-g" 'goto-line)
+(global-set-key "\M-[" 'previous-error)
+(global-set-key "\M-]" 'next-error)
+(global-set-key "\M--" 'color-theme-arjen) 
+(global-set-key "\M-=" 'color-theme-pok-wog)
+(global-set-key "\M-'" 'rebuild)
+(global-set-key "\M-p" 'pmd-current-buffer)
+(global-set-key "\M-j" 'jalopy)
+(global-set-key "\M-t" 'java-try)
+(global-set-key "\M-s" 'java-getset)
+(global-set-key "\M-o" 'java-logger)
+(global-set-key "\M-c" 'copy-region-as-kill)
+(global-set-key "\M-v" 'yank)
+(global-set-key "\C-\\" 'uncomment-region)
+(global-set-key "\M-m" 'java-javadoc)
+(global-set-key "\M-0" 'font-lock-fontify-buffer)
+(global-set-key "\M-l" 'recompile)
+(global-set-key "\M-n" 'new-frame)
+(global-set-key "\M-\\" 'comment-region)
+(global-set-key "\M-!" 'texshop-typeset)
+(global-set-key "\M-@" 'texshop-bibtex)
+
+(setq compile-command "ant -emacs compile 2>&1")
+(custom-set-variables
+  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+; '(CUA-mode t nil (cua))
+ '(c-basic-offset 2)
+ '(case-fold-search t)
+ '(current-language-environment "ASCII")
+ '(global-font-lock-mode t nil (font-lock))
+'(pmd-home "/usr/local/pmd")
+'(pmd-java-home "/usr/bin/java")
+'(pmd-ruleset-list (quote ("rulesets/imports.xml" "rulesets/basic.xml" "rulesets/unusedcode.xml" "rulesets/strings.xml" )))
+;; '(pmd-ruleset-list (quote ("rulesets/imports.xml" "rulesets/unusedcode.xml" )))
+ '(show-paren-mode t nil (paren))
+ '(transient-mark-mode t))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
+  ;; Your init file should contain only one such instance.
+ '(font-lock-string-face ((t (:foreground "Khaki"))))
+ '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod" :weight bold)))))
+
+(defun up-one () (interactive) (scroll-up 1))
+(defun down-one () (interactive) (scroll-down 1))
+(global-set-key [C-mouse-4] 'down-one)
+(global-set-key [C-mouse-5] 'up-one)
+(global-set-key [M-mouse-4] 'down-one)
+(global-set-key [M-mouse-5] 'up-one)
+(global-set-key [C-prior] 'down-one)
+(global-set-key [C-next] 'up-one)
+(global-set-key [M-prior] 'down-one)
+(global-set-key [M-next] 'up-one)
+
+(defun et-al ()
+  "Inserts a LATEX et. al in italics"
+  (interactive)
+  (insert "\\textit{et. al}")
+  )
+
+(defun java-javadoc ()
+  "Create a javadoc comment"
+  (interactive)
+  (beginning-of-line)
+  (insert "/**")
+  (c-indent-command)
+  (insert "\n* ")
+  (c-indent-command)
+  (insert "\n*/")  
+  (c-indent-command)
+  (insert "\n")
+  (end-of-line -1)
+  )
+
+(defun java-logger ()
+  "Output logger.log("
+  (interactive)
+  (setq src (read-from-minibuffer "Source: " nil nil nil nil nil nil))
+  (setq msg (read-from-minibuffer "Message: " nil nil nil nil nil nil))
+  (insert (format "Debug.out(\"%s\", \"%s\");" src msg))
+  (c-indent-command)
+)
+
+(defun java-sysout ()
+  "Output the string System.out.println("
+  (interactive)
+  (insert "System.out.println(")
+)
+
+
+;; Java getter/setter generator.
+(defun java-getset ()
+  "Generate a default source for a Java getter and setter methods."
+  (interactive)
+  (setq var (split-string (read-from-minibuffer "Variable (eg. int index): "
+                                                nil nil nil nil nil nil) " "))
+  (setq type (car var))
+  (setq name (car (cdr var)))
+  (beginning-of-line)
+  (c-indent-command)
+  (insert         "/**")
+  (c-indent-command)
+  (insert (format "\n* Set the value of %s." name))
+  (c-indent-command)
+  (insert         "\n**/")
+  (c-indent-command)
+  (insert (format "\npublic void set%s(%s %s_) {" (upcase-initials name) type name))
+  (c-indent-command)
+  (insert (format "\n%s = %s_;" name name))
+  (c-indent-command)
+  (insert         "\n}")
+  (c-indent-command)
+  (insert         "\n\n/**")
+  (c-indent-command)
+  (insert (format "\n* Get the value of %s." name))
+  (c-indent-command)  
+  (insert         "\n**/")
+  (c-indent-command)
+  (insert (format "\npublic %s get%s() {" type (upcase-initials name)))
+  (c-indent-command)
+  (insert (format "\nreturn %s;" name))
+  (c-indent-command)
+  (insert         "\n}")
+  (c-indent-command)
+  (insert         "\n");
+)
+
+;; Java try-catch generator.
+(defun java-try ()
+  "Generate a skeleton source for a Java try-catch-finally statements."
+  (interactive)
+  (setq name (read-from-minibuffer "Exception: " "Exception" nil nil nil nil nil))
+  (beginning-of-line)
+  (c-indent-command)
+  (insert         "try {\n")
+  (c-indent-command)
+  (insert (format "\n} catch (%s ex) {" name))
+  (c-indent-command)
+  (insert         "\nex.printStackTrace();")
+  (c-indent-command)
+  (insert         "\n}")
+  (c-indent-command)
+  (insert         "\n")
+  (end-of-line -3)
+)
+
+;; Java class skeleton generator.
+(defun java-class ()
+  "Generate a skeleton source for a Java class."
+  (interactive)
+  (setq name (read-from-minibuffer "Class name: " nil nil nil nil nil nil))
+  (setq pck (read-from-minibuffer "Package: " nil nil nil nil nil nil))
+  (setq exts (read-from-minibuffer "Extends: " "extends " nil nil nil nil nil))
+  (setq impl (read-from-minibuffer "Implements: " "implements " nil nil nil nil nil))
+  (insert (format "package %s;\n" pck))
+  (insert         "\n")
+  (insert         "/**\n")
+  (insert         " * \n") 
+  (insert         " **/\n")
+  (insert (format "public class %s %s %s {\n" name exts impl))
+  (insert         "  \n")
+  (insert         "}\n")
+  (end-of-line -1)
+)
+
+;; Switches to the *compilation* buffer and recompiles
+(defun rebuild ()
+  "Switch to compilation buffer and recompile"
+  (interactive)
+  (save-buffer)
+  (switch-to-buffer-other-window "*compilation*")
+  (recompile)
+)
+
+(defun jalopy ()
+  "Formats the current buffer using Jalopy"
+  (interactive)
+  (save-buffer)
+  (setq jalopy-file-name buffer-file-name)
+  (shell-command-to-string
+   (concat "/usr/local/jalopy/bin/jalopy " jalopy-file-name))
+  (revert-buffer t t nil)
+)
+
+(defun texshop-typeset ()
+  (interactive)
+  (let ((docname (expand-file-name (buffer-file-name))))
+    (do-applescript 
+     (format "tell application \"TeXShop\" to open_for_externaleditor at \"%s\"" docname))
+    (do-applescript 
+     (format "tell application \"TeXShop\" to typeset document \"%s\"" 
+	     (file-name-nondirectory docname)))))
+
+(defun texshop-bibtex ()
+  (interactive)
+  (let ((docname (expand-file-name (buffer-file-name))))
+    (do-applescript 
+     (format "tell application \"TeXShop\" to open_for_externaleditor at \"%s\"" docname))
+    (do-applescript 
+     (format "tell application \"TeXShop\" to bibtex document \"%s\"" 
+	     (file-name-nondirectory docname)))))
