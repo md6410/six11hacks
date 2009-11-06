@@ -1,17 +1,12 @@
 This is Olive version 2.
 
+It has a bunch of ink analyzers and visualizers that you can turn on
+and off. It has some interesting ideas that I have used in subsequent
+work, but architecturally it was a mess.
+
 To compile:
-
-   You will need the following things installed: Java 1.5 (or maybe
-   higher), Apache Ant 1.6 (or higher?). When java and ant are
-   installed, you can do:
-
    $ ant compile
 
-   ... and it will put the resulting class files in the build/
-   directory.
-
 To run:
-
-   After compiling, just type ./run.
+   $ ./run
 
