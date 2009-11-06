@@ -1,0 +1,38 @@
+~/Projects/sketching-games/twitscan $ ./run twitscan.props
+field: text
+field: user/screen_name
+field: user/name
+field: user/id
+Connecting...
+Connected. Processing tweets...
+  >>>   text: "Finishing this beer, then going to bed!"
+  >>>   user/name: "Jason Pearce"
+  >>>   unixtime: 1257396001222
+  >>>   user/id: 32413600
+  >>>   user/screen_name: "pancake415"
+
+  >>>   text: "Finally done. Well not really. Done enough to go home and keep working with the comfort of a beer."
+  >>>   user/name: "elbadactle"
+  >>>   unixtime: 1257396002484
+  >>>   user/id: 16458765
+  >>>   user/screen_name: "elbadactle"
+
+  >>>   text: "Cleaning out my closet, just found some beer that @healthbledger left in there a few weeks ago. Party time."
+  >>>   user/name: "Whitney Allen"
+  >>>   unixtime: 1257396002563
+  >>>   user/id: 23125052
+  >>>   user/screen_name: "whitney_allen"
+
+  >>>   text: "Still have yet to go for the beer.  I might as well be paralyzed."
+  >>>   user/name: "Joe Yerdon"
+  >>>   unixtime: 1257396024823
+  >>>   user/id: 21847241
+  >>>   user/screen_name: "HockeyJoeGM"
+
+  >>>   text: "Pizza + beer + baseball = :]"
+  >>>   user/name: "alisun armstrong"
+  >>>   unixtime: 1257396043136
+  >>>   user/id: 61063742
+  >>>   user/screen_name: "feistycakes"
+
+
