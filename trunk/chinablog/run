@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+
+cpmunge () {
+        if ! echo $CP | /usr/bin/egrep -q "(^|:)$1($|:)" ; then
+           if [ "$2" = "after" ] ; then
+              CP=$CP:$1
+           else
+              CP=$1:$CP
+           fi
+        fi
+}
+
+addjars () {
+    for thejar in $1/*.jar
+      do
+      if [ -f "$thejar" ]; then
+          cpmunge "$thejar"
+      fi
+    done
+}
+
+addjars lib
+cpmunge build/classes
+
+if [ $# == 1 ] ; then
+    prog=$1
+    shift
+else
+    prog=org.six11.chinablog.Main
+fi
+
+java -classpath $CP $prog $@
