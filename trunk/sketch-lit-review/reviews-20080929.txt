@@ -1,0 +1,678 @@
+
+
+-------- Original Message --------
+Subject:        Sketching article reviews
+Date:   Mon, 29 Sep 2008 12:41:23 -0400
+From:   Ben Bederson <bederson@cs.umd.edu>
+To:     'Jason Hong' <jasonh@cs.cmu.edu>
+
+
+
+Hi Jason,
+
+
+
+It took a bit longer than I had hoped, but I have two good reviews for
+the sketching article for FnT in HCI.  Both reviewers like the article,
+and recommend it for publication after minor revisions.  So at this
+point, I do not feel the need for further review.  Instead, why don't
+you look at the reviews and consider how you'd like to revise the
+article to respond to them.  I don't think the revisions will have to be
+too significant, so hopefully it won't take that long---maybe a month?
+
+
+
+-          Ben
+
+
+=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-
+-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=
++~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=+
+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=+~
++-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=+~+
+
+
+REVIEW 1
+=======
+
+
+
+This survey paper gives a pretty good overview of sketch recognition
+research.  With a few exceptions noted below, the organization and
+selection content are by and large in good shape.  With a serious but
+not too strenuous effort on the authors' part, it can be ready for
+publication within one revision cycle.
+
+ Overall, the scope of the paper should be better defined.  The main
+confusion lies with the definitions of sketching and design.   The
+title indicates that the paper is about sketching for design.  But
+this begs the question, what is the full scope of sketching activity,
+and how does sketching for design play into this?   This issue arises
+repeatedly throughout the paper.    The authors come from a design
+perspective and have something to teach, yet at the same time they
+sometimes write as if the reader is supposed to know design
+methodology.  For example, it will be confusing to some readers to
+read that design is not only a process of solving a problem, but of
+defining problems to solve.    The detailed notes below point out
+instances of these problems.    Otherwise the paper covers a lot of
+ground pretty well with only a few omissions.
+
+ The abstract does not properly frame the paper.   While the title
+names design as a topical focus, the word "design" is mentioned only
+in secondary status in the abstract.  If design is to bound the scope
+for considering sketching in this paper, then this boundary should be
+made more prominant in the abstract.
+
+Section 1
+
+ The paper opens with the sentence, "Everybody sketches."  This is a
+nice rhetorical flourish, but in an academic paper every statement
+must be factually and literally true.  This statement is not.
+Immediately the reader is baited into thinking of counterexamples and
+the authors' credibility is immediately called into question.
+
+ More generally, the introduction leaves the reader somewhat
+off-balance about the status of sketching with respect to design.
+Let's see.   "Sketching plays a fundamental role in design."  Always?
+If it's fundamental, then it would seem that all design involves
+sketching?  Is this really true?  Can design not be done without
+sketching?  Can blind people not design anything?  Many of these
+problems can probably be fixed by adding qualifiers.  It makes the
+writing less punchy but it makes for better accuracy.
+
+ Then, can sketches occur outside of design?  What about handwritten
+notes?  Margin graphics?  Calculations?  Doodles?    It's not clear from
+this introduction.
+
+ On Page 2 the paper defines a sketch to be a drawing that is made by
+hand and done quickly.  This would seem to exclude rough drawings
+created with the aid of drafting tools or rulers.  Can these not be
+sketches?  If clay and cardboard can be sketches, then why not?  This
+would also seem to exclude drawings done freehand by a designer who works
+slowly and deliberately.  Are these exclusions intentional?  I might
+suggest that an extrinsic definition be better suited to delimit the
+scope of a paper about a concept with inherently fuzzy boundaries that
+"sketch" has.   If the purpose is to survey intelligent user
+interfaces for sketching for design, it is best to be inclusive of
+disparate applications, approaches, and methodologies.
+
+Page 2:
+
+"Sketching has been a topic of interest for quite some time."
+
+Based on what follows, it looks like this should be
+
+"Sketching has been a topic of interest in Computer Science for quite
+some time."
+
+Page 2:
+
+"The diversity makes it difficult..."
+should be
+"Their diversity makes it difficult..."
+
+Page 3:
+
+"...shows the user creating a rivet..."
+
+Actually the user is "drawing", or maybe "defining" a rivet, not
+actually creating i.e. manufacturing one.
+
+Page 5:
+
+Broken sentence at the end of the first paragraph.  Maybe should be
+"Today, pen based Tablet PCs...".  But "today" is used in the previous
+sentence.
+
+Page 5;
+
+"with which people can represent,..."
+maybe could be
+"with which people can express,..."
+
+Page 7:
+The paragraph on Traditional sketching starts off saying we need to
+understand sketching without computation first.  But then the
+following sentence tells us about computational support for sketching.
+Smooth this out.
+
+Section 2
+
+Page 9: The authors are designers and have a particular notion of what
+design is about that apparently distinguishes the design goal from
+"the problem".  Most in computer science view the starting point of
+activities to be a problem definition, and all work from there is
+understanding the constraints at work in order to solve the problem.
+Thus, some readers are likely to react with confusion to the way this
+section and others in the paper are written.
+
+Also, the statement that "the interaction is between the designer and
+the drawing; sketching is merely the medium in which this conversation
+takes place" is somewhat baffling.   Isn't the paper and pencil the
+medium (or stylus or mouse and computer in the case of
+computer-supported sketching)?  How can the drawing be a
+conversational partner?
+
+Page 9:
+
+Paragraph 3 suggests that a phone number written on a whiteboard is a
+sketch.   Again, the scope of sketching remains murky in this paper.
+If a phone number is a sketch, what a about a name written next to the
+phone number?  Then what about purely textual handwritten notes?
+If the scope is large and inclusive of non-drawing graphical
+expression then that's fine, but please say so.
+
+Page 10:
+
+"While designing, we iteratively explore and refine the problem
+definition..."   Again, this is foreign thinking to computer
+scientists.
+
+Page 10:
+
+"... but designers find them as they explore."  Could use a more
+powerful word here, than "find".  How about "discover", "reveal",
+"draw out", "encounter", "elaborate"?
+
+Page 11:
+
+"...studied the differences between students and professional
+architects..."
+
+Shouldn't "students" be singular here?  Isn't the intent,
+"student architects"?
+
+Page 11:
+
+"Experimental and observational studies imply..."  This is a rather
+vacuous statement and is not adequately supported by the rest of the
+paragraph.   What about different styles, different schools? How
+universal is this across domains, cultures, eras?
+
+Page 12:
+
+"Today most software tools..."
+does not logically lead to
+"These observations..."
+
+Page 12:
+
+"come up with"  is a bit informal maybe?
+
+Page 13:
+
+The first paragraph of of Section 2.3 is fuzzy.  What is a notational
+system? Please define.
+
+Section 2.3 is where this paper could contribute a taxonomy to help
+the reader place sketching and design in a larger context.  Maybe a
+venn diagram?   A 2x2 chart?   Some sort of organizational principle
+would help a lot.   Concepts to include include:
+sketch, drawing, diagram, annotation, doodle, graphics, figure,
+schematic, plans, illustration, map, design, plan, outline,
+visualization, mockup.
+
+Also, a dileneation of the ingredients of a sketch design would be
+useful.  These might include domain lines (e.g. part boundaries,
+wires, walls), symbology, notational linework, dimensions or
+denominations, annotations, notes, doodles, region fillers.
+
+This might help in tightening up the paragraph on Page 14 starting with,
+"Freehand diagrammatic drawings..."
+The definitions of "abstract", "ambiguous", and "imprecise" are
+unclear and need to be explained or possibly illustrated with a
+figure.
+
+Page 16:
+
+"...as they understand them, allowing..."
+probably should be
+"...as they understand them, and allows..."
+
+Page 18:
+
+There needs to be a bit more detail about the studies of Goel.  Did
+they use formal or informal computer drawing application, e.g. Paint
+or Powerpoint?
+
+Page 19:
+
+"Because sketches are ambiguous..."
+I don't think you mean all sketches are always ambiguous.  Maybe say
+"Because sketch elements can easily be ambiguous..."
+
+Page 19:
+
+"We can make use of consistencies of how people..."
+should be
+"We can make use of consistencies in how people..."
+
+Page 19:
+
+The last paragraph ends abruptly.  I expected more about how
+consistencies in the mechanical act of drawing can be used to further
+guide recognition.   Just one small example will do here.
+
+Section 3
+
+Section 3 needs a statement somewhere about the quality of hardware
+available for computer-based sketch recognition development and
+deployment.  Is it good enough now?  What would be ideal?  What needs
+to be improved?
+
+
+Page 21:
+
+Is PADD a class of applications or the name of Guimbretiere's research
+platform?   Why does this label encompass all of the work described in
+this paragraph?
+
+Page 23:
+
+Some devices can sense stylus pressure.   Please say more.
+How significant is this in getting a "sketchy" line quality?
+For example, does the hardware support texture region filling using
+scratchy, lightweight strokes?  Is this important to designers?
+
+Section 3 should mention buttons somewhere.   Buttons are a critical
+part of a mouse.  Are they viable on a pen?
+
+Page 23:
+
+The LiveBoard is defunct.  But other manufacturers make different
+versions of the SmartBoard.  Try the PolyVision web site.
+Mention other methods for non-marker based online input capture.
+Recently someone rigged up a Wii as a digital ink marker.
+
+Page 24:
+
+The leading camera-based marker sensing technology is the DViT system
+from SMART Technologies.
+
+Section 4
+
+Page 26:
+
+When talking about error rates be clear about what type of rates you
+mean. A 1% per-character error rate is much worse than a 1% per-word
+error rate.
+
+Page 26:
+
+"a spell checker"
+
+This is less sophisticated than it could be.   The general case would
+be called a language model, and this can include dictionaries, n-gram
+statstics, and syntax models.
+
+Page 28:
+
+"...system may zealously..."
+Somehow reading this I got the feeling it would be better to say
+"...system might zealously..."
+because there is no question of permission involved, but of a design
+policy that is made in the past tense to the system taking an action.
+
+Page 28:
+
+I would question the use of quotes around "Courses of Action" for military
+commanders.  "Course of Action Diagram" is a technical term of art.
+Write it however Forbus writes it.
+
+Page 29:
+
+The first paragraph of Section 4.2 contains an important error.
+
+User input in sketch based applications is referred to as *digital
+ink* (*ink* for short after *digial ink* has been established) *only*
+when it is online input.  Digital ink contains timing data.
+Blueprints are rasters.  Programs are available for vectorizing them,
+but the result is curves or polygons, but still not full digital ink
+because there is no timing data.
+
+Perhaps some of the explanation of the difference between online and
+offline on Page 37 could be brought to here.
+
+Page 30:
+
+The table might use the word "Genre" instead of "Type of sketch"
+
+Page 32:
+
+Gennari notwithstanding, segmentation, grouping, and parsing are
+different things.  Segmentation is partitioning of undifferentiated
+data into multiple objects.   Grouping is identification of collections
+of data objects that should be treated as units.  Parsing might
+involve grouping, but primarily involves assignment of objects to
+roles under a model.
+
+Page 35:
+
+Figure 4.2.2 is labeled as Figure 4.2.
+
+Section 4.5 needs to draw out the distinction between single-stroke
+and multi-stroke entities.   All of the discussion of recognizers
+needs to be clear about their capability in this regard.   I recognize
+that this may take a bit more research and rewriting, but this is very
+important and should be one of the key ideas this paper should get
+across to anyone learning about this field.
+
+Page 38:
+
+To call examples and models of symbols or objects "templates" is
+somewhat questionable.  Maybe some in the field have bought into this
+terminology, but to many the word "template" will convey
+concreteness, literal shape or form, and lack of abstraction.  I would
+not refer to a rule system for classifying gestures as templates.
+
+Page 39:
+
+More depth is necessary in Section 4.5.2.  How big are these
+libraries?  How are they indexed?   If they are big, are they slow,
+therefore?  How are exemplars compared with the target? Are these
+single-stroke or multi-stroke?    Finally, which of the listed methods
+should a student go to who just wants something that works?
+
+Since some of these methods are discussed later in Section 4.6,
+a forward pointer would be in order.
+
+Page 39:
+
+What is the definition of a grapheme?  A stroke?
+
+Page 40:
+
+"...based on an understanding of the domain the input models".
+
+The input does not model the domain.  The input contains an instance
+of a sketch.  The system can succeed on an input instance only if it
+obeys the system's model of constraints of the domain.
+
+Page 40:
+
+"belief of a hypothesis"
+should be
+"belief in a hypothesis"
+
+Page 41:
+
+The discussion of SketchREAD should address the scalability of this
+approach.
+
+Page 41:
+
+"They operate on isolated elements and do not perform..."
+
+Does this mean they operate on isolated strokes? If strokes, then say
+strokes instead of elements to reduce unnecessary ambiguity.
+
+Page 43:
+
+"This later word was extended with gdt (later called Quill)."
+
+What is gdt?
+
+Section 4.7 needs to more directly address the key issue of depth
+ambiguity and different methods for inflation in the z-dimension.  I
+don't mean Necker ambiguity, I mean quantitative depth.  There is
+quite a bit of work on this and some of it should be mentioned.
+
+Page 45:
+
+"...there is an infinite number of ways..."
+should be
+"...there are an infinite number of ways..."
+
+Page 45:
+
+In the text, please clarify the following distinction:
+A wireframe model shows all surface boundaries (edges) in a
+"see-through" view; hidden lines are shown.
+An orthogonal view refers to viewing geometry but normally treats
+surfaces as opaque, so hidden lines are removed.
+
+Page 46:
+
+"...adjoining faces is not visible 4.6"
+
+Should the "4.6" be removed?
+
+Page 46:
+
+Figure 4.7 is referred to as Figure 4.7.1.
+
+Page 51:
+
+"...should be recognized, displayed and how..."
+should be
+"...should be recognized, displayed, and how..."
+
+A stylistic point is in order. Each section contains a concluding
+paragraph summarizing what was discussed, and anticipating what will
+come next.   And, each section contains an introductory paragraph
+explaining what has been discussed and outlining what will come next.
+These might read as redundant.
+
+Section 4.7 should most definitely include some discussion of the
+diagram and engineering drawing recognition literature.  Some of this
+literature actually addresses hand-drawn input.  For example, the
+paper will be deficient without discussion of the work of Josep
+Llados.
+
+Section 5
+
+I would recommend for Section 5 that before launching into a
+discussion of managing recognition error, the section offer a listing
+or taxonomy of tasks.   Tasks include drawing new material, modifying
+existing material in sketch form, copying existing material, deleting
+some part of a sketch, formalizing existing material, de-formalizing
+or roughening existing material, performing domain-specific operations
+such as running a simulation, changing a viewpiont, or switching
+between graphical renderings.    The idea is to give the reader some
+global idea of what interaction is for and about.
+
+Page 59:
+
+Pie menus are beautiful.  But are they only of academic significance?
+Please list some real applications that use them.
+
+Page 59:
+
+Does pressure really work as a UI modality?  I thought the answer was
+no.
+
+Page 59:
+
+What are Gedrics?  This needs some amplification or illustration.
+
+Page 67:
+
+Somewhere in Section 5.7 the paper should probably mention Google
+SketchUp.   This is widely used and to discuss it and place it in a
+larger framework is an opportunity for this paper to hook up with the
+real world.
+
+Page 69:
+
+Again, is this summary paragraph really necessary?
+
+Section 6:
+
+Is "every worthy work" grammatical?   I found it jarring.
+
+Page 71:
+
+"(We too have been guilty of this sin.)" is too grandiose and
+personalized.  If a mea culpa is necessary, I suggest the following:
+
+"The importance of sketching in design is asserted frequently in the
+literature, though few studies (including our own) go further than
+observing..."
+
+Page 74:
+
+"...we cannot yet say that the basic recognition of sketches, whether
+domain-centric or domain-independent, is a solved problem."
+
+This vastly overstates the state of the art.  Sketch recognition is
+not even close to being a solved problem.  Any student who reads this
+far into the paper should now get a red-carpet invitation to jump in
+and start working.   The paper should emphatically state that there
+is a huge need for new ideas and pioneering work in sketch
+recognition.  The opportunities are boundless (if not funding).
+
+ In summary, this can be a good survey paper, and the time is ripe
+for one.  I hope these comments are helpful to the authors in refining
+the paper.  Obviously some of my comments are stylistic suggestions
+intended to help the authors improve clarity.   Others pertain to
+important elements of content.  The quality of the first draft strongly
+suggests that the authors will be able to address all remaining issues
+handily.
+
+
+
+
+=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-
+-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=
++~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=+
+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=+~
++-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=-+~+-=+~+
+
+
+REVIEW 2
+
+========
+
+Here are my overview comments.  I'd recommend acceptance of this article.
+
+An authoritative survey on sketch recognition is highly valuable, as the
+sketch based interface and recognition community has evolved
+sufficiently that an overview of past work and techniques would benefit
+future researchers.  As with any survey, this survey makes some value
+judgements as to what should and should not be included in an overview
+of past research endeavours.  The decisions have largely been good,
+particularly for the current generation of sketch recognition research.
+Furthermore, at a high level, I think the organization of past research
+results and the progression of the paper from the sketching paradigm to
+hardware, recognition, and interaction issues seemed appropriate.  Each
+section benefited from a thorough survey of many significant papers.  In
+the remainder of this review, I will provide some more detailed overview
+comments on each chapter.
+
+The sketching paradigm chapter introduces researchers in sketch systems
+to work in design that motivates the need for sketching.  In my
+experience in the sketch recognition community, it has seemed that many
+researchers are unaware of work like that of Schon on reflective
+practitioners.  While I am not familiar with all of the citations in
+this section, an overview of the role of sketching in design, in problem
+solving, and in discourse is welcomed.
+
+The hardware chapter is one chapter that I consider inappopriately
+focused.  It's specific goal was the description of hardware devices
+that support sketching.  While this description of hardware is
+necessary, when one considers sketch recognition researchers, it seems
+that additional information is needed on the  substrates upon which
+sketch-based research systems can be built.  I would have preferred
+seeing more discussion of OS architectures, including wisptis, wintab,
+etc., as a vehicle for identifying how the hardware surveyed in this
+chapter can be used.  Furthermore, it seems appropriate to include a
+discussion of formats for digital ink input, including Microsoft Ink,
+InkML, etc.  Finally, an important component of OS support for sketches
+are those SDKs and Toolkits that make pen-based input available and from
+upon which researchers can construct new sketch systems.  While hardware
+is an important component of the infrastructure for digital ink, it is
+only a small part of accessing digital pen input and building systems
+using these input systems.  I would recommend that the authors broaden
+the focus of this chapter.  Some of the information on toolkits is
+available later in the paper, and can be moved to this chapter.
+
+The recognition chapter provides a good overview of the current
+generation of research in sketch recognition systems.  Two areas for
+improvement occur to me.  The first is related work in the document
+image analysis and pattern recognition community, particularly focused
+on on-line diagram recognition work.  Significant research exists in
+this domain, and on-line diagram recognition systems typically assume
+that users are providing input in real time to a system which is
+interpreting that input.  Many of the issues of immediate versus delayed
+recognition, error feedback, output formats, etc. that have been
+identified by researchers such as Blostein, Zanibbi, Arvo, and others
+can inform the current generation of research in sketch recognition.
+
+The other area of weakness involves some clustering of information in
+the chapter.  Recognizers that were cited were were described by
+example.  However, when one looks at recognizers such as Rubine's,
+Kara's, etc., these recognizers basically fall into broad categories.
+First, a set of hard-coded/ad-hoc/rule-based recognizers exist.  I
+prefer the term "rule-based" recognizers, as opposed to hard-coded.
+Some of the work in MathPad is based on this style of recognition, where
+basic output from a character recognizer (the MS tablet recognizer) is
+combined with a set of hand-coded analytically specified rules to
+transform the characters into appropriate mathematical symbols.  While
+these systems have weaknesses, they have been used to great effect in
+past work on on-line diagram recognition, where researchers were
+assuming more well-formed input than is typical in sketch recognition
+systems.  Second, a set of recognizers exist that are feature-based.
+These include Rubine's system, which analyzes stroke data to extract a
+set of individual features, and the Cali recognizer by Jorge and
+others.  The final broad category of systems are template based (elastic
+matching, deformable template matching, chain codes, recognizer kernels,
+etc.).  Template-based systems, following the argument in this survey,
+are based on two approaches:  graphical and textual.  In the area of
+graphical template systems, Ledeen's recognizer was an early precursor
+to the field of elastic matching.  The 1$ recognizer is a simplification
+of an elastic matching algorithm.  Kara's recognizer is a primitive
+example of elastic matching.  A wealth of research exists on graphical
+templase-based systems, particularly in the recognition of characters,
+and it would be good to leverage this work to structure this list of
+recognizers.  This is particularly true as many are simplifications of
+or more primitive variants of the work in graphical template systems.
+Finally, textual templates include techniques in Ladder, and were
+pioneered by researchers such as Paternak in his ADIK system.  It would
+be beneficial to provide a more sophisticated structure to these
+recognizer systems.  Currently in the paper, this structure is aluded to
+briefly (section 4.5), but then dropped for section 4.6.  The benefit to
+a more sophisticated structure is that it allows better structure for
+new research contributions.  Researchers can decide whether they are
+providing an incremental advance in template-based recognizers, for
+e.g., or are introducing a completely new style of recognition to the
+community.
+
+
+
+Chapter 5 focuses on interaction issues, and is a challenging chapter to
+write.  Many new interaction techniques have been proposed for
+tablet-based interfaces, and these have a number of different focuses.
+The clustering of research into recognition errors, reaction to input
+(essentially what the system does with input), toolkits, sketches and
+cscw, novel interaction techniques, the mode problem, application areas,
+and playful applications is, perhaps, as good as any.  When I examine
+this chapter, however, it seems that it might be best to cite CHI/UIST
+proceedings for some of the work in this chapter and focus more fully on
+areas that are relevant to sketch recognition systems.  Handling
+recognizer errors, the goals of recognition (e.g. beautification -- also
+called rectification in some on-line recognition work -- versus output
+to other applications versus animation and simulation, versus problem
+solving aids).  Some other work may be in the wrong place -- the
+toolkits, for example, seem better positioned with hardware as an
+infrastructure for supporting sketch recognition systems as opposed to
+an interaction issues.  Finally, some of the work -- the mode problem,
+for example -- might be better contained in an omnibus reference to the
+HCI community.  Obviously the HCI issues of pen-based interaction are
+very important, but they have been extensively addressed and fall
+somewhat outside the sketch modeling and recognition community.  It's
+hard to say whether any of the work on the mode problem, on sketching in
+support of cscw, on pressure, crossing, or delimiters, etc., etc. is
+really best surveyed in chapter 5.  My suggestion would be to consider
+leaving some of these issues to chapter 6 as part of a discussion for
+why few successful systems exist to date, and to focus chapter 5 on the
+challenges of building sketch recognition systems.
+
+
+
+While many of the comments provided above could strengthen this review,
+it is still an effective and broad survey of the current generation of
+sketch recognition systems and is, in its present form a valuable
+contribution.  I would consider any of the above suggested modifications
+minor manipulations to the basic content contained in the review.
+
+
