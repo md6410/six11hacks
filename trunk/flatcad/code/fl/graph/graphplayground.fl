@@ -1,0 +1,49 @@
+
+
+load("fl/graph/graph.fl")
+
+print(" ----- - - --------- -- - - - ----- -- --- ------ ------ - - --------- -- - - - ----- -- --- ------ -")
+
+v1 = vert("p1")
+
+print("debugging verts, before adding to graph")
+
+debug(v1)
+
+e1 = edge(v1, v1, nil)
+
+print()
+print("-------")
+print()
+
+print("debugging edge/start/end, before adding to graph")
+
+debug(e1)
+debug(e1.start)
+debug(e1.end)
+
+print()
+print("-------")
+print()
+
+G = graph()
+G.V = [v1]
+G.E = [e1]
+
+for each (v : G.V)
+  print("debugging v")
+  debug(v)
+done
+
+print()
+print("-------")
+print()
+
+for each (e : G.E)
+  print("debugging edge/start/end")
+  debug(e)
+  debug(e.start)
+  debug(e.end)
+done
+
+

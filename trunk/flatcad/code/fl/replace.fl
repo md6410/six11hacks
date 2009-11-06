@@ -1,0 +1,50 @@
+; replace.fl
+
+; This shows how you can replace portions of
+; predefined geometry with some alternate
+; geometry. It also demonstrates how you can
+; give points names by using the 'mark' function.
+
+define triangle (:len)
+  mark("A")
+  forward (2)
+  mark("A")
+  left (120)
+  mark ("B")
+  forward (2)
+  mark ("B")
+  left (120)
+  mark("C")
+  forward (2)
+  mark("C")
+  left (120)
+done
+
+define notch (:ignore)
+  forward (0.95)
+  left (90)
+  forward (0.4)
+  right (90)
+  forward (0.05)
+  mark("BOTTOM OF NOTCH")
+  forward (0.05)
+  right (90)
+  forward (0.4)
+  left (90)
+  forward (0.95)
+done
+
+triangle (28)
+
+replace ("A", "A")
+  notch(3)
+done
+
+
+replace("B", "B")
+  notch(3)
+done
+
+replace("C", "C")
+  notch(3)
+done

@@ -1,0 +1,15 @@
+mat 0.0675
+
+begin hexagon
+  begin repeat 6
+    f .5
+    notch left .135
+    f .5
+    l 60
+  end
+end
+
+hexagon
+
+
+

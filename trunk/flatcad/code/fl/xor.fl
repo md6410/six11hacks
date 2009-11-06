@@ -1,0 +1,13 @@
+showPolygons(true)
+
+define sq()
+  repeat(4)
+    forward(1)
+    left(90)
+  done
+done
+
+sq()
+turtlexor()
+left(45)
+sq()

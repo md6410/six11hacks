@@ -1,0 +1,5 @@
+; The comment character is a semicolon.
+; This is a totally empty flatlang program, but that
+; *should be OK*.
+;Comments do not have to have whitespace after them.
+   ; Nor do they freak out if there is whitespace before them.

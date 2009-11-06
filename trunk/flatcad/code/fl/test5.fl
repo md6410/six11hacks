@@ -1,0 +1,13 @@
+define changeInputParam(x)
+  print ("in:",x)
+  x = ["make", "it", "work"]
+  print("out:", x)
+  x
+done
+
+o.laundry = ["a", "b"]
+print("issuing call...")
+o.alternate = changeInputParam(o.laundry)
+print("o.laundry should still be a, b:", o.laundry)
+print("o.alternate should be make it work:", o.alternate)
+

@@ -1,0 +1,13 @@
+define f(x)
+  if (x < 3)
+    x + 2
+  else
+   x * x
+  done
+done
+
+n = 1
+repeat (5)
+  print ("The value is", f(n))
+  n = n+1
+done

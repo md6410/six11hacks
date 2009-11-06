@@ -1,0 +1,27 @@
+; part-mode-test.fl
+;
+; when printed, this should produce HPGL for
+; a triangle with little triangle cut out of it.
+
+define tri(s)
+  repeat(3)
+    forward(s)
+    left(120)
+  done
+done
+
+tri(2)
+
+up()
+forward(1)
+left(90)
+forward(0.5)
+left(90)
+forward(0.3)
+left(180)
+down()
+
+tri(0.4)
+setPartMode(true)
+
+hpgl("triangle-with-hole.hpgl")

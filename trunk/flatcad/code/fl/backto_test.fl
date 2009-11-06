@@ -1,0 +1,19 @@
+define triangle(:len)
+  mark("a")
+  forward(:len)
+  left(120)
+  mark("b")
+  forward (1)
+  mark("m")
+  forward (1)
+  left(120)
+  mark("c")
+  forward(:len)
+  left(120)
+done
+
+triangle (2)
+
+backto("m")
+triangle(2)
+

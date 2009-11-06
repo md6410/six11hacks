@@ -1,0 +1,12 @@
+; pos-test.fl - testing position and x,y,z thereof
+
+define move(amt)
+  forward(amt)
+  print("x: ", pos().x, " y:", pos().y, " z:", pos().z)
+done
+
+move(1.4)
+left(90)
+move(-0.8)
+pitch(90)
+move(0.5)

@@ -1,0 +1,28 @@
+load ("fl/jessica/triangle.fl")
+load ("fl/jessica/square.fl")
+
+showPolygons(true)
+
+shape("tri")
+  triangle(2, 0.2, 0.05)
+done
+
+;shape("square")
+;  square(1.5, 0.2, 0.05)
+;done
+
+define go(s, ttl)
+  draw(s, "a")
+  from("b","c")
+    pitch(90)
+    left(180)
+    if (ttl > 0)
+      go(s, ttl - 1)
+    done
+  done
+done
+
+go("tri", 1)
+; go("square", 3)
+
+hpgl("jessica-triangles.hpgl")

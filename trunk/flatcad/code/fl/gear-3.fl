@@ -1,0 +1,245 @@
+; gear-experimentive.fl - make a parametric gear
+
+define edge(len, depth, angle, isHalf)
+ wo = (2 * len) / 3
+ wi = len / 3
+ tooth(wo, wi, depth, isHalf)
+ left(angle)
+done
+
+define tooth(wo, wi, depth, isHalf)
+ if(isHalf)
+   halfTooth(wo, wi, depth)
+ else
+   fullTooth(wo, wi, depth)
+ done
+done
+
+define halfTooth(wo, wi, depth)
+ wo2 = wo/2
+ wi2 = wi/2
+ mark("start")
+
+ ;; no drawing -- here I lay down ref points
+ up()
+
+ ;; do the 'inner' line & mark c and d
+ left(90)
+ forward(depth)
+ right(90)
+ forward(wo / 2)
+ forward(wi / 2)
+ down()
+done
+
+define fullTooth(wo, wi, depth)
+ wo2 = wo/2
+ wi2 = wi/2
+ mark("start")
+
+ ;; no drawing -- here I lay down ref points
+ up()
+
+ ;; do the 'outer' line & mark b, e, and f
+ forward(wi2)
+ b = pos()
+ forward(wo)
+ e = pos()
+ forward(wi2)
+ f = pos()
+ backto("start")
+
+ ;; do the 'inner' line & mark c and d
+ left(90)
+ forward(depth)
+ right(90)
+ forward(wo / 2)
+ c = pos()
+ forward(wi)
+ d = pos()
+
+ ;; pen down and connect the dots.
+ backto("start")
+ down()
+ drawto(b)
+ drawto(c)
+ drawto(d)
+ drawto(e)
+ drawto(f)
+
+ ;; ensure we leave at the right pos/dir
+ up()
+ backto("start")
+ forward(wi + wo)
+ down()
+done
+
+define centeredSquare(holeSize)
+ hs2 = holeSize / 2
+ forward(hs2)
+ left(90)
+ forward(hs2)
+ left(90)
+ repeat(3)
+   forward(holeSize)
+   left(90)
+ done
+ forward(hs2)
+done
+
+define gear(numteeth, toothlength,
+                     toothdepth, holeSize, endNum)
+ mark("gear_start")
+ angle = 360/numteeth
+ repeat(numteeth/2)
+   edge(toothlength, toothdepth, angle, false)
+ done
+
+ opposite = pos()
+ repeat(numteeth/2)
+   edge(toothlength, toothdepth,angle, false)
+ done
+
+ up()
+ drawto(opposite, 0.5)
+ down()
+ center = pos()
+ centeredSquare(holeSize)
+ backto("gear_start")
+
+
+ ;; below here I reposition for meshing gears.
+ ;;up()
+ repeat(endNum)
+   edge(toothlength, toothdepth,angle, false)
+ done
+ edge(toothlength, toothdepth, angle, true)
+ down()
+ center
+done
+
+define circlyThing(radius)
+  mark("beginning")
+  mark("x")
+  numSides = 16
+  angle = 360 / numSides
+  i = 0
+  repeat(numSides)
+    up()
+    left(angle * i)
+    forward(radius)
+    turtle(0.3)
+    p = pos()
+    backto("x")
+    left(angle * (i+1))
+    forward(radius)
+    down()
+    drawto(p)
+    up()
+    i = i + 1
+    backto("x")
+  done
+  backto("beginning")
+  down()
+done
+
+define collar(inner, outer)
+  circlyThing(inner)
+  circlyThing(outer)
+done
+
+define make_collars(axleSize)
+  collar(axleSize, axleSize * 3)
+  up()
+  forward(0.65)
+  down()
+  collar(axleSize, axleSize * 3)
+  up()
+  forward(0.65)
+  down()
+  collar(axleSize, axleSize * 3)
+done
+showPolygons(false)
+
+numteeth = 12
+len = 0.3
+dep = 0.12
+holeSize = 0.2
+axleSize = 0.08
+
+mark("initial position")
+
+c1 = gear(numteeth, len, dep, holeSize, 4)
+left(180)
+c2 = gear(numteeth+6, len, dep, holeSize, 6)
+left(180)
+c3 = gear(numteeth+2, len, dep, holeSize, 0)
+
+offset = 2.7
+up()
+drawto(c1)
+right(90)
+forward(offset)
+down()
+; centeredSquare(holeSize)
+circlyThing(axleSize)
+
+up()
+drawto(c2)
+right(90)
+forward(offset)
+down()
+;centeredSquare(holeSize)
+circlyThing(axleSize)
+up()
+drawto(c3)
+right(90)
+forward(offset)
+down()
+;centeredSquare(holeSize)
+circlyThing(axleSize)
+
+backto("initial position")
+
+up()
+forward(1)
+left(45)
+forward(0.3)
+right(45)
+
+make_collars(axleSize)
+
+backto("initial position")
+
+up()
+forward(0.65)
+right(45)
+forward(0.3)
+left(45)
+
+make_collars(axleSize)
+
+backto("initial position")
+
+houseW = 1.7
+houseH = 3.0
+up()
+right(90)
+forward(0.75)
+right(90)
+forward(0.2)
+left(90)
+
+down()
+forward(houseW)
+left(90)
+forward(houseH)
+left(90)
+forward(houseW)
+left(90)
+forward(houseH)
+left(90)
+
+; turtle(0.4)
+
+laser("gear-seymour.hpgl")

@@ -1,0 +1,47 @@
+define back(amt)
+  forward(-amt)
+ done
+
+define hinge(dist, dihedralAngle, incidentalAngle)
+  left(incidentalAngle)
+  roll(dihedralAngle)
+  forward(dist)
+  back(dist)
+  right(incidentalAngle)
+done
+
+define hingedSide(sideLen, hingeLen, dihedralAngle, incidentalAngle, culminatingAngle)
+  forward(sideLen / 2)
+  left(incidentalAngle)
+  roll(dihedralAngle)
+  forward(hingeLen)
+  back(hingeLen)
+  right(incidentalAngle)
+  forward(sideLen / 2)
+  left(culminatingAngle)
+done
+
+define side(sideLen, culminatingAngle)
+  forward(sideLen)
+  left(culminatingAngle)
+done
+
+define sheet(size)
+  side(size, 90)
+  side(size, 90)
+  side(size, 90)
+  side(size, 90)
+done
+
+define foldedSheet(size, angle)
+  hingedSide(size, size, angle, 90, 90)
+  side(size, 90)
+  hingedSide(size, size, angle, 90, 90)
+  side(size, 90)
+done
+
+
+sheet(2)
+foldedSheet(2,120)
+
+showPolygons(true)

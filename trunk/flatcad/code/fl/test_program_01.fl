@@ -1,0 +1,55 @@
+; boxcad.fl
+
+; Lets you make a box with parameterized width,
+; height, and length.
+;
+; Example usage:
+;       box(1,4,3)
+
+define box_face(w, l)
+   print("Making face of dimensions", w, "x", l)
+   mark("a") forward (w) mark("a")
+   left (90)
+   mark("b") forward (l) mark("b")
+   left (90)
+   mark("c") forward (w) mark("c")
+   left (90)
+   mark("d") forward (l) mark("d")
+   left (90)
+done
+
+load ("fl/finger_joint.fl")
+
+define notched_face(w, l)
+  box_face(w, l)
+  wamt = w / 10
+  lamt = l / 10
+  depth = 0.2 ; material thickness
+  finger_joint("a", "a", depth, wamt, 5)
+  finger_joint("b", "b", depth, lamt, 5)
+  finger_joint("c", "c", depth, wamt, 5)
+  finger_joint("d", "d", depth, lamt, 5)
+done
+
+define box_3(width, height, length)
+  ; Make three sides of the box
+  notched_face(height, width)
+  pitch(90)
+  roll(270)
+  notched_face(length, height)
+  pitch(90)
+  roll(270)
+  notched_face(width, length)
+done
+
+define box(width, height, length)
+  box_3(width, height, length)
+  forward (width)
+  pitch(90)
+  forward(height)
+  left(90)
+  forward(length)
+  roll(270)
+  left(180)
+  box_3(width, length, height)
+done

@@ -1,0 +1,22 @@
+load ("fl/notched_triangle.fl")
+
+halfLen = 1
+depth = 0.15
+halfNotch = 0.05
+
+shape ("notched")
+    notched_triangle(:halfLen, :depth, :halfNotch)
+done
+
+draw ("notched")
+
+from("notch a", "notch b", "notch c")
+    left(180)
+    pitch(270)
+    draw("notched", "notch a")
+    from("notch b", "notch c")
+        left(180)
+        pitch(270)
+        draw("notched", "notch a")
+    done
+done

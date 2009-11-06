@@ -1,0 +1,19 @@
+; facedir-test.fl - debugging facedir
+
+pitch(90)
+forward(1)
+pitch(-90)
+forward(1)
+left(45)
+pitch(30)
+d = dir()
+pitch(-30)
+right(135)
+forward(1)
+facedir(d)
+forward(0.5)
+
+;; The turtle should still be at the end of the
+;; zigzag, facing to the upper left corner.
+
+turtle(0.4)

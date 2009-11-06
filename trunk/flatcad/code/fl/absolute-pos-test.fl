@@ -1,0 +1,21 @@
+pos()
+forward(1)
+here = pos()
+print ("here is", here)
+bigger = here * 2
+print ("twice that is", bigger)
+left(90)
+forward(1)
+there = pos()
+print ("there is", there)
+res = here + there
+print ("adding vectors", here, "and", there, "gives", res)
+print ("the following should fail:")
+print (here * there)
+print ("also the following should fail:")
+print (here - 3)
+left(45)
+d = dir()
+print ("I am facing in direction:", d)
+
+

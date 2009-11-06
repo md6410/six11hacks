@@ -1,0 +1,88 @@
+; notch_shape_test.fl
+
+; This shows a jaggie way of making
+; complex (kind of) models that involve
+; many copies of the same shape that
+; are drawn in such a way as to demonstrate
+; that they notch together in a nice way.
+;
+; I say "jaggie" because in order for the
+; shapes to be drawn in the right way, I
+; have to know exactly how they are
+; drawn to begin with. After drawing one 
+; shape I drive the turtle to the place that
+; the next shape should begin by tracing
+; over the geometry I just drew.
+;
+; A better future version of this would
+; let me simply say 'go back to point A
+; and draw another'
+ 
+load ("fl/triangle.fl")
+load ("fl/notch.fl")
+
+half=0.95
+nd=0.2
+halfW=0.05
+
+; print(:half)
+
+define notchedTriangle(:len)
+  triangle(:len)
+  replace("a", "a")
+    notch(:half, :nd, :halfW)
+  done
+
+  replace("b", "b")
+    notch(:half, :nd, :halfW)
+  done
+
+  replace("c", "c")
+    notch(:half, :nd, :halfW)
+  done
+done
+
+define out(:a, :b, :c)
+  forward(:c)
+  right(90)
+  forward(:b)
+  left(90)
+  forward(:a)
+  left(120)
+done
+
+define in(:a, :b, :c)
+  forward(:a)
+  left(90)
+  forward(:b)
+  right(90)
+  forward(:c)
+done
+
+shape ("notched")
+  notchedTriangle(2)
+done
+
+define nextNotch(:half, :nd, :halfW)
+  out(:half, :nd, :halfW)
+  in(:half, :nd, :halfW)
+  pitch(90)
+  left(180)
+  draw ("notched", "notch bottom")
+  right(180)
+  pitch(270)
+done
+
+; the base triangle
+draw ("notched", "notch bottom")
+
+nextNotch(:half, :nd, :halfW)
+nextNotch(:half, :nd, :halfW)
+nextNotch(:half, :nd, :halfW)
+
+left (180)
+pitch (90)
+
+nextNotch(:half, :nd, :halfW)
+nextNotch(:half, :nd, :halfW)
+

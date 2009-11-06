@@ -1,0 +1,9 @@
+a = ["one", w, "thrice"]
+b = ["four", 5]
+c = 8
+
+myList = quote ([a,b,c])
+print(myList)
+
+mList = [a,b,c]
+print(mList)

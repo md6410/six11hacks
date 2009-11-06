@@ -1,0 +1,8 @@
+; one_gear.fl - tests a single gear
+
+load("fl/fab/gear.fl")
+
+g1 = gear(16)
+g1.draw()
+
+print("the 16 gear has radius", g1.radius)

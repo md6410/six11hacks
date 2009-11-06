@@ -1,0 +1,5 @@
+myList = ["a", "b", "c", "d"]
+
+for each (val : myList) (val != "c")
+  print (val)
+done

@@ -1,0 +1,98 @@
+; offcenter_wheel.fl
+
+; This is a wheel with a spot for an offcenter
+; axle to attach.
+
+load("fl/fab/functions.fl")
+
+safe define offcenter_wheel()
+  offcenter = offcenter_wheel_full(2, 0.13, 1.2, 0.3)
+  offcenter
+done
+
+safe define offcenter_wheel_full(outerRadius, innerRadius, holeDist, holeRadius)
+  offcenter = object("offcenter wheel")
+  offcenter.innerRadius = innerRadius
+  offcenter.outerRadius = outerRadius
+  offcenter.holeDist = holeDist
+  offcenter.holeRadius = holeRadius
+  offcenter.n_axle_center = 0
+  offcenter.n_collar_center = 0
+  offcenter.n_axle_offcenter = 0
+  offcenter.n_collar_offcenter = 0
+  offcenter.center = pos()
+
+  offcenter.draw = offcenter_draw
+  offcenter.ghost_draw = offcenter_ghost_draw
+  offcenter.coaxial_adjust = 
+               offcenter_coaxial_adjust
+  print("I am returning an object with center:", offcenter.center)
+  offcenter
+done
+
+safe define offcenter_coaxial_adjust()
+  nil ; dont' do anything.
+done
+
+safe define offcenter_ghost_draw()
+  old_ghost = ghost
+  ghost = true
+  draw()
+  ghost = old_ghost
+done
+
+safe define offcenter_draw()
+  mark("offcenter start")
+  part("offcenter wheel")
+  center = pos()
+  center_dir = dir()
+  centered_polygon(30, outerRadius)
+  centered_polygon(4, innerRadius)
+  move(holeDist)
+  centered_polygon(16, holeRadius)
+  offcenter_location = pos()
+  offcenter_dir = dir()
+
+  move_to(center)
+  facedir(center_dir)
+  repeat (n_axle_center)
+    raise()
+    axle_bearing().draw()
+  done
+  repeat(n_collar_center)
+    raise()
+    collar().draw()
+  done
+  repeat(n_axle_center + n_collar_center)
+    lower()
+  done
+
+  move_to(offcenter_location)
+  facedir(offcenter_dir)
+  repeat (n_axle_offcenter)
+    raise()
+    axle_bearing().draw()
+  done
+  repeat(n_collar_offcenter)
+    raise()
+    collar().draw()
+  done
+  repeat(n_axle_offcenter + n_collar_offcenter)
+    lower()
+  done
+
+  backto("offcenter start")
+  move_to(offcenter_location)
+  facedir(offcenter_dir)
+done
+
+safe define offcenter_example()
+  oc = offcenter_wheel()
+  oc.n_axle_center = 1
+  oc.n_collar_center = 2
+  oc.n_axle_offcenter = 1
+  oc.n_collar_offcenter = 2
+  oc.draw()
+  print("The center is at", oc.center)
+  print("The offcenter is at", oc.offcenter_location)
+done

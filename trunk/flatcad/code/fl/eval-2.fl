@@ -1,0 +1,14 @@
+define foo(a,b)
+  a + (a*b)
+done
+
+s = source(["define", "nuts", "(", "x", ")", "forward", "(", "x", ")", "done"])
+
+eval(s)
+nuts(0.42)
+left(90)
+nuts(0.6)
+
+; showMachine()
+
+

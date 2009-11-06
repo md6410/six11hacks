@@ -1,0 +1,53 @@
+; gear-mount.fl - housing for gear example
+
+define zig(w,d)
+  forward(w)
+  left(90)
+  forward(d)
+  right(90)
+  forward(w)
+done
+
+define zag(w,d)
+  right(90)
+  forward(d)
+  left(90)
+done
+
+define zigzag(w, d)
+  zig(w, d)
+  zag(w, d)
+done
+
+showPolygons(false)
+
+height = 3
+width = 2
+hole = 0.2
+h2 = hole/2
+
+forward(height)
+left(90)
+forward(width)
+left(90)
+forward(height)
+left(90)
+
+repeat(5)
+  zigzag(0.2, 0.3)
+done
+
+left(90)
+up()
+forward(2* height/3)
+left(90)
+forward(width/2 - h2)
+down()
+repeat(4)
+  forward(hole)
+  right(90)
+done
+; down()
+; turtle(0.4)
+
+laser("gear-mount.hpgl")

@@ -1,0 +1,18 @@
+; Make a polygon with an arbitrary
+; number of sides.
+define notched_polygon (len, sides, notchDepth, notchWidth)
+  turnAmt = 360/sides
+  fAmt = (len/2) - (notchWidth / 2)
+  repeat(sides)
+    forward (fAmt)
+    left(90)
+    forward (notchDepth)
+    right(90)
+    forward (notchWidth)
+    right(90)
+    forward (notchDepth)
+    left(90)
+    forward (fAmt)
+    left(turnAmt)
+  done
+done

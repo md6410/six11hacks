@@ -1,0 +1,20 @@
+print("starting animation...")
+
+define tri()
+  repeat(3)
+    forward(1)
+    left(120)
+  done
+done
+
+amt = 0
+repeat(30)
+  clear()
+  right(amt)
+  amt = amt+5
+  tri()
+  redraw()
+  pause(100)
+done
+
+print("done")

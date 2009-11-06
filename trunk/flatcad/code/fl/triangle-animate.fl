@@ -1,0 +1,44 @@
+define tri(len)
+  repeat(3)
+    forward(len)
+    left(120)
+  done
+done
+
+define predraw()
+  redraw()
+  pause(100)
+done
+
+angleA = 0
+tickA = 360/60
+lenA = 4
+angleB = 0
+tickB = tickA / 60
+lenB = lenA * 0.7
+angleC = 0
+tickC = tickB / 60
+lenC = lenB * 0.7
+
+while(true)
+  clear()
+  mark("noon")
+  showPolygons(true)
+
+  roll(angleA)
+  tri(lenA)
+  angleA = angleA + tickA
+  backto("noon")
+
+  roll(angleB)
+  tri(lenB)
+  angleB = angleB + tickB
+  backto("noon")
+
+  roll(angleC)
+  tri(lenC)
+  angleC = angleC + tickC
+  backto("noon")
+
+  predraw()
+done

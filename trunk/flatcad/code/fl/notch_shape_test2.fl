@@ -1,0 +1,68 @@
+; notch_shape_test2.fl
+
+load ("fl/triangle.fl")
+load ("fl/notch.fl")
+
+half=0.95
+nd=0.2
+halfW=0.05
+
+define notchedTriangle(:len)
+  triangle(:len)
+  replace("a", "a")
+    notch(:half, :nd, :halfW)
+  done
+
+  replace("b", "b")
+    notch(:half, :nd, :halfW)
+  done
+
+  replace("c", "c")
+    notch(:half, :nd, :halfW)
+  done
+done
+
+define out(:a, :b, :c)
+  forward(:c)
+  right(90)
+  forward(:b)
+  left(90)
+  forward(:a)
+  left(120)
+done
+
+define in(:a, :b, :c)
+  forward(:a)
+  left(90)
+  forward(:b)
+  right(90)
+  forward(:c)
+done
+
+shape ("notched")
+  notchedTriangle(2)
+done
+
+define nextNotch(:half, :nd, :halfW)
+  out(:half, :nd, :halfW)
+  in(:half, :nd, :halfW)
+  pitch(90)
+  left(180)
+  draw ("notched", "notch bottom")
+  right(180)
+  pitch(270)
+done
+
+; the base triangle
+draw ("notched", "notch bottom")
+
+nextNotch(:half, :nd, :halfW)
+nextNotch(:half, :nd, :halfW)
+nextNotch(:half, :nd, :halfW)
+
+left (180)
+pitch (90)
+
+nextNotch(:half, :nd, :halfW)
+nextNotch(:half, :nd, :halfW)
+

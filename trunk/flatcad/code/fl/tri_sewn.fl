@@ -1,0 +1,22 @@
+load ("fl/sewnPoly.fl")
+
+dihedral = 180-70.528779
+
+len = 4
+define face()
+  down()
+  sewnPoly(len, 3, 4, 1/60, 1/5)
+  up()
+done
+
+face()
+roll(180)
+up()
+
+repeat(3)
+  roll(dihedral)
+  face()
+  roll(-dihedral)
+  forward(len)
+  left(360/3)
+done

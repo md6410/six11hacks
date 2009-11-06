@@ -1,0 +1,53 @@
+; part-print-test.fl
+
+define polygon(size, sides) 
+  repeat(sides)
+    forward(size)
+    left(360/sides)
+  done
+done
+
+mark("beginning")
+
+part("square collar")
+up()
+forward(2)
+down()
+
+polygon(2, 4)
+
+up()
+left(45)
+forward(1)
+right(45)
+down()
+
+polygon(0.6, 4)
+
+backto("beginning")
+up()
+pitch(20)
+forward(0.4)
+down()
+
+part("triangular collar")
+
+polygon(2, 3)
+
+up()
+left(360/12)
+forward(0.9)
+right(360/12)
+down()
+
+polygon(0.5, 3)
+
+part("straight line")
+up()
+forward(1)
+pitch(20)
+down()
+forward(1)
+
+
+laser("part-print-test.hpgl")

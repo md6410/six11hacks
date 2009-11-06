@@ -1,0 +1,18 @@
+mat 0.0675
+
+begin rectangle
+  begin repeat 2
+    f .25
+    notch left .135
+    f .25
+    l 90
+    f .5
+    notch left .135
+    f .5
+    l 90
+  end
+end
+
+rectangle
+
+

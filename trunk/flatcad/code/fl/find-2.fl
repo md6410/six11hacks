@@ -1,0 +1,10 @@
+; Find and replace
+
+orig = ["a", "b", "c", "d"]
+addme = ["x", "y"]
+z = flatten(cons(orig, addme))
+print("Before", orig)
+print("thing", z)
+; curs = find("a", orig, 0)
+; sub("b", "X", curs)
+; print("After", orig)

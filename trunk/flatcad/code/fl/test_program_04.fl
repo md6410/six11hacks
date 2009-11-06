@@ -1,0 +1,10 @@
+firstName = "Tony the Tangster"
+
+define setName (:a, :b)
+       firstName = :a
+       lastName = :b
+done
+
+setName("don", "quixote")
+
+lastName = ""

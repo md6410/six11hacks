@@ -1,0 +1,20 @@
+begin cursor
+  ; go out to the tip of the arrow
+  f .1
+  ; turn around
+  l 150
+
+  f .4
+  l 120
+  
+  f 0.34641
+  l 120
+  
+  f .4
+  r 30
+  
+  b .1
+end
+
+cursor
+

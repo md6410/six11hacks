@@ -1,0 +1,11 @@
+x = 5
+
+define triangle (:w, :dir)
+	f (:w)
+	turn (:dir)
+done
+
+define square
+       f (1)
+       turn (90)
+done

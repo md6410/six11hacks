@@ -1,0 +1,371 @@
+% Keep these two lines in order to get typesetting to work w/ the funny fonts.
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[times, 10pt, twocolumn]{article}
+\usepackage{geometry} % See geometry.pdf for lots of layout options. 
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{hyphenat}
+\usepackage{subfigure}
+
+\usepackage{fontspec,xltxtra,xunicode}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Mapping=tex-text]{Cochin}
+%\setromanfont[Mapping=tex-text]{Times}
+\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans}
+\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+\newbox\subfigbox % Create a box to hold the subfigure. 
+\makeatletter 
+\newenvironment{subfloat}% % Create the new environment. 
+{\def\caption##1{\gdef\subcapsave{\relax##1}}% 
+\let\subcapsave=\@empty % Save the subcaption text. 
+\let\sf@oldlabel=\label 
+\def\label##1{\xdef\sublabsave{\noexpand\label{##1}}}% 
+\let\sublabsave\relax % Save the label key. 
+\setbox\subfigbox\hbox 
+\bgroup}% % Open the box... 
+{\egroup % ... close the box and call \subfigure. 
+\let\label=\sf@oldlabel 
+\subfigure[\subcapsave]{\box\subfigbox}}% 
+\makeatother 
+
+\title{Sketching for the Refinement Stage of Design}
+
+\author{Gabe Johnson\\\texttt{johnsogg@cmu.edu}} 
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This workshop paper summarizes the motivation for my forthcoming PhD
+proposal on \textit{computational support for sketching during the
+  refinement stages of design}. I will explore this space by (1)
+building a tool empowering people to easily design artifacts by
+concurrently sketching alongside traditional interaction methods, and
+(2) evaluating interaction and engineering issues associated with
+it. This work is preliminary, and I welcome constructive criticism in
+shaping my proposal.
+\end{abstract}
+
+\section{Introduction}
+
+Early phases of design can be characterized by idea generation and
+exploration \cite{newman-web-designers,buxton-sketching}. Sketching
+readily supports these activities. This is why many sketching systems
+have focused on early phases of design. Refinement phases are
+characterized by incremental revision and production---activities
+traditional computer design tools support well. However, designers
+continue to sketch on paper after they have begun revising computer
+models. These refinement-phase sketches help people solve sub-problems
+that were not apparent or relevant during earlier exploration.
+
+However, current software design tools are unable to directly leverage
+these refinement stage sketches. Instead, users manually translate
+sketches to the computer model. Design tools could be made to
+understand the user's informal sketching input by leveraging the
+formal representation already present in the model. It is not
+clear---from both technical and HCI perspectives---how a tool that
+concurrently supports formal and informal input should be made. In
+order to explore these areas, I propose to build such a tool.
+
+First, I will produce a design environment called FlatCAD. The current
+version of FlatCAD supports users in making models by programming in a
+domain-specific language called FlatLang \cite{johnson-flatcad}. The
+next version of FlatCAD will also support traditional GUI operations
+and sketching input. 
+
+The second contribution explores challenges associated with
+concurrently using informal sketches with formal computer
+representations. In particular I am interested in (a) software
+engineering and (b) HCI aspects of these tools. In the following
+sections I briefly describe FlatCAD, discuss the technical and
+interaction challenges associated with adding support for sketching to
+it.
+
+\section{FlatCAD Use Scenario}
+
+% Just summarize FlatCAD, don't go into the philosophy, nor should
+% FlatLang be described in great depth... a 'LOGO turtle with a laser
+% cutter for an ass' is sufficient. This section gives just enough
+% background for a later discussion of the environment I will add
+% sketching support for.
+
+FlatCAD is an environment for designing objects made of flat material
+for rapid prototyping. Currently, users define shapes by programming
+in the LOGO-like FlatLang domain-specific language. The output of a
+FlatLang program is a ``cutfile'' that is sent to a laser cutter. A
+simple FlatLang program for drawing a square is listed in
+Figure~\ref{fig:flatlang}.
+
+\begin{figure}
+  \centering 
+  \begin{subfloat}% 
+    \begin{minipage}{1.8in} 
+      \small
+\begin{verbatim}
+define rectangle(width, height)
+  repeat(2)
+    forward(width)
+    left(90)
+    forward(height)
+    left(90)
+  done
+done
+\end{verbatim}
+    \end{minipage}
+  \end{subfloat} 
+
+  \caption{Very simple \nohyphens{FlatLang} code that draws a
+    rectangle.}
+  \label{fig:flatlang}
+\end{figure} 
+
+FlatCAD has been used to design several classes of physical artifacts,
+such as construction kits to mechanisms to household goods like soap
+dishes and toothbrush holders. Here I detail the process I took when
+making the soap dishes shown in Figure~\ref{fig:soapdish-sketch}.
+
+I began by making quick drawings to help me think about aspects of
+making a soap dish---its primary purpose is to hold a bar of soap, but
+it also should prevent water from pooling, be easy to use, and be
+stylish. 
+
+\begin{figure}
+  \centering
+  \subfigure[] { 
+    \label{fig:soapdish-gabe} 
+    \includegraphics[width=5.0cm]{soapdish-gabe.jpg} 
+  }
+  \hspace{0.5cm}
+  \subfigure[] {
+    \label{fig:soapdish-tiller} 
+    \includegraphics[width=5.0cm]{soapdish-tiller.jpg}
+  }
+  \caption{Two soap dishes made with FlatCAD.}
+  \label{fig:soapdish}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \subfigure[] { 
+    \label{fig:soapdish-sketch-1} 
+    \includegraphics[]{soapdish-01.jpg} 
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-2} 
+    \includegraphics[]{soapdish-02.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-3} 
+    \includegraphics[]{soapdish-03.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-4} 
+    \includegraphics[]{soapdish-04.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-5} 
+    \includegraphics[]{soapdish-05.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-6} 
+    \includegraphics[]{soapdish-06.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-7} 
+    \includegraphics[]{soapdish-07.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-08ab} 
+    \includegraphics[]{soapdish-08ab.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-08c} 
+    \includegraphics[]{soapdish-08c.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-9} 
+    \includegraphics[]{soapdish-09.jpg}
+  }
+  \subfigure[] {
+    \label{fig:soapdish-sketch-10} 
+    \includegraphics[]{soapdish-10.jpg}
+  }
+  \caption{Sketches made during idea generation and exploration.}
+  \label{fig:soapdish-sketch}
+\end{figure}
+
+The first sketches in this sequence helped me to think about
+functional requirements, while the last few sketches focused on
+details of how the soap dish would be constructed and what particular
+pieces would look like. The final two sketches include parameters and
+the locations of notches where other pieces adjoin. After these
+sketches were made, I recreated the sketches in FlatCAD by writing a
+FlatLang program. Figure~\ref{fig:soapdish-slat} shows the program's
+rendering of a single vertical slat.
+
+\begin{figure}
+   \centering
+   \includegraphics[width=3.5cm]{soapdish-style-1-slat.png} 
+   \caption{FlatCAD screen shot of a soap dish slat in progress.}
+   \label{fig:soapdish-slat}
+\end{figure}
+
+As I worked I needed to make several more drawings
+(Figure~\ref{fig:refine}). Some were made to help understand how
+variables were related, others were used to add needed complexity to
+the parts so they would fit together well. Even though I had a
+perfectly good image of the model on my computer screen, I had to
+re-draw it on paper before making progress. The details already
+specified (lengths and angles) could not be transferred to the
+sketch. After making the drawings, I had to translate what I had
+learned from them back into FlatLang code.
+
+It would be helpful if FlatCAD enabled users to sketch directly on the
+model in order to modify it. The precise nature of the on-screen model
+provides excellent contextual clues for supporting recognition. For
+example, several sketches refer to variables that exist in the formal
+model (e.g. \texttt{n.thickness} in Figure~\ref{fig:refine-01}) or
+anonymous dimensions (e.g. the vertical edge indicated with the
+arrowheaded line in Figure~\ref{fig:refine-03}).
+
+% Note: \usepackage{subfigure}
+
+\begin{figure}
+  \centering
+  \subfigure[] { 
+    \label{fig:refine-01} 
+    \includegraphics[width=4cm]{refine-01.jpg} 
+  }
+  \subfigure[] {
+    \label{fig:refine-02} 
+    \includegraphics[width=4cm]{refine-02.jpg}
+  }
+  \subfigure[] {
+    \label{fig:refine-03} 
+    \includegraphics[width=4cm]{refine-03.jpg}
+  }
+  \caption{Refinement phase sketches drawn on paper.}
+  \label{fig:refine}
+\end{figure}
+
+
+
+\section{Interaction Techniques}
+
+Currently, design tools support input done with a keyboard and mouse
+in a structured user interface consisting of elements like buttons,
+pick-lists, dialog boxes, text areas, and so on. Structured interfaces
+are designed to minimize or eliminate ambiguity of user input.
+
+Consider the simple task of enlarging a rectangle. A traditional
+structured drawing program is likely to provide control handles, which
+the user clicks and drags in order to change an object's size
+(Figure~\ref{fig:object-handle-1}).
+
+An alternate strategy is that of calligraphic interaction, wherein
+users draw freehand, ambiguous input
+\cite{jorge-calligraphic-introduction}. Users may sketch their
+intention to resize a box in many ways: drawing arrows indicating what
+should move, or re-drawing the entire
+box. Figure~\ref{fig:object-sketch} illustrates a user changing a
+rectangle by redrawing only the portion that must change. There are
+currently no widely used conventions for such interaction, and little
+is known about what is effective for ongoing usage.
+
+\begin{figure}
+  \centering
+  \subfigure[Original rectangle] { 
+    \label{fig:object-handle-1} 
+    \includegraphics[origin=c,width=4cm]{object-handle-1.pdf} 
+  }
+  \hspace{0.5cm}
+  \subfigure[Selecting object reveals `handles'] { 
+    \label{fig:object-handle-2} 
+    \includegraphics[origin=c,width=4cm]{object-handle-2.pdf} 
+  }
+  \hspace{0.5cm}
+  \subfigure[Drag cursor, enlarge to 1/72 inch accuracy] { 
+    \label{fig:object-handle-3} 
+    \includegraphics[origin=c,width=4cm]{object-handle-3.pdf} 
+  }
+  \caption{Enlarging an object using traditional WIMP interaction.}
+  \label{fig:object-handle}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \subfigure[Original rectangle] { 
+    \label{fig:object-sketch-1} 
+    \includegraphics[origin=c,width=4cm]{object-sketch-1.pdf} 
+  }
+  \hspace{0.5cm}
+  \subfigure[Draw new extents of rectangle, implicitly selecting the
+    particular edges that will change] {
+    \label{fig:object-sketch-2} 
+    \includegraphics[origin=c,width=4cm]{object-sketch-2.pdf} 
+  }
+  \hspace{0.5cm}
+  \subfigure[The exact size is not precisely provided] { 
+    \label{fig:object-sketch-3} 
+    \includegraphics[origin=c,width=4cm]{object-sketch-3.pdf} 
+  }
+  \caption{Enlarging an object using calligraphic interaction.}
+  \label{fig:object-sketch}
+\end{figure}
+
+One of the primary challenges with interactive systems is the ``mode
+problem'' \cite{tesler-mode-problem}: users often are unsure how to
+enter a mode, or are unaware which mode they are in. Structured user
+interfaces can arguably mitigate this problem more effectively than
+recognition based interfaces.  There are several strategies for
+handling this in sketch recognition user interfaces, including the
+Inferred Mode Protocol \cite{saund-inferred-mode} and explicit mode
+selection triggered by gestures
+\cite{hinckley-scriboli,johnson-flow-selection}.
+
+\section{Engineering}
+
+Existing sketching tools produce models for refinement with other
+design software. In these cases, the connection between the sketching
+and refining tool has been one way \cite{lin-denim}. However, tools
+that enable iterative sketching and refinement requires two-way
+connections. For example, SimuSketch recognizes drawings of dynamic
+systems \cite{kara-recognizer-uist}. The recognized model is passed to
+the SimuLink program for display and editing. However, modifications
+made in SimuLink are not reflected in the sketch.
+
+FlatCAD will support such a two-way connection between informal and
+formal modes of expressing intent. Informal sketch input may be
+provided at one moment, formal commands given the next. The inherent
+ambiguity of sketch input must be managed because the user may issue
+formal instructions at any time. Say the user has drawn a shape that
+may be a rectangle, but may also be an oval. Next the user selects a
+'resize' tool and begins to enlarge the shape. What should happen?
+
+This is partly an interaction question, but it is also an engineering
+question. The drawing may provide enough context to disambiguate the
+shape's identity. This context can come in many forms, such as domain
+awareness \cite{alvarado-dynamic-bayes}, or knowledge of temporal
+patterns of how people draw \cite{sezgin-multiscale-models}.
+
+\section{Summary}
+
+A proposed version of FlatCAD aims to support concurrent informal and
+formal modes of input during the refinement phases of design. This
+will serve as a useful means for exploring various human-computer
+interaction topics related to sketch recognition interfaces. It also
+provides a foundation to study engineering topics of how to identify,
+model, and use context for the purpose of recognition. This work is
+still very much in progress.
+
+\bibliographystyle{plain}
+
+\bibliography{sketch-bibliography}
+
+\end{document}  
+

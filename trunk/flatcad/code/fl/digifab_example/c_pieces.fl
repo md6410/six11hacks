@@ -1,0 +1,41 @@
+width = 0.8
+length = 2.0
+height = 2.0
+spacing = 0.8
+thickness = 0.07
+
+define piece()
+  forward(width + length)
+  right(90)
+  forward(width)
+  right(90)
+  forward(length)
+  left(90)
+  forward(height)
+  left(90)
+  forward(length)
+  right(90)
+  forward(width)
+  right(90)
+  forward(width + length)
+  right(90)
+  forward(height + width + width)
+  right(90)
+done
+
+define construction()
+  left(90)
+  repeat(5)
+    piece()
+    up()
+    pitch(90)
+    forward(spacing)
+    pitch(-90)
+    down()
+  done
+done
+
+construction()
+
+turtle(0.2)
+showPolygons(true)

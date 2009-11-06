@@ -1,0 +1,19 @@
+a = "foo"
+b = "bar"
+print (a+b)
+
+a = "2"
+b = "5"
+print (a+b)
+
+a = 2
+b = 5
+print(a+b)
+
+a = "two"
+b = 5
+print (a+b)
+
+a = true
+b = "five"
+print(a+b)

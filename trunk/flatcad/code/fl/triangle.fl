@@ -1,0 +1,17 @@
+define triangle (len)
+  mark("a")
+  forward(len)
+  mark("a")
+  left(120)
+
+  mark("b")
+  forward(len)
+  mark("b")
+  left(120)
+
+  mark("c")
+  forward(len)
+  mark("c")
+  left(120)
+done
+

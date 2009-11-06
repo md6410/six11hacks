@@ -1,0 +1,10 @@
+package org.six11.flatcad.geom;
+
+/**
+ * 
+ **/
+public class PolygonException extends RuntimeException {
+  public PolygonException(String message) {
+    super(message);
+  }
+}

@@ -1,0 +1,11 @@
+begin square
+  begin repeat 4
+    f 1
+    r 90
+  end
+end
+
+print squares
+square
+print stop
+

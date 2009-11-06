@@ -1,0 +1,106 @@
+load("fl/graph/graph.fl")
+
+v1 = vert("p1")
+v2 = vert("p2")
+v3 = vert("p3")
+v4 = vert("p4")
+v5 = vert("p5")
+v6 = vert("p6")
+
+e1 = edge(v1, v2, nil)
+e2 = edge(v4, v2, nil)
+e3 = edge(v3, v5, nil)
+e4 = edge(v2, v5, nil)
+e5 = edge(v2, v3, nil)
+e6 = edge(v3, v3, nil)
+e7 = edge(v3, v4, nil)
+e8 = edge(v3, v1, nil)
+e9 = edge(v5, v1, nil)
+
+G = graph()
+G.V = [v1, v2, v3, v4, v5, v6]
+G.E = [e1, e2, e3, e4, e5, e6, e7, e8]
+
+WHITE = 1
+GREY  = 2
+BLACK = 3
+
+currentNode = nil
+todo = []
+clock = 1
+parent = nil
+
+define printNodeInfo(v)
+  print("            Node:",v)
+  print("          Parent:",v.predecessor)
+  print("  Discovery Time:",v.discoveryTime)
+  print("  Processed Time:",v.processedTime)
+  print()
+done
+
+define tick()
+  t = clock
+  clock = clock+1
+  t
+done
+
+define discover(node)
+;  print("discovered", node)
+  node.predecessor = parent
+  node.discovered = GREY
+  node.discoveryTime = tick()
+  node.predecessor = currentNode
+  todo = cons(node, todo)
+;  print("todo list is now", todo)
+done
+
+define process()
+  v = first(todo)
+  v.discovered = GREY
+  v.processedTime = tick()
+  currentNode = v  
+  print ("processing",v)
+  todo = rest(todo)
+  out = Outgoing_Edges(v, G.E)
+  for each (e : out)
+    if (e.end.discovered == WHITE)
+      discover(e.end)
+    done
+  done
+  v.discovered = BLACK
+done
+
+
+define breadth_first_search(G, start)
+
+  ; reset bfs accounting info
+  currentNode = nil
+  todo = []
+  clock = 1
+  parent = nil
+
+  ; reset bfs data for each vertex
+  for each (v : G.V)
+    v.discovered = WHITE
+    v.discoveryTime = nil
+    v.processedTime = nil
+    v.predecessor = nil
+  done
+
+  ; seet the process with the start node
+  discover(start)
+
+  ; go!
+  while (todo.n > 0)
+    process()
+  done
+done
+
+
+
+breadth_first_search(G, v1)
+print ("completed bfs")
+
+for each (v : G.V)
+  printNodeInfo(v)
+done

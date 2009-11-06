@@ -1,0 +1,35 @@
+define debugList(l)
+  print("Debugging list with ", l.n, "entries (list itself is debugged first)")
+  debug(l)  		  
+  for each (thing : l)
+    debug(thing)
+  done
+  print("------------------- (debugList complete)")
+done
+
+define o(name)
+  object(name)
+done
+
+a = o("a")
+b = o("b")
+c = o("c")
+
+a.x = "chicken"
+
+list1 = [a,b,c]
+list2 = [c,b,a]
+
+list1[1].y = "horse"
+
+debugList(list1)
+debugList(list2)
+
+print("1. should be chicken:", a.x)
+print("2. should be chicken:", list1[0].x)
+print("3. should be chicken:", list2[2].x)
+
+
+print("4. should be horse:", list1[1].y)
+print("5. should be horse:", b.y)
+print("6. should be horse:", list2[1].y)

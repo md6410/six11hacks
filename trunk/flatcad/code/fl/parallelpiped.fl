@@ -1,0 +1,33 @@
+load("distro/flatcad-examples/turtle.fl")
+
+showPolygons(true)
+
+define roll(amt)
+  __roll(180)
+done
+
+define poly(len, angle, sides)
+  roll(90)
+  simplePoly(len, 4)
+  roll(-90)
+  forward(len)
+  left(angle)
+  if (sides > 0)
+    poly(len, angle, sides-1)
+  done
+done
+
+define anyPoly(len, sides)
+  poly (len, 360/sides, sides)
+done
+
+define simplePoly(len, sides)
+  repeat(sides)
+    forward(len)
+    left(360/sides)
+  done
+done
+
+anyPoly(0.16, 30)
+
+turtle(0.2)

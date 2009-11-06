@@ -1,0 +1,8 @@
+
+foo = ["foo", "bar", "baz", "baf"]
+nuts = ["pea", "cocoa"]
+
+print("w/indexes", append(foo, nuts))
+print("w/cons:", append2(foo,nuts))
+
+

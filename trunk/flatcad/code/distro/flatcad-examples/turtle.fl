@@ -1,0 +1,25 @@
+; turtle.fl - procedure for drawing a turtle
+
+; Load this file and call turtle(0.2) to draw a
+; little turtle at your current position. Hint:
+; put the call at the very end of your file.
+;
+; To load this file, just use this syntax:
+; load ("flatcad-examples/turtle.fl")
+
+define turtle(s)
+  t_tri(s/4)
+  t_tri(s)
+done
+
+define t_tri(s)
+  left(90)
+  forward(s/2)
+  right(120)
+  forward(s)
+  right(120)
+  forward(s)
+  right(120)
+  forward(s/2)
+  right(90)
+done

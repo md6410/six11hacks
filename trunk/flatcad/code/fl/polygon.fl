@@ -1,0 +1,9 @@
+; Make a polygon with an arbitrary
+; number of sides.
+define polygon (len, sides)
+  turnAmt = 360/sides
+  repeat(sides)
+    forward (len)
+    left(turnAmt)
+  done
+done

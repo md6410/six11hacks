@@ -1,0 +1,60 @@
+load("fl/fab/functions.fl")
+load("fl/fab/bar.fl")
+load("fl/fab/offcenter_wheel.fl")
+load("fl/fab/gear.fl")
+load("fl/fab/wheel.fl")
+
+wheel_radius = 1.5
+w1 = wheel(wheel_radius)
+w1.draw()
+right(90)
+move(2 * wheel_radius + 0.5)
+left(90)
+w2=wheel(wheel_radius)
+w2.draw()
+
+mark("chassis start")
+left(90)
+move(2 * wheel_radius+ 0.5)
+right(90)
+repeat(5)
+  raise()
+done
+plane = pos().z
+part("chassis")
+axles = [w1.center, w2.center]
+
+bb = bounds(axles)
+bb.grow(0.5)
+bb.min_x = bb.min_x - (wheel_radius + 0.5)
+bb.max_x = bb.max_x + (wheel_radius + 0.5)
+draw_bb(bb)
+
+orig_axles = axles
+repeat(axles.n)
+  backto("chassis start")
+  a = first(axles)
+  axles = rest(axles)
+  move_to(a)
+  pitch(90)
+  move(plane)
+  pitch(-90)
+  ab = axle_bearing()
+  centered_polygon(16, ab.outer)
+done
+
+axles = orig_axles
+
+repeat(axles.n)
+  backto("chassis start")
+  a = first(axles)
+  axles = rest(axles)
+  move_to(a)
+  pitch(90)
+  move(plane)
+  pitch(-90)
+  axle_bearing().draw()
+  print("word up", a)
+done
+
+laser(x)

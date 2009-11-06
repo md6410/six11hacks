@@ -1,0 +1,108 @@
+; bar.fl - a bar in a linkage
+
+load("fl/fab/functions.fl")
+load("fl/fab/collar.fl")
+
+safe define bar(length, width, n_holes, ab, collar)
+  b = object("bar")
+  b.length = length
+  b.width = width
+  b.n_holes = n_holes
+  b.axle = ab
+  b.n_axles = 0
+  b.n_collars = 0
+  b.collar = collar
+  b.hole_positions = []
+  
+  b.ghost_draw = bar_ghost_draw
+  b.draw = bar_draw_from_hole
+  b.draw_from_corner = bar_draw
+  b
+done
+
+safe define link(len)
+  bar_full(len, 0.9, 2, 1, axle_bearing(), 1, collar())
+done
+
+safe define bar_full(length, width, n_holes,
+                     n_axles, axle,
+                     n_collars, collar)
+  b = bar(length, width, n_holes, axle, collar)
+  b.n_axles = n_axles
+  b.n_collars = n_collars
+  b
+done
+
+safe define bar_ghost_draw()
+  old_ghost = ghost
+  ghost = true
+  bar_draw_from_corner()
+  ghost = old_ghost
+done
+
+safe define bar_draw_from_hole()
+  ; Draw from the position of the first hole, 
+  ; even if n_holes is zero.
+  startdir = dir()
+  right(90)
+  move(width / 2)
+  right(90)
+  move(width / 2)
+  left(180)
+  draw_from_corner()
+
+  move_to(first(hole_positions))
+  facedir(startdir)
+
+done
+
+safe define bar_draw()
+  hole_positions = [] ; reset the positions.
+  part("bar")
+  repeat(2)
+    cut(length)
+    left(90)
+    cut(width)
+    left(90)
+  done
+  
+  if (n_holes > 0)
+    left(90)
+    move(width / 2)
+    right(90)
+    move(width / 2)
+    p = pos()
+    centered_polygon(16, axle.outer)
+    hole_positions = cons(p, hole_positions)
+  done
+
+  dist = (length - width) / (n_holes - 1)
+  repeat(n_holes - 1)
+    move(dist)
+    p = pos()
+    centered_polygon(16, axle.outer)
+    hole_positions = cons(p, hole_positions)
+  done
+
+  for each (hole : hole_positions)
+    print("making stuff for hole", hole)
+    move_to(hole)
+    repeat(n_axles)
+      print("making an axle")
+      raise()
+      axle.draw()
+    done
+    repeat(n_collars)
+      print("making a collar")
+      raise()
+      collar.draw()
+    done
+    repeat(n_axles + n_collars)
+      lower()
+    done
+  done
+
+  hole_positions
+done
+
+

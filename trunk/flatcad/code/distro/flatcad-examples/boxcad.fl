@@ -1,0 +1,76 @@
+; boxcad.fl - Produce HPGL for cutting boxes
+
+; The procedure of interest here is 'box'. Use it
+; like this:
+
+; box (width, height, length, matThickness)
+
+; This version of boxcad doesn't display the
+; pieces in proper 3D orientation. To print out
+; HPGL, just use the command:
+
+; hpgl ("my-box-file-name.hpgl")
+
+; See the bottom of the file for a commented
+; out example. To use this file, just load it using
+; the 'load' function.
+
+define zig(w,d)
+  forward(w)
+  left(90)
+  forward(d)
+  right(90)
+  forward(w)
+done
+
+define zag(w,d)
+  right(90)
+  forward(d)
+  left(90)
+done
+
+define side(len, m, special)
+  if (special)
+    less = 0
+  else
+    less = 1
+  done
+  repeat ( (len/(2*m)) - less)
+    zig(m, m)
+    zag(m, m)
+  done
+  if (special)
+    forward(2*m)
+  else
+    zig(m, 2*m)
+  done
+  left(90)
+done
+
+define face(dim1, dim2, depth, special)
+  side(dim1, depth, special)
+  side(dim2, depth, special)
+  side(dim1, depth, special)
+  side(dim2, depth, special)
+done
+
+define box(dim1, dim2, dim3, depth)
+  mark("box origin")
+  repeat(2)
+    face(dim1, dim2, depth, true)
+    backto("box origin")
+    face(dim1, dim3, depth, false)
+    backto("box origin")
+    face(dim2, dim3, depth, false)
+    backto("box origin")
+  done
+done
+
+hpgl("box-for-dorkbot.hpgl")
+
+box(4, 4, 3.0, 0.085)
+
+
+
+
+

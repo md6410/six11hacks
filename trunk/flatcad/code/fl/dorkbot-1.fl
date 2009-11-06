@@ -1,0 +1,53 @@
+define one_notch(len, depth, width)
+  len2 = len / 2
+  width2 = width / 2
+  forward(len2 - width2)
+  left(90)
+  forward(depth)
+  right(90)
+  forward(width)
+  right(90)
+  forward(depth)
+  left(90)
+  forward(len2 - width2)
+done
+
+define notched_side
+ (numNotches, notchDepth, notchWidth, len)
+  if (numNotches == 0)
+    forward(len)
+  else
+    partLen = len / numNotches
+    repeat(numNotches)
+      one_notch(partLen, notchDepth, notchWidth)
+    done
+  done
+done
+
+opDepth = 0.12
+opWidth = 0.083
+
+define piece(sides, len, numNotches)
+  repeat(sides)
+    notched_side(numNotches, 0.12, 0.083, len)
+    left(360/sides)
+  done
+done
+
+; piece(6, 1.5, 3)
+; laser("dorkbot-hex-3.hpgl")
+
+define glue()
+  op4 = opDepth * 4
+  notched_side(1, opDepth, opWidth, op4)
+  left(90)
+  notched_side(1, opDepth, opWidth, op4)
+  left(90)
+  notched_side(1, opDepth, opWidth, op4)
+  left(90)
+  notched_side(1, opDepth, opWidth, op4)
+done
+
+glue()
+laser("dorkbot-glue-2.hpgl")
+

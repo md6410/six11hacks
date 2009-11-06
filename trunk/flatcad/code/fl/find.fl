@@ -1,0 +1,18 @@
+;tar = []
+;tar = "a"
+tar = "b"
+;tar = ["b", "c"]
+
+;src = ["a", ["b", "c"], "d"]
+src = flatten(["a", ["b", "c"], "d", ["b", "c"]])
+;src = []
+
+n = 2
+res = find(tar, src, n-1)
+
+print ("Does '", tar, "' appear in the list", src, n, "times?")
+if (res)
+  print("Yes")
+else
+  print("No")
+done

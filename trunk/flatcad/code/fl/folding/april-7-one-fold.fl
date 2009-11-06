@@ -1,0 +1,74 @@
+; An alternate approach to folding. Perhaps this is cleaner.
+
+define dot()
+  dot_offset = 0.1
+  mark("dot_begin")
+  up()
+  back(dot_offset)
+  left(90)
+  down()
+  repeat(10)
+    forward(0.05)
+    right(360/10)
+  done
+  backto("dot_begin")
+done
+
+define hypot (a, b)
+  sqrt(a*a + b*b)
+done
+
+define back(amt)
+  forward(-amt)
+done
+
+define hinge(planar_angle, len, hinge_angle)
+  left(planar_angle)
+  forward(len)
+  left(180)
+  roll(hinge_angle)
+  forward(len)
+  left(180-planar_angle)
+;  left(planar_angle)
+done
+
+define deg(r)
+  r * (180 / pi())
+done
+
+a = 3.5
+b = 4.5
+h = hypot(a,b)
+normalized_a = a / h
+normalized_b = b / h
+pl_angle = deg(acos(normalized_a))
+hi_angle = 50 ; 180
+
+; pt_C
+dot()
+forward(a)
+
+; pt_M
+dot()
+hinge(180 - pl_angle, hypot(a,b), hi_angle)
+left(90)
+forward(b)
+
+
+; pt_B
+dot()
+left(90)
+forward(a)
+
+; pt_S
+dot()
+hinge(180 - pl_angle, hypot(a,b), hi_angle)
+left(90)
+forward(b)
+
+; pt_C again
+
+
+turtle(0.3)
+showPolygons(true)
+

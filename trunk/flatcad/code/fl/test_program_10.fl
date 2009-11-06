@@ -1,0 +1,25 @@
+define triangle (:len)
+  forward (:len)
+  left (120)
+  forward (:len)
+  left (120)
+  forward (:len)
+  left (120)
+done
+
+define thingy (:len, :rollamt)
+  triangle(:len)
+  roll(:rollamt)
+  right(60)
+done
+
+define manythingies(:len, :rollamt)
+  thingy(:len, :rollamt)
+  thingy(:len, :rollamt)
+  thingy(:len, :rollamt)
+  thingy(:len, :rollamt)
+  thingy(:len, :rollamt)
+done
+
+manythingies(2, 35)
+

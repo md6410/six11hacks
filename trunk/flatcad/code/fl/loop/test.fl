@@ -1,0 +1,30 @@
+
+x = 12
+
+print("outside: x is", x)
+
+repeat(2)
+  print("inside repeat: x is", x)
+done
+
+count = 2
+while (count > 0)
+  print("inside while: x is", x)
+  count = count - 1
+done
+
+stuff = ["first", "second"]
+for each (s : stuff)
+  print("inside foreach: x is", x)
+done
+
+define myFun()
+  stuff = ["first", "second"]
+  y = 42
+  for each (s : stuff)
+    print("myFun: inside foreach: y is", y)
+  done
+done
+
+print("calling myFun...")
+myFun()

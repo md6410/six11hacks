@@ -1,0 +1,465 @@
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  13 JUN 2008 16:28
+entering extended mode
+\write18 enabled.
+ %&-line parsing enabled.
+**flatcad.tex
+(./flatcad.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, basque, bulgarian, coptic, welsh, czech, slovak, german, ng
+erman, danish, esperanto, spanish, catalan, galician, estonian, farsi, finnish,
+ french, greek, monogreek, ancientgreek, croatian, hungarian, interlingua, ibyc
+us, indonesian, icelandic, italian, latin, mongolian, dutch, norsk, polish, por
+tuguese, pinyin, romanian, russian, slovenian, uppersorbian, serbian, swedish, 
+turkish, ukenglish, ukrainian, loaded.
+(/usr/local/texlive/2007/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/local/texlive/2007/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2002/07/08 v3.2 Page Geometry
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@dimlist=\toks15
+
+(/usr/local/texlive/2007/texmf-dist/tex/xelatex/xetexconfig/geometry.cfg))
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2007/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 90.
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
+\Gread@gobject=\count90
+))
+\Gin@req@height=\dimen107
+\Gin@req@width=\dimen108
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\@emptytoks=\toks16
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+))
+(/usr/local/texlive/2007/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip43
+\subfigcapskip=\skip44
+\subfigcaptopadj=\dimen109
+\subfigbottomskip=\skip45
+\subfigcapmargin=\dimen110
+\subfiglabelskip=\skip46
+\c@subfigure=\count91
+\c@lofdepth=\count92
+\c@subtable=\count93
+\c@lotdepth=\count94
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/local/texlive/2007/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip47
+\subfig@bottom=\skip48
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 149.
+LaTeX Info: Redefining \nocite on input line 214.
+Package: cite 2003/11/04  v 4.01
+)
+(/usr/local/texlive/2007/texmf-dist/tex/latex/hyphenat/hyphenat.sty
+Package: hyphenat 2001/01/02 v2.3a hyphenation utilities
+\langwohyphens=\language48
+LaTeX Info: Redefining \_ on input line 34.
+)
+(./latex8.sty
+IEEE 8.5 x 11-Inch Proceedings Style `latex8.sty'.
+\@ctmp=\skip49
+\@figindent=\skip50
+) (/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+\subfigbox=\box26
+
+
+LaTeX Warning: Unused global option(s):
+    [times].
+
+(./flatcad.aux)
+\openout1 = `flatcad.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 40.
+ (/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-------------------- Geometry parameters
+paper: class default
+landscape: --
+twocolumn: true
+twoside: --
+asymmetric: --
+h-parts: 92.14519pt, 0.7\paperwidth , 92.14519pt (default)
+v-parts: 95.39737pt, 0.7\paperheight , 143.09605pt (default)
+hmarginratio: 1:1
+vmarginratio: 2:3
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  614.295pt
+\paperheight 794.96999pt
+\textwidth  496.85625pt
+\textheight 641.39624pt
+\oddsidemargin  -21.97014pt
+\evensidemargin -21.97014pt
+\topmargin  0.0pt
+\headheight 0.0pt
+\headsep    0.0pt
+\footskip   30.0pt
+\marginparwidth 4.0pt
+\marginparsep   10.0pt
+\columnsep  22.58437pt
+\skip\footins  9.0pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+\@twocolumntrue 
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+(/usr/local/texlive/2007/texmf-dist/tex/context/base/supp-pdf.tex
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count95
+\scratchdimen=\dimen111
+\scratchbox=\box27
+\nofMPsegments=\count96
+\nofMParguments=\count97
+\MPscratchCnt=\count98
+\MPscratchDim=\dimen112
+\MPnumerator=\count99
+\everyMPtoPDFconversion=\toks17
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+LaTeX Font Info:    Try loading font information for U+msa on input line 42.
+ (/usr/local/texlive/2007/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 42.
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
+
+<physical-output-boxcad.pdf, id=1, 614.295pt x 794.97pt>
+File: physical-output-boxcad.pdf Graphic file (type pdf)
+
+<use physical-output-boxcad.pdf>
+Underfull \hbox (badness 7540) in paragraph at lines 110--110
+\OT1/ptm/m/n/8 whose faces at-tach
+ []
+
+<physical-output-jessica.pdf, id=2, 614.295pt x 794.97pt>
+File: physical-output-jessica.pdf Graphic file (type pdf)
+
+<use physical-output-jessica.pdf>
+<physical-output-gears.pdf, id=3, 614.295pt x 794.97pt>
+File: physical-output-gears.pdf Graphic file (type pdf)
+
+<use physical-output-gears.pdf>
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]\OT1/ptm/m/n/8 (c) Gears are one
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+\OT1/ptm/m/n/8 type of piece in
+ []
+
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 133.
+
+(/usr/local/texlive/2007/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+<mechanism_graphics.pdf, id=4, 614.295pt x 794.97pt>
+File: mechanism_graphics.pdf Graphic file (type pdf)
+
+<use mechanism_graphics.pdf>
+Overfull \hbox (5.0pt too wide) in paragraph at lines 143--144
+ [][] 
+ []
+
+<mechanism_physical.pdf, id=5, 614.295pt x 794.97pt>
+File: mechanism_physical.pdf Graphic file (type pdf)
+
+<use mechanism_physical.pdf>
+Overfull \hbox (5.0pt too wide) in paragraph at lines 149--150
+ [][] 
+ []
+
+[1{/usr/local/texlive/2007/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+ <./physical-output-boxcad.pdf> <./physical-output-jessica.pdf> <./physical-out
+put-gears.pdf>]
+Overfull \hbox (33.49731pt too wide) in paragraph at lines 253--253
+[]          \OT1/pcr/m/n/9 coaxial(gear_2, piston_wheel)),[] 
+ []
+
+[2 <./mechanism_graphics.pdf> <./mechanism_physical.pdf>]
+Underfull \hbox (badness 1205) in paragraph at lines 278--286
+\OT1/ptm/m/n/10 be cre-ated or edited pro-gram-mat-i-cally. For ex-am-ple,
+ []
+
+[3] <pentahedron.pdf, id=56, 270.97838pt x 521.88475pt>
+File: pentahedron.pdf Graphic file (type pdf)
+ <use pentahedron.pdf>
+Overfull \hbox (5.0pt too wide) in paragraph at lines 429--430
+[][] 
+ []
+
+
+Underfull \vbox (badness 1038) has occurred while \output is active []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 493.
+
+! Undefined control sequence.
+l.500 the \tetnhtt
+                  {backto} command.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \relax 
+l.532     \begin{minipage}{}
+                            
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.532     \begin{minipage}{}
+                            
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+<notch_graphic.pdf, id=57, 323.2075pt x 90.3375pt>
+File: notch_graphic.pdf Graphic file (type pdf)
+ <use notch_graphic.pdf>
+Overfull \hbox (144.54pt too wide) in paragraph at lines 533--534
+[][] 
+ []
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \relax 
+l.534     \end{minipage}
+                        
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.534     \end{minipage}
+                        
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+
+Overfull \hbox (8.56743pt too wide) in paragraph at lines 551--551
+[]\OT1/pcr/m/n/9 notch(3, 0.5, 0.2, "X")[] 
+ []
+
+
+Overfull \hbox (8.56743pt too wide) in paragraph at lines 551--551
+[]\OT1/pcr/m/n/9 notch(3, 0.5, 0.2, "Y")[] 
+ []
+
+<turtle_tree_graph.pdf, id=58, 1183.42125pt x 142.5325pt>
+File: turtle_tree_graph.pdf Graphic file (type pdf)
+
+<use turtle_tree_graph.pdf> [4 <./pentahedron.pdf>]
+! Missing number, treated as zero.
+<to be read again> 
+                   \relax 
+l.596   \begin{minipage}{}
+                          
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.596   \begin{minipage}{}
+                          
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+<notched_triangle.pdf, id=73, 141.51068pt x 160.57993pt>
+File: notched_triangle.pdf Graphic file (type pdf)
+
+<use notched_triangle.pdf>
+<shapes-complete.pdf, id=74, 406.51875pt x 403.5075pt>
+File: shapes-complete.pdf Graphic file (type pdf)
+
+<use shapes-complete.pdf>
+Overfull \hbox (224.30998pt too wide) in paragraph at lines 600--601
+[][] 
+ []
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \relax 
+l.601   \end{minipage}
+                      
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.601   \end{minipage}
+                      
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+
+Overfull \hbox (22.69733pt too wide) in paragraph at lines 692--692
+[]\OT1/pcr/m/n/9 ; make an n-sided polygon beginning and[] 
+ []
+
+
+Overfull \hbox (28.09732pt too wide) in paragraph at lines 692--692
+[]\OT1/pcr/m/n/9 ; ending at the current turtle position.[] 
+ []
+
+
+Overfull \hbox (17.29733pt too wide) in paragraph at lines 692--692
+[]\OT1/pcr/m/n/9 define centered_polygon(sides, radius)[] 
+ []
+
+
+Overfull \hbox (11.89734pt too wide) in paragraph at lines 692--692
+[]  \OT1/pcr/m/n/9 points = [] ; initialize empty list[] 
+ []
+
+
+Underfull \hbox (badness 1264) in paragraph at lines 696--696
+[]\tenhv Figure 9. []FlatLang []show-ing ab-so-lute and
+ []
+
+
+Underfull \hbox (badness 1609) in paragraph at lines 700--709
+[]\OT1/ptm/m/n/10 Figure 9[] il-lus-trates the use of []\OT1/pcr/m/n/10 mark[]\
+OT1/ptm/m/n/10 /[]\OT1/pcr/m/n/10 backto []\OT1/ptm/m/n/10 and
+ []
+
+[5 <./turtle_tree_graph.pdf> <./notch_graphic.pdf>] [6 <./notched_triangle.pdf>
+ <./shapes-complete.pdf>] (./flatcad.bbl
+Underfull \vbox (badness 1215) has occurred while \output is active []
+
+) [7]
+(./flatcad.aux) ) 
+Here is how much of TeX's memory you used:
+ 1961 strings out of 94073
+ 26345 string characters out of 1162984
+ 79939 words of memory out of 1500000
+ 5211 multiletter control sequences out of 10000+50000
+ 28057 words of font info for 66 fonts, out of 1200000 for 2000
+ 645 hyphenation exceptions out of 8191
+ 25i,8n,24p,381b,357s stack positions out of 5000i,500n,6000p,200000b,5000s
+{/usr/local/texlive/2007/texmf-dist/fonts/enc/dvips/base/8r.en
+c}</usr/local/texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmbx10.pfb></usr/l
+ocal/texlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmsy7.pfb></usr/local/texli
+ve/2007/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2007/
+texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2007/texmf-d
+ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/
+type1/urw/times/utmr8a.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on flatcad.pdf (7 pages, 3681954 bytes).
+PDF statistics:
+ 160 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+

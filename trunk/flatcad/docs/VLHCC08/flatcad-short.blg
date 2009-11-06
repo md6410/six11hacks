@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: flatcad-short.aux
+The style file: latex8.bst
+Database file #1: sketch-bibliography.bib
+Warning--can't use both volume and number fields in mori-plushie
+You've used 9 entries,
+            2118 wiz_defined-function locations,
+            547 strings with 5131 characters,
+and the built_in function-call counts, 2647 in all, are:
+= -- 239
+> -- 114
+< -- 2
++ -- 47
+- -- 36
+* -- 149
+:= -- 440
+add.period$ -- 27
+call.type$ -- 9
+change.case$ -- 42
+chr.to.int$ -- 0
+cite$ -- 10
+duplicate$ -- 126
+empty$ -- 245
+format.name$ -- 36
+if$ -- 568
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 12
+newline$ -- 48
+num.names$ -- 18
+pop$ -- 71
+preamble$ -- 1
+purify$ -- 36
+quote$ -- 0
+skip$ -- 76
+stack$ -- 0
+substring$ -- 100
+swap$ -- 24
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 30
+warning$ -- 1
+while$ -- 22
+width$ -- 10
+write$ -- 97
+(There was 1 warning)

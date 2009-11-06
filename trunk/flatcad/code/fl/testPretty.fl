@@ -1,0 +1,35 @@
+define easy(a, b)
+  a + b   
+done
+
+define medium(a, b)
+  if (a < b)
+    a * b + b
+  else
+    (a + b) * b
+  done
+done
+
+define complex(a, b)
+  repeat(a)
+    if (b == 2)
+      easy(a, b)
+    alt(a > 6)
+      medium(a, b)
+    else
+      complex(a-1, b-1)
+    done
+  done
+done
+
+define manyStatements()
+  a = complex(6,2)
+  b = easy(medium(1,2), medium(5,6))
+  print("The result is", complex(a,b))
+done
+
+pprint(easy)
+pprint(medium)
+pprint(complex)
+pprint(manyStatements)
+

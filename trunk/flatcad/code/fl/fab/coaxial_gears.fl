@@ -1,0 +1,7 @@
+; coaxial_gears.fl
+
+load("fl/fab/gear.fl")
+load("fl/fab/functions.fl")
+
+coaxial_objects(gear(24), gear(12), 0.4)
+

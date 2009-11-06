@@ -1,0 +1,77 @@
+define t()
+  tri(0.06)
+  tri(0.2)
+done
+
+define tri(s)
+  left(90)
+  forward(s/2)
+  right(120)
+  forward(s)
+  right(120)
+  forward(s)
+  right(120)
+  forward(s/2)
+  right(90)
+done
+
+define zig(w,d)
+  forward(w)
+  left(90)
+  forward(d)
+  right(90)
+  forward(w)
+done
+
+define zag(w,d)
+  right(90)
+  forward(d)
+  left(90)
+done
+
+define side(len, m, special)
+  if (special)
+    less = 0
+  else
+    less = 1
+  done
+  repeat ( (len/(2*m)) - less)
+    zig(m, m)
+    zag(m, m)
+  done
+  if (special)
+    forward(2*m)
+  else
+    zig(m, 2*m)
+  done
+  left(90)
+done
+
+define face(dim1, dim2, depth, special)
+  side(dim1, depth, special)
+  side(dim2, depth, special)
+  side(dim1, depth, special)
+  side(dim2, depth, special)
+done
+
+define box(dim1, dim2, dim3, depth)
+  mark("box origin")
+  repeat(2)
+    face(dim1, dim2, depth, true)
+    backto("box origin")
+    face(dim1, dim3, depth, false)
+    backto("box origin")
+    face(dim2, dim3, depth, false)
+    backto("box origin")
+  done
+done
+
+hpgl("box-1-2-3.hpgl")
+
+box(0.9, 1.6, 2.7, 0.098)
+
+showPolygons(false)
+
+
+
+

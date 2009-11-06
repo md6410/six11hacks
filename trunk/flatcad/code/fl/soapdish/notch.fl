@@ -1,0 +1,64 @@
+; notch.fl - parametric notch object
+
+safe define notch(thickness, depth)
+  n = object("notch")
+  n.thickness = thickness
+  n.depth = depth
+  n.draw_right = notch_draw_right
+  n.draw_left = notch_draw_left
+  n.draw = notch_draw_left
+  n.trough_dir = nil
+  n.trough_pos = nil
+  n.bump_draw = notch_bump_draw_right
+  n.bump_hole_draw = notch_bump_hole_draw
+  n
+done
+
+safe define notch_draw_right()
+  forward(-1.0 * thickness/2)
+  right(90)
+  forward(depth)
+  left(90)
+  forward(thickness/2)
+  mark("notch bottom")
+  trough_pos = pos()
+  trough_dir = dir()
+  forward(thickness/2)
+  left(90)
+  forward(depth)
+  right(90)
+  forward(-1.0 * thickness / 2)
+done
+
+safe define notch_draw_left()
+  left(180)
+  notch_draw_right()
+  right(180)
+done
+
+safe define notch_bump_draw_right()
+  right(90)
+  forward(thickness)
+  left(90)
+  forward(thickness * 2)
+  left(90)
+  forward(thickness)
+  right(90)
+done
+
+safe define notch_bump_hole_draw()
+  mark("bump hole begin")
+  forward(thickness)
+  left(90)
+  forward(thickness/2)
+  left(90)
+  forward(thickness*2)
+  left(90)
+  forward(thickness)
+  left(90)
+  forward(thickness*2)
+  left(90)
+  forward(thickness/2)
+  backto("bump hole begin")
+done
+

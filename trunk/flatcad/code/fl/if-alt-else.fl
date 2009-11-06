@@ -1,0 +1,22 @@
+a = 4
+b = 7
+
+if (a < b)
+  print ("Right")
+alt(a > b)
+  print ("Wrong 1")
+else
+  print ("Wrong 2")
+done
+
+if (2*a < b)
+  print ("Wrong 3")
+else
+  print ("Right")
+done
+
+c = ((2+a))*b
+d = 2+a*b
+
+print ("c is", c)
+print ("d is", d)

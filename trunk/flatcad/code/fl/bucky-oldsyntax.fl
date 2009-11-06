@@ -1,0 +1,72 @@
+mat 0.0675
+
+begin cursor
+  f .2
+  r 150
+  begin repeat 3
+    f .3
+    r 120
+  end
+  l 150
+  b .2
+end
+
+begin pentagon-left
+  begin repeat 5
+    f 1
+    l 72
+  end
+end
+
+begin pentagon-right
+  begin repeat 5
+    f 1
+    r 72
+  end
+end
+
+; Make a pentagon that will 
+; be the 'middle'
+pentagon-left
+
+; Now rotate by the magic number,
+; draw a pentagon, and rotate
+; back & set up for the next go.
+
+begin repeat 5
+  ; roll left 63.43
+  pentagon-right
+  ; roll right 63.43
+  f 1
+  l 72
+end
+
+f 1
+; roll left 63.43
+r 72
+f 1
+r 72
+f 1
+r 72
+; roll right 63.43
+f 1
+l 72
+f 1
+l 72
+f 1
+l 72
+f 1
+r 180
+
+; roll right 63.43
+pentagon-left
+
+begin repeat 5
+  ; roll left 63.43
+  pentagon-right
+  ; roll right 63.43
+  f 1
+  l 72
+end
+
+cursor

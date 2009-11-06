@@ -1,0 +1,38 @@
+; welcome.fl - Welcome to FlatCAD!
+
+; Control-N  -- start a new file
+; Control-O  -- open an existing file...
+; Control-S  -- save current file
+; Control-Shift-S  -- save as...
+
+; *** The most important command: ***
+; Control-Enter  -- interpret program
+
+; Hit ^O and look in the flatcad-examples
+; folder, especially the file "syntax.fl".
+
+; Here's code for a tetrahedron!
+
+dihedralAngle = 125
+
+define triangle(size)
+  repeat(3)
+    forward(size)
+    left(120)
+  done
+done
+
+define goNext(size)
+  roll(-dihedralAngle)
+  forward(size)
+  right(90)
+  roll(dihedralAngle)
+done
+
+roll(dihedralAngle)
+repeat(4)
+  triangle(3)
+  goNext(3)
+done
+
+showPolygons(true)

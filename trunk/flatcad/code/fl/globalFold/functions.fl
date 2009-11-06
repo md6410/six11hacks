@@ -1,0 +1,41 @@
+define back(amt)
+  forward(-amt)
+ done
+
+define hinge(dist, dihedralAngle)
+  left(90)
+  roll(dihedralAngle)
+  forward(dist)
+  back(dist)
+  right(90)
+done
+
+define hingedSide (sideLen, dihedralAngle)
+  forward(sideLen / 2)
+  left(90)
+  roll(dihedralAngle)
+  forward(sideLen) ; hinge length
+  back(sideLen)
+  right(90)
+  forward(sideLen / 2)
+  left(90)
+done
+
+define side(sideLen)
+  forward(sideLen)
+  left(90)
+done
+
+define sheet(size)
+  side(size)
+  side(size)
+  side(size)
+  side(size)
+done
+
+define foldedSheet(size, angle)
+  hingedSide(size, angle)
+  side(size)
+  hingedSide(size, angle)
+  side(size)
+done

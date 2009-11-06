@@ -1,0 +1,27 @@
+; choo-choo.fl
+
+load("fl/fab/offcenter_wheel.fl")
+load("fl/fab/bar.fl")
+load("fl/fab/gear.fl")
+
+gear()
+
+o_r = 2
+i_r = 0.3
+h_d = 1.25
+h_r = 0.3
+
+wheel = offcenter_wheel(o_r, i_r, h_d, h_r)
+wheel.draw()
+
+b = bar_full(	3, ; length 
+	1.5, ; width
+	2, ; num holes
+	1,; n_axles
+	axle_bearing(),
+	1, ; n_collars
+	collar())
+
+b.draw()
+left(60)
+b.draw()

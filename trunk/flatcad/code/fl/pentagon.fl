@@ -1,0 +1,15 @@
+mat 0.0675
+
+begin pentagon
+  begin repeat 5
+    f .5
+    notch left .135
+    f .5
+    l 72
+  end
+end
+
+pentagon
+
+
+

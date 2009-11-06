@@ -1,0 +1,39 @@
+define report()
+   print("currently at ", pos())
+done
+
+part("foo")
+forward(0.5)
+report()
+left(90)
+forward(2)
+report()
+p1 = pos()
+
+right(135)
+forward(sqrt(2))
+report()
+pitch(45)
+forward(1)
+report()
+pitch(-45)
+forward(0.5)
+report()
+right(90)
+
+up()
+forward(1)
+down()
+forward(1)
+drawto(p1)
+
+part("bar")
+
+repeat(3)
+  forward(1)
+  left(120)
+done
+
+
+laser("foo.out")
+print("Hello")

@@ -1,0 +1,20 @@
+define square(:len)
+  mark ("a")
+  forward (:len)
+  mark ("a")
+  left (90)
+  mark ("b")
+  forward (:len)
+  mark ("b")
+  left (90)
+  mark ("c")
+  forward (:len)
+  mark ("c")
+  left (90)
+  mark ("d")
+  forward (:len)
+  mark ("d")
+  left (90)
+done
+
+

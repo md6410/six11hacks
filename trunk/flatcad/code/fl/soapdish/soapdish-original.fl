@@ -1,0 +1,241 @@
+; soapdish.fl
+
+load("fl/soapdish/notch.fl")
+
+define floor_piece(x1, x2, xmult, ymax, anotch)
+  up()
+  left(90)
+  forward(ymax)
+  right(90)
+  forward(x1 * xmult)
+  right(180)
+  x1top = pos()
+  down()
+  part("floor_piece")
+  notched_segment(2, anotch, x1 * xmult)
+  left(90)
+  forward(ymax)
+  left(90)
+  notched_segment(1, anotch, x2 * xmult)
+  drawto(x1top)
+done
+
+define floor_piece_2(x1, x2, xmult, ymax, 
+                                 bend, anotch, bump_space)
+  up()
+  left(90)
+  forward(ymax)
+  right(90)
+  forward(x1 * xmult)
+  right(180)
+  x1top = pos()
+  down()
+  part("floor_piece")
+  notched_segment(2, anotch, x1 * xmult)
+  bent_segment(ymax,bend,true)
+  left(90)
+  bumpy_side(x2 * xmult, anotch, bump_space)
+  drawto(x1top)
+done
+
+define floor_piece_2_back(nslats, space, height, 
+                                          anotch, bump_space)
+  part("floor piece 2 backside")
+  extended_height = height + 1
+  width = nslats * space
+  repeat(2)
+    forward(width)
+    left(90)
+    forward(extended_height)
+    left(90)
+  done
+  up()
+  left(90)
+  edge_offset = bump_space + anotch.thickness
+  forward(edge_offset)
+  down()
+  many_bumps(nslats, anotch, space)
+  up()
+  forward(height - (2*edge_offset))
+  down()  
+  many_bumps(nslats, anotch, space)
+done
+
+define notched_segment(n, myNotch, amt)
+  seg_amt = amt/(n+1)
+  repeat(n)
+    forward(seg_amt)
+    myNotch.draw()
+  done
+  forward(seg_amt)
+done
+
+define many_bumps(nslats, anotch, space)
+  mark("many bumps begin")
+  moveAmt = (nslats * space) / (nslats + 1) 
+  repeat(nslats)
+    up()
+    right(90)
+    forward(moveAmt)
+    left(90)
+    down()
+    anotch.bump_hole_draw()
+  done
+  backto("many bumps begin")
+done
+
+define bumpy_side(amt, anotch, bump_space)
+  ; I have to go 'amt' total distance. notch is in the middle.
+  remainder = (amt / 2) - (bump_space + 2*anotch.thickness)
+  forward(bump_space)
+  anotch.bump_draw()
+  forward(remainder)
+  anotch.draw_left()
+  forward(remainder)
+  anotch.bump_draw()
+  forward(bump_space)
+done
+
+define bump(length, width)
+  right(90)
+  forward(width)
+  left(90)
+  forward(length)
+  left(90)
+  forward(width)
+  right(90)
+done
+
+define bent_segment(y, bend, is_left)
+  mark("bend begin")
+  bend_begin = pos()
+  up()
+  left(90)
+  forward(y/2)
+  if (is_left)
+    left(90)
+  else
+    right(90)
+  done
+  forward(bend)
+  bend_bottom = pos()
+  left(180) 
+  forward(bend)
+  if (is_left)
+    left(90)
+  else
+    right(90)
+  done
+  forward(y/2)
+  bend_end = pos()
+  bend_end_dir = dir()
+  backto("bend begin")
+  down()
+  drawto(bend_bottom)
+  drawto(bend_end)
+  facedir(bend_end_dir)
+done
+
+define floor_piece_tiller(x, y, bend, anotch)
+  part("floor piece tiller style")
+  notched_segment(2, anotch, x)
+  bent_segment(y, bend, true)
+  left(90)
+  notched_segment(2, anotch, x)
+  left(90)
+  forward(y)
+done
+
+
+define z()
+  up()
+  pitch(90)
+  forward(slat_spacing)
+  pitch(-90)
+  down()
+done
+
+define binder(myNotch, slatn, slatspacing)
+  part("binder")
+  notched_segment(slatn, myNotch, slatn * slatspacing)
+  left(90)
+  forward(0.6)
+  left(90)
+  forward(slatn * slatspacing)
+  left(90)
+  forward(0.6)
+ done
+
+define make_style_1()
+  n = notch(0.121, 0.3)
+  slat_n = 8
+  slat_spacing = 0.5
+  repeat(slat_n)
+    mark("x")
+    floor_piece(1.6, 1.2, 1.0, 2.6, n)
+    backto("x")
+    z()
+  done
+  left(-90)
+  repeat(3)
+    mark("binder start")
+    binder(n, slat_n, slat_spacing)
+    backto("binder start")
+    z()
+  done
+  laser("a")
+done
+
+
+safe define make_style_2()
+  n = notch(0.122, 0.3)
+  slat_n = 6
+  slat_spacing = 0.7
+  binder_n = 3
+  x1 = 1.6
+  x2 = 1.3
+  xmult = 1.0
+  ymax = 2.6
+  bend = 0.5
+  bump_space = 0.2
+  repeat(slat_n)
+    mark("x")
+    floor_piece_2(x1, x2, xmult, ymax, bend, n, bump_space)
+    backto("x")
+    z()
+  done
+  left(-90)
+
+  repeat(binder_n)
+    mark("binder start")
+    binder(n, slat_n, slat_spacing)
+    backto("binder start")
+    z()
+  done
+
+  floor_piece_2_back(slat_n, slat_spacing, x2, n, bump_space)
+  laser("a")
+done
+
+define make_style_tiller()
+  n = notch(0.121, 0.3)
+  slat_n = 8
+  slat_spacing = 0.5
+  repeat(slat_n)
+    mark("x")
+    floor_piece_tiller(1, 2.8, 0.3, n)
+    backto("x")
+    z()
+  done
+  repeat(4)
+    mark("binder start")
+    binder(n, slat_n, slat_spacing)
+    backto("binder start")
+    z()
+  done
+  laser("a")
+done
+
+; make_style_tiller()
+; make_style_1()
+make_style_2()

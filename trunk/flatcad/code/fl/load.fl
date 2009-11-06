@@ -1,0 +1,4 @@
+; this is a test
+load("fl/triangle-plain.fl")
+
+triangle(2)

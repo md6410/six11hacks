@@ -1,0 +1,54 @@
+load ("distro/flatcad-examples/turtle.fl")
+
+define back(amt)
+  forward(-amt)
+done
+
+define hinge(dist, angle)
+  roll(angle)
+  forward(dist)
+  back(dist)
+done
+
+define brilliantIdea(xDim, yDim, angle1, angle2)
+  forward(yDim / 2)
+  left(90)
+  hinge(xDim / 2, angle1)
+  right(90)
+  forward(yDim / 2)
+  left(90)
+
+  forward(xDim / 2)
+  left(90)
+  hinge(yDim / 2, angle2)
+  right(90)
+  forward(xDim / 2)
+  left(90)
+
+  forward(yDim / 2)
+  left(90)
+  hinge(xDim / 2, angle1)
+  right(90)
+  forward(yDim / 2)
+  left(90)
+ 
+  ;;;;;;; Why the hell do I have to do this?
+  if (angle1 == 180)
+    m = -1
+  else
+    m = 1
+  done
+
+  forward(xDim / 2)
+  left(90)
+  hinge(yDim / 2, m * angle2)
+  right(90)
+  forward(xDim / 2)
+  left(90)
+
+  turtle(0.3)
+done
+
+showPolygons(true)
+
+brilliantIdea(2.6, 2.6, 180, 130)

@@ -1,0 +1,43 @@
+load ("distro/flatcad-examples/turtle.fl")
+
+define sheet(xDim, yDim)
+  forward(yDim)
+  left(90)
+  forward(xDim)
+  left(90)
+  forward(yDim)
+  left(90)
+  forward(xDim)
+  left(90)
+done
+
+define back(amt)
+  forward(-amt)
+done
+
+define hinge(dist, angle)
+  roll(angle)
+  forward(dist)
+  back(dist)
+done
+
+define triangularFoldedSheet(xDim, yDim, angle)
+  hypot = sqrt(xDim * xDim + yDim * yDim)
+  forward(yDim)
+  left(135)
+  hinge(hypot, angle)
+  right(45)
+  forward(xDim)
+  left(90)
+  forward(yDim)
+  left(135)
+  roll(angle)
+  right(45)
+  forward(xDim)
+  left(90)
+  turtle(0.2)
+done
+
+showPolygons(true)
+
+triangularFoldedSheet(2,2,-145)

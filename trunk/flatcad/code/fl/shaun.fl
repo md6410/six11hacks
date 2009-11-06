@@ -1,0 +1,29 @@
+define trianglePlus (len)
+  forward(len)
+  left(120)
+  forward(len)
+  left(120)
+  forward(len)
+  left(135)
+  forward(len/10)
+done
+
+define thingy (len, rollamt)
+  trianglePlus(len)
+  roll(rollamt)
+  right(60)
+done
+
+; I want some variables for a loop, can I do that?
+length = 10
+roll = 55
+
+; I want to loop
+while (length > 3)
+  thingy(length, roll)
+  length = length - 1
+  roll = roll * 1.2
+done ; end loop.
+
+; Is there any way to loop.?  If not, then you 
+; could at least do some recursion, yeah?

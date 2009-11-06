@@ -1,0 +1,12 @@
+load ("fl/triangle-plain.fl")
+
+triangle(0.2)
+up()
+forward(1)
+down()
+triangle(2)
+right(90)
+roll(45)
+triangle(1)
+
+showPolygons(true)

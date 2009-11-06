@@ -1,0 +1,19 @@
+; coaxial_wheels.fl
+
+load("fl/fab/gear.fl")
+load("fl/fab/functions.fl")
+load("fl/fab/offcenter_wheel.fl")
+
+off1 = offcenter_wheel()
+off2 = offcenter_wheel()
+
+g1 = gear(12)
+g2 = gear(18)
+
+coaxial_objects(g1, off1, 0.0)
+raise()
+coaxial_objects(g2, g1, 0.0)
+raise()
+coaxial_objects(off1, off2, 0.0)
+raise()
+coaxial_objects(off2, g2, 0.0)

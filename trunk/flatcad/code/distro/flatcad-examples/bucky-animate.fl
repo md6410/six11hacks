@@ -1,0 +1,111 @@
+; showPolygons(true)
+
+define roll(amt)
+; One of the following lines must be commented
+;  __roll(amt) ; use normal roll semantics
+;  print("at top of redefined roll")
+  howMuch = amt * (roll_tick_cur / roll_tick_max)
+;  print ("input value is", amt)
+;  print ("rolling by", howMuch)
+  __roll(howMuch) ; supress rolling out of xy plane
+done
+
+define oroll(amt)
+  __roll(amt)
+done
+
+define pentagon_left(len)
+  repeat(5)
+    forward(len)
+    left(72)
+  done
+done
+
+define pentagon_right(len)
+  repeat(5)
+    forward(len)
+    right(72)
+  done
+done
+
+define make_half_left(sideLength)
+  repeat(5)
+    left(72)
+    roll(63.43)
+    pentagon_right(sideLength)
+    roll(-63.43)
+    forward(sideLength)
+  done
+done
+
+
+define make_half_right(sideLength)
+  repeat(5)
+    right(72)
+    roll(-63.43)
+    pentagon_left(sideLength)
+    roll(63.43)
+    forward(sideLength)
+  done
+done
+
+define buckyball(sideLength, tick)
+
+  roll_tick_cur = tick
+  roll_tick_max = 10
+
+  ; Make a pentagon that will 
+  ; be the 'middle'
+
+  pentagon_left(sideLength)
+  right(72)
+  make_half_left(sideLength)
+
+  s = 72
+  a = 63.43
+
+  up()
+
+  roll(a)
+  right(s)
+  forward(sideLength)
+  roll(-a)
+  left(s)
+  forward(sideLength)
+  roll(a)
+  right(s)
+  forward(sideLength)
+  roll(-a)
+  left(s)
+  forward(sideLength)
+  roll(a)
+  right(s)
+
+  down()
+
+  pentagon_right(sideLength)
+  left(72)
+  make_half_right(sideLength)
+
+done
+
+n = 0
+size = 0.85
+step = 0.2
+showPolygons(true)
+buckyball(size, n)
+redraw()
+pause(4000)
+
+while (n < 10)
+  clear()
+  buckyball(size, n)
+  n = n + step
+  if (n > 10)
+    n = 10
+  done
+  showPolygons(true)
+  redraw()
+  pause(150)
+  showPolygons(true)
+done

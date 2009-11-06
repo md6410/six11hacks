@@ -1,0 +1,31 @@
+
+define reposition()
+  up()
+  pitch(90)
+  forward(0.1)
+  pitch(-90)
+  down()
+done
+
+define forward(amt)
+  __forward(x * amt)
+done
+
+x = 1.0
+
+define loopy()
+  x = 1.8
+
+  repeat(25)
+    mything()
+    reposition()
+    x = x * 0.95
+  done
+  jitter(0.4, 0.9)
+done
+
+; loopy()
+
+mything()
+
+x = 1.0

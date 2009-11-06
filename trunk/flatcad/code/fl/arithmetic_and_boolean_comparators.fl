@@ -1,0 +1,86 @@
+; Need to support arithmetic:
+; +
+; - 
+; /
+; *
+
+; Boolean comparator operators:
+; <
+; <=
+; >
+; >=
+; ==
+; !=
+
+; Flow Control statements:
+; if..else if..else
+; while
+; repeat
+
+a = 0
+b = 1
+
+epsilon = 0.0001
+large   = 10000
+
+if (:a > :b)
+  print ("Error 1")
+else if (:a == :b)
+  print ("Error 2")
+else if (:a < :b)
+  print ("Success 1")
+else if (:a <= b)
+  print ("Error 3");
+done
+
+result = large * epsilon
+if (result != 1)
+  print ("Error 4")
+else
+  print ("Success 2")
+done
+
+fibA = 1
+fibB = 1
+fibC = :fibA + :fibB
+
+while (fibC < 34)
+  fibC = :fibA + :fibB
+  fibA = :fibB
+  fibB = :fibC
+done
+
+if (:fibC == 34)
+  print ("Success 3")
+else
+  print ("Error 5")
+done
+
+seventeen = 34 / 2
+
+if (17 == :seventeen)
+  print ("Success 4")
+else
+  print ("Error 6")
+done
+
+repeat(3)
+  large = large / 10
+done
+
+if (large > 10)
+  print ("Error 7")
+else if (large < 10)
+  print ("Error 8")
+else
+  print ("Success 5")
+done
+
+eight = large - 2
+if (eight > 2)
+  print ("Error 9")
+else if (eight >= 2)
+  print ("Success 6")
+else
+  print ("Error 10")
+done

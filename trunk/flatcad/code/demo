@@ -1,0 +1,1 @@
+./run --flatpath=.:distro/flatcad-examples distro/flatcad-examples/welcome.fl

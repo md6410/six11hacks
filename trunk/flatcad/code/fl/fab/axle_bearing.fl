@@ -1,0 +1,51 @@
+; axle-bearing.fl
+; 
+; Axles are square because they are easier
+; to glue. To let the axle rotate, I need to fit it to 
+; a bearing that can spin.
+
+safe define axle_bearing()
+  a = object("axle_bearing")
+  a.hole = axle_hole()
+  a.outer = 0.3
+  a.draw = axle_bearing_draw
+  a.ghost_draw = axle_bearing_ghost_draw
+  a.center = nil
+  a
+done
+
+safe define axle_bearing_ghost_draw()
+  old_ghost = ghost
+  ghost = true
+  draw()
+  ghost = old_ghost
+done
+
+safe define axle_bearing_draw()
+  part("axle")
+  centered_polygon(16, outer)
+  hole.draw()
+  center = pos()
+done
+
+safe define axle_hole()
+  h = object("axle hole")
+  h.radius = 0.13
+  h.n_sides = 4
+  h.draw = axle_hole_draw
+  h.ghost_draw = axle_hole_ghost_draw
+  h.center = nil
+  h
+done
+
+safe define axle_hole_ghost_draw()
+  old_ghost = ghost
+  ghost = true
+  draw()
+  ghost = old_ghost
+done
+
+safe define axle_hole_draw()
+  centered_polygon(n_sides, radius)
+  center = nil
+done

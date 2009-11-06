@@ -1,0 +1,25 @@
+define bitch()
+  print("erst:", erst)
+  print("second:", second)
+  print("together:", together)
+done
+
+
+erst    = ["a", "b"]
+second   = ["c", "d"]
+together = join(erst, second)
+bitch()
+
+erst    = ["a", "b"]
+second   = ["c", [[[erst]]], "d"]
+together = join(erst, second)
+bitch()
+
+together = flatten(together)
+print("flattened together:", together)
+
+sp = split("b", together)
+print("I split the list",together,"into", sp.n, "pieces")
+print("1:", first(sp))
+print("2:", first(rest(sp)))
+print(sp)

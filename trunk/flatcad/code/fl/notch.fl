@@ -1,0 +1,13 @@
+define notch(:main, :depth, :notchHalfWidth)
+  forward(:main)
+  left(90)
+  forward(:depth)
+  right(90)
+  forward(:notchHalfWidth)
+  mark("notch bottom")
+  forward(:notchHalfWidth)
+  right(90)
+  forward(:depth)
+  left(90)
+  forward(:main)
+done

@@ -1,0 +1,55 @@
+load ("distro/flatcad-examples/turtle.fl")
+
+define hinge(dist, angle)
+  roll(angle)
+  forward(dist)
+  forward(-dist)
+done
+
+define brilliantIdea
+(xDim, yDim, angle1, angle2, angle3)
+  hypot = sqrt(xDim * xDim + yDim * yDim) / 2
+
+  forward(yDim / 2)
+  left(90)
+  hinge(xDim / 2, angle1)
+  right(90)
+
+  mark("a")
+  left(45)
+  hinge(hypot, angle3)
+  right(45)
+
+  forward(yDim / 2)
+  mark("b")
+  left(90)
+  forward(xDim / 2)
+
+  left(135)
+  hinge(hypot, angle3)
+  right(45)
+
+  hinge(yDim / 2, angle2)
+  right(90)
+
+  forward(xDim / 2)
+  left(90)
+  forward(yDim / 2)
+  left(90)
+  hinge(xDim / 2, angle1)
+  right(90)
+  
+  forward(yDim / 2)
+  left(90)
+  forward(xDim / 2)
+  left(90)
+  hinge(yDim / 2, angle2)
+  right(90)
+  forward(xDim / 2)
+  left(90)
+
+done
+
+showPolygons(true)
+
+brilliantIdea(2.6, 2.6, 180, 180, -90)

@@ -1,0 +1,10 @@
+begin rectagle :width :height
+f :width
+r 90
+f :height
+r 90
+f :width
+r 90
+f :height
+r 90
+end

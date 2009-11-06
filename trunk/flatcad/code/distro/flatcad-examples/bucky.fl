@@ -1,0 +1,70 @@
+define roll(amt)
+; One of the following lines must be commented
+;  __roll(amt) ; use normal roll semantics
+  __roll(0) ; supress rolling out of xy plane
+done
+
+showPolygons(true)
+; hpgl("bucky.hpgl")
+
+define pentagon_left(len)
+  repeat(5)
+    forward(len)
+    left(72)
+  done
+done
+
+define pentagon_right(len)
+  repeat(5)
+    forward(len)
+    right(72)
+  done
+done
+
+sideLength = 0.6
+
+; Make a pentagon that will 
+; be the 'middle'
+pentagon_left(sideLength)
+
+; Now rotate by the magic number,
+; draw a pentagon, and rotate
+; back & set up for the next go.
+
+repeat(5)
+  roll(63.43)
+  pentagon_right(sideLength)
+  roll(360 - 63.43)
+  forward(sideLength)
+  left(72)
+done
+
+up()
+forward(sideLength)
+roll(63.43)
+right(72)
+forward(sideLength)
+right(72)
+forward(sideLength)
+right(72)
+roll(-63.43)
+forward(sideLength)
+left(72)
+forward(sideLength)
+left(72)
+forward(sideLength)
+left(72)
+forward(sideLength)
+right(180)
+down()
+
+roll(-63.43)
+pentagon_left(sideLength)
+
+repeat(5)
+  roll(63.43)
+  pentagon_right(sideLength)
+  roll(-63.43)
+  forward(sideLength)
+  left(72)
+done

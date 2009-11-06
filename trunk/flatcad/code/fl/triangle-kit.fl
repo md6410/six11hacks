@@ -1,0 +1,11 @@
+define triangle (:len)
+  forward (:len)
+  left (120)
+  name_point("a")
+  forward (:len)
+  left (120)
+  name_point("b")
+  forward (:len)
+  left (120)
+  name_point("c")
+done

@@ -1,0 +1,39 @@
+; new-print-mode-test.fl
+
+pitch(45)
+
+left(45)
+forward(1)
+a = pos()
+
+left(45)
+forward(1)
+left(45)
+forward(1)
+left(45)
+
+repeat(4)
+  forward(0.4)
+  left(90)
+done
+
+b = pos()
+
+up()
+
+forward(1)
+down()
+
+repeat(5)
+  forward(0.5)
+  left(360/5)
+done
+
+c = pos()
+
+part("drawto part")
+drawto(a)
+drawto(b)
+drawto(c)
+
+laser("d")

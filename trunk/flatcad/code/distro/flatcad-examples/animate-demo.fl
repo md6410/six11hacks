@@ -1,0 +1,15 @@
+s = 0.6 n = 8
+t = 100 rn = 16
+pause(1000)
+jitter(1.0, 0.0)
+repeat(rn)
+  roll(360/rn)
+  repeat(n)
+    forward(s)
+    left(360/n)
+    pause(t)
+    redraw()
+  done
+  s = s * 1.05
+done
+jitter(0.3, 0.3)

@@ -1,0 +1,24 @@
+; object-functions.fl - does something erudite
+
+define say_name()
+  print("My name is", name)
+done
+
+define person(n, a)
+  o = object("a person")
+  o.name = n
+  o.age = "0"
+  o.action = say_name
+  o
+done
+
+p = person("The Man", 55)
+print ("This person is named", p.name ". Let them speak.")
+p.action()
+
+other = person("Booby Monkey", 7)
+print ("The other person is named", p.name ". Let them speak too.")
+other.action()
+print ("Let the first say something again.")
+
+p.action()

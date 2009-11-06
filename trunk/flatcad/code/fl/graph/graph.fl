@@ -1,0 +1,58 @@
+
+define graph()
+  _a = "graph"
+  _a.V = []
+  _a.E = []
+  _a
+done
+
+define edge(start, end, data)
+  print("Making edge. start:")
+  debug(start)
+  print("end:")
+  debug(end)
+  st = "edge (" + start + "->" + end + ")"
+  if (data)
+    st = st + "[" + data + "]"
+  done
+  e = object(st)
+  e.start = start
+  e.end = end
+  e.data = data
+  e
+done
+
+define vert(data)
+  v = object("vert (" + data + ")")
+  v.data = data
+  v
+done
+
+define point(x,y,z)
+  p = object("point")
+  p.x = x
+  p.y = y
+  p.z = z
+  p
+done
+
+define addEdge(graph, edge)
+  print("changing graph's edge list from this:")
+  debugList(graph.E)
+  graph.E = cons(edge, graph.E)
+  print("to this:")
+  debugList(graph.E)
+done
+
+define addVert(graph, vert)
+  graph.V = cons(vert, graph.V)
+done
+
+; Return a list of edges who start at v
+define Outgoing_Edges(v, E)
+  ret = []
+  for each (edge : E) (edge.start == v)
+    ret = cons(edge, ret)
+  done
+done
+

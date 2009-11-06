@@ -1,0 +1,28 @@
+; centered-polygon.fl
+; - draw polygons starting from center
+; - example of a 16-gon, radius 0.4:
+; centered_polygon(16, 0.4)
+
+define centered_polygon(sides, radius)
+  mark("beginning")
+  angle = 360 / sides
+  points = []
+  i = 0
+  up()
+  repeat(sides+1)
+    backto("beginning")
+    left(i * angle)
+    forward(radius)
+    i = i+1
+    points = cons(pos(), points)
+  done
+  down()
+  while (points.n > 0)
+    p = first(points)
+    points = rest(points)
+    drawto(p)
+  done
+  backto("beginning")
+done
+
+
