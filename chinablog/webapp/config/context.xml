@@ -1,0 +1,19 @@
+<!-- <Context path="/chinablog"
+         docBase="chinablog"
+         debug="5"
+         reloadable="true"
+         crossContext="true"> -->
+<Context>
+
+	<Resource name="jdbc/good"
+	          auth="Container"
+	          type="javax.sql.DataSource"
+	          maxActive="100"
+	          maxIdle="30"
+	          maxWait="10000"
+	          username="root"
+	          password="secret"
+	          driverClassName="com.mysql.jdbc.Driver"
+	          url="jdbc:mysql://localhost:3306/good?autoReconnect=true" />
+
+</Context>
