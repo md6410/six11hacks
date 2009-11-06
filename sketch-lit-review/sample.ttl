@@ -1,0 +1,21 @@
+
+\articletitle{Article Title}
+\authorname1{Your Name}
+\affiliation1{Your Affiliation}
+
+\authorname2{Co-Author Name}
+\affiliation2{Co-Author Affiliation}
+
+\author1address2ndline{First Address Line}
+\author1city{City}
+\author1zip{Postcode}
+\author1country{Countrry}
+\author1email{Email Address}
+
+\author2address2ndline{Co-Author First Address Line}
+\author2city{Co-Author City}
+\author2zip{Co-Author Postcode}
+\author2country{Co-Author Country}
+\author2email{Co-Author Email Address}
+
+\maketitle

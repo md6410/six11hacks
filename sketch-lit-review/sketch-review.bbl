@@ -1,0 +1,1000 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Accot and Zhai}~{2002}]{accot-crossing}
+Accot, J. and S. Zhai (2002), `More than dotting the i's --- foundations for
+  crossing-based interfaces'.
+In: {\em CHI '02: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 73--80, ACM.
+
+\bibitem[\protect\citeauthoryear{Alvarado}~{2000}]{alvarado-masters-thesis}
+Alvarado, C. (2000), `A natural sketching environment: Bringing the computer
+  into early stages of mechanical design'.
+Master's thesis, Massachusetts Institute of Technology.
+
+\bibitem[\protect\citeauthoryear{Alvarado}~{2004}]{alvarado-skrui-guidelines}
+Alvarado, C. (2004), `Sketch Recognition User Interfaces: Guidelines for Design
+  and Development'.
+In: {\em Proceedings of AAAI Fall Symposium on Intelligent Pen-based
+  Interfaces}.
+
+\bibitem[\protect\citeauthoryear{Alvarado and
+  Davis}~{2004}]{alvarado-sketchread-uist}
+Alvarado, C. and R. Davis (2004), `SketchREAD: A Multi-domain Sketch
+  Recognition Engine'.
+In: {\em UIST '04: Proceedings of the 17th annual ACM symposium on User
+  interface software and technology}.
+
+\bibitem[\protect\citeauthoryear{Alvarado and
+  Davis}~{2005}]{alvarado-dynamic-bayes}
+Alvarado, C. and R. Davis (2005), `Dynamically Constructed Bayes Nets for
+  Multi-Domain Sketch Understanding'.
+In: {\em International Joint Conference on Artificial Intelligence}.
+
+\bibitem[\protect\citeauthoryear{Anastacio
+  et~al.}~{2006}]{anastacio-plant-sketching}
+Anastacio, F., M.~C. Sousa, F. Samavati, and J.~A. Jorge (2006), `Modeling
+  plant structures using concept sketches'.
+In: {\em NPAR '06: Proceedings of the 4th international symposium on
+  Non-photorealistic animation and rendering}. New York, NY, USA, pp. 105--113,
+  ACM.
+
+\bibitem[\protect\citeauthoryear{Anoto}~{2002}]{anoto}
+Anoto (2002), `Development Guide for Service Enabled by Anoto Functionality'.
+Technical report, Anoto AB.
+
+\bibitem[\protect\citeauthoryear{Anthony et~al.}~{2005}]{anthony-multimodal}
+Anthony, L., J. Yang, and K.~R. Koedinger (2005), `Evaluation of multimodal
+  input for entering mathematical equations on the computer'.
+In: {\em CHI '05: CHI '05 extended abstracts on Human factors in computing
+  systems}. New York, NY, USA, pp. 1184--1187, ACM.
+
+\bibitem[\protect\citeauthoryear{Apitz and
+  Guimbreti\`{e}re}~{2004}]{apitz-crossy}
+Apitz, G. and F. Guimbreti\`{e}re (2004), `{CrossY}: a crossing-based drawing
+  application'.
+In: {\em UIST '04: Proceedings of the 17th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 3--12, ACM.
+
+\bibitem[\protect\citeauthoryear{{Apple, Inc.}}~{2007}]{apple-inkwell}
+{Apple, Inc.} (2007), `Apple Inkwell'.
+http://www.apple.com/sg/macosx/features/inkwell/.
+
+\bibitem[\protect\citeauthoryear{Arnheim}~{1969}]{arnheim-visthink}
+Arnheim, R. (1969), {\em Visual Thinking}.
+London: Faber and Faber.
+
+\bibitem[\protect\citeauthoryear{Arnowitz
+  et~al.}~{2006}]{arnowitz-software-prototyping}
+Arnowitz, J., M. Arent, and N. Berger (2006), {\em Effective Prototyping for
+  Software Makers}.
+Morgan Kaufmann.
+
+\bibitem[\protect\citeauthoryear{Arvo and Novins}~{2005}]{arvo-beautification}
+Arvo, J. and K. Novins (2005), `Appearance-preserving manipulation of
+  hand-drawn graphs'.
+In: {\em GRAPHITE '05: Proceedings of the 3rd international conference on
+  Computer graphics and interactive techniques in Australasia and South East
+  Asia}. New York, NY, USA, pp. 61--68, ACM.
+
+\bibitem[\protect\citeauthoryear{{Autodesk, Inc.}}~{2008}]{autodesk-web}
+{Autodesk, Inc.} (2008), `{Autodesk Maya}'.
+http://autodesk.com.
+
+\bibitem[\protect\citeauthoryear{Bae et~al.}~{2008}]{bae-ilovesketch}
+Bae, S.-H., R. Balakrishnan, and K. Singh (2008), `ILoveSketch:
+  As-Natural-As-Possible Sketching System for Creating 3D Curve Models'.
+In: {\em Proceedings of UIST'08 (to appear)}.
+
+\bibitem[\protect\citeauthoryear{Bailey and Konstan}~{2003}]{bailey-demais}
+Bailey, B.~P. and J.~A. Konstan (2003), `Are informal tools better?: comparing
+  DEMAIS, pencil and paper, and authorware for early multimedia design'.
+In: {\em CHI '03: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 313--320, ACM.
+
+\bibitem[\protect\citeauthoryear{Bimber et~al.}~{2000}]{bimber-sketch-bnf}
+Bimber, O., L.~M. Encarnacao, and A. Stork (2000), `A multi-layered
+  architecture for sketch-based interaction within virtual environments'.
+{\em Computers and Graphics} {\bf 24}, 851--867.
+
+\bibitem[\protect\citeauthoryear{Black}~{1990}]{black-fidelity}
+Black, A. (1990), `Visible planning on paper and on screen: The impact of
+  working medium on decision-making by novice graphic designers.'.
+{\em Behaviour and Information Technology} {\bf 9}(4), 283--296.
+
+\bibitem[\protect\citeauthoryear{Bloomenthal
+  et~al.}~{1998}]{bloomenthal-sketch-n-make}
+Bloomenthal, M., R. Zeleznik, R. Fish, L. Holden, A. Forsberg, R. Riesenfeld,
+  M. Cutts, S. Drake, H. Fuchs, and E. Cohen (1998), `{SKETCH-N-MAKE}:
+  Automated machining of {CAD} sketches'.
+In: {\em Proceedings of ASME DETC'98}. pp. 1--11.
+
+\bibitem[\protect\citeauthoryear{Blostein
+  et~al.}~{2002}]{blostein-diagrams-review}
+Blostein, D., E. Lank, A. Rose, and R. Zanibbi (2002), `User Interfaces for
+  On-Line Diagram Recognition'.
+In: {\em GREC '01: Selected Papers from the Fourth International Workshop on
+  Graphics Recognition Algorithms and Applications}. London, UK, pp. 92--103,
+  Springer-Verlag.
+
+\bibitem[\protect\citeauthoryear{Buxton}~{2007}]{buxton-sketching}
+Buxton, B. (2007), {\em Sketching User Experiences}.
+Morgan Kaufmann Publishers.
+
+\bibitem[\protect\citeauthoryear{Chen et~al.}~{2008}]{chen-sketching-reality}
+Chen, X., S.~B. Kang, Y.-Q. Xu, J. Dorsey, and H.-Y. Shum (2008), `Sketching
+  reality: Realistic interpretation of architectural designs'.
+{\em ACM Trans. Graph.} {\bf 27}(2), 1--15.
+
+\bibitem[\protect\citeauthoryear{Clowes}~{1971}]{clowes-seeing-things}
+Clowes, M.~B. (1971), `On Seeing Things'.
+{\em Artificial Intelligence} {\bf 2}, 79--116.
+
+\bibitem[\protect\citeauthoryear{Cohen et~al.}~{1999}]{cohen-3d}
+Cohen, J.~M., L. Markosian, R.~C. Zeleznik, J.~F. Hughes, and R. Barzel (1999),
+  `An interface for sketching {3D} curves'.
+In: {\em {I3D} '99: Proceedings of the 1999 symposium on Interactive 3D
+  graphics}. New York, NY, USA, pp. 17--21, ACM.
+
+\bibitem[\protect\citeauthoryear{Cole et~al.}~{1995}]{cole-survey}
+Cole, R., J. Mariani, H. Uszkoreit, A. Zaenen, and V. Zue (1995), {\em Survey
+  of the State of the Art in Human Language Technology}.
+Center for Spoken Language Understanding CSLU, Carnegie Mellon University.
+
+\bibitem[\protect\citeauthoryear{Costagliola et~al.}~{2003}]{costagliola-xpg}
+Costagliola, G., V. Deufemia, F. Ferrucci, and C. Gravino (2003), `Exploiting
+  {XPG} for Visual Languages Definition, Analysis and Development'.
+{\em Electronic Notes in Theoretical Computer Science} {\bf 82}(3), 612--627.
+
+\bibitem[\protect\citeauthoryear{Costagliola et~al.}~{2005}]{costagliola-skg}
+Costagliola, G., V. Deufemia, and M. Risi (2005), `Sketch Grammars: A Formalism
+  for Describing and Recognizing Diagrammatic Sketch Languages'.
+In: {\em International Conference on Document Analysis and Recognition}.
+
+\bibitem[\protect\citeauthoryear{Cross}~{1990}]{cross-nature-nurture}
+Cross, N. (1990), `The nature and nurture of design ability'.
+{\em Design Studies} {\bf 11}(3), 127--140.
+
+\bibitem[\protect\citeauthoryear{Cross}~{1999}]{cross-natural-intelligence}
+Cross, N. (1999), `Natural Intelligence in Design'.
+{\em Design Studies} {\bf 20}(1), 25--39.
+
+\bibitem[\protect\citeauthoryear{{Cross Pen Computing Group}}~{1998}]{crosspad}
+{Cross Pen Computing Group} (1998), `{CrossPad}'.
+Portable digital notepad.
+
+\bibitem[\protect\citeauthoryear{Davis}~{2006}]{davis-siggraph-tutorial}
+Davis, R. (2006), `Sketch understanding: toward natural interaction toward
+  natural interaction'.
+In: {\em SIGGRAPH '06: ACM SIGGRAPH 2006 Courses}. New York, NY, USA, p.~4,
+  ACM.
+
+\bibitem[\protect\citeauthoryear{Davis et~al.}~{2008}]{davis-k-sketch}
+Davis, R.~C., B. Colwell, and J.~A. Landay (2008), `K-sketch: a `kinetic'
+  sketch pad for novice animators'.
+In: {\em CHI '08: Proceeding of the twenty-sixth annual SIGCHI conference on
+  Human factors in computing systems}. New York, NY, USA, pp. 413--422, ACM.
+
+\bibitem[\protect\citeauthoryear{de~Bruyne}~{1980}]{debruyne-acoustic}
+de~Bruyne, P. (1980), `Acoustic radar graphic input device'.
+In: {\em SIGGRAPH '80: Proceedings of the 7th annual conference on Computer
+  graphics and interactive techniques}. New York, NY, USA, pp. 25--31, ACM.
+
+\bibitem[\protect\citeauthoryear{Di~Fiore and
+  Van~Reeth}~{2002}]{difiore-sketching-artistic}
+Di~Fiore, F. and F. Van~Reeth (2002), `A Multi-Level Sketching Tool for
+  Pencil-and-Paper Animation'.
+In: {\em Sketch Understanding: Papers from the 2002 American Association for
+  artificial Intelligence (AAAI 2002) Spring Symposium}. pp. 32--36.
+
+\bibitem[\protect\citeauthoryear{Do}~{1998}]{do-phd-thesis}
+Do, E. Y.-L. (1998), `The Right Tool at the Right Time: Investigation of
+  Freehand Drawing as an Interface to Knowledge Based Design Tools'.
+Ph.D. thesis, Georgia Institute of Technology.
+
+\bibitem[\protect\citeauthoryear{Do}~{2005}]{do-design-sketches-tools}
+Do, E. Y.-L. (2005), `Design Sketches and Sketch Design Tools'.
+{\em Knowledge-Based Systems} {\bf 18}(8), 838--405.
+
+\bibitem[\protect\citeauthoryear{{Electronic Arts, Inc.}}~{2008}]{ea-sims}
+{Electronic Arts, Inc.} (2008), `{The Sims}'.
+http://thesims.ea.com.
+
+\bibitem[\protect\citeauthoryear{Ellis et~al.}~{1969}]{ellis-grail}
+Ellis, T.~O., J.~F. Heafner, and W.~L. Sibley (1969), `The {GRAIL} Project: An
+  Experiment in Man-Machine Communications'.
+Technical Report RAND Memorandum RM-5999-ARPA, RAND Corporation.
+
+\bibitem[\protect\citeauthoryear{Ernerfeldt}~{2008}]{ernerfeldt-phun}
+Ernerfeldt, E. (2008), `(Forthcoming MS Thesis on Phun)'.
+Master's thesis, Ume\aa~University.
+
+\bibitem[\protect\citeauthoryear{Fonseca and
+  Jorge}~{2000}]{fonseca-fuzzy-recognition}
+Fonseca, M. and J. Jorge (2000), `Using fuzzy logic to recognize geometric
+  shapes interactively'.
+{\em Fuzzy Systems, 2000. FUZZ IEEE 2000. The Ninth IEEE International
+  Conference on} {\bf 1}, 291--296.
+
+\bibitem[\protect\citeauthoryear{Fonseca et~al.}~{2002}]{fonseca-caligraphic}
+Fonseca, M., C. Pimentel, and J. Jorge (2002), `{CALI}: An online scribble
+  recognizer for calligraphic interfaces'.
+In: {\em AAAI 2002 Spring Symposium (Sketch Understanding Workshop)}. pp.
+  51--58.
+
+\bibitem[\protect\citeauthoryear{Forbus}~{2008}]{forbus-cogsketch-tutorial}
+Forbus, K.~D. (2008), `Exploring Spatial Cognition through Sketch
+  Understanding'.
+In: {\em Spatial Cognition}.
+  http://conference.spatial-cognition.de/sc08/tutorials/T-1.
+
+\bibitem[\protect\citeauthoryear{Forbus
+  et~al.}~{2003}]{forbus-nusketch-battlespace}
+Forbus, K.~D., J. Usher, and V. Chapman (2003), `Sketching for military courses
+  of action diagrams'.
+In: {\em Proceedings of Intelligent User Interfaces '03}.
+
+\bibitem[\protect\citeauthoryear{Frankish
+  et~al.}~{1995}]{frankish-recognition-tolerance}
+Frankish, C., R. Hull, and P. Morgan (1995), `Recognition accuracy and user
+  acceptance of pen interfaces'.
+In: {\em CHI '95: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 503--510, ACM Press/Addison-Wesley
+  Publishing Co.
+
+\bibitem[\protect\citeauthoryear{Futrelle}~{1999}]{futrelle-ambigutiy}
+Futrelle, R. (1999), `Ambiguity in visual language theory and its role in
+  diagram parsing'.
+{\em Visual Languages, 1999. Proceedings. 1999 IEEE Symposium on} pp. 172--175.
+
+\bibitem[\protect\citeauthoryear{Futrelle and
+  Nikolakis}~{1995}]{futrelle-diagram-parsing}
+Futrelle, R.~P. and N. Nikolakis (1995), `Efficient analysis of complex
+  diagrams using constraint-based parsing'.
+In: {\em Proceedings of the Third Itnl. Conference on Document Analysis and
+  Recognition (ICDAR'95)}.
+
+\bibitem[\protect\citeauthoryear{Gei{\ss}ler}~{1995}]{geissler-gedrics}
+Gei{\ss}ler, J. (1995), `Gedrics: the next generation of icons'.
+In: {\em Proceedings of the 5th International Conference on Human-Computer
+  Interaction (INTERACT'95)}.
+
+\bibitem[\protect\citeauthoryear{Gennari et~al.}~{2005}]{gennari-parsing}
+Gennari, L., L.~B. Kara, and T.~F. Stahovich (2005), `Combining Geometry and
+  Domain Knowledge to Interpret Hand-Drawn Diagrams'.
+{\em Computers and Graphics} {\bf 29}(4), 547--562.
+
+\bibitem[\protect\citeauthoryear{Glasgow et~al.}~{1995}]{glasgow-diagrams}
+Glasgow, J., N.~H. Narayanan, and B. Chandrasekaran (eds.) (1995), {\em
+  Diagrammatic Reasoning: Cognitive and Computational Perspectives}.
+MIT Press.
+
+\bibitem[\protect\citeauthoryear{Goel}~{1995}]{goel-sketches-of-thought}
+Goel, V. (1995), {\em Sketches of Thought}.
+Cambridge, MA: MIT Press/A Bradford Book.
+
+\bibitem[\protect\citeauthoryear{Goldschmidt}~{1991}]{goldschmidt-dialectics}
+Goldschmidt, G. (1991), `The Dialectics of Sketching'.
+{\em Creativity Research Journal} {\bf 4}(2), 123--143.
+
+\bibitem[\protect\citeauthoryear{Goldschmidt}~{1999}]{goldschmidt-backtalk}
+Goldschmidt, G. (1999), `The Backtalk of Self-Generated Sketches'.
+In: {\em Spatial and Visual Reasoning in Design}.
+Syndey, Australia: Key Center of Design Computing.
+
+\bibitem[\protect\citeauthoryear{Goodman}~{1976}]{goodman-symbols}
+Goodman, N. (1976), {\em Languages of Art: An Approach to a Theory of Symbols.
+  2nd ed.}
+Indianapolis, Indiana: Hackett.
+
+\bibitem[\protect\citeauthoryear{{Google, Inc.}}~{2008}]{google-sketchup}
+{Google, Inc.} (2008), `{Google Sketchup}'.
+http://www.sketchup.com/.
+
+\bibitem[\protect\citeauthoryear{Grimstead and
+  Martin}~{1995}]{grimstead-3d-linear-system}
+Grimstead, I.~J. and R.~R. Martin (1995), `Creating solid models from single 2D
+  sketches'.
+In: {\em SMA '95: Proceedings of the third ACM symposium on Solid modeling and
+  applications}. New York, NY, USA, pp. 323--337, ACM.
+
+\bibitem[\protect\citeauthoryear{Groner}~{1966}]{groner-grail-recognizer}
+Groner, G.~F. (1966), `Real-Time Recognition of Handprinted Text'.
+Technical Report RM-5016-ARPA, RAND Corporation.
+
+\bibitem[\protect\citeauthoryear{Gross}~{1994}]{gross-stretch-a-sketch}
+Gross, M.~D. (1994), `Stretch-A-Sketch, a Dynamic Diagrammer'.
+In: {\em Proceedings of IEEE Symposium on Visual Languages and Human-Centric
+  Computing}. pp. 232--238.
+
+\bibitem[\protect\citeauthoryear{Gross}~{1996}]{gross-cocktail}
+Gross, M.~D. (1996), `The Electronic Cocktail Napkin: a computational
+  environment for working with design diagrams'.
+{\em Design Studies} {\bf 17}(1), 53--69.
+
+\bibitem[\protect\citeauthoryear{Gross and Do}~{1996}]{gross-ecn-uist}
+Gross, M.~D. and E.~Y.-L. Do (1996), `Ambiguous Intentions: A paper-like
+  interface for creative design'.
+In: {\em UIST '04: ACM Conference on User Interface Software Technology}.
+  Seattle, WA, pp. 183--192.
+
+\bibitem[\protect\citeauthoryear{Gross and Do}~{2000}]{gross-boe}
+Gross, M.~D. and E.~Y.-L. Do (2000), `Drawing on the Back of an Envelope'.
+{\em Computers and Graphics} {\bf 24}(6), 835--849.
+
+\bibitem[\protect\citeauthoryear{Grundy and
+  Hosking}~{2007}]{grundy-maramasketch}
+Grundy, J. and J. Hosking (2007), `Supporting Generic Sketching-Based Input of
+  Diagrams in a Domain-Specific Visual Language Meta-Tool'.
+In: {\em ICSE '07: International Conference on Software Engineering}.
+  Washington, DC, pp. 282--291, IEEE Computer Society.
+
+\bibitem[\protect\citeauthoryear{Guimbreti\`{e}re}~{2003}]{guimbretiere-padd}
+Guimbreti\`{e}re, F. (2003), `Paper augmented digital documents'.
+In: {\em UIST '03: Proceedings of the 16th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 51--60, ACM.
+
+\bibitem[\protect\citeauthoryear{Hammond and Davis}~{2005}]{hammond-ladder}
+Hammond, T. and R. Davis (2005), `{LADDER}, a sketching language for user
+  interface developers'.
+{\em Elsevier, Computers and Graphics} {\bf 29}, 518--532.
+
+\bibitem[\protect\citeauthoryear{Hammond and
+  Davis}~{2006}]{hammond-interactive-descriptions}
+Hammond, T. and R. Davis (2006), `Interactive Learning of Structural Shape
+  Descriptions from Automatically Generated Near-miss Examples'.
+In: {\em Intelligent User Interfaces (IUI)}. pp. 37--40.
+
+\bibitem[\protect\citeauthoryear{Han}~{2005}]{han-multitouch}
+Han, J.~Y. (2005), `Low-cost multi-touch sensing through frustrated total
+  internal reflection'.
+In: {\em UIST '05: Proceedings of the 18th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 115--118, ACM.
+
+\bibitem[\protect\citeauthoryear{Hendry}~{2006}]{hendry-sketching-explanations}
+Hendry, D.~G. (2006), `Sketching with conceptual metaphors to explain
+  computational processes'.
+In: {\em IEEE Symposium on Visual Languages/Human-Centric Computing}. Brighton,
+  UK, pp. 95--102, IEEE Computer Society Press.
+
+\bibitem[\protect\citeauthoryear{Hinckley}~{2006}]{hinckley-input-technology}
+Hinckley, K. (2006), `Input Technologies and Techniques'.
+In: A. Sears and J.~A. Jacko (eds.): {\em Handbook of Human-Computer
+  Interaction}.
+Lawrence Erlbaum \& Associates.
+
+\bibitem[\protect\citeauthoryear{Hinckley et~al.}~{2005}]{hinckley-scriboli}
+Hinckley, K., P. Baudisch, G. Ramos, and F. Guimbretiere (2005), `Design and
+  analysis of delimiters for selection-action pen gesture phrases in scriboli'.
+In: {\em CHI '05: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 451--460, ACM.
+
+\bibitem[\protect\citeauthoryear{Hong and Landay}~{2000}]{hong-satin}
+Hong, J. and J. Landay (2000), `{SATIN}: A Toolkit for Informal Ink-based
+  Applications.'.
+{\em CHI Letters (13th Annual ACM Symposium on User Interface Software and
+  Technology: UIST 2000)} {\bf 2}(2), 63--72.
+
+\bibitem[\protect\citeauthoryear{Hong et~al.}~{2002}]{hong-recognizers}
+Hong, J., J. Landay, A.~C. Long, and J. Mankoff (2002), `Sketch Recognizers
+  from the End-User's the Designer's and the Programmer's Perspective'.
+In: T. Stahovic, J. Landay, and R. Davis (eds.): {\em AAAI Spring Symposium on
+  Sketch Understanding}. Menlo Park, CA, AAAI Press.
+
+\bibitem[\protect\citeauthoryear{Huffman}~{1971}]{huffman-nonsense}
+Huffman, D.~A. (1971), `Impossible Objects as Nonsense Sentences'.
+{\em Machine Intelligence} {\bf 6}, 295--323.
+
+\bibitem[\protect\citeauthoryear{Igarashi and
+  Hughes}~{2001}]{igarashi-suggestive}
+Igarashi, T. and J.~F. Hughes (2001), `A suggestive interface for 3D drawing'.
+In: {\em UIST '01: Proceedings of the 14th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 173--181, ACM.
+
+\bibitem[\protect\citeauthoryear{Igarashi and Hughes}~{2003}]{igarashi-smooth}
+Igarashi, T. and J.~F. Hughes (2003), `Smooth meshes for sketch-based freeform
+  modeling'.
+In: {\em I3D '03: Proceedings of the 2003 symposium on Interactive 3D
+  graphics}. New York, NY, USA, pp. 139--142, ACM.
+
+\bibitem[\protect\citeauthoryear{Igarashi et~al.}~{1997}]{igarashi-pegasus}
+Igarashi, T., S. Matsuoka, S. Kawachiya, and H. Tanaka (1997), `Interactive
+  beautification: a technique for rapid geometric design'.
+In: {\em UIST '97: Proceedings of the 10th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 105--114, ACM.
+
+\bibitem[\protect\citeauthoryear{Igarashi et~al.}~{1999}]{igarashi-teddy}
+Igarashi, T., S. Matsuoka, and H. Tanaka (1999), `Teddy: A Sketching Interface
+  for 3D Freeform Design'.
+In: {\em ACM SIGGRAPH'99}. Los Angeles, California, pp. 409--416.
+
+\bibitem[\protect\citeauthoryear{Johnson
+  et~al.}~{2006}]{johnson-flow-selection}
+Johnson, G., M.~D. Gross, and E.~Y.-L. Do (2006), `Flow Selection: A Time-Based
+  Selection and Operation Technique for Sketching Tools'.
+In: {\em 2006 Conference on Advanced Visual Interfaces}. Venice, Italy, pp.
+  83--86.
+
+\bibitem[\protect\citeauthoryear{Ju et~al.}~{2004}]{ju-navigator}
+Ju, W., A. Ionescu, L. Neeley, and T. Winograd (2004), `Where the wild things
+  work: capturing shared physical design workspaces'.
+In: {\em CSCW '04: Proceedings of the 2004 ACM conference on Computer supported
+  cooperative work}. New York, NY, USA, pp. 533--541, ACM.
+
+\bibitem[\protect\citeauthoryear{Kanizsa}~{1979}]{kanizsa-gestalt}
+Kanizsa, G. (1979), {\em Organization in Vision: Essays on Gestalt Perception}.
+Praeger, New York.
+
+\bibitem[\protect\citeauthoryear{Kara et~al.}~{2006}]{kara-3d-styling}
+Kara, L.~B., C.~M. D'Eramo, and K. Shimada (2006), `Pen-based styling design of
+  3D geometry using concept sketches and template models'.
+In: {\em SPM '06: Proceedings of the 2006 ACM symposium on Solid and physical
+  modeling}. New York, NY, USA, pp. 149--160, ACM.
+
+\bibitem[\protect\citeauthoryear{Kara and
+  Stahovich}~{2005}]{kara-recognizer-cg}
+Kara, L.~B. and T.~F. Stahovich (2005), `An image-based, trainable symbol
+  recognizer for hand-drawn sketches'.
+{\em Computers and Graphics} {\bf 29}(4), 501--517.
+
+\bibitem[\protect\citeauthoryear{Karam and
+  Schraefel}~{2006}]{karam-gesture-recognition}
+Karam, M. and M.~C. Schraefel (2006), `Investigating user tolerance for errors
+  in vision-enabled gesture-based interactions'.
+In: {\em AVI '06: Proceedings of the working conference on Advanced visual
+  interfaces}. New York, NY, USA, pp. 225--232, ACM.
+
+\bibitem[\protect\citeauthoryear{Karpenko and
+  Hughes}~{2006}]{karpenko-smoothsketch}
+Karpenko, O.~A. and J.~F. Hughes (2006), `{SmoothSketch}: {3D} free-form shapes
+  from complex sketches'.
+{\em ACM Trans. Graph.} {\bf 25}(3), 589--598.
+1141928.
+
+\bibitem[\protect\citeauthoryear{Kay}~{1986}]{kay-sketchpad-grail-dynabook}
+Kay, A. (1986), `{Alan Kay} lecture on early interactive computer systems'.
+{http://www.newmediareader.com/cd\_samples/Kay/index.html}.
+
+\bibitem[\protect\citeauthoryear{Kim and Kim}~{2006}]{kim-segmentation}
+Kim, D.~H. and M.-J. Kim (2006), `A curvature estimation for pen input
+  segmentation in sketch-based modeling'.
+{\em Computer-Aided Design} {\bf 38}(3), 238--248.
+
+\bibitem[\protect\citeauthoryear{kloonigames.com}~{2008}]{crayon-physics-delux%
+e}
+kloonigames.com (2008), `Crayon Physics Deluxe'.
+http://www.kloonigames.com/crayon/.
+
+\bibitem[\protect\citeauthoryear{Kuczun and Gross}~{1997}]{kuczun-lan-sketcher}
+Kuczun, K. and M.~D. Gross (1997), `Local Area Network Tools and Tasks'.
+In: {\em ACM Conf. on Designing Interactive Systems}. pp. 215--221.
+
+\bibitem[\protect\citeauthoryear{Kurtenbach and
+  Buxton}~{1991}]{kurtenbach-marking-menus}
+Kurtenbach, G. and W. Buxton (1991), `Issues in Combining Marking Menus and
+  Direct Manipulation Techniques'.
+In: {\em Symposium on User Interface Software and Technology}. pp. 137--144,
+  ACM.
+
+\bibitem[\protect\citeauthoryear{Kurtenbach et~al.}~{1997}]{kurtenbach-t3}
+Kurtenbach, G., G. Fitzmaurice, T. Baudel, and B. Buxton (1997), `The design of
+  a {GUI} paradigm based on tablets, two-hands, and transparency'.
+In: {\em CHI '97: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 35--42, ACM.
+
+\bibitem[\protect\citeauthoryear{Labahn et~al.}~{2006}]{labahn-mathbrush}
+Labahn, G., S. MacLean, M. Marzouk, I. Rutherford, and D. Tausky (2006), `A
+  preliminary report on the {MathBrush} pen-math system'.
+In: {\em Maple 2006 Conference}. pp. 162--178.
+
+\bibitem[\protect\citeauthoryear{Lakin et~al.}~{1989}]{lakin-vmacs-89}
+Lakin, F., J. Wambaugh, L. Leifer, D. Cannon, and C. Sivard (1989), `The
+  Electronic Design Notebook: Performing Medium And Processing Medium'.
+{\em Visual Computer: International Journal of Computer Graphics} {\bf 5}(4).
+
+\bibitem[\protect\citeauthoryear{LaLomia}~{1994}]{lalomia-recognition-accuracy}
+LaLomia, M. (1994), `User acceptance of handwritten recognition accuracy'.
+In: {\em CHI '94: Conference companion on Human factors in computing systems}.
+  New York, NY, USA, pp. 107--108, ACM.
+
+\bibitem[\protect\citeauthoryear{Landay}~{1996}]{landay-silk}
+Landay, J.~A. (1996), `{SILK}: Sketching Interfaces Like Krazy'.
+In: {\em ACM CHI 1996}. Vancouver, Canada, pp. 398--399.
+
+\bibitem[\protect\citeauthoryear{Larkin and Simon}~{1987}]{larkin-diagrams}
+Larkin, J. and H. Simon (1987), `Why a Diagram is (Sometimes) Worth Ten
+  Thousand Words'.
+{\em Cognitive Science Journal} {\bf 11}, 65--99.
+
+\bibitem[\protect\citeauthoryear{LaViola and Zeleznik}~{2004}]{laviola-mathpad}
+LaViola, J. and R.~C. Zeleznik (2004), `{MathPad}$^{2}$: A System for the
+  Creation and Exploration of Mathematical Sketches'.
+{\em ACM Trans. Graph.} {\bf 23}(3), 432--440.
+
+\bibitem[\protect\citeauthoryear{Lee et~al.}~{2007}]{lee-3d-infrared-pen}
+Lee, J., S. Hudson, and P. Dietz (2007), `Hybrid infrared and visible light
+  projection for location tracking'.
+In: {\em UIST '07: Proceedings of the 20th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 57--60, ACM.
+
+\bibitem[\protect\citeauthoryear{Lee}~{2008}]{lee-projector-thesis}
+Lee, J.~C. (2008), `Projector-Based Location Discovery and Tracking'.
+Ph.D. thesis, Carnegie Mellon University, 5000 Forbes Ave, Pittsburgh PA, USA.
+
+\bibitem[\protect\citeauthoryear{Lee et~al.}~{2006}]{lee-graph-matching}
+Lee, W., L.~B. Kara, and T.~F. Stahovich (2006), `An Efficient Graph-Based
+  Symbol Recognizer'.
+In: T.~F. Stahovich and M.~C. Sousa (eds.): {\em EUROGRAPHICS Workshop on
+  Sketch-Based Interfaces and Modeling}.
+
+\bibitem[\protect\citeauthoryear{Li et~al.}~{2005}]{li-mode-switching}
+Li, Y., K. Hinckley, Z. Guan, and J.~A. Landay (2005), `Experimental Analysis
+  of Mode Switching Techniques in Pen-based User Interfaces'.
+In: {\em CHI 2005}.
+
+\bibitem[\protect\citeauthoryear{Lin et~al.}~{2000}]{lin-denim}
+Lin, J., M. Newman, J. Hong, and J. Landay (2000), `{DENIM}: Finding a tighter
+  fit between tools and practice for web site design'.
+In: {\em CHI Letters}. pp. 510--517.
+
+\bibitem[\protect\citeauthoryear{Lipson and
+  Shpitalni}~{2002}]{lipson-correlation}
+Lipson, H. and M. Shpitalni (2002), `Correlation-Based Reconstruction of a {3D}
+  Object from a Single Freehand Sketch'.
+In: {\em AAAI 2002 Spring Symposium (Sketch Understanding Workshop)}.
+
+\bibitem[\protect\citeauthoryear{Llad\'{o}s et~al.}~{2001}]{llados-rag}
+Llad\'{o}s, J., E. Mart\'{\i}, and J.~J. Villanueva (2001), `Symbol Recognition
+  by Error-Tolerant Subgraph Matching between Region Adjacency Graphs'.
+{\em IEEE Trans. Pattern Anal. Mach. Intell.} {\bf 23}(10), 1137--1143.
+
+\bibitem[\protect\citeauthoryear{Long. et~al.}~{2000}]{long-quill-chi}
+Long., A.~C., J.~A. Landay, L.~A. Rowe, and J. Michiels (2000), `Visual
+  similarity of pen gestures'.
+In: {\em CHI '00: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 360--367, ACM.
+
+\bibitem[\protect\citeauthoryear{Mahoney and
+  Fromherz}~{2002}]{mahoney-sketching-issues}
+Mahoney, J.~V. and M.~P.~J. Fromherz (2002), `Three main concerns in sketch
+  recognition and an approach to addressing them'.
+In: {\em Sketch Understanding, Papers from the 2002 AAAI Spring Symposium}.
+
+\bibitem[\protect\citeauthoryear{Mankoff}~{2000}]{mankoff-burlap}
+Mankoff, J. (2000), `Providing integrated toolkit-level support for ambiguity
+  in recognition-based interfaces'.
+In: {\em CHI '00: CHI '00 extended abstracts on Human factors in computing
+  systems}. New York, NY, USA, pp. 77--78, ACM.
+
+\bibitem[\protect\citeauthoryear{Mankoff et~al.}~{2000}]{mankoff-oops}
+Mankoff, J., G.~D. Abowd, and S.~E. Hudson (2000), `{OOPS}: A Toolkit
+  Supporting Mediation Techniques for Resolving Ambiguity in Recognition-Based
+  Interfaces'.
+{\em Computers and Graphics} {\bf 24}(6), 819--834.
+
+\bibitem[\protect\citeauthoryear{Marr}~{1976}]{marr-visual-infoprocessing}
+Marr, D. (1976), `Early Processing of Visual Information'.
+{\em Philosophical Transactions of the Royal Society of London B} {\bf 275},
+  483--519.
+
+\bibitem[\protect\citeauthoryear{Mas et~al.}~{2005}]{mas-graph-grammar}
+Mas, J., G. S\'{a}nchez, and J. Llad\'{o}s (2005), `An Adjacency Grammar to
+  Recognize Symbols and Gestures in a Digital Pen Framework'.
+In: {\em Pattern Recognition and Image Analysis}, Vol. 3523 of {\em Lecture
+  Notes in Computer Science}. pp. 115--122, Springer.
+
+\bibitem[\protect\citeauthoryear{Masry et~al.}~{2005}]{masry-3d-sketch}
+Masry, M., D. Kang, and H. Lipson (2005), `A freehand sketching interface for
+  progressive construction of {3D} objects'.
+{\em Computers and Graphics} {\bf 29}(4), 563--575.
+
+\bibitem[\protect\citeauthoryear{Meyer}~{1995}]{meyer-pen-review}
+Meyer, A. (1995), `Pen computing: a technology overview and a vision'.
+{\em SIGCHI Bull.} {\bf 27}(3), 46--90.
+
+\bibitem[\protect\citeauthoryear{{Microsoft, Inc.}}~{2007}]{microsoft-surface}
+{Microsoft, Inc.} (2007), `Surface'.
+http://www.microsoft.com/surface/.
+
+\bibitem[\protect\citeauthoryear{Mitani et~al.}~{2000}]{mitani-3d-sketch}
+Mitani, J., H. Suzuki, and F. Kimura (2000), `{3D} Sketch: Sketch-Based Model
+  Reconstruction and Rendering'.
+In: {\em IFIP Workshop Series on Geometric Modeling: Fundamentals and
+  Applications}. Parma, Italy.
+
+\bibitem[\protect\citeauthoryear{Moran et~al.}~{1999}]{moran-collage-zombie}
+Moran, T.~P., E. Saund, W. van Melle, A.~U. Gujar, K.~P. Fishkin, and B.~L.
+  Harrison (1999), `Design and Technology for Collaborage: Collaborative
+  Collages of Information on Physical Walls'.
+{\em CHI Letters} {\bf 1}(1).
+
+\bibitem[\protect\citeauthoryear{Moran et~al.}~{1998}]{moran-whiteboard}
+Moran, T.~P., W. van Melle, and P. Chiu (1998), `Spatial interpretation of
+  domain objects integrated into a freeform electronic whiteboard'.
+In: {\em Proceedings of UIST'98}.
+
+\bibitem[\protect\citeauthoryear{Mori and Igarashi}~{2007}]{mori-plushie}
+Mori, Y. and T. Igarashi (2007), `Plushie: An Interactive Design System for
+  Plush Toys'.
+In: {\em Proceedings of SIGGRAPH 2007}. ACM.
+
+\bibitem[\protect\citeauthoryear{Mumford}~{1994}]{mumford-hidden-line}
+Mumford, D. (1994), `Elastica and computer vision'.
+In: C.~L. Bajaj (ed.): {\em Algebraic Geometry and its Applications}.
+Springer-Verlag, New York.
+
+\bibitem[\protect\citeauthoryear{Myers et~al.}~{2008}]{myers-behavior-design}
+Myers, B., S.~Y. Park, Y. Nakano, G. Mueller, and A. Ko (2008), `How Designers
+  Design and Program Interactive Behaviors'.
+In: P. Bottoni, M.~B. Rosson, and M. Minas (eds.): {\em Proceedings of IEEE
+  Symposium on Visual Languages and Human-Centric Computing}. pp. 177--184.
+
+\bibitem[\protect\citeauthoryear{Mynatt et~al.}~{1999}]{mynatt-flatland}
+Mynatt, E.~D., T. Igarashi, W.~K. Edwards, and A. LaMarca (1999), `Flatland:
+  new dimensions in office whiteboards'.
+In: {\em CHI '99: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 346--353, ACM.
+
+\bibitem[\protect\citeauthoryear{Nealen et~al.}~{2007}]{nealen-fibermesh}
+Nealen, A., T. Igarashi, O. Sorkine, and M. Alexa (2007), `{FiberMesh}:
+  Designing Freeform Surfaces with {3D} Curves'.
+In: {\em ACM SIGGRAPH 2007}. San Diego, CA, ACM Transactions on Computer
+  Graphics.
+
+\bibitem[\protect\citeauthoryear{Nealen et~al.}~{2005}]{nealen-3d-sketch}
+Nealen, A., O. Sorkine, M. Alexa, and D. Cohen-Or (2005), `A sketch-based
+  interface for detail-preserving mesh editing'.
+In: {\em SIGGRAPH '05: ACM SIGGRAPH 2005 Papers}. New York, NY, USA, pp.
+  1142--1147, ACM.
+
+\bibitem[\protect\citeauthoryear{Negroponte}~{1975}]{negroponte-soft-arc-mac}
+Negroponte, N. (1975), {\em Soft Architecture Machines}.
+Cambridge, MA: MIT Press.
+
+\bibitem[\protect\citeauthoryear{Neiman
+  et~al.}~{1999}]{neiman-sketch-retrospective}
+Neiman, B., E.~Y.-L. Do, and M.~D. Gross (1999), `Sketches and Their Functions
+  in Early Design: A Retrospective Analysis of Two Houses'.
+In: {\em Design Thinking Research Symposium}. Cambridge MA.
+
+\bibitem[\protect\citeauthoryear{Newman and
+  Landay}~{2000}]{newman-web-designers}
+Newman, M.~W. and J.~A. Landay (2000), `Sitemaps, storyboards, and
+  specifications: a sketch of Web site design practice'.
+In: {\em DIS '00: Proceedings of the 3rd conference on Designing interactive
+  systems}. New York, NY, USA, pp. 263--274, ACM.
+
+\bibitem[\protect\citeauthoryear{Newman and
+  Sproull}~{1979}]{newman-sproull-graphics-2}
+Newman, W. and R. Sproull (1979), {\em Principles of Interactive Computer
+  Graphics, 2nd ed.}
+McGraw-Hill.
+
+\bibitem[\protect\citeauthoryear{Oh et~al.}~{2006}]{oh-fab}
+Oh, Y., G. Johnson, M.~D. Gross, and E.~Y.-L. Do (2006), `The {Designosaur} and
+  the {Furniture Factory}: Simple Software for Fast Fabrication'.
+In: {\em 2nd Int. Conf. on Design Computing and Cognition (DCC06)}.
+
+\bibitem[\protect\citeauthoryear{Oviatt et~al.}~{2006}]{oviatt-math-quiet}
+Oviatt, S., A. Arthur, and J. Cohen (2006), `Quiet interfaces that help
+  students think'.
+In: {\em UIST '06: Proceedings of the 19th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 191--200, ACM.
+
+\bibitem[\protect\citeauthoryear{Oviatt and Cohen}~{2000}]{oviatt-multimodal}
+Oviatt, S. and P. Cohen (2000), `Multimodal Processes That Process What Comes
+  Naturally'.
+{\em Commun. ACM} {\bf 43}(3), 45--53.
+
+\bibitem[\protect\citeauthoryear{{Palm, Inc.}}~{2007}]{palm}
+{Palm, Inc.} (2007), `Palm Digital PDA'.
+http://www.palm.com/.
+
+\bibitem[\protect\citeauthoryear{Pasternak and Neumann}~{1993}]{pasternak-adik}
+Pasternak, B. and B. Neumann (1993), `Adaptable Drawing Interpretation Using
+  Object-Oriented and Constraint-Based Graphic Specification'.
+In: {\em Proceedings of the International Conference on Document Analysis and
+  Recognition (ICDAR '93)}.
+
+\bibitem[\protect\citeauthoryear{Paulson
+  et~al.}~{2008}]{paulson-edu-sketch-games}
+Paulson, B., B. Eoff, A. Wolin, A. Johnston, and T. Hammond (2008),
+  `Sketch-Based Educational Games: ``Drawing'' Kids Away from Traditional
+  Interfaces'.
+In: {\em Interaction Design and Children (IDC 2008) (to appear)}.
+
+\bibitem[\protect\citeauthoryear{Pavlidis and Wyk}~{1985}]{pavlidis-beautifier}
+Pavlidis, T. and C.~J.~V. Wyk (1985), `An automatic beautifier for drawings and
+  illustrations'.
+{\em SIGGRAPH Comput. Graph.} {\bf 19}(3), 225--234.
+
+\bibitem[\protect\citeauthoryear{Pedersen et~al.}~{1993}]{pedersen-tivoli}
+Pedersen, E.~R., K. McCall, T.~P. Moran, and F.~G. Halasz (1993), `Tivoli: an
+  electronic whiteboard for informal workgroup meetings'.
+In: {\em CHI '93: Proceedings of the INTERACT '93 and CHI '93 conference on
+  Human factors in computing systems}. New York, NY, USA, pp. 391--398, ACM.
+
+\bibitem[\protect\citeauthoryear{Plimmer}~{2008}]{plimmer-pen-usability}
+Plimmer, B. (2008), `Experiences with digital pen, keyboard and mouse
+  usability'.
+{\em Journal on Multimodal User Interfaces} {\bf 2}(1), 13--23.
+
+\bibitem[\protect\citeauthoryear{Plimmer and Freeman}~{2007}]{plimmer-inkkit}
+Plimmer, B. and I. Freeman (2007), `A Toolkit Approach to Sketched Diagram
+  Recognition'.
+In: {\em Proceedings of HCI 2007}. British Computer Society.
+
+\bibitem[\protect\citeauthoryear{Polya}~{1945}]{polya-solve}
+Polya, G. (1945), {\em How To Solve It}.
+Princeton University Press.
+
+\bibitem[\protect\citeauthoryear{Qian and Gross}~{1999}]{qian-netdraw}
+Qian, D. and M.~D. Gross (1999), `Collaborative Design with NetDraw'.
+In: {\em Proceedings of CAAD Futures 1999 Conference}, Vol. CAAD Futures
+  'Computers in Building'.
+
+\bibitem[\protect\citeauthoryear{Ramos et~al.}~{2004}]{ramos-pressure-widgets}
+Ramos, G., M. Boulos, and R. Balakrishnan (2004), `Pressure widgets'.
+In: {\em CHI '04: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 487--494, ACM.
+
+\bibitem[\protect\citeauthoryear{Rittel and Webber}~{1973}]{rittel-wicked}
+Rittel, H. and M. Webber (1973), `Dilemmas in a General Theory of Planning'.
+{\em Policy Sciences} {\bf 4}, 155--169.
+
+\bibitem[\protect\citeauthoryear{Rubine}~{1991}]{rubine-recognizer}
+Rubine, D. (1991), `Specifying gestures by example'.
+{\em SIGGRAPH Computer Graphics} {\bf 25}(4), 329--337.
+
+\bibitem[\protect\citeauthoryear{Santos
+  et~al.}~{1992}]{santos-handwriting-recognition}
+Santos, P., A.~J. Baltzer, A.~N. Badre, R.~L. Henneman, and M. Miller (1992),
+  `On handwriting recognition performance: Some experimental results'.
+In: {\em Proceedings of the Human Factors Society 36th Annual Meeting}. pp.
+  283--287.
+
+\bibitem[\protect\citeauthoryear{Saund}~{1999}]{saund-zombie}
+Saund, E. (1999), `Bringing the Marks on a Whiteboard to Electronic Life'.
+In: {\em CoBuild '99: Proceedings of the Second International Workshop on
+  Cooperative Buildings, Integrating Information, Organization, and
+  Architecture}. London, UK, pp. 69--78, Springer-Verlag.
+
+\bibitem[\protect\citeauthoryear{Saund et~al.}~{2003}]{saund-scanscribe}
+Saund, E., D. Fleet, D. Larner, and J. Mahoney (2003), `Perceptually-supported
+  image editing of text and graphics'.
+In: {\em UIST '03: Proceedings of the 16th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 183--192, ACM.
+
+\bibitem[\protect\citeauthoryear{Saund and Lank}~{2003}]{saund-inferred-mode}
+Saund, E. and E. Lank (2003), `Stylus input and editing without prior selection
+  of mode'.
+In: {\em UIST '03: Proceedings of the 16th annual ACM symposium on User
+  interface software and technology}. New York, NY, USA, pp. 213--216, ACM.
+
+\bibitem[\protect\citeauthoryear{Saund et~al.}~{2002}]{saund-perceptual}
+Saund, E., J. Mahoney, D. Fleet, D. Larner, and E. Lank (2002), `Perceptual
+  Organization as a Foundation for Intelligent Sketch Editing'.
+In: {\em AAAI Spring Symposium on Sketch Understanding}. pp. 118--125, American
+  Association for Artificial Intelligence.
+
+\bibitem[\protect\citeauthoryear{Saund and Moran}~{1994}]{saund-persketch}
+Saund, E. and T.~P. Moran (1994), `A Perceptually-Supported Sketch Editor'.
+In: {\em ACM Symposium on User Interface Software and Technology (UIST '94)}.
+  Marina del Rey, CA.
+
+\bibitem[\protect\citeauthoryear{Schilit et~al.}~{1998}]{schilit-xlibris}
+Schilit, B.~N., G. Golovchinsky, and M.~N. Price (1998), `Beyond paper:
+  supporting active reading with free form digital ink annotations'.
+In: {\em CHI '98: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 249--256, ACM Press/Addison-Wesley
+  Publishing Co.
+
+\bibitem[\protect\citeauthoryear{Schkolne
+  et~al.}~{2001}]{schkolne-shape-sculpt}
+Schkolne, S., M. Pruett, and P. Schr\"{o}der (2001), `Surface drawing: creating
+  organic 3D shapes with the hand and tangible tools'.
+In: {\em CHI '01: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 261--268, ACM.
+
+\bibitem[\protect\citeauthoryear{Schon}~{1983}]{schon-reflective}
+Schon, D.~A. (1983), {\em The Reflective Practitioner}.
+Basic Books.
+
+\bibitem[\protect\citeauthoryear{Schon and
+  Wiggins}~{1992}]{schon-kinds-of-seeing}
+Schon, D.~A. and G. Wiggins (1992), `Kinds of Seeing and Their Functions in
+  Designing'.
+{\em Design Studies} {\bf 13}(2), 135--156.
+
+\bibitem[\protect\citeauthoryear{Schweikardt and
+  Gross}~{1998}]{schweikardt-digital-clay}
+Schweikardt, E. and M.~D. Gross (1998), `Digital Clay: Deriving Digital Models
+  from Freehand Sketches'.
+In: T. Seebohm and S.~V. Wyk (eds.): {\em Digital Design Studios: Do Computers
+  Make A Difference? ACADIA 98}. pp. 202--211.
+
+\bibitem[\protect\citeauthoryear{Sezgin
+  et~al.}~{2001}]{sezgin-early-processing}
+Sezgin, T., T. Stahovich, and R. Davis (2001), `Sketch based interfaces: Early
+  processing for sketch understanding'.
+In: {\em The Proceedings of 2001 Perceptive User Interfaces Workshop (PUI'01)}.
+
+\bibitem[\protect\citeauthoryear{Sezgin}~{2006}]{sezgin-phd-thesis}
+Sezgin, T.~M. (2006), `Sketch Interpretation Using Multiscale Stochastic Models
+  of Temporal Patterns'.
+Ph.D. thesis, Massachusetts Institute of Technology.
+
+\bibitem[\protect\citeauthoryear{Sezgin and Davis}~{2007}]{sezgin-temporal}
+Sezgin, T.~M. and R. Davis (2007), `Sketch Interpretation Using Multiscale
+  Models of Temporal Patterns'.
+{\em IEEE Computer Graphics and Applications} {\bf 27}(1), 28--37.
+
+\bibitem[\protect\citeauthoryear{Shilman et~al.}~{2001}]{shilman-parsing}
+Shilman, M., H. Pasula, S. Russell, and R. Newton (2001), `Statistical Visual
+  Language Models for Ink Parsing'.
+In: {\em AAAI Sketch Understanding Symposium}.
+
+\bibitem[\protect\citeauthoryear{Shilman
+  et~al.}~{2003}]{shilman-discerning-structure}
+Shilman, M., Z. Wei, S. Raghupathy, P. Simard, and D. Jones (2003), `Discerning
+  Structure from Freeform Handwritten Notes'.
+In: {\em Proceedings of International Conference on Document Analysis and
+  Recognition (ICDAR) 2003}.
+
+\bibitem[\protect\citeauthoryear{Shpitalni and
+  Lipson}~{1996}]{shpitalni-curve-fitting}
+Shpitalni, M. and H. Lipson (1996), `Classification of Sketch Strokes and
+  Corner Detection Using Conic Sections and Adaptive Clustering'.
+{\em Trans. of ASME J. of Mechanical Design} {\bf 119}(2), 131--135.
+
+\bibitem[\protect\citeauthoryear{Signer and Norrie}~{2007}]{signer-paperpoint}
+Signer, B. and M.~C. Norrie (2007), `{PaperPoint}: a paper-based presentation
+  and interactive paper prototyping tool'.
+In: {\em TEI '07: Proceedings of the 1st international conference on Tangible
+  and embedded interaction}. New York, NY, USA, pp. 57--64, ACM.
+
+\bibitem[\protect\citeauthoryear{Simon}~{1973}]{simon-ill-structured-problems}
+Simon, H.~A. (1973), `The Structure of Ill Structured Problems'.
+{\em Artificial Intelligence} {\bf 4}(3), 181--201.
+
+\bibitem[\protect\citeauthoryear{Song et~al.}~{2006}]{song-modelcraft}
+Song, H., F. Guimbreti\`{e}re, and H. Lipson (2006), `{ModelCraft}: Capturing
+  Freehand Annotations and Edits on Physical 3D Models'.
+In: {\em UIST '06: Proceedings of the 19th annual ACM symposium on User
+  interface software and technology}.
+
+\bibitem[\protect\citeauthoryear{Stahovich}~{1997}]{stahovich-sketchit-diagram}
+Stahovich, T.~F. (1997), `Interpreting the Engineer's Sketch: A Picture is
+  Worth a Thousand Constraints'.
+In: {\em 1997 AAAI Symposium on Reasoning with Diagrammatic Representations
+  II}. pp. 31--38.
+
+\bibitem[\protect\citeauthoryear{Stefik et~al.}~{1987}]{stefik-colab}
+Stefik, M., G. Foster, D.~G. Bobrow, K. Kahn, S. Lanning, and L. Suchman
+  (1987), `Beyond the chalkboard: computer support for collaboration and
+  problem solving in meetings'.
+{\em Communications of the ACM} {\bf 30}(1), 32--47.
+7887.
+
+\bibitem[\protect\citeauthoryear{Sutherland}~{1963}]{sutherland-sketchpad}
+Sutherland, I. (1963), `{SketchPad}: A man-machine graphical communication
+  system.'.
+In: {\em Spring Joint Computer Conference}. pp. 329--345.
+
+\bibitem[\protect\citeauthoryear{Suwa and
+  Tversky}~{1997}]{suwa-analysis-students}
+Suwa, M. and B. Tversky (1997), `What do architects and students perceive in
+  their design sketches? A protocol analysis'.
+{\em Design Studies} {\bf 18}, 385--403.
+
+\bibitem[\protect\citeauthoryear{Terry and Mynatt}~{2002}]{terry-creative-ui}
+Terry, M. and E.~D. Mynatt (2002), `Recognizing Creative Needs in User
+  Interface Design'.
+In: {\em {C \& C} '02: Proceedings of the ACM Conference on Creativity and
+  Cognition}.
+
+\bibitem[\protect\citeauthoryear{Tesler}~{1981}]{tesler-mode-problem}
+Tesler, L. (1981), `The Smalltalk Environment'.
+{\em Byte} {\bf 6}, 90--147.
+
+\bibitem[\protect\citeauthoryear{Thorpe and
+  Shafer}~{1983}]{thorpe_huffman_clowes}
+Thorpe, C. and S. Shafer (1983), `Correspondence in Line Drawings of Multiple
+  Views of Objects'.
+In: {\em Proceedings of IJCAI-83}.
+
+\bibitem[\protect\citeauthoryear{Tombre et~al.}~{2000}]{tombre-vectorization}
+Tombre, K., C. Ah-Soon, P. Dosch, G. Masini, and S. Tabonne (2000), `Stable and
+  robust vectorization: How to make the right choices'.
+In: A. Chhabra and D. Dori (eds.): {\em Graphics Recognition: Recent Advances},
+  Vol. 1941 of {\em Lecture Notes in Computer Science}.
+Springer-Verlag, Berlin, pp. 3--18.
+
+\bibitem[\protect\citeauthoryear{Tsang et~al.}~{2004}]{tsang-3d-sketching}
+Tsang, S., R. Balakrishnan, K. Singh, A. Ranjan, and A. Ranjan (2004), `A
+  suggestive interface for image guided 3D sketching'.
+In: {\em CHI '04: Proceedings of the SIGCHI conference on Human factors in
+  computing systems}. New York, NY, USA, pp. 591--598, ACM.
+
+\bibitem[\protect\citeauthoryear{Tversky}~{2002}]{tversky-sketching-thinking}
+Tversky, B. (2002), `What do sketches say about thinking?'.
+In: T. Stahovic, J. Landay, and R. Davis (eds.): {\em AAAI Spring Symposium on
+  Sketch Understanding}. Menlo Park, CA, AAAI Press.
+
+\bibitem[\protect\citeauthoryear{Tversky and Lee}~{1999}]{tversky-routes}
+Tversky, B. and P.~U. Lee (1999), `Pictorial and verbal tools for conveying
+  routes.'.
+In: C. Freksa and D.~M. Mark (eds.): {\em COSIT-99}, Vol. 1661 of {\em Lecture
+  Notes in Computer Science}. Stade, Germany, pp. 51--64, Springer.
+
+\bibitem[\protect\citeauthoryear{Tversky
+  et~al.}~{2000}]{tversky-diagrammatic-communication}
+Tversky, B., J. Zacks, P.~U. Lee, and J. Heiser (2000), `Lines, Blobs, Crosses
+  and Arrows: Diagrammatic Communication with Schematic Figures'.
+In: {\em Diagrams '00: Proceedings of the First International Conference on
+  Theory and Application of Diagrams}. London, UK, pp. 221--230,
+  Springer-Verlag.
+
+\bibitem[\protect\citeauthoryear{van Sommers}~{1984}]{van-sommers-cognition}
+van Sommers, P. (1984), {\em Drawing and Cognition: Descriptive and
+  Experimental Studies of Graphic Production Processes}.
+Cambridge University Press.
+
+\bibitem[\protect\citeauthoryear{Veselova and
+  Davis}~{2004}]{veselova-perceptual}
+Veselova, O. and R. Davis (2004), `Perceptually Based Learning of Shape
+  Descriptions'.
+In: {\em AAAI '04: Proceedings of the National Conference on Artificial
+  Intelligence}. San Jose, California, pp. 482--487.
+
+\bibitem[\protect\citeauthoryear{{Wacom}}~{2007}]{wacom}
+{Wacom} (2007), `Wacom Tablet'.
+http://www.wacom.com.
+
+\bibitem[\protect\citeauthoryear{Walker et~al.}~{2002}]{walker-fidelity}
+Walker, M., L. Takayama, and J.~A. Landay (2002), `High-fidelity or
+  low-fidelity, paper or computer? Choosing Attributes when testing web
+  prototypes'.
+In: {\em Proceedings of Human Factors and Ergonomics Society: HFES 2002}.
+
+\bibitem[\protect\citeauthoryear{Wang and Grinstein}~{1989}]{wang-3d-sketch}
+Wang, W. and G. Grinstein (1989), `A polyhedral object's CSG-Rep reconstruction
+  from a single 2D line drawing'.
+In: {\em Proceedings of 1989 SPIE Intelligent Robots and Computer Vision III:
+  Algorithms and Techniques}, Vol. 1192. pp. 230--238.
+
+\bibitem[\protect\citeauthoryear{Ward}~{2008}]{ward-pen-bibliography}
+Ward, J.~R. (2008), `Annotated Bibilography in Pen Computing and Handwriting
+  Recognition'.
+http://users.erols.com/rwservices/biblio.html.
+
+\bibitem[\protect\citeauthoryear{Wardrip-Fruin and Montfort}~{2003}]{nmr}
+Wardrip-Fruin, N. and N. Montfort (eds.) (2003), {\em The New Media Reader}.
+MIT Press.
+
+\bibitem[\protect\citeauthoryear{West et~al.}~{2007}]{west-memento}
+West, D., A. Quigley, and J. Kay (2007), `MEMENTO: a digital-physical scrapbook
+  for memory sharing'.
+{\em Personal Ubiquitous Comput.} {\bf 11}(4), 313--328.
+
+\bibitem[\protect\citeauthoryear{Wobbrock et~al.}~{2007}]{wobbrock-dollar}
+Wobbrock, J.~O., A.~D. Wilson, and Y. Li (2007), `Gestures without libraries,
+  toolkits or training: a \$1 recognizer for user interface prototypes'.
+In: {\em UIST '07: Proceedings of ACM Symposium on User Interface Software and
+  Technology}. New York, NY, USA, pp. 159--168, ACM.
+
+\bibitem[\protect\citeauthoryear{Wong}~{1992}]{wong-rr-prototypes}
+Wong, Y.~Y. (1992), `Rough and ready prototypes: lessons from graphic design'.
+In: {\em CHI '92: Posters and short talks of the 1992 SIGCHI conference on
+  Human factors in computing systems}. New York, NY, USA, pp. 83--84, ACM.
+
+\bibitem[\protect\citeauthoryear{Yamamoto et~al.}~{2006}]{yamamoto-art019}
+Yamamoto, Y., K. Nakakoji, Y. Niahinaka, and M. Asada (2006), `{ART019}: A
+  Time-Based Sketchbook Interface'.
+Technical report, KID Laboratory, RCAST, University of Tokyo.
+
+\bibitem[\protect\citeauthoryear{Zeleznik et~al.}~{1996}]{zeleznik-sketch}
+Zeleznik, R.~C., K.~P. Herndon, and J.~F. Hughes (1996), `{SKETCH}: An
+  Interface for Sketching {3D} Scenes'.
+In: {\em SIGGRAPH 1996}.
+
+\end{thebibliography}

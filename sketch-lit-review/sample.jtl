@@ -1,0 +1,80 @@
+
+\journaltitle{Human-Computer Interaction}
+
+\journaltitleprefix{Foundations and Trends\textsuperscript{\textregistered} in}
+
+\journallibraryinfo{%
+  Foundations and Trends\textsuperscript{\textregistered} in \@journaltitle, \@pubyear,
+  Volume~\@volume, 4 issues. ISSN paper version 1931-7883. %%% (\@paperprice).
+  ISSN online version 1931-7891. %%% (\@onlineprice).
+  Also available as a combined paper and online
+  subscription.%%% (\@combinedprice).
+}
+
+\journalissn{ISSNs: Paper version 1551-305X;\\ Electronic version 1551-3068}
+
+\journaleditorinchief{Joseph M. Hellerstein}
+
+\journaleditoraddress{Computer Science Division \\
+University of California, Berkeley\\
+Berkeley, CA \\
+USA}
+%\journaleditorcountry{} \journaleditoremail{}
+
+
+
+\journaleditor{Surajit Chaudhuri (Microsoft Research)}
+\journaleditor{Ronald Fagin (IBM Research)}
+\journaleditor{Minos Garofalakis (Intel Research)}
+\journaleditor{Johannes Gehrke (Cornell University)}
+\journaleditor{Alon Halevy (Google)}
+\journaleditor{Jeffrey Naughton (University of Wisconsin)}
+\journaleditor{Jignesh Patel (University of Michigan)}
+\journaleditor{Raghu Ramakrishnan (Yahoo! Research)}
+  
+
+
+
+%Foundations and Trends\textsuperscript{\textregistered} in
+%Theoretical Computer Science publishes surveys and tutorials on the foundations
+%of computer science. The scope of the series is broad.
+%Articles in this series will focus on mathematical approaches
+%to topics revolving around the theme of efficiency in computing.
+%The list of topics below is meant to illustrate some of the
+%coverage, and is not intended to be an exhaustive list.
+
+%covers a breadth of topics relating to the management of large 
+%volumes of data. The journal targets the full scope of issues in 
+%data management, from theoretical foundations, to languages and 
+%modeling, to algorithms, system architecture, and applications. 
+%The list of topics below illustrates some of the intended 
+%coverage, though it is by no means exhaustive:  
+
+\journaltopic{Data Models and Query Languages} 
+\journaltopic{Query Processing and Optimization} 
+\journaltopic{Storage, Access Methods, and Indexing} 
+\journaltopic{Transaction Management, Concurrency Control and Recovery} 
+\journaltopic{Deductive Databases} 
+\journaltopic{Parallel and Distributed Database Systems} 
+\journaltopic{Database Design and Tuning} 
+\journaltopic{Metadata Management} 
+\journaltopic{Object Management} 
+\journaltopic{Trigger Processing and Active Databases} 
+\journaltopic{Data Mining and OLAP} 
+\journaltopic{Approximate and Interactive Query Processing} 
+\journaltopic{Data Warehousing} 
+\journaltopic{Adaptive Query Processing} 
+\journaltopic{Data Stream Management} 
+\journaltopic{Search and Query Integration} 
+\journaltopic{XML and Semi-Structured Data} 
+\journaltopic{Web Services and Middleware} 
+\journaltopic{Data Integration and Exchange} 
+\journaltopic{Private and Secure Data Management} 
+\journaltopic{Peer-to-Peer, Sensornet and Mobile Data Management} 
+\journaltopic{Scientific and Spatial Data Management} 
+\journaltopic{Data Brokering and Publish/Subscribe} 
+\journaltopic{Data Cleaning and Information Extraction} 
+\journaltopic{Probabilistic Data Management}
+
+
+\endinput

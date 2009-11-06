@@ -1,0 +1,285 @@
+\newpage
+\chapter{Challenges and Opportunities}
+\label{sec:summary}
+
+In the preceding five sections we have reviewed work on computational
+support for sketching in design, beginning with GRAIL and Sketchpad in
+the 1960s through work that is going on today. We have viewed the
+field from various aspects: studies of ``traditional'' design
+sketching done on paper without benefit of computation; hardware that
+has been employed for computer supported sketching, techniques for,
+and management of sketch recognition; and interaction in sketch based
+design software. Although we attempt in this review to cover the main
+themes in computer supported sketching for design, the field has grown
+large and diverse. We cannot hope to have captured all worthy and
+relevant work.
+
+Our efforts in assembling this review began with a question: After
+forty years of research on computational support for sketching, why
+are there so few real world applications of this technology? Although
+the mouse has dominated computer interfaces since 1980, we see no sign
+that in daily life people are ceasing to draw with pencil and marker,
+on paper, and on whiteboards. Indeed, people draw on every available
+surface. We posit that if computational support for sketching really
+worked, it would be more widely adopted in a variety of applications
+and domains. As this has not yet happened, we asked ourselves: What is
+the state of the art today, and what obstacles must be overcome before
+freehand sketching interaction will make its way from the research
+laboratory into the world of everyday use?
+
+We found no simple single answer. However, our review of the
+literature in this field reveals research directions---and in some
+cases, challenges---in several areas that if resolved provides
+opportunities to develop successful real world applications. We
+summarize these below. Overall we maintain the optimistic outlook that
+the day of real-world sketching interfaces is still to come---whether
+just around the corner or a decade or more away. Each year we see a
+growing number of published papers and research projects. Hardware
+continues to advance, albeit somewhat more slowly. Further, the
+research community working on sketch based interaction is growing both
+in size and in diversity of backgrounds.
+
+\section{Future work in understanding traditional sketching}
+\label{sec:summary-three-areas}
+
+Sketch based software for design depends on research in two main
+areas. The first area is an understanding of the roles and uses of
+sketching in design: why, when, and how designers make quick drawings,
+and the role they play in the enterprise of designing. The second area
+is an understanding of the mechanics of sketching---how people make
+meaningful marks with a stylus. Research in these closely related
+topics can foster a better understanding of the computational
+mechanisms that can be brought to bear to support, in various ways,
+the processes of sketching for design.
+
+\subsection{Sketching in design}
+The importance of sketching in design is asserted frequently in the
+literature, though few studies (including our own) go further than
+observing, as an argument for the authors' pen based software project,
+that designers sketch. Yet if we are to build sketching software that
+is truly useful for designers, we must gain a more systematic
+understanding of the ways that designers make diagrams, drawings, and
+sketches, how these representations serve design reasoning, how and
+what they communicate, and how they can be integrated with other
+knowledge and expertise. We cannot entirely separate the study of
+sketching---as medium---from the study of design processes. Thus
+research in computer support for sketching can benefit by engaging
+designers and design researchers. Empirical studies of designers
+sketching, ethnographies, and analyses of user needs have already
+added to our knowledge. Nevertheless a thorough understanding of the
+functions of sketching in design will come only when we also engage
+designers in our quest.
+
+\subsection{Mechanics of sketching}
+The mechanics of drawing and sketching is the second area where
+advances in research will lead to real world applications. There is a
+small but fascinating body of literature on how people draw things: we
+mentioned van Sommers' studies and there are others. Previously, film
+and video has been used to look closely at drawing mechanics. Now, pen
+technologies can fuel empirical studies on drawing ergonomics using
+Anoto, Wacom, or similar capture devices. These technologies can
+record drawing behavior that may be analyzed to better understand
+patterns and preferences for certain kinds of drawing tasks. What
+sequence do people choose in making a drawing, and what governs this
+choice? What, if any, is the relationship between pen speed, pressure,
+and the designer's level of confidence or certainty in the drawing?
+Answering these and other questions about drawing mechanics can lead,
+among other things, to software that can more effectively use these
+input data in building a more accurate model of the designer's
+actions.
+
+Better knowledge about drawing mechanics can also inform the
+development of input and output hardware for sketching in design. We
+have seen hardware platforms move from light pens and CRTs, to
+expensive tethered digitizing surfaces, to low-cost tablets integrated
+with displays, digitizing whiteboards, and most recently e-ink and
+electronic paper. For input technologies, costs drop as resolution,
+reliability, and portability improve. Output technologies also improve
+in resolution, color capability, power consumption, and readability
+under diverse lighting conditions. The relatively recent introduction
+of Anoto's technology, introduced in 1998, reminds us that radically
+different approaches in hardware are possible and can lead to quite
+different applications. Two-handed interaction~\cite{kurtenbach-t3} is
+valuable in certain tasks, as is the ability to draw on arbitrary
+surfaces or in space~\cite{schkolne-shape-sculpt}. It is easy to
+underestimate the effects of hardware on the performance of sketching
+systems: subtle ergonomic factors such as display screen parallax or
+the pen's feel on the drawing surface contribute to user
+satisfaction. Designers want to be comfortable drawing for extended
+periods of time, and even casual users are surprisingly sensitive to
+pen and surface ergonomics.
+
+Under the broad rubric of computational mechanisms to support
+sketching in design, we have looked at (in
+Section~\ref{sec:recognition}) managing and integrating recognition
+into sketch based interfaces, and (in Section~\ref{sec:interaction})
+interaction techniques specific to sketching.
+
+\section{Future work in computational support for sketching}
+
+\subsection{Recognition}
+
+Sketch recognition is a cousin to speech and gesture recognition, and
+there are issues common to all recognition based interaction, for
+example segmentation, grouping, and managing conflicts, correction,
+context, and n-best lists. Generally, the sketch recognition community
+could benefit from a close comparative study of research on
+recognition in these other modalities. We found no empirical data on
+what accuracy rate is acceptable in sketch recognition: How good must
+a recognizer be? Although this is likely to vary according to user and
+circumstance, the field would benefit by having benchmark data on
+acceptable accuracy in sketch recognition, similar to studies of
+acceptance of handwriting recognition accuracy.
+
+Recognizer training is another area where research could advance
+support for sketching. Users are reluctant to devote time to training
+a recognizer, and so methods for incorporating training into ordinary
+use scenarios would be advantageous. Machine learning techniques might
+be applied to extract patterns from sketch data obtained from large
+numbers of users. When is it necessary to train a recognizer for
+individual users; when can a standard scheme serve all users? And when
+training is necessary, what interfaces are users most willing to
+tolerate? How can the number of needed training samples be minimized?
+Comparative usability and performance evaluations of training methods
+could be helpful.
+
+Also related to recognition, when and under what circumstances should
+an application attempt recognition? Just how eager or lazy should a
+recognition engine be? When to be eager; when to be lazy? What
+heuristics can an application use to determine its recognition
+strategies? To what extent, and using what methods, can a system's
+knowledge of context support recognition? And finally, although many
+different approaches to recognition have been pursued, the challenge
+of recognizing sketches, whether domain-centric or domain-independent,
+remains an open problem. 
+
+A special (but important) case of sketch recognition is the problem of
+generating three-dimensional models from two-dimensional
+sketches. Again, many efforts have tackled particular kinds of
+2D-to-3D sketch recognition. Yet specific constraints bound the
+capabilities of each of these projects: some systems make assumptions
+of orthonormal geometry; others handle curved surfaces. We are still
+far from a general purpose system for generating three dimensional
+models from sketches. The challenges here include dealing with
+incomplete drawings (e.g., lines truncated by the edge of the sketch);
+incorrect drawings (not made to correct isometry or perspective); the
+use of shading, hatching, and line weight to inform
+model-construction. Here we also distinguish between projects that aim
+to recognize and parse projection drawings made according to the
+traditional conventions, and those (like SKETCH~\cite{zeleznik-sketch}
+and SketchUp~\cite{google-sketchup}) that use an artificial language
+of gestural commands to construct models.
+
+\subsection{Interaction techniques}
+
+Another broad area where research can advance software support for
+sketching in design is interaction techniques specifically tuned for
+the pen. The early work at PARC that produced the WIMP interface led
+to widely adopted conventions for using the mouse to interact with
+applications. We have yet to see a similar set of conventions emerge
+for using the pen to interact with applications, though as we saw in
+Section \ref{sec:interaction}, some work has been done along these
+lines. Pen interaction techniques might leverage input data such as
+pressure~\cite{ramos-pressure-widgets} and pen angle, in addition to
+the customary position, timing, and pen-up, pen-down events. It may be
+fruitful also to look at the design of screen widgets specifically for
+use with the pen, rather than assuming that the widgets that work for
+the mouse are equally suited for pen based interaction. And work with
+gestures such as the ``pigtail'' or the technique of ``crossing''
+screen items suggests that developing and adopting a conventional
+language of pen gestures may be
+helpful~\cite{hinckley-scriboli,apitz-crossy}.
+
+Stepping up a level from the pen and screen, support for sketching
+will require other interaction techniques. For example, managing
+recognition errors and ambiguities in a sketching program without
+unduly distracting the designer remains a challenge. Research on
+interruption management may be useful: the system could assess the
+user's state and decide when is an appropriate time to query for
+resolving an error, conflict, or ambiguity.
+
+\subsection{Application architectures}
+
+Perhaps one of the greatest obstacles to widespread adoption of
+sketching interaction is the underlying architecture of application
+software and the software engineering assumptions that this entails. A
+strength of sketching is that it can convey decisions on a spectrum
+from ambiguity and vagueness to precision and certainty. However, as
+long as the underlying software does not support such a spectrum, it
+will be difficult to take advantage of this feature. That is, whatever
+degree of ambiguity or precision the user may wish to convey through
+the sketch will be resolved before the application gets hold of it. In
+this review we have touched many times on the idea that sketches can
+capture the user's level of commitment and precision, but until
+application software can use this information, the system's capacity
+to capture and convey it is wasted. Here we contrast speech and sketch
+recognition: It is a fair assumption that a speaker has intended to
+make a specific and precise utterance, and it is the job of the
+listener to recognize what that was. As we've pointed out, in design
+this is not always the case.
+
+Sketching, however, does not only happen at the early stages of
+designing. Designers sketch throughout the process, and so software
+must also be able to capture and use sketch input even during later
+stage design. The earliest, exploratory sketches may convey a wide
+range of alternatives quickly. Drawings made in concluding phases
+resolve detail and entail highly precise decision making.  Effective
+sketch based applications must be able to support designers throughout
+this process. 
+
+In the vein of innovative application architectures that take
+advantage of sketching input, it is worth remarking that many of the
+innovations in Sketchpad were programming language ideas, not what we
+would now see as HCI ideas. The software architecture of Sketchpad---a
+constraint solver at its core, an object-like representation of
+prototypes and instances---these were deeply integrated into the
+design of the program. It may take more than wrapping existing
+applications with a ``sketching interface'' in order to reap the
+advantages of pen based interaction.
+
+\subsection{Toolkits}
+
+Most of the systems we reviewed here were built from scratch, using
+only the most basic device and graphics libraries. Building from the
+ground up can allow more divergent and potentially innovative
+work. However, this comes at a heavy cost: a great deal of redundant
+effort is spent by the sketching research community building similar
+low-level functionality. In order to advance the field and build more
+robust and sharable sketching applications, programmers can rely on
+toolkits and libraries to perform many of the mundane and common
+tasks. Several toolkits have been proposed and developed (e.g. SATIN
+and InkKit~\cite{hong-satin,plimmer-inkkit}) but these have not gained
+widespread acceptance.  It would be worth looking into why more
+researchers and developers have not adopted these toolkits. What would
+be the required characteristics of a successful toolkit for
+sketching---both research prototypes and full-fledged
+applications---remains an open question.
+
+\section{Conclusion: in support of visual thinking}
+
+Computational support for sketching has a long and interesting history
+dating back to the early days of computing. Some of the first
+graphical interfaces in the 1960s demonstrated compelling features
+that even today are not wholly integrated into pen computing. Despite
+advances in hardware (digitizing whiteboards, the
+Wacom\texttrademark\ ~\cite{wacom} and Anoto pen technologies, the
+Tablet PC) sketching remains a niche area. Perhaps it always will. On
+the other hand, it may be that overcoming a number of obstacles would
+make pen based sketch interaction far more attractive in a range of
+application areas. People, after all, still draw.
+
+Certainly for designers---and by this we mean not only those in the
+``artistic'' or ``creative'' professions but also chemical,
+electrical, mechanical engineers, economists, anyone who uses
+graphical representations in their work---better computer support for
+sketching would be a boon. Arguably, sketching and diagramming is not
+just a matter of recording geometry of ideas that have been worked out
+in the head. Rather, as Arnheim put it, drawing is a medium for visual
+thinking~\cite{arnheim-visthink}. Seen in this way, supporting
+sketching for design goes beyond strategies for more accurately
+capturing pen strokes or ink, or tuning recognition. Truly inspired
+work on computational support for sketching will see its task as
+supporting designers---and all users---in thinking visually.
+
+
+
