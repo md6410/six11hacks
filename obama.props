@@ -1,0 +1,5 @@
+username=six11
+password=secret
+keywords=Obama,beer,health
+fields=text,user/screen_name,user/name,user/id,created_at
+periodicUpdate=10
