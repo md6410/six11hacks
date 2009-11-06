@@ -1,0 +1,29 @@
+; modify_list.fl - demonstrates list operations
+
+; The functions in question are:
+; sub (lookFor, replaceWith, list)
+; subList (lookFor, replaceWith, list)
+; ins (lookFor, insertThis, list)
+; insList (lookFor, insertThis, list)
+
+myList = ["a", "b", "c", "b"]
+print("before:", myList)
+sub("b", ["i", "owned", "you"], myList)
+print("after sub b:", myList)
+
+myList = ["a", "b", "c", "b"]
+print("before:", myList)
+subList("b", ["i", "owned", "you"], myList)
+print("after subList on b:", myList)
+
+myList = ["a", "b", "c", "b"]
+print("before:", myList)
+ins("b", ["i", "owned", "you"], myList)
+print("after ins b:", myList)
+
+myList = ["a", "b", "c", "b"]
+print("before:", myList)
+insList("b", ["i", "owned", "you"], myList)
+print("after insList on b:", myList)
+
+

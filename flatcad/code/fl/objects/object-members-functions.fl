@@ -1,0 +1,24 @@
+; object-members-functions.fl
+;  - tests the ability to associate data with
+;     objects and have that data be available
+;     to 'member' functions.
+
+x = object("my object")
+x.color = "blue"
+
+y = object("a different object")
+y.color = "red"
+
+define age()
+  print("age called on object whose color is", color)
+  42.0
+done
+
+print(x, "is", x.color)
+x.f = age
+y.f = age
+
+print("Let's see if these are different.")
+print(x.f())
+print(y.f())
+

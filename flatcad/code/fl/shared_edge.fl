@@ -1,0 +1,5 @@
+load ("fl/triangle.fl")
+
+triangle(3)
+left(60)
+triangle(3)

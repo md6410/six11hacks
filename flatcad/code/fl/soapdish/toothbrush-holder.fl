@@ -1,0 +1,156 @@
+; toothbrush-holder.fl
+;
+; Lets you make a toothbrush holder with
+; some number (n > 0) of slots for toothbrushes.
+
+load("fl/soapdish/functions.fl")
+load("fl/soapdish/notch.fl")
+
+safe define hole()
+  circle(0.4)
+done
+
+
+safe define span_2(wid, len, n, myNotch)
+  part("span")
+  down()
+  mark("span start")
+  len_outer = 3.0 * myNotch.thickness
+  len_inner = len - 2.0 * len_outer
+  repeat(2)
+    forward(len_outer)
+    myNotch.draw()
+    forward(len_inner)
+    myNotch.draw()
+    forward(len_outer)
+    left(90)
+    forward(wid)
+    left(90)
+  done
+
+  span_holes(wid, len, n)
+
+  backto("span start")
+done
+
+safe define span(wid, len, n, myNotch)
+  part("span")
+  mark("span start")
+  down()
+  repeat(2)
+    forward(len)
+    left(90)
+    notched_segment(2, myNotch, wid)
+    left(90)
+  done
+
+  span_holes(wid, len, n)
+done
+
+safe define span_holes(wid, len, n)
+  ; reposition to drill the holes
+  up()
+  left(90)
+  forward(wid/2.0)
+  right(90)
+  down()
+
+  ; drill n holes
+  fAmt = len / (n + 1)
+  repeat(n)
+    up()
+    forward(fAmt)
+    down()
+    hole()
+  done
+  down()
+  backto("span start")
+done
+
+safe define floor(wid, len, myNotch)
+  part("floor")
+  down()
+  repeat(2)
+    forward(len)
+    left(90)
+    notched_segment(2, myNotch, wid)
+    left(90)
+  done
+done
+
+safe define floor_2(wid, len, myNotch)
+  part("floor")
+  down()
+  len_outer = 3.0 * myNotch.thickness
+  len_inner = len - 2.0 * len_outer
+  repeat(2)
+    forward(len_outer)
+    myNotch.draw()
+    forward(len_inner)
+    myNotch.draw()
+    forward(len_outer)
+    left(90)
+    forward(wid)
+    left(90)
+  done
+done
+
+safe define support(ht, widTop, widBot, myNotch, nA, nB, nC)
+  part("support")
+  down()
+  mark("support beginning")
+  s = pos()
+  right(90)
+  forward(widBot)
+  left(90)
+  forward(nA)
+  myNotch.draw()
+  forward(nB - nA)
+  myNotch.draw()
+  forward(nC - nB)
+  myNotch.draw()
+  forward(ht - nC)
+  left(90)
+  forward(widTop)
+  drawto(s)
+  backto("support beginning")
+done
+
+safe define toothbrush_holder_1()
+  myNotch = notch(0.121, 0.3)
+  spanWid = 1.0
+  spanNSlots = 2
+  spanLen = spanNSlots + 1.5
+  span(spanWid, spanLen, spanNSlots, myNotch)
+  raise()
+  span(spanWid, spanLen, spanNSlots, myNotch)
+  raise()
+  floor(spanWid, spanLen, myNotch)
+  repeat(4)
+    raise()
+    support(4, 0.3, 1.4, myNotch, 0.4, 1.0, 3.0)
+  done
+done
+
+safe define toothbrush_holder_2()
+  myNotch = notch(0.121, 0.3)
+  spanWid = myNotch.depth * 4
+  spanNSlots = 2
+  spanLen = spanNSlots + 1.5
+  supportHeight = 5
+  supportTopWid = myNotch.depth * 1.5
+  supportBotWid = 1.0
+  span_2(spanWid, spanLen, spanNSlots, myNotch)
+  raise()
+  span_2(spanWid, spanLen, spanNSlots, myNotch)
+  raise()
+  floor_2(spanWid, spanLen, myNotch)
+  repeat(4)
+    raise()
+    support(supportHeight, supportTopWid, supportBotWid, myNotch, 0.4, 1.0, supportHeight - 1)
+  done
+done
+
+toothbrush_holder_2()
+
+laser("geh")

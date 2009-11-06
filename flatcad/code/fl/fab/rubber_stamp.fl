@@ -1,0 +1,27 @@
+load("fl/fab/functions.fl")
+load("fl/fab/axle_bearing.fl")
+
+safe define rubber_stamp(radius, ab)
+  centered_polygon(16, radius)
+  ab.draw()
+done
+
+
+axle_bearing().draw()
+raise()
+axle = axle_bearing()
+axle.inner = 0.26
+axle.outer = 0.5
+rubber_stamp(1, axle)
+
+raise()
+raise()
+
+rubber_stamp(1, axle)
+
+raise()
+raise()
+raise()
+roll(30)
+rubber_stamp(2, axle)
+

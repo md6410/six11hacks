@@ -1,0 +1,117 @@
+lexer grammar FlatLang;
+@header {
+package org.six11.flatcad.flatlang;
+}
+
+T60 : 'done' ;
+T61 : 'if' ;
+T62 : 'else' ;
+T63 : 'alt' ;
+T64 : '(' ;
+T65 : ')' ;
+T66 : 'repeat' ;
+T67 : 'while' ;
+T68 : 'for each' ;
+T69 : ':' ;
+T70 : '=' ;
+T71 : 'or' ;
+T72 : 'and' ;
+T73 : '==' ;
+T74 : '!=' ;
+T75 : '<' ;
+T76 : '<=' ;
+T77 : '>' ;
+T78 : '>=' ;
+T79 : '+' ;
+T80 : '-' ;
+T81 : '*' ;
+T82 : '/' ;
+T83 : '%' ;
+T84 : '.' ;
+T85 : '[' ;
+T86 : ']' ;
+T87 : 'define' ;
+T88 : 'replace' ;
+T89 : ',' ;
+T90 : 'replaceAll' ;
+T91 : 'from' ;
+T92 : 'shape' ;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 298
+SAFE	:	'safe'
+	;
+	
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 301
+OBJECT	:	'__object__'
+	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 304
+INFINITY:	'infinity'
+	;
+	
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 307
+TRUE	:	'true'
+	;
+	
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 310
+FALSE	:	'false'
+	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 313
+NUM	:	INT+
+	|	INT* '.' INT+
+	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 317
+ID	:	(LETTER | '_') (LETTER | '_' | INT)*
+	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 320
+fragment
+LETTER	:	('a'..'z'|'A'..'Z')
+	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 324
+fragment
+INT	:	('0'..'9')+
+    	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 328
+STR_LITERAL
+     :   '"' ( ESC_SEQ | ~('\\'|'"') )* '"'
+     ;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 332
+fragment
+ESC_SEQ
+    :   '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')
+    |   UNI_ESC
+    |   OCT_ESC
+    ;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 339
+fragment
+OCT_ESC	:	'\\' ('0'..'3') ('0'..'7') ('0'..'7')
+	|	'\\' ('0'..'7') ('0'..'7')
+	|	'\\' ('0'..'7')
+	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 345
+fragment
+UNI_ESC	:	'\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+    	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 349
+fragment
+HEX_DIGIT
+	:	('0'..'9'|'a'..'f'|'A'..'F') 
+	;
+
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 354
+LINE_COMMENT
+	:	(';' .* '\n') { $channel = HIDDEN; }
+	;
+	
+// $ANTLR src "src/org/six11/flatcad/flatlang/FlatLang.g" 358
+WS	:	(' ' | '\t' | '\r' | '\n' ) { $channel = HIDDEN; }
+	;

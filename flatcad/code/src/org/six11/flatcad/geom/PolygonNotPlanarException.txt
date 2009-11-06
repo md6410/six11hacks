@@ -1,0 +1,10 @@
+package org.six11.flatcad.geom;
+
+/**
+ * 
+ **/
+public class PolygonNotPlanarException extends PolygonException  {
+  public PolygonNotPlanarException(String msg) {
+    super(msg);
+  }
+}

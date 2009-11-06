@@ -1,0 +1,22 @@
+orig = quote(
+  forward(0.1)
+)
+
+expanded = quote (
+  forward(0.1),
+  right(90),
+  forward(0.1),
+  left(90),
+  forward(0.1),
+  left(90),
+  forward(0.1),
+  right(90),
+  forward(0.1)
+)
+
+koch = orig
+subList(first(orig), expanded, koch)
+subList(first(orig), expanded, koch)
+
+eval(source(koch))
+

@@ -1,0 +1,91 @@
+; gear.fl - make a parametric gear
+
+define edge(len, depth, angle)
+  wo = (2 * len) / 3
+  wi = len / 3
+  tooth(wo, wi, depth)
+  left(angle)
+done
+
+define tooth(wo, wi, depth)
+  wo2 = wo/2
+  wi2 = wi/2
+  mark("start")
+
+  ;; no drawing -- here I lay down ref points
+  up()
+
+  ;; do the 'outer' line & mark b, e, and f
+  forward(wi2)
+  b = pos()
+  forward(wo)
+  e = pos()
+  forward(wi2)
+  f = pos()
+  backto("start")
+
+  ;; do the 'inner' line & mark c and d
+  left(90)
+  forward(depth)
+  right(90)
+  forward(wo / 2)
+  c = pos()
+  forward(wi)
+  d = pos()
+
+  ;; pen down and connect the dots.
+  backto("start")
+  down()
+  drawto(b)
+  drawto(c)
+  drawto(d)
+  drawto(e)
+  drawto(f)
+
+  ;; ensure we leave at the right pos/dir
+  up()
+  backto("start")
+  forward(wi + wo)
+  down()
+done
+
+define centeredSquare(holeSize)
+  hs2 = holeSize / 2
+  forward(hs2)
+  left(90)
+  forward(hs2)
+  left(90)
+  repeat(3)
+    forward(holeSize)
+    left(90)
+  done
+  forward(hs2)
+done
+
+define gear(numteeth, toothlength, 
+                      toothdepth, holeSize)
+  angle = 360/numteeth
+  repeat(numteeth/2)
+    edge(toothlength, toothdepth, angle)
+  done
+
+  opposite = pos()
+  repeat(numteeth/2)
+    edge(toothlength, toothdepth,angle)
+  done
+ 
+  up()
+  drawto(opposite, 0.5)
+  down()
+  centeredSquare(holeSize)
+done
+
+showPolygons(false)
+numteeth = 16
+len = 0.3
+dep = 0.12
+holeSize = 0.2
+
+gear(numteeth, len, dep, holeSize)
+
+laser("gear-small.hpgl")

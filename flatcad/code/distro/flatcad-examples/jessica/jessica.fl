@@ -1,0 +1,45 @@
+load ("jessica/triangle.fl")
+load ("jessica/square.fl")
+
+showPolygons(true)
+
+shape("tri")
+  triangle(3, 0.4, 0.1)
+done
+
+define go(s, ttl)
+  draw(s, "a")
+  from("b","c")
+    pitch(90)
+    left(180)
+    if (ttl > 0)
+      go(s, ttl - 1)
+    done
+  done
+done
+
+define chainPart(startPoint, endPoint)
+  draw("tri", startPoint)
+  backto(endPoint)
+  pitch(90)
+  left(180)
+done
+
+define bug()
+  chainPart("a", "b")
+  chainPart("b", "a")
+  chainPart("a", "b")
+  chainPart("b", "c")
+  chainPart("a", "c")
+  chainPart("a", "c")
+  chainPart("a", "b")
+  chainPart("a", "b")
+done
+
+go("tri", 3)
+
+; bug()
+
+; draw("tri")
+
+; hpgl("jessica-triangles.hpgl")

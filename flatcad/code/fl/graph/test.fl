@@ -1,0 +1,21 @@
+a = "A or E"
+a.b = "B or F"
+a.b.c = "C"
+a.d = "D"
+a.e = a
+a.f = a.b
+a.L1 = ["this", "is", "a", "homogeneous", "list"]
+a.L2 = [0, 2, "hetero"]
+a.L3 = [0, "mixed numbers", "and text", "and references" , a.b, a]
+
+print("Value of a.b is", a.b)
+print("Value of a.b.c is", a.b.c)
+print("Value of a.c is", a.c)
+print("Value of a.d is", a.d)
+print("Value of a.e is", a.e)
+print("Value of a.f is", a.f)
+print("Value of a.L1 is", a.L1)
+print("Value of a.L2 is", a.L2)
+print("Value of a.L3 is", a.L3)
+
+

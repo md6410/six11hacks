@@ -1,0 +1,8 @@
+list = [["a", "first"], ["b"], ["a", "second"], ["c"], ["a", "third"], ["d"]]
+
+n = 0
+repeat(4)
+  n = n + 1
+  subList = findListWithFirst("a", list, n-1)
+  print ("Given", n, ", I found:", subList)
+done

@@ -1,0 +1,39 @@
+showPolygons(true)
+
+define fat_fwd(amt, thickness)
+  roll(90)
+
+  left(90)
+  __forward(thickness / 2)
+  right(90)
+  __forward(amt)
+  right(90)
+  __forward(thickness)
+  right(90)
+  __forward(amt)
+  right(90)
+  __forward(thickness / 2)
+  right(90)
+  
+  roll(-90)
+  
+  up()
+  __forward(amt)
+  down()
+
+done
+
+define forward(amt)
+  fat_fwd(amt,0.3)
+done
+
+define poly(len, n)
+  repeat(n)
+    forward(len)
+    left(360/n)
+  done
+done
+
+poly(2,5)
+
+turtle(0.3)

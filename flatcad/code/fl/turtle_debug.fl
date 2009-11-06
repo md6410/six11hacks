@@ -1,0 +1,10 @@
+define a(s)
+  b(s/2)
+  b(s)
+done
+
+define b(s)
+  print("Value is", s)
+done
+
+a(1)

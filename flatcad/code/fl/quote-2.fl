@@ -1,0 +1,22 @@
+q = quote(
+  forward(1),
+  left(90),
+  forward(1)
+)
+
+nifty = quote (
+  forward(0.3),
+  left(45),
+  forward(0.3),
+  right(45),
+  forward(0.3)
+)
+
+print("q is", q)
+f = first(quote(forward(1)))
+
+print ("f is", f)
+
+subList (f, nifty, q)
+print ("q is", q)
+eval(source(q))

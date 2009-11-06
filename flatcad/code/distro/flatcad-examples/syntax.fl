@@ -1,0 +1,216 @@
+; syntax.fl - Shows all flatlang syntax
+
+; This gives you an example of FlatLang syntax.
+; The comment character is the semicolon. It
+; extends all the way to the end of the line.
+; Aside from that one case, newline characters
+; and whitespace is not interpreted and only
+; serves to separate language elements.
+
+; FlatLang lets you name variables and assign
+; values into them such as numbers, strings,
+; and truth values. Examples:
+
+a = 4
+b = 0.4
+c = "here's a string"
+d = false
+
+; You can do all the standard arithmetic using
+; parenthesis to group, and can freely mix
+; variables with literals. Standard operator
+; precedence applies (my dear aunt sally):
+
+a = 2 + 2
+b = a * 3
+c = b % 5
+d = (b * (b - 1)) / 0.3
+
+; There is something a little weird with floating
+; point numbers. You have to write them with a
+; leading 0. So if I write .3, that is wrong.
+
+; Equality statements resolve to truth values:
+a = 4 > -5.2342
+b = (3*3) >= 9
+c = 0 != 1
+
+; To help debug programs, you can print things
+; out using the print() function, which just
+; needs a comma separated list of things.
+;   ** Note ** that output will appear in your
+;   terminal or system console.
+print ("The value of c is", c)
+print ("Ten squared is", 10 * 10)
+
+; Looping is done with either a 'while' statement
+; or a 'repeat' statement. This thing here...
+
+a = 4
+while (a > 0)
+  print ("The value of a in the while block is", a)
+  a = a - 1
+done
+
+; ... is the same as this...
+
+a = 4
+repeat(4)
+  print("The value of a in the repeat block is", a)
+  a = a - 1
+done
+
+; You can define parameterized procedures
+; that do stuff. Procedures can call each other
+; or even themselves. Here's the syntax for a
+; procedure with two arguments:
+
+define addStuff(thing_one, thing_two)
+  result = thing_one + thing_two
+  print (thing_one, "+", thing_two, "=", result)
+done
+
+; Call a procedure by writing its name with a
+; comma-separated list of expressions:
+a = 3
+b = -0.2
+c = "this is not a number"
+addStuff(a, a)
+addStuff(a, b)
+addStuff(a, c)
+
+; Note that the last call to 'addStuff' involved
+; adding 3 and "this is not a number", which
+; generally doesn't work. When FlatLang can't
+; perform an operation due to an incorrect type,
+; it just uses some default value. For addition
+; it uses zero, for multiplication it uses one.
+
+; Flow-control is achieved with if-statements.
+; An if statement in FlatLang looks a little bit
+; different from most languages. It starts with
+; 'if (expression)' and ends with 'done', with any
+; number of 'alt' sections and an optional 'else'
+; statement. Here's a couple examples:
+
+if (6 >= 2)
+  print ("This is a simple if-statement.")
+done
+
+if (0 > 5)
+  print ("This will not print")
+alt (4 > 5)
+  print ("This won't print either")
+alt (5 > 5)
+  print ("Five is not greater than five!")
+else
+  print ("None of those options were true.")
+done
+
+; Functions can call other functions, or even
+; themselves. When functions call themselves,
+; it is called "recursion". You will need a way to
+; end the recursion, otherwise you'll wind up in
+; an infinite loop, with the universe imploding
+; about you, so please try to avoid it.
+
+; Here is a somewhat tricky example that
+; shows you the values of some Fibonacci
+; numbers. It isn't the paragon of efficiency --
+; it is written to be clear, not fast.
+
+define fib(a, b, count, limit)
+  sum = a + b
+  if (count == limit)
+    print ("Fibonacci number", limit, "is", sum)
+  else
+    fib(sum, a, count+1, limit)
+  done
+done
+
+; What are the first 12 Fibonacci numbers?
+count = 1
+repeat(12)
+  fib (1,1, 0, count)
+  count = count + 1
+done
+
+; Now for turtle operations. You can move your
+; turtle around in 3D by using the forward,
+; left, right, roll, and pitch commands:
+
+forward(1)
+right(90)
+forward(-1)
+pitch(45)
+forward(1)
+roll(60)
+left(90)
+forward(1)
+
+; Turtle commands can be written on their own
+; like above, or they can be wrapped inside of
+; looping statements such as 'repeat'. And like
+; any other statement, they can be part of a
+; procedure definition. Here's a procedure for
+; making a square:
+
+define square(side_length)
+  repeat(4)
+    forward(side_length)
+    right(90)
+  done
+done
+
+; Now call the square procedure. Note that the
+; Turtle begins drawing at the end of that weird
+; little squiggle thing from above.
+
+square(2)
+
+; FlatCAD automatically notices when you make
+; a closed shape (a polygon). If you want to see
+; the polygons in full color, use the special 
+; showPolygons function.
+
+showPolygons(true)
+
+; There are only two more things to demonstrate.
+; You can add markers into your model where
+; the Turtle is at the moment, and then move
+; back to those locations later on. Use the 'mark'
+; function to add a landmark and 'backto' to
+; return to the most recent landmark with the
+; given name.
+
+mark("corner of square")
+
+; Now, draw a bunch of squares that fans out
+; and rolls a little bit from the corner of that
+; first square. This code uses the 'up' and 'down'
+; commands that lifts the Turtle's pen up and
+; down. Use this to move the turtle without
+; drawing lines.
+
+dist = 0.1
+angle = 10
+repeat(6)
+  backto("corner of square")
+  up()
+  right(angle)
+  roll(angle)
+  forward(dist)
+  down()
+  square(1)
+  angle = angle + 10
+  dist = dist * dist
+done
+
+; Last, but not least, you can print your model
+; to an HPGL file that can be used on a laser
+; cutter. The following line is commented out
+; by default, but if you want to make an HPGL
+; file, go ahead and remove the semicolon.
+
+; hpgl("example-flatcad-output.hpgl")
+

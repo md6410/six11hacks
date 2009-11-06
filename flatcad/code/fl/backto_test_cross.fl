@@ -1,0 +1,14 @@
+define cross(len)
+  mark("a")
+  count = 1
+  repeat(4)
+    backto("a")
+    right(90 * count)
+    forward(len)
+    count = count + 1
+  done
+  backto("a")
+done
+
+cross(2)
+showSoup()

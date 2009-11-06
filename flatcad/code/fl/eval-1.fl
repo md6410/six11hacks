@@ -1,0 +1,7 @@
+
+
+src = quote(2 + 3)
+e = eval(src)
+
+print ("Source code:", src)
+print ("Evaluated to:", e)

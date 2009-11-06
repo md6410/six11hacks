@@ -1,0 +1,10 @@
+FlatLang and FlatCAD: Construction Kits by Code
+
+
+The FlatCAD system lets you create your own construction kits by
+coding in the LOGO-like FlatLang language. No longer must construction
+kit pieces be merely a product designed by someone else: if you can
+write a simple FlatLang program, you can design a kit. This paper
+describes our domain-specific language's features, debugging
+environment, and example output.
+

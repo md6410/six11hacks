@@ -1,0 +1,33 @@
+; scope.fl - tests variable scoping
+
+define foo()
+  print("foo: should be nil:", x)
+done
+
+define bar()
+  x = 1
+  print("bar: should be one:", x)
+done
+
+define baz()
+  x = 2
+  print("baz: should be two:", x)
+done
+
+
+foo()
+bar()
+baz()
+foo()
+bar()
+baz()
+
+print("setting a global x to 3.")
+x = 3
+
+foo()
+bar()
+baz()
+foo()
+bar()
+baz()

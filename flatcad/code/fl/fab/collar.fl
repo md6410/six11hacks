@@ -1,0 +1,21 @@
+safe define collar()
+  c = object("collar")
+  c.inner = 0.14
+  c.outer = 0.4
+  c.draw = collar_draw
+  c.ghost_draw = collar_ghost_draw
+  c
+done
+
+safe define collar_draw()
+  part("collar")
+  centered_polygon(4, inner)
+  centered_polygon(14, outer)
+done
+
+safe define collar_ghost_draw()
+  old_ghost = ghost
+  ghost = true
+  collar_draw()
+  ghost = old_ghost
+done

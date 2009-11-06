@@ -1,0 +1,13 @@
+
+size = 0.5
+repeat(3)
+  clear()
+  repeat(360/30)
+    forward(size)
+    left(30)
+    pause(500)
+    redraw()
+  done
+  size = size + 0.4
+done
+

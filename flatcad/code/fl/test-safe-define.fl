@@ -1,0 +1,40 @@
+; test-safe-define.fl
+
+safe define foo()
+  print("foo: should be nil:", x)
+  " --- foo"
+done
+
+safe define bar()
+  x = 1
+  print("bar: should be 1:", x)
+  " --- bar"
+done
+
+define baz()
+  print("baz: at first x is:", x)
+  x = 42
+  print("baz: should be 42:", x)
+done
+
+define baf()
+  print("baf: should be nil or 42:", x)
+done
+
+random_item = "bleh"
+print("   **** **** 	HERE ***")
+
+foo()
+bar()
+baz()
+baf()
+
+print("global: should be nil:", x)
+print(" -- now I set x globally to 3.")
+x = 3
+
+foo()
+bar()
+baz()
+baf()
+

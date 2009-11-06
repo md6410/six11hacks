@@ -1,0 +1,56 @@
+[ have gear-experimentive.fl running ]
+
+Hi, I'm Gabe. Welcome to my corner of the room. Here, have a
+toy. Here's another one. There's others sitting here on my desk, but
+these are at least kind of interactive.
+
+My background is computer science. But I'm really interested in how we
+can use computation to support people doing design. There are
+languages other than dialog boxes and click-and-drag that we could use
+to design stuff. I'm going to show you two of those today:
+programming, and sketching.
+
+This project is called FlatCAD. It lets you write programs in a little
+LOGO-like language I call FlatLang. Executing a FlatLang program gives
+you shapes, and if you want you can send the shapes to a laser
+cutter. This program here is very close to the one that generated the
+shapes for those two gearboxes you're holding.
+
+[ open bar-with-collars-and-axle.fl ]
+
+Here's a two-bar linkage. This code looks simple, it's easy to read,
+but what you see here is the tip of an iceberg. The rest of the
+iceberg is in libraries, also written in FlatLang.
+
+Like I said, there's another language I'm interested in, which is
+sketching. 
+
+[ switch to Olive ]
+
+This program is called Olive. I can draw things freely with the pen,
+and Olive tries to recognize certain things. Right now it is only set
+up to look for polygons. 
+
+[ draw a shape, turn on polygons, then turn it back off ]
+
+I can use this to indicate shape, and also indicate where notches go,
+like in this kit here.
+
+[ turn on notches. draw a square and put some notches down ]
+
+I can use Olive as a front end for FlatCAD. Here I'll draw a polygon,
+a crazy looking thing, and turn it into executable FlatLang code.
+
+[ make a non-convex polygon and hit the generate flatlang button ]
+
+Now I can look at the results in FlatCAD.
+
+[ open aa.fl ]
+
+Right now it is just showing a single instance of that shape. I've
+prepared a little program that uses this shape in a visually
+interesting way.
+
+[ comment the mything() call and uncomment the loopy() call ]
+
+

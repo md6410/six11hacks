@@ -1,0 +1,26 @@
+march 1 2008
+
+I'm in the middle of re-writing the code that prints the
+model. Earlier there were two modes:
+
+A) Every complete polygon is its own part. When FlatCAD generates HPGL
+it separates all polygons so that they don't overlap. The benefit is
+hat FlatCAD will automatically lay things out for you. On the down
+side, it would be impossible to make parts with holes in them, such as
+a taurus.
+
+B) The screen is considered to be a sheet of material, and all lines
+are considered to be cuts. This lets you make parts with holes in
+them. However, the programmer must explicitly position each part
+on the screen.
+
+What I am going for is a combination of these two: when the programmer
+is making a single piece that involves multiple polygons, they simply
+indicate that they are making a new part. Then they draw that part's
+geometry as usual. When the part is done, they simply begin a new
+part. FlatCAD will then take each part and lay them out so they don't
+overlap, while trying to be efficient with the material.
+
+I'm not done yet. But I did manage to fix an efficiency bug. The old
+gear-experimentive.fl program would take about 20 seconds to draw. Now
+it draws in about 2 seconds.

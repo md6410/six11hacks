@@ -1,0 +1,20 @@
+toggle_val = 0
+
+define isToggled()
+  return toggle_val == 1
+done
+
+define toggle()
+  toggle_val = (toggle_val + 1) % 2
+done
+
+print (isToggled())
+toggle()
+print (isToggled())
+toggle()
+print (isToggled())
+toggle()
+print (isToggled())
+toggle()
+print (isToggled())
+toggle()

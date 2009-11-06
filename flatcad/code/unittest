@@ -1,0 +1,45 @@
+#!/bin/bash
+
+addTest () {
+	TEST_CASES="$TEST_CASES $1"
+}
+
+cpmunge () {
+        if ! echo $CP | /usr/bin/egrep -q "(^|:)$1($|:)" ; then
+           if [ "$2" = "after" ] ; then
+              CP=$CP:$1
+           else
+              CP=$1:$CP
+           fi
+        fi
+}
+
+addjars () {
+    for thejar in $1/*.jar
+      do
+      if [ -f "$thejar" ]; then
+          cpmunge "$thejar"
+      fi
+    done
+}
+
+addjars lib
+cpmunge build/classes
+
+# Add the names of classes that have JUnit 4.x tests
+addTest org.six11.flatcad.geom.Vertex
+addTest org.six11.flatcad.geom.Polygon
+addTest org.six11.flatcad.geom.Polyhedron
+addTest org.six11.flatcad.geom.Line
+addTest org.six11.flatcad.geom.LineSegment
+addTest org.six11.flatcad.geom.Plane
+addTest org.six11.flatcad.geom.HalfEdge
+addTest org.six11.flatcad.geom.MatrixStack
+addTest org.six11.flatcad.geom.MathUtils
+
+addTest org.six11.flatcad.gl.SelectionModel
+
+prog=org.junit.runner.JUnitCore
+
+java -classpath $CP $prog $TEST_CASES
+

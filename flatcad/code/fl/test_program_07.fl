@@ -1,0 +1,6 @@
+define no_params ()
+  forward (1)
+done
+
+no_params()
+

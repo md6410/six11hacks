@@ -1,0 +1,248 @@
+; gear-seymour-round-axles.fl
+
+define min(a, b)
+  if (a < b)
+    a
+  else
+    b
+  done
+done
+
+define max(a, b)
+  if (a > b)
+    a
+  else
+    b
+  done
+done
+
+define bounds(positions)
+
+    minx = 100
+    maxx = -100
+    miny = 100
+    maxy = -100
+
+    remaining = positions
+    repeat(positions.n)
+      minx = min(first(remaining).x, minx)
+      maxx = max(first(remaining).x, maxx)
+      miny = min(first(remaining).y, miny)
+      maxy = max(first(remaining).y, maxy)
+      remaining = rest(remaining)
+    done
+
+    range = object("bounding box")
+    range.max_x = maxx
+    range.max_y = maxy
+    range.min_x = minx
+    range.min_y = miny
+    range.grow = grow
+    range
+done
+
+define draw_bb(range)
+  up()
+  forward(range.max_y)
+  down()
+  left(90)
+  forward(-1 * range.min_x)
+  left(90)
+  forward(range.max_y - range.min_y)
+  left(90)
+  forward(range.max_x - range.min_x)
+  left(90)
+  forward(range.max_y - range.min_y)
+  left(90)
+  forward(range.max_x)
+done
+
+define centered_polygon(sides, radius)
+  mark("beginning")
+  theta = 360 / sides
+  points = []
+  i = 0
+  up()
+  repeat(sides+1)
+    backto("beginning")
+    left(i * theta)
+    forward(radius)
+    i = i+1
+    points = cons(pos(), points)
+  done
+  down()
+  while (points.n > 0)
+    p = first(points)
+    points = rest(points)
+    drawto(p)
+  done
+  backto("beginning")
+done
+
+define edge(len, depth, angle, isHalf, cut)
+  wo = (2 * len) / 3
+  wi = len / 3
+  tooth(wo, wi, depth, isHalf, cut)
+  left(angle)
+done
+
+define tooth(wo, wi, depth, isHalf, cut)
+  if(isHalf)
+    halfTooth(wo, wi, depth, cut)
+  else
+    fullTooth(wo, wi, depth, cut)
+  done
+done
+
+define halfTooth(wo, wi, depth, cut)
+  wo2 = wo/2
+  wi2 = wi/2
+
+  ;; no drawing -- here I lay down ref points
+  up()
+
+  ;; do the 'inner' line & mark c and d
+  left(90)
+  forward(depth)
+  right(90)
+  forward(wo / 2)
+  forward(wi / 2)
+  if(cut)
+    down()
+  done
+done
+
+define fullTooth(wo, wi, depth, cut)
+  wo2 = wo/2
+  wi2 = wi/2
+  mark("start")
+
+ ;; no drawing -- here I lay down ref points
+  up()
+
+ ;; do the 'outer' line & mark b, e, and f
+  forward(wi2)
+  b = pos()
+  forward(wo)
+  e = pos()
+  forward(wi2)
+  f = pos()
+  backto("start")
+
+ ;; do the 'inner' line & mark c and d
+  left(90)
+  forward(depth)
+  right(90)
+  forward(wo / 2)
+  c = pos()
+  forward(wi)
+  d = pos()
+
+ ;; pen down and connect the dots.
+  backto("start")
+  if (cut)
+    down()
+  done
+  drawto(b)
+  drawto(c)
+  drawto(d)
+  drawto(e)
+  drawto(f)
+
+ ;; ensure we leave at the right pos/dir
+  up()
+  backto("start")
+  forward(wi + wo)
+  if (cut)
+    down()
+  done
+done
+
+define gear(nteeth, len, dep,
+                   holeSize, endTooth, ncollars)
+  part("gear")
+  mark("gear start")
+
+  angle = 360/nteeth
+  repeat(nteeth / 2)
+    edge(len, dep, angle, false, true)
+  done
+  opposite = pos()
+  repeat(nteeth / 2)
+    edge(len, dep, angle, false, true)
+  done
+  up()
+  drawto(opposite, 0.5)
+  down()
+  centered_polygon(16, holeSize)
+  center = pos()
+
+  repeat(ncollars)
+    part("gear collar")
+    up()
+    pitch(90)
+    forward(0.5)
+    pitch(-90)
+    down()
+    centered_polygon(16, holeSize * 3)
+    centered_polygon(16, holeSize)
+  done
+
+  part("adjust")
+  backto("gear start")
+  
+  ;; reposition for meshing
+  up()
+  repeat(endTooth)
+    edge(len, dep, angle, false, false)
+  done
+  edge(len, dep, angle, true, false)
+  down()
+  center
+done
+
+mark("origin")
+
+up()
+pitch(90)
+forward(1)
+pitch(-90)
+down()
+
+positions = []
+
+positions = cons(gear(16, 0.5, 0.2, 0.2, 1, 2), positions)
+right(180)
+
+positions = cons(gear(12,0.5, 0.2, 0.2, 2, 2), positions)
+right(180)
+
+positions = cons(gear(14,0.5, 0.2, 0.2, 0, 2), positions)
+
+part("chassis")
+bb = bounds(positions)
+amt = 0.4
+
+bb.min_x = bb.min_x - amt
+bb.max_x = bb.max_x + amt
+bb.min_y = bb.min_y - amt
+bb.max_y = bb.max_y + amt
+
+backto("origin")
+draw_bb(bb)
+
+spots = positions
+repeat(positions.n)
+  spot = first(spots)
+  spots = rest(spots)
+  up()
+  drawto(spot)
+  pitch(-90)
+  forward(1)
+  pitch(90)
+  down()
+  centered_polygon(16, 0.2)
+done
+
+laser("foo")
+

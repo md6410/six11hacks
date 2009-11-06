@@ -1,0 +1,10 @@
+define yuck()
+  forward(1)
+  left(45)
+  forward(0.5)
+done
+
+yuck()
+left(170)
+forward(0.4)
+yuck()

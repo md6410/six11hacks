@@ -1,0 +1,38 @@
+define person(name, age)
+  p = object("a person object")
+  p.name = name
+  p.age = age
+  p
+done
+
+p1 = person("John", 57)
+p1.name = "Ringo"
+p2 = person("Paul", 32)
+p1.age = 2
+p2.name = "George"
+
+print (p1.name + " is " + p1.age + " years old")
+print (p2.name + " is " + p2.age + " years old")
+
+obj = object("holder")
+obj.stuff = [p1, p2]
+
+print ("The next two should be the same")
+debug (p1)
+debug(obj.stuff[0])
+
+p1 = obj.stuff[0]
+p2 = obj.stuff[1]
+
+define nameMunge(aThing)
+  aThing.stuff[0].name + " and " + aThing.stuff[1].name
+done
+
+define printIt(anObject)
+  print (anObject.stuff[0].name + " is " + anObject.stuff[0].age + " years old")
+  print (anObject.stuff[1].name + " is " + anObject.stuff[1].age + " years old")
+  print ("The combined age of " + nameMunge(anObject) + " is " + (anObject.stuff[0].age + anObject.stuff[1].age))
+done
+
+printIt(obj)
+

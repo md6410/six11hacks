@@ -1,0 +1,6 @@
+define triangle(len)
+  repeat(3)
+    forward(len)
+    left(120)
+  done
+done

@@ -1,0 +1,37 @@
+define hforward(len,angle)
+  forward(len / 2)
+  left(90)
+  roll(angle)
+  forward(len)
+  forward(-len)
+  right(90)
+  forward (len / 2)
+done
+
+define sheet(a,b)
+  forward(a)
+  left(90)
+  forward(b)
+  left(90)
+  forward(a)
+  left(90)
+  forward(b)
+  left(90)
+done
+
+define replaceFwdWithHinge(idx, hingeLen)
+  sheetSrc = source(sheet)
+  src = element(sheetSrc, 3)
+  fwd = findListWithFirst(quote(forward), src, idx-1)
+  print(fwd)
+  if (fwd)
+    paramList = element(fwd, 2)
+    param = first(paramList)
+    target = source([source(paramList), " / 2"])
+    sub(param, target, paramList)
+    eval(source(sheetSrc))
+  done
+done
+
+replaceFwdWithHinge(4, quote(a))
+sheet(1,2)

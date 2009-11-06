@@ -1,0 +1,9 @@
+define polygon(numSides, sideLen)
+  repeat(numSides)
+    forward(sideLen)
+    left(360 / numSides)
+  done
+done
+
+polygon(5, 1)
+showPolygons(true)

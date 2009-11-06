@@ -1,0 +1,37 @@
+load("distro/flatcad-examples/turtle.fl")
+
+define sheet(xDim, yDim)
+  mark("a")
+  forward(yDim)
+  left(90)
+  mark("b")
+  forward(xDim)
+  left(90)
+  mark("c")
+  forward(yDim)
+  left(90)
+  mark("d")
+  forward(xDim)
+  left(90)
+done
+
+define foldedSheet(xDim, yDim, angle)
+  xHalf = xDim / 2
+  sheet(xHalf, yDim)
+  backto("c")
+  roll(180 - angle)
+  sheet(xHalf, yDim)
+done
+
+define doubleFoldedSheet(xDim, yDim, angle)
+  sheet(xDim/2, yDim/2)
+  backto("b")
+  roll(0)
+  sheet(yDim/2, xDim/2)
+
+  turtle(0.2)
+done
+
+doubleFoldedSheet(5,4, 45)
+
+showPolygons(true)

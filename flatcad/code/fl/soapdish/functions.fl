@@ -1,0 +1,199 @@
+; functions.fl
+;
+; This has a bunch of functions common
+; to many machine programs. It includes
+; some math things (like min and max) and
+; geometry things (like calculating the
+; bounding box of a list of points).
+
+define min(a, b)
+  if (a < b)
+    a
+  else
+    b
+  done
+done
+
+define max(a, b)
+  if (a > b)
+    a
+  else
+    b
+  done
+done
+
+safe define distance_between_points(p1, p2)
+  dx = p1.x - p2.x
+  dy = p1.y - p2.y
+  dz = p1.z - p2.z
+  sqrt(dx * dx + dy * dy + dz * dz)
+done
+
+safe define get_posdir()
+  ld = object("position and direction")
+  ld.pos = pos()
+  ld.dir = dir()
+  ld
+done
+
+safe define set_posdir(ld)
+  move_to(ld.pos)
+  facedir(ld.dir)
+done
+
+define bounds(positions)
+
+    minx = 100
+    maxx = -100
+    miny = 100
+    maxy = -100
+
+    remaining = positions
+    repeat(positions.n)
+      minx = min(first(remaining).x, minx)
+      maxx = max(first(remaining).x, maxx)
+      miny = min(first(remaining).y, miny)
+      maxy = max(first(remaining).y, maxy)
+      remaining = rest(remaining)
+    done
+
+    range = object("bounding box")
+    range.max_x = maxx
+    range.max_y = maxy
+    range.min_x = minx
+    range.min_y = miny
+    range.grow = bounds_grow
+    range
+done
+
+safe define bounds_grow(delta)
+  max_x = max_x + delta
+  min_x = min_x - delta
+  max_y = max_y + delta
+  min_y = min_y - delta
+done
+
+define draw_bb(range)
+  up()
+  forward(range.max_y)
+  down()
+  left(90)
+  forward(-1 * range.min_x)
+  left(90)
+  forward(range.max_y - range.min_y)
+  left(90)
+  forward(range.max_x - range.min_x)
+  left(90)
+  forward(range.max_y - range.min_y)
+  left(90)
+  forward(range.max_x)
+done
+
+safe define centered_polygon(sides, radius)
+  mark("beginning")
+  cp_center = pos()
+  cp_center_dir = dir()
+  theta = 360 / sides
+  points = []
+  i = 0
+
+  repeat(sides+1)
+    backto("beginning")
+    left(i * theta)
+    move(radius)
+    i = i+1
+    points = cons(pos(), points)
+  done
+
+  while (points.n > 0)
+    p = first(points)
+    points = rest(points)
+    cut_to(p)
+  done
+  backto("beginning")
+  move_to(cp_center)
+  facedir(cp_center_dir)
+
+done
+
+safe define coaxial_objects(ob1, ob2, z_separation)
+  ob1.coaxial_adjust()
+  ob1.draw()
+  move_to(ob1.center)
+
+  ob2.coaxial_adjust()
+  ob2.draw()
+done
+
+safe define debug_tick_fb(amt)
+  forward(amt)
+  forward(-amt)
+done
+
+safe define debug_tick()
+  down()
+  ang = 360/6
+  debug_tick_fb(0.3)
+  left(90)
+  debug_tick_fb(0.2)
+  left(90)
+  debug_tick_fb(0.1)
+  left(90)
+  debug_tick_fb(0.2)
+  left(90)
+done
+
+safe define cut(amt)
+  if(ghost)
+    up()
+  else
+    down()
+  done
+  forward(amt)
+done
+
+safe define move(amt)
+  up()
+  forward(amt)
+done
+
+safe define cut_to(p)
+  if(ghost)
+    up()
+  else
+    down()
+  done
+  drawto(p)
+done
+
+safe define move_to(p)
+  up()
+  drawto(p)
+done
+
+
+define raise()
+  pitch(90)
+  move(0.3)
+  pitch(-90)
+done
+
+define lower()
+  pitch(-90)
+  move(0.3)
+  pitch(90)
+done
+
+define circle(radius)
+  centered_polygon(32, radius)
+done
+
+define notched_segment(n, myNotch, amt)
+  seg_amt = amt/(n+1)
+  repeat(n)
+    forward(seg_amt)
+    myNotch.draw()
+  done
+  forward(seg_amt)
+done
+

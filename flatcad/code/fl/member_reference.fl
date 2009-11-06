@@ -1,0 +1,7 @@
+a = ["one", "two", 2+3.4]
+print ("a.n is", a.n)
+b = ""
+b.x = "hi"
+b.laundry = [a.n, "shirt", "socks", b.x]
+print ("b.x is", b.x)
+print ("laundry is", b.laundry)

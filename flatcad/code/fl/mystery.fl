@@ -1,0 +1,6 @@
+define mystery(n)
+  repeat(n)
+    print("back up")
+    backto("spot")
+  done
+done

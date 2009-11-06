@@ -1,0 +1,18 @@
+load("fl/triangle-corners.fl")
+
+triangle(1)
+count = 1
+repeat(3)
+  backto("a")
+  left(20 * count)
+  forward(1)
+  count = count + 1
+  if (count == 2)
+    triangle(1)
+    left(20)
+  else
+    left(40)
+    forward(0.5)
+  done
+done
+

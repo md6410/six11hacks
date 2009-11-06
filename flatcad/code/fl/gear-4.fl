@@ -1,0 +1,140 @@
+; gear-4.fl
+
+define centered_polygon(sides, radius)
+  mark("beginning")
+  theta = 360 / sides
+  points = []
+  i = 0
+  up()
+  repeat(sides+1)
+    backto("beginning")
+    left(i * theta)
+    forward(radius)
+    i = i+1
+    points = cons(pos(), points)
+  done
+  down()
+  while (points.n > 0)
+    p = first(points)
+    points = rest(points)
+    drawto(p)
+  done
+  backto("beginning")
+done
+
+define edge(len, depth, angle, isHalf)
+ wo = (2 * len) / 3
+ wi = len / 3
+ tooth(wo, wi, depth, isHalf)
+ left(angle)
+done
+
+define tooth(wo, wi, depth, isHalf)
+ if(isHalf)
+   halfTooth(wo, wi, depth)
+ else
+   fullTooth(wo, wi, depth)
+ done
+done
+
+define halfTooth(wo, wi, depth)
+ wo2 = wo/2
+ wi2 = wi/2
+ mark("start")
+
+ ;; no drawing -- here I lay down ref points
+ up()
+
+ ;; do the 'inner' line & mark c and d
+ left(90)
+ forward(depth)
+ right(90)
+ forward(wo / 2)
+ forward(wi / 2)
+ down()
+done
+
+define fullTooth(wo, wi, depth)
+ wo2 = wo/2
+ wi2 = wi/2
+ mark("start")
+
+ ;; no drawing -- here I lay down ref points
+ up()
+
+ ;; do the 'outer' line & mark b, e, and f
+ forward(wi2)
+ b = pos()
+ forward(wo)
+ e = pos()
+ forward(wi2)
+ f = pos()
+ backto("start")
+
+ ;; do the 'inner' line & mark c and d
+ left(90)
+ forward(depth)
+ right(90)
+ forward(wo / 2)
+ c = pos()
+ forward(wi)
+ d = pos()
+
+ ;; pen down and connect the dots.
+ backto("start")
+ down()
+ drawto(b)
+ drawto(c)
+ drawto(d)
+ drawto(e)
+ drawto(f)
+
+ ;; ensure we leave at the right pos/dir
+ up()
+ backto("start")
+ forward(wi + wo)
+ down()
+done
+
+define gear(numteeth, toothlength,
+                     toothdepth, holeSize, endNum)
+ mark("gear_start")
+ angle = 360/numteeth
+ repeat(numteeth/2)
+   edge(toothlength, toothdepth, angle, false)
+ done
+
+ opposite = pos()
+ repeat(numteeth/2)
+   edge(toothlength, toothdepth,angle, false)
+ done
+
+ up()
+ drawto(opposite, 0.5)
+ down()
+ center = pos()
+ centered_polygon(16, holeSize)
+ backto("gear_start")
+
+
+ ;; below here I reposition for meshing gears.
+ ;;up()
+ repeat(endNum)
+   edge(toothlength, toothdepth,angle, false)
+ done
+ edge(toothlength, toothdepth, angle, true)
+ down()
+ center
+done
+
+numteeth = 12
+len = 0.3
+dep = 0.12
+holeSize = 0.2
+axleSize = 0.08
+
+c1 = gear(numteeth, len, dep, holeSize, 5)
+left(180)
+c2 = gear(numteeth+6, len, dep, holeSize, 6)
+; left(180)
+; c3 = gear(numteeth+2, len, dep, holeSize, 0)

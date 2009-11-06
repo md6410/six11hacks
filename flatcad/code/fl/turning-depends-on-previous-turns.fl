@@ -1,0 +1,29 @@
+define shoot(amt)
+  roll(amt)
+  left(90)
+  forward(1)
+  forward(-1)
+  right(90)
+  roll(-amt)
+done
+
+majorAngle = 0
+minorAngle = 60
+
+forward(1)
+shoot(minorAngle)
+forward(1)
+
+right(90)
+forward(1)
+roll(   majorAngle   )
+forward(1)
+right(90)
+forward(1)
+shoot(-minorAngle)
+forward(1)
+right(90)
+forward(1)
+roll (   majorAngle   )
+forward(1)
+

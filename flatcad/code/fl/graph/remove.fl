@@ -1,0 +1,9 @@
+myList = ["a", "b", "c", "b"]
+
+print("Before removing b:", myList)
+myList = remove("b", myList, 1)
+print("After removing b:", myList)
+
+myList = remove("b", myList, 1)
+print("After removing b a second time:", myList)
+

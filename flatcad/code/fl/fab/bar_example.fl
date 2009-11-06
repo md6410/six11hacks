@@ -1,0 +1,30 @@
+; bar_example.fl
+;
+; This demonstrates making linked bars.
+
+load("fl/fab/bar.fl")
+load("fl/fab/axle_bearing.fl")
+load("fl/fab/collar.fl")
+
+define n_bar_linkage(n, len, width, hs, angle)
+  print("n_bar:", len, width, hs, angle)
+  ax = axle_bearing()
+  ax.outer = hs * 2
+  print("axle outer is", ax.outer)
+  c = collar()
+  c.outer = hs * 4
+  repeat(n)
+    bar_full(4, 1, 2, 1, ax, 1, c).draw()
+    left(angle)
+  done
+done
+
+width = 0.7
+length = 2.3
+holeSize = 0.13
+
+left(45)
+n_bar_linkage(2, length, width, holeSize, 70)
+
+laser("victor")
+

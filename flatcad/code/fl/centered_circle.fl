@@ -1,0 +1,33 @@
+
+define circlyThing(radius)
+  mark("beginning")
+  mark("x")
+  numSides = 16
+  angle = 360 / numSides
+  i = 0
+  repeat(numSides)
+    up()
+    left(angle * i)
+    forward(radius)
+    turtle(0.3)
+    p = pos()
+    backto("x")
+    left(angle * (i+1))
+    forward(radius)
+    down()
+    drawto(p)
+    up()
+    i = i + 1
+    backto("x")
+  done
+  backto("beginning")
+  down()
+done
+
+circlyThing(0.1)
+
+forward(1)
+
+circlyThing(0.4)
+
+turtle(0.4)

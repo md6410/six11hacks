@@ -1,0 +1,16 @@
+myList = [2, 6, 3, 4.999999, 1, 0, 7, infinity, 6]
+
+define isEven(num)
+  (num % 2) == 0
+done
+
+print("Here's some even numbers")
+for each (item : myList) (isEven(item))
+  print (item)
+done
+
+print()
+print("Here's numbers that are larger than 5")
+for each (item : myList) (item > 5)
+  print (item)
+done

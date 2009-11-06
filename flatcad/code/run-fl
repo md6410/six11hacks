@@ -1,0 +1,1 @@
+./run-arb org.six11.flatcad.flatlang.FlatInterpreter $@ 

@@ -1,0 +1,11 @@
+mat 0.1
+
+begin part square
+  begin repeat 4
+    f 1
+    r 90
+  end
+end
+
+square
+

@@ -1,0 +1,41 @@
+load ("fl/triangle-corners.fl")
+
+define sq()
+forward (1)
+left (90)
+forward (1)
+left (90)
+forward (1)
+left (90)
+forward (1)
+left (90)
+done
+
+mark("start")
+triangle(3)
+roll(45)
+right(60)
+triangle(3)
+
+define case_1()
+  up()
+  right(120)
+  forward(1.5)
+  left(90)  
+  forward(0.5)
+  left(90)
+  down()
+  triangle(1)
+done
+
+define case_2()
+  backto("start")
+  up()
+  left(180)
+  forward(1.5)
+  down()
+  triangle(1)
+done
+
+case_2()
+;showPolygons("true")

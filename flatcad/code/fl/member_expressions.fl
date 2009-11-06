@@ -1,0 +1,3 @@
+a = "something"
+a.x = "foo"
+print (a)

@@ -1,0 +1,8 @@
+This file lists several material thicknesses.
+
+The $1.85 sheets of wood from the CMU art store are between 0.1275
+inches and 0.1295 inches thick.
+
+The original seymour box was of 0.066" balsa.
+
+The pink coded balsa square dowels are 0.19".

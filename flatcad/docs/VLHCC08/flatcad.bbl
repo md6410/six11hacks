@@ -1,0 +1,62 @@
+\begin{thebibliography}{10}\setlength{\itemsep}{-1ex}\small
+
+\bibitem{abelson-turtle-geometry}
+H.~Abelson and A.~diSessa.
+\newblock {\em Turtle Geometry}.
+\newblock MIT Press, 1981.
+
+\bibitem{blauvelt-automata}
+G.~Blauvelt and M.~Eisenberg.
+\newblock Computer aided design of mechanical automata: Engineering education
+  for children.
+\newblock In {\em ICET 2006, The IASTED International Conference on Education
+  and Technology}, Calgary, Alberta, 2006.
+
+\bibitem{cockburn-leogo}
+A.~Cockburn and A.~Bryant.
+\newblock Leogo: An equal opportunity user interface for programming.
+\newblock {\em Journal of Visual Languages and Computing}, 8(5-6):601--619,
+  1997.
+
+\bibitem{dannenberg-nyquist}
+R.~Dannenberg.
+\newblock The implementation of nyquist, a sound synthesis language.
+\newblock {\em Computer Music Journal}, 21(3):61--70, 1997.
+
+\bibitem{gross-formwriter}
+M.~D. Gross.
+\newblock Formwriter: A little programming language for generating
+  three-dimensional form algorithmically.
+\newblock In {\em CAAD Futures}, pages 577--588, 2001.
+
+\bibitem{martin-triskit}
+F.~Martin, M.~Meo, and G.~Doyle.
+\newblock Triskit: A software-generated construction toy system.
+\newblock In {\em "Let's get Physical" Workshop at the 2nd International
+  Conference on Design Computing and Cognition (DCC06)}, Eindhoven, The
+  Netherlands, 2006.
+
+\bibitem{mori-plushie}
+Y.~Mori and T.~Igarashi.
+\newblock Plushie: An interactive design system for plush toys.
+\newblock In {\em Proceedings of SIGGRAPH 2007}, volume~23, 2007.
+
+\bibitem{oh-fab}
+Y.~Oh, G.~Johnson, M.~D. Gross, and E.~Do.
+\newblock The {Designosaur} and the {Furniture Factory}: Simple software for
+  fast fabrication.
+\newblock In {\em Second International Conference on Design Computing and
+  Cognition}, Eindhoven, The Netherlands, 2006.
+
+\bibitem{papert-mindstorms}
+S.~Papert.
+\newblock {\em Mindstorms--Children, Computers, and Powerful Ideas}.
+\newblock Harvester Press, Brighton, 1980.
+
+\bibitem{parr-antlr}
+T.~Parr.
+\newblock {\em The Definitive {ANTLR} Reference: Building Domain-Specific
+  Languages}.
+\newblock The Pragmatic Bookshelf, 2007.
+
+\end{thebibliography}

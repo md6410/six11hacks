@@ -1,0 +1,16 @@
+; triangle.fl
+;
+; This is a notched triangle with named points
+; a, b, and c at the bottom of the notches
+
+load ("fl/jessica/notch.fl")
+
+define triangle(len, notchDepth, notchWidth)
+  angle = 360 / 3
+  notch(len, notchDepth, notchWidth, "a")
+  left(angle)
+  notch(len, notchDepth, notchWidth, "b")
+  left(angle)
+  notch(len, notchDepth, notchWidth, "c")
+  left(angle)
+done

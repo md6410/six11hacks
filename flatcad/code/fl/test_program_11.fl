@@ -1,0 +1,8 @@
+; This little test program focuses on arithmetic
+
+a = 4
+b = 2
+c = :a + :b
+print ("4 + 2 is", :c)
+d = :a * :b
+print ("4 * 2 is", :d)

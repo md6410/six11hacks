@@ -1,0 +1,54 @@
+; wheel.fl
+
+; This is a wheel with a spot for an offcenter
+; axle to attach.
+
+load("fl/fab/functions.fl")
+
+safe define wheel(radius)
+  w = object("wheel")
+  w.radius = radius
+  w.n_collar = 2
+  w_col = collar()
+  w.center = pos()
+  w.draw = wheel_draw
+  w
+done
+
+safe define wheel_coaxial_adjust()
+  nil ; dont' do anything.
+done
+
+safe define wheel_ghost_draw()
+  old_ghost = ghost
+  ghost = true
+  draw()
+  ghost = old_ghost
+done
+
+safe define wheel_draw()
+  print("wheeeeelie has radius", radius)
+  mark("wheel start")
+  part("wheel")
+  center = pos()
+  center_dir = dir()
+  centered_polygon(30, radius)
+  axle_hole().draw()
+  repeat(n_collar)
+    raise()
+    collar().draw()
+  done
+
+  backto("wheel start")
+done
+
+safe define wheel_example()
+  w1 = wheel(1)
+  w1.draw()
+  right(90)
+  move(2.5)
+  left(90)
+  w2=wheel(1)
+  w2.draw()
+done
+

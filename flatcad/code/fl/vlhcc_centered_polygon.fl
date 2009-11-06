@@ -1,0 +1,23 @@
+define centered_polygon(sides, radius)
+  angle = 360 / sides
+  points = [] ; initializes empty list
+  up()
+  mark("middle")
+  i = 0
+  repeat (sides+1)
+    backto("middle")
+    left(i * angle)
+    forward(radius)
+    points = cons(pos(), points)
+    i = i+1
+  done
+
+  down()
+  repeat(points.n)
+    p = first(points)
+    points = rest(points)
+    drawto(p)
+  done
+done
+
+centered_polygon(8, 1)

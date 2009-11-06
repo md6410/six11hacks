@@ -1,0 +1,4 @@
+x = sqrt(2)
+forward(x)
+left(90)
+forward(x+1)

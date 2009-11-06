@@ -1,0 +1,26 @@
+define debugList(l)
+  print("Debugging list with ", l.n, "entries (list itself is debugged first)")
+  debug(l)  		  
+  for each (thing : l)
+    debug(thing)
+  done
+  print("------------------- (debugList complete)")
+done
+
+define o(st)
+  object(st)
+done
+
+completed = []
+originals = [o("a"), o("b"), o("c")]
+
+while (originals.n > 0)
+  print (" ---------------- ")
+  print ("originals is now...")
+  debugList(originals)
+  print ("completed is now...")
+  debugList(completed)
+  item = first(originals)
+  originals = rest(originals)
+  completed = cons(item, originals)
+done

@@ -1,0 +1,9 @@
+; backto.fl
+
+; tests if the backto builtin works
+mark("a")
+forward(3)
+
+backto("a")
+right(90)
+forward(1)

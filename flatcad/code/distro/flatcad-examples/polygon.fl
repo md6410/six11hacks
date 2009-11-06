@@ -1,0 +1,12 @@
+; polygon.fl - Makes polygons
+
+; Example: polygon(7, 0.5)
+
+define polygon(numSides, sideLength)
+  repeat (numSides)
+    forward(sideLength)
+    left(360 / numSides)
+  done
+done
+
+

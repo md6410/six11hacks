@@ -1,0 +1,295 @@
+; builtin.fl - Built-in function definitions
+
+; It is inadvisable to edit this file. If you
+; need to redefine something, go ahead. The
+; functions with the names beginning with __
+; will always be present (unless you redefine
+; *those*, in which case you're boned.
+
+; ;; This caused problems, so I comment it out
+; define source(in)
+;   __source(in)
+; done
+
+define object(str)
+ ret = __object__
+ ret.__str__ = str
+ ret
+done
+
+define eq(a,b)
+  __eq(a,b)
+done
+
+define flatten(in)
+  __flatten(in)
+done
+
+define eval(in)
+  __eval(in)
+done
+
+define part(name)
+  __part(name)
+done
+
+define up()
+  __up()
+done
+
+define down()
+  __down()
+done
+
+define forward(amt)
+  __forward(amt)
+done
+
+define backward(amt)
+  __backward(amt)
+done
+
+define left(amt)
+  __left(amt)
+done
+
+define right(amt)
+  __right(amt)
+done
+
+define roll(amt)
+  __roll(amt)
+done
+
+define pitch(amt)
+  __pitch(amt)
+done
+
+define mark(name)
+  __mark(name)
+done
+
+define showSoup()
+  __showSoup()
+done
+
+define showMachine()
+  __showMachine()
+done
+
+define showPolygons(val)
+  __showPolygons(val)
+done
+
+define jitter(a, b)
+  __jitter(a, b)
+done
+
+define backto(name)
+  __backto(name)
+done
+
+; define load(fileName)
+;   __load(fileName)
+; done
+
+define hpgl(fileName)
+  __hpgl(fileName)
+done
+
+define setPartMode(v)
+  __setPartMode(v)
+done
+
+define cons(e, list)
+  __cons(e, list)
+done
+
+define rest(list)
+  __rest(list)
+done
+
+define first(thing)
+  __first(thing)
+done
+
+define last(list)
+  element(list, list.n - 1)
+done
+
+define element(list, n)
+  list[n]
+done
+
+define append2(a, b)
+  appendwcons(rev(a), b)
+done
+
+define appendwcons(a, b)
+  rv = cons(first(a), b)
+  if(rest(a).n > 0)
+    rv = appendwcons(rest(a), rv)
+  done
+  rv
+done
+
+define rev(list)
+  rv = []
+  count = 0
+  limit = list.n
+  while (count < limit)
+    rv = cons(first(list), rv)
+    list = rest(list)
+    count = count + 1
+  done
+  rv
+done
+
+define append(a,b)
+  rv = []
+  count = b.n - 1
+  repeat(b.n)
+    v = element(b, count)
+    rv = cons(v, rv)
+    count = count - 1
+  done
+  count = a.n - 1
+  repeat(a.n)
+    v = element(a, count)
+    rv = cons(v, rv)
+    count = count - 1
+  done
+  rv
+done
+
+define turtle(s)
+  turtle_tri(s/4)
+  turtle_tri(s)
+done
+
+define turtle_tri(s)
+  __left(90)
+  __forward(s/2)
+  __right(120)
+  __forward(s)
+  __right(120)
+  __forward(s)
+  __right(120)
+  __forward(s/2)
+  __right(90)
+done
+
+define sub(a, b, list)
+  __replaceNode(a, b, list)
+done
+
+define subList(a, b, list)
+  __replaceList(a, b, list)
+done
+
+define ins(a, b, list)
+  __insertNode(a, b, list)
+done
+
+define insList(a, b, list)
+  __insertList(a, b, list)
+done
+
+; Looks thru 'list' for some target object, tossing away some number
+; of matches as given by 'throwAway'. This returns a list which is
+; just a pointer into the original list.
+
+define find (lookFor, list, throwAway)
+  if (eq(list, []))
+    false
+  alt (eq(lookFor, first(list)))
+    if (throwAway > 0)
+      find (lookFor, rest(list), throwAway - 1) ; keep going
+    else
+      list
+    done
+  else
+    find (lookFor, rest(list), throwAway)
+  done
+done
+
+define findIndexOfListWithFirst (lookFor, list, throwAway, currentIdx)
+  if (eq(list, []))
+    -1
+  alt (eq(lookFor, first(first(list))))
+    if (throwAway > 0)
+      ; keep going
+      findIndexOfListWithFirst (lookFor, rest(list), throwAway - 1, currentIdx+1)
+    else
+      currentIdx
+    done
+  else
+    findIndexOfListWithFirst (lookFor, rest(list), throwAway, currentIdx+1)
+  done
+done
+
+; Just like 'find', except it expects each element of 'list' to
+; also be a list.
+define findListWithFirst (lookFor, list, throwAway)
+  idx = findIndexOfListWithFirst(lookFor, list, throwAway, 0)
+  print ("index is", idx)
+  if (idx < 0)
+    print("evals to false")
+    false
+  else
+    print("evals to true")
+    list[idx]
+  done
+done
+
+define join(listA, listB)
+  __join(listA, listB)
+done
+
+define split(lookFor, list, throwAway)
+  __split(lookFor, list, throwAway)
+done
+
+define splitAtIndex(idx, list)
+  __splitAtIndex(idx, list)
+done
+
+define copyList(idxA, idxB, list)
+  if (idxA > idxB)
+    t = idxB
+    idxB = idxA
+    idxA = t
+  done
+  if (idxA < 0)
+    idxA = 0
+  done
+  if (idxB >= list.n)
+    idxB = list.n - 1
+  done
+  idx = idxB - 1
+  ret = []
+  while (idx >= idxA and idx >= 0 and idx < list.n)
+    ret = cons(list[idx], ret)
+    idx = idx - 1
+  done
+  ret
+done
+
+define remove(val, list, howMany)
+  ret = []
+  totalRemoved = 0
+  for each (v : list)
+;    print("remove-iteration begin. does", v, "equal", val, "?", (v == val))
+    if (totalRemoved >= howMany or v != val)
+;      print("remove-iteration-A. Removing", v)
+      ret = cons(v, ret)
+    alt (v == val)
+;      print("remove-iteration-B. Incrementing kill count to", (totalRemoved + 1))
+      totalRemoved = totalRemoved + 1
+    done
+;    print("remove-iteration end. Were I to return now, I would return the reverse of", ret)
+  done
+  ret = rev(ret)
+;  print("remove end. returning", ret) 
+  ret
+done

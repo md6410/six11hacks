@@ -1,0 +1,9 @@
+VL/HCC rebuttal for paper 87
+
+The reviewers rightly point out several flaws with the FlatCAD paper. I would like to address two points that each reviewer made in their own way.
+
+First, reviewers commented that while programming is a powerful method of expressing certain ideas, it is by no means a panacea. Currently, the only mode of interacting with FlatCAD is via programming. As was too-briefly mentioned near the end of the paper, we envision alternate modes of interaction for FlatCAD. Programming is good at certain things and poor at others. When programming is inappropriate, the benefits of other expressive modes (e.g. sketching or direct manipulation) could be used. The current version of FlatCAD has been helpful for us to learn what in particular the programming paradigm is good and bad for. When we add sketching and WIMP interaction, we can make more informed decisions about what the power and limitations of the programming mode are.
+
+Second, the paper inadequately described the power of FlatLang beyond what LOGO (or variants) already provide. Unlike LOGO implementations that I am aware of, the system analyzes the turtle's path and notes (for example) when the turtle has completed a polygon. Further, the turtle tree is a manipulable record of the turtle's history, and can be used to insert named locations, record and play back sequences of turtle operations, and to ``do surgery'' on previously executed code. We did not provide examples of this, however we are prepared to. FlatLang also provides the ability to delimit logical parts so they may be automatically laid out on the laser cutter.
+
+The other comments were fair, and we are aware of the problems in this line of research. An evaluation---even an informal study to see what people like or don't like---would be helpful. The subsequent work that adds sketching and WIMP paradigms will give us a way to compare the utility of various modes of expression.  

@@ -1,0 +1,41 @@
+define sheet ( a ,  b ) 
+
+forward ( a ) 
+left ( 90 ) 
+
+; fold 1
+forward ( ( b  /  2 ) ) 
+left ( 90 ) 
+roll ( 0 ) 
+forward ( a ) 
+forward ( - a ) 
+right ( 90 ) 
+forward ( ( b  /  2 ) ) 
+
+left ( 90 ) 
+
+; fold 2
+forward ( a / 2 ) 
+left ( 90 ) 
+roll ( 0 ) 
+forward ( ( b  /  2 ) ) 
+forward ( - ( b  /  2 ) ) ;;;;;; 
+right ( 90 ) 
+forward ( a / 2 ) 
+
+left ( 90 ) 
+
+; fold 3
+forward ( ( b  /  2 ) ) 
+left ( 90 ) 
+roll ( 0 ) 
+forward ( a ) 
+forward ( - a ) 
+right ( 90 ) 
+forward ( ( b  /  2 ) ) 
+
+left ( 90 ) 
+
+done
+
+sheet(3,3)

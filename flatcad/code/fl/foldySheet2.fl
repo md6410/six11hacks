@@ -1,0 +1,46 @@
+
+define sheet(xDim, yDim)
+  forward(yDim)
+  left(90)
+  forward(xDim)
+  left(90)
+  forward(yDim)
+  left(90)
+  forward(xDim)
+  left(90)
+done
+
+define back(amt)
+  forward(-amt)
+done
+
+define foldedSheet(xDim, yDim, angle)
+  forward(yDim)
+  left(90)
+  forward(xDim / 2)
+
+  left(90)
+  roll(angle)
+  forward(yDim)        ; hinge 1
+  back(yDim)
+  right(90)
+
+  forward(xDim / 2)
+  left(90)
+  forward(yDim)
+  left(90)
+  forward(xDim / 2)
+
+  left(90)
+  roll(angle)
+  forward(yDim)        ; hinge 2
+  back(yDim)
+  right(90)
+
+  turtle(.2)
+  forward(xDim/2)
+done
+
+showPolygons(true)
+
+foldedSheet(2,2,45)

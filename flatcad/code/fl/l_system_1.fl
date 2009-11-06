@@ -1,0 +1,25 @@
+define F(:x)
+  mark ("start")
+  forward (:x)
+  mark ("end")
+done
+
+define expand_F(:x)
+  F(:x)
+  right(90)
+  F(:x)
+  left(90)
+  F(:x)
+  left(90)
+  F(:x)
+  right(90)
+  F(:x)
+done
+
+define expand(:x)
+  replace("start", "end")
+    expand_F(:x)
+  done
+done
+
+F(1)

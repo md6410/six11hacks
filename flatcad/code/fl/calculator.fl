@@ -1,0 +1,11 @@
+a = 4
+b = 1
+
+while (b < a)
+  print ("Still in loop.")
+  b = b+1
+done
+
+repeat (5)
+  print ("I am doing my thing")
+done

@@ -1,0 +1,46 @@
+load("fl/graph/graph.fl")
+
+define debugList(l)
+  print("Debugging list with ", l.n, "entries (list itself is debugged first)")
+  debug(l)  		  
+  for each (thing : l)
+    debug(thing)
+  done
+  print("------------------- (debugList complete)")
+done
+define move(t)
+  forward(t.len)
+  left(angle)
+done
+
+define turtleOp(len, angle)
+  m = object("a turtle op")
+  m.len = len
+  m.angle = angle
+  m
+done
+
+a = vert("a")
+b = vert("b")
+c = vert("c")
+d = vert("d")
+
+g = graph()
+debug(a)
+
+;addVert(g, a)
+;addVert(g, b)
+;addVert(g, c)
+;addVert(g, d)
+
+
+;edge(a, b, nil)
+;addEdge(g, edge(a, b, turtleOp(1,90)))
+;addEdge(g, edge(b, c, turtleOp(1,90)))
+;addEdge(g, edge(c, d, turtleOp(1,90)))
+;addEdge(g, edge(d, a, turtleOp(1,90)))
+
+;debugList(g.E)
+
+;next = Outgoing_Edges(a, g.E)
+;print("The edge leaving", a, "is", next)

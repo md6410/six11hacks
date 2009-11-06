@@ -1,0 +1,9 @@
+repeat(4)
+  forward(2)
+  left(90)
+done
+
+right(45)
+forward(1)
+
+turtle(0.5)

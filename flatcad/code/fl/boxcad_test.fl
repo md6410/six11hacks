@@ -1,0 +1,9 @@
+; This tests the boxcad.fl mini-library
+
+jitter(0.0, 0.0)
+
+load ("fl/boxcad.fl")
+
+box(2,2,2)
+
+hpgl("box.hpgl")

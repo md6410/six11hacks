@@ -1,0 +1,78 @@
+takeNum = 1
+
+define hforward(sideLen, hingeLen, angle)
+  mark("hinge begin")
+  forward(sideLen) ; one
+  left(90)
+  roll(angle)
+  forward(hingeLen) ; two
+  forward(0-hingeLen) ; three
+  right(90)
+  forward (sideLen) ; four
+  mark("hinge end")
+  ;; Each hinged side has four forward statements
+done
+
+define sheet(a,b)
+  mark("side one begin")
+  forward(a)
+  mark("side one end")
+  left(90)
+  mark("side two begin")
+  forward(b)
+  mark("side two end")
+  left(90)
+  mark("side three begin")
+  forward(a)
+  mark("side three end")
+  left(90)
+  mark("side four begin")
+  forward(b)
+  mark("side four end")
+  left(90)
+done
+
+define replaceFwdWithHinge(idx, hingeLen, angle)
+  sheetDefineTree = source(sheet)
+  sheetBodyTree = element(sheetDefineTree, 3)
+  fwdIdx = findIndexOfListWithFirst(quote(forward), sheetBodyTree, idx-1, 0)
+  if (fwdIdx >= 0)
+    fwd = element(sheetBodyTree, fwdIdx)
+    oldFwdParam = first(element(fwd, 2))
+    newFwdParam = source(flatten([oldFwdParam, "/ 2"]))
+    
+    ; I now know which thing to replace and I have the parameter for the hinge.
+    hingeBodyList = flatten(element(source(hforward), 3))
+    sub(quote(sideLen), newFwdParam, hingeBodyList)
+    sub(quote(hingeLen), hingeLen, hingeBodyList)
+    sub(quote(angle), angle, hingeBodyList)
+
+    fwdFirstThird = splitAtIndex(fwdIdx, sheetBodyTree)
+    fwdSecondThird = splitAtIndex(1, fwdFirstThird[1])
+    fwdLastHalf = [hingeBodyList, fwdSecondThird[1]]
+    sheetNewBody = join(fwdFirstThird[0], fwdLastHalf)
+    sheetNewDefine = copyList(0, 3, sheetDefineTree)
+    sheetNewDefine = join(sheetNewDefine, sheetNewBody)
+    sheetNewDefine = join(sheetNewDefine, sheetDefineTree[4])
+    takeNum = takeNum + 1
+    eval(source(sheetNewDefine))
+  done
+done
+
+
+angleA = 180
+angleB = 60
+
+;; fold L1 to L3:
+replaceFwdWithHinge(4, quote(a/2), angleA)
+replaceFwdWithHinge(2, quote(a/2), angleA)
+
+;; fold L2 to L4:
+replaceFwdWithHinge(6, quote(b/2), angleB)
+replaceFwdWithHinge(1, quote(b/2), angleB)
+
+pprint(sheet)
+
+sheet(4,2)
+
+showPolygons(false)

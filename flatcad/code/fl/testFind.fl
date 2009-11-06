@@ -1,0 +1,11 @@
+orig = ["a", "b", "c", "d"]
+pieces = split("c", orig, 0)
+print ("I split", orig, "into", pieces)
+sub("c", "X", pieces[1])
+print ("I replaced c with X and now I have", pieces)
+together = join(pieces[0], pieces[1])
+print ("Now I joined it into", together)
+pieces = splitAtIndex(1, together)
+print ("I split", together, "into", pieces)
+together = join(pieces[0], pieces[1])
+print ("Now I joined it into", together)

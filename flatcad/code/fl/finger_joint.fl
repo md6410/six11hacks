@@ -1,0 +1,33 @@
+; finger_joint.fl
+
+; Creates a finger joint pattern, useful in replacement blocks. 
+
+define one_finger_joint(depth, width)
+  forward(width)
+  left (90)
+  forward(depth)
+  right (90)
+  forward(width)
+  right (90)
+  forward(depth)
+  left (90)
+done
+
+
+define finger_joint(start, end, depth, toothwidth, numteeth)
+  replace(start, end)
+    repeat(numteeth)
+      one_finger_joint(depth, toothwidth)
+    done
+  done
+done
+
+; load ("fl/square.fl")
+; square (1.5)
+
+; mat = 0.15
+; finger_joint("a", "a", mat, mat)
+; finger_joint("b", "b", mat, mat)
+; finger_joint("c", "c", mat, mat)
+; finger_joint("d", "d", mat, mat)
+

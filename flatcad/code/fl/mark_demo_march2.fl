@@ -1,0 +1,33 @@
+load("fl/triangle-plain.fl")
+
+showPolygons(true)
+
+define foo(len)
+triangle(len)
+forward(len)
+right(90)
+triangle(len)
+forward(len)
+right(90)
+triangle(len)
+forward(len)
+right(90)
+triangle(len)
+forward (len)
+done
+
+foo(2)
+
+up()
+forward(3)
+down()
+
+foo(1)
+up()
+forward(3)
+down()
+
+foo(2.5)
+
+
+hpgl("hello.hpgl")

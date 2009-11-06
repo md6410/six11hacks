@@ -1,0 +1,9 @@
+define foo()
+  "Karolina"
+done
+
+s = source(foo)
+
+eval(source(s))
+
+

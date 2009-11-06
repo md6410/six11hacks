@@ -1,0 +1,22 @@
+a = ["one", 2, "thrice"]
+b = ["four", 5]
+c = 8
+
+define powers(x)
+  [ x, x*x, x*x*x ]
+done
+
+myList = ["one", [a], b, 3/2, c, powers, powers(c)]
+
+print ("myList is: ", myList)
+
+i = 0
+repeat(4)
+  v = myList[i]
+  print("The value of myList[",i,"] is: ", v)
+  i = i+1
+done
+
+v = myList[1]
+v2 = v[0]
+print("And finally...", v2[0])

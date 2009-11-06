@@ -1,0 +1,150 @@
+; gear.fl
+;
+; These are functions related to a gear.
+
+load("fl/fab/functions.fl")
+load("fl/fab/axle_bearing.fl")
+
+safe define gear(n_teeth)
+  g = object("gear")
+  g.axle = axle_hole()
+  g.n_teeth = n_teeth
+  g.length = 0.5
+  g.depth = 0.2
+  g.wo = 0
+  g.wi = 0
+  g.wo2 = 0
+  g.wi2 = 0
+  g.center = nil
+;  g.radius = nil
+
+  g.draw = gear_draw
+  g.edge = gear_edge
+  g.calc = gear_calc_stuff
+  g.ghost_draw = gear_ghost_draw
+  g.ghost_draw_tooth = gear_ghost_draw_tooth
+  g.coaxial_adjust = gear_coaxial_adjust
+  g.move_to_tooth_bottom = gear_move_to_tooth_bottom
+  g
+done
+
+safe define gear_calc_stuff()
+  wo = (2 * length) / 3
+  wi = length / 3
+  wo2 = wo / 2
+  wi2 = wi / 2
+done
+
+safe define gear_edge()
+  tooth()
+  left(angle)
+done
+
+define tooth()
+  mark("start")
+
+  ;; do the 'outer' line & mark b, e, and f
+  move(wi2)
+  b = pos()
+  move(wo)
+  e = pos()
+  move(wi2)
+  f = pos()
+  backto("start")
+
+  ;; do the 'inner' line & mark c and d
+  left(90)
+  move(depth)
+  right(90)
+  move(wo / 2)
+  c = pos()
+  move(wi/2)
+  bottom = get_posdir()
+  move(wi/2)
+  d = pos()
+
+  ;; pen down and connect the dots.
+  backto("start")
+  cut_to(b)
+  cut_to(c)
+  cut_to(d)
+  cut_to(e)
+  cut_to(f)
+
+  ;; ensure we leave at the right pos/dir
+  backto("start")
+  move(wi + wo)
+
+  ;; return the 'bottom' of the tooth
+  bottom
+done
+
+safe define gear_move_to_tooth_bottom(n)
+  repeat(n)
+    b = gear_ghost_tooth()
+    left(360 / n_teeth)
+  done
+  if (b)
+    set_posdir(b)
+  done
+done
+
+safe define gear_ghost_draw()
+  old_ghost = ghost
+  ghost = true
+  draw()
+  ghost = old_ghost
+done
+
+safe define gear_ghost_tooth()
+  old_ghost = ghost
+  ghost = true
+  b = tooth()
+  ghost = old_ghost
+  b ; this is the _bottom_ of the tooth
+done
+
+safe define gear_coaxial_adjust()
+  ghost_draw()
+  print("moving by gear radius:", radius)
+  move(radius)
+
+  angle = 360 / n_teeth
+  left((angle/2) + 90)
+;  print("did gear_coaxial_adjust.")
+done
+
+safe define gear_draw()
+  part("gear")
+  mark("gear start")
+  calc()
+  initial = get_posdir()
+  angle = 360/n_teeth
+  repeat(n_teeth / 2)
+    edge()
+  done
+
+  left(90 - (angle/2))
+  opposite = get_posdir()
+  right(90 - (angle/2))
+
+  repeat(n_teeth / 2)
+    edge()
+  done
+
+  diameter = distance_between_points(initial.pos, opposite.pos)
+  radius = diameter / 2
+  backto("gear start")
+  set_posdir(opposite)
+  move(radius)
+  center = pos()
+  if (ghost)
+    axle.ghost_draw()
+  else
+    axle.draw()
+  done
+  backto("gear start")
+  set_posdir(initial)
+
+done
+

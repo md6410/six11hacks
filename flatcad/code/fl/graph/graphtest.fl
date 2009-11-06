@@ -1,0 +1,107 @@
+load("fl/graph/graph.fl")
+
+define debugList(l)
+  print("Debugging list with ", l.n, "entries (list itself is debugged first)")
+  debug(l)  		  
+  for each (thing : l)
+    debug(thing)
+  done
+  print("------------------- (debugList complete)")
+done
+
+v1 = vert("p1")
+v2 = vert("p2")
+v3 = vert("p3")
+v4 = v1
+
+e1 = edge(v1, v2, nil)
+e2 = edge(v2, v3, nil)
+e3 = edge(v3, v1, nil)
+
+G = graph()
+G.V = [v1, v2, v3]
+G.E = [e1, e2, e3]
+
+define weight(e)
+  1
+done
+
+; Extract_Min(Q) searches for the vertex u in the vertex 
+; set Q that has the smallest u.distance That vertex is 
+; removed from the set Q and returned to the user.
+;
+define Extract_Min(Q)
+  ret = ""
+  removeMe = nil
+  smallest = infinity
+  for each (v : Q) ; (v.distance <= smallest)
+    if (v.distance <= smallest)
+      removeMe = v
+      smallest = v.distance
+    done
+  done
+  if (removeMe)
+    Q = remove(removeMe, Q, 1)
+    ret.removed = removeMe
+    ret.modifiedList = Q
+  done
+  ret
+done
+
+define Test_Extract_Min() 
+  mul = 1.1
+  for each (v : G.V)
+    v.distance = mul
+    mul = mul*mul
+  done
+  t = Extract_Min(G.V)
+  print("I removed", t.removed)
+  print("My new list is", t.modifiedList)
+done
+
+define Dijkstra2(G, s)
+  debugList(G.V)
+done
+
+; G is the graph
+; s is the source vertex
+define Dijkstra(G, s)
+
+  for each (v : G.V)
+    v.distance = infinity                          ; Unknown distance function from s to v
+    v.previous = nil
+  done
+
+  s.distance = 0                                   ; Distance from s to s
+  visited = []                                     ; Set of all visited vertices, was originally S
+  unvisited = G.V                                  ; Set of all unvisited vertices, was originally Q
+  v = object("nothing")
+  while (unvisited.n > 0)                          ; The algorithm itself
+    vertAndUnvisited = Extract_Min(unvisited)      ; Remove best vertex from priority queue
+    u = vertAndUnvisited.removed
+    unvisited = vertAndUnvisited.modifiedList
+    visited = cons(u, visited)                     ; Mark it 'visited'
+    print("Visited:  ", visited)
+    print("Unvisited:", unvisited)
+    leaving = Outgoing_Edges(u, G.E)
+    for each (ed : leaving)                        ; Get edges leaving 'u'
+      print("Comparing u.distance and ed.end.distance:", u.distance, ," < ? ", ed.end.distance)
+;      print("Looking at edge:", ed)
+      if (u.distance < ed.end.distance)            ; Relax (u,v)
+        v.distance = ed.end.distance + 1
+        v.previous = ed.end
+      done
+    done
+  done
+  v
+done
+
+par = Dijkstra(G, v1)
+;par = Dijkstra2(G, v1)
+
+print("done?", par)
+;print("par.previous", par.previous)
+
+;print(Outgoing_Edges(v1, G.E))
+
+; Test_Extract_Min()

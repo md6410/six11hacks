@@ -1,0 +1,1373 @@
+10/4/06 12:12 pm
+
+I'm starting this progress log at the suggestion of Eric. I've made a
+lot of progress, but unfortunately almost all of it is in abstract
+coding that can't be directly visualized. So for my own sanity and so
+others can see what I'm up to if they want, I'm starting this log. It
+might also help keep me focused.
+
+This post is an overall summary of what I've done so far.
+
+The goal is to make a CAD system that works with flat pieces of
+material such as wood, paper, or metal. Unlike most modelers, FlatCAD
+only lets you perform operations that are physically possible. These
+operations include folding, cutting, layering, and attaching. We hope
+to implement a little language that from which the visual or printed
+model is generated--a little bit like postscript is for
+documents. Unlike postscript, our little language will be "user
+friendly", letting people write programs that generate forms, rather
+than using the mouse. The mouse interaction will also be supported,
+but mouse activity will be translated into textual commands in our
+language.
+
+Our first throwaway prototype was a quick iteration to get *something*
+produced. This was more of a psychological win than a technical
+win. From this experience we came to understand what we were really
+building, even if our throwaway prototypes were completely unable to
+tell a story to a casual onlooker.
+
+My next goal is to produce something that is not just a psychological
+win, but also a technological achievement. For the past week and a
+half I have been struggling to create a modeler that can take a single
+piece of material (which has thickness) and fold it along some
+arbitrary line that passes through one side of the form. In doing so I
+have created an object hierarchy that includes solid bodies (Body),
+polygons (Polygon), points (Vertex), and 3D lines (Line). In order to
+do perform transformations on these types, I have also done some work
+on using the Jakarta Commons Math Library to help with the math. Also
+I have written code to perform 3D rotations about an arbitrary
+axis. In order to show all of this to the user, I have added a
+'drawGL' method to my various objects that turns the current geometry
+into a series of OpenGL commands that draw my model to the
+screen. Using OpenGL and Java is not necessarily straightforward but I
+have discovered that the LWJGL (Lightweight Java Game Library) is
+useful. The LWJGL also includes an AWT component for using OpenGL in
+the context of a traditional GUI, rather than consuming the entire
+screen or window.
+
+In the past couple of days I have made some intellectual progress as
+well. I had been working on a 'fold' operation as my primary
+focus. But in doing so, I realized a couple of things: 
+
+* The math is much easier if I model things as having a constant
+  thickness.  
+
+* A fold can be thought of as: (1) cutting the material along the fold
+  line, (2) rotating one of the parts about the fold line axis, and
+  (3) attaching the two parts with a special kind of joint.
+
+So now, rather than working on folding as a basic operation, I can
+think of is as a composite operation, which involves cutting,
+rotating, and attaching. I already have solved the rotation problem
+using the matrix transform code. If I implement rotation and at least
+this one kind of attaching, I will be able to quickly implement
+folding with high confidence that it isn't buggy or just a hack.
+
+In order to implement 'cut', I need a way of splitting apart a solid
+body and retain the surface normals. Given two points on a plane, I
+should be able to determine the four points that will be the new
+corners of two separate bodies. In order to do this I need a better
+way of specifying which points are adjacent to one another. I am
+creating a new Graph data structure that has parametizable types so I
+can avoid casting all the time.
+
+
+10/4/06 7:53pm
+
+I spent the afternoon/evening finishing work on the graph structure,
+and began work on the 'cut' operation. In order to do this I need to
+be able to be able to calculate the location of points along known
+lines (such as one edge of a polygon). I also need to be able to
+determine which plane a line exists on, if any. Right now most of the
+functionality of the cut function is commented out. But I am able to
+say "cut the body along this line" and it will be able to tell which
+polygon can claim ownership of that line. Based on the fold line and
+the surface normal of that polygon I will soon be able to calculate
+the locations of other vertices on opposing faces that will be the new
+corners of the two halves of the body.
+
+
+10/5/06 10:25pm
+
+Today I implemented Plane/Plane intersection based on the source code
+found here:
+
+http://www.geometryalgorithms.com/Archive/algorithm_0104/algorithm_0104B.htm
+
+It seriously took me like three hours to find a resource that
+coherently explained this. Why do math people think it is OK to just
+start using symbols without describing what they are, if they are
+unknowns, or if they are parameters, or what? I realize all of these
+things are important in deriving equations and algorithms -- but just
+like it is good practice to comment your code, it is equally good
+practice to coherently describe a mathematical technique.
+
+Anyway, I can do Plane.getIntersection(planeA, planeB) and get a Line
+in response. If the two Planes are parallel it will throw an
+exception, so the calling code must wrap the call in a try block.
+
+Now that I have Plane/Plane interaction, I can find all the points of
+all the Polygons that are involved in a cut line. This is tomorrow's
+mission.
+
+
+10/8/06 1:42pm
+
+I now can cut a single body and find the polygon that defines the cut
+portion. Now I have to form two new bodies based on the points from
+the original body, with the points from the cut-polygon
+interjected. My current problem is that I have the cut-polygon points,
+but I don't have a programmatic way to decide which order the points
+should be provided. I have a harebrained idea that involves summing
+the surface normals, each of which has been scaled by the area of it's
+face. In my harebrained theory, the sum of those scaled vectors should
+be the zero vector. (Think about summing the surface vectors on a cube
+-- the result is definitely the zero vector.)
+
+So I have been hoping to implement this, but it turns out that
+programatically finding the area of a polygon is not
+straightforward. Paul Bourke's web site was very promising at first:
+
+http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/
+
+But it only concerns 2D polygons. I could probably find an extension
+that works for 3D polygons. But I don't want to keep re-solving solved
+problems. Isn't this what the Internet is for?
+
+Next I found this:
+
+http://dcostanet.net/wordpress/2005/10/29/area-of-a-polygon/
+
+... which involves some absurdly complicated math that uses double
+integrals and calculus. Come on, people, this isn't a hard problem!
+You don't have to show off how big your math is!
+
+I figured it out, eventually. I made my own functions to find the
+area, and it is probably not as efficient as what a skilled math
+person would make, but it works. Basically, you just find the area of
+each triangle in the polygon based on vertex 0,i,i+1 for i in
+[1..n-1], and sum those areas.
+
+As for the larger problem, here's an email that I sent to Shaun and
+Yeonjoo:
+
+I had a kind of hum-drum problem to solve: I have all the faces of a
+solid body (such as a box, or a pyramid, or anything else that doesn't
+"leak") except one. Imagine a single six-sided die, but with the "six"
+side missing. I have two polygons that could serve as the missing six.
+Both of them have the correct points, but they are facing opposite
+directions (their surface normals are the reverse of one another). It
+is important to choose the right one in order for my math in other
+places to work correctly, because it depends on the surface normals
+facing the right way (pointing outwards, rather than inwards... we
+wouldn't want the six dots of our die on the inside of the cube, would
+we?).
+
+So, my challenge was to programmatically determine which face to use.
+I didn't want to fake it and rely on the fact that the solids that I
+happen to be using right now are boxes. I wanted to solve the general
+case, for instances where the solid body was something else, like a
+pyramid, or something with lots of faces like a cut emerald.
+
+It occured to me last night that there should be some stable
+relationship between the surface normals of the various faces. I
+should really try to fall asleep more often because I have my best
+ideas at those times. Anyway, here's what occured to me: if you were
+to take each surface normal and scale it by the surface area (this
+gives you a vector) and then add all of those vectors together, the
+result should be the zero vector.
+
+Think about a cube: each face has an opposite. If you add all the
+surface normals of a cube together, they sum to the zero vector. Try
+it with any other "non-leaky" solid body and you'll get the same
+answer.
+
+So, in order to solve my "which polygon do I pick", I just use the one
+that makes my sum-of-scaled-normals equal to the zero vector.
+
+I haven't been able to find any mention of this anywhere on the web.
+Have either of you heard of this property of polyhedra?
+
+
+10/8/06 10:42pm
+
+I'm still struggling with finding a way to split a polyhedron in
+two. I have all the points, and I know how they connect. I just need
+to find a reasonable and error-free algorithm for producing two solid
+bodies from one.
+
+
+10/11/06 1:07am
+
+I talked with Mike about my problem, and he said something about a
+kind of data structure. Based on what he said, it triggered a vague
+memory about something that we didn't actually use in the Graphics
+class, but it was in the book. I looked into it and have since
+translated a good portion of my representation to using it. It's
+called a 'half-edge' datastructure. 
+
+At this point I can insert a new vertex on an edge, and I can split a
+polygon into two. It even shows this graphically, as I made my new
+polyhedron data type be drawable in OpenGL. My next task is to take my
+'split polygon' function output (two polygons) and replace the
+original polygon with the two in a way that the polyhedron agrees
+with. I believe my 'stitch' function should be able to let me just
+replace a polygon.
+
+My wrists are really starting to hurt. I think tomorrow I will look on
+the web for a new keyboard and wristguard things. I might also break
+down and buy a new display for school.
+
+
+10/11/06 12:08pm
+
+Success! I have implemented a series of related geometric types, all
+of which are based on the use of half-edges to hold the relationships
+between them. (This excepts polyhedra, which hold reference to each of
+its faces.) To demonstrate with pixels, I have an OpenGL pyramid
+(tetrahedron). I have been using my pyramid in the same way people use
+the GLUT Teapot, but the pyramid is easier to manipulate. 
+
+First I implemented an 'insert' function for a half-edge, which
+inserts a vertex along the half-edge somewhere. This results in the
+half-edge and it's pair going away, being replaced by four new ones (a
+half-edge and it's pair, on both sides of the inserted point).
+
+Next I implemented a 'split' function in my polygon, which takes two
+vertices (that are assumed to be part of the polygon) and returns two
+polygons which are the result of the original polygon being split by
+the line segment joining the two vertices.
+
+Finally I used my 'insert' and 'split' functions along with my
+polygon's 'stitch' function, which was able to add the two new
+polygons without modification.
+
+Next up: make a new Box object that is a subclass of Polyhedron rather
+than Body, and replace my old Polygon with my new Polygon2 code, and
+make sure everything works with that. This shouldn't take very
+long. After that I can get to the 'cut' operation that works much like
+the 'split' for polygons: it will take a cut polygon and return two
+Polyhedra objects.
+
+
+10/12/06 12:20am
+
+I discovered a show-stoppingly-bad bug in my insert method. Each
+polygon maintains a reference to one of it's half-edges (it is
+arbitrary which one it uses). If I happen to insert a vertex on a
+half-edge that is referenced by the polygon, I need to update the
+polygon's reference. It took me a few hours to find this, because some
+of my debugging statements would enter into an infinite loop and I
+would run out of stack space. Just finding that problem accounted for
+about half of my time this evening.
+
+But in the end I figured it all out. I put up some screenshots on the
+Wiki that show my box after having been cut along a plane. This
+example is contrived insofar as I am not specifying a cut plane, but
+instead just giving it some points. But it is demonstrating a lot of
+the stuff that I've worked on lately.
+
+Tomorrow's goals are :
+
+1) Replicate what I have done tonight but using 'cut' semantics: a
+   line on a surface, and it figures out the normal and the the cut
+   plane from that. I've done that before in my old code, so it
+   shouldn't be hard to move things around to get that working.
+
+2) Make a legitimate 'cut' method that takes a polyhedron and a cut
+   plane and produces two polyhedra.
+
+I think that is all I can do tomorrow, but I can continue anyway:
+
+3) Refactor the TestOpenGLComponent into something that isn't just for
+   testing purposes. Integrate it with my command line code. Resist
+   the temptation to turn it into an applet quite yet.
+
+4) Throw together a new set of commands for making 3D material,
+   specifying faces, edges, and lines. Be able to indicate cut
+   planes. Even with such a small number of things to do there is
+   probably enough to see if there is "something there", and get an
+   idea about what FlatLang may look like.
+
+
+10/13/06 12:00am  (Friday the 13th!)
+
+I did #1 from above and I almost managed to get #2 completed. There
+was just too much going on today to have a nice stretch of time to do
+this. The George Stiny talk was interesting, though.
+
+I'm right at the end of my 'cut' method. I know the algorithm I need
+to use but I am too tired to code and test it right now. The basic
+idea is that I traverse each edge of my cutPolygon (which I have
+already) and locate the plane on the original polygon that is coplanar
+to that edge (Polygon.isOnPlane(Line)), and split that polygon along
+said line. Since I am traversing the cutPolygon in order, I will be
+splitting polygons in order as well and can keep track of which half
+the resulting polygons are in. To find the location of the rest of the
+polygons I can just look at an arbitrary point from each to determine
+if it is above or below the cutPlane, and make a copy of each one for
+the two return polyhedra.
+
+
+10/14/06 3:22pm  (Saturday the 14th :(
+
+I have a legitimate 'cut'! There appears to be one more bug, but it is
+far improved. At this point I can cut a polyhedron into two simply by
+specifying two points. Example:
+
+    Polyhedron[] boxes = testBox.cut(midNorthTop, midSouthTop);
+
+I spent some time proving to myself that the resulting polyhedra
+really were independent of one another by moving them a little bit. I
+uncovered all sorts of subtle bugs by doing this. For example, it was
+not making copies of vertices when appropriate, but instead using the
+same Vertex object in two different polygons, which is hardly good for
+independence. I decided to ensure that my polygons were put together
+correctly by applying Euler's formula for polygons (which says V + F -
+E = 2). I also had to change the meaning of Vertex.equals() back to
+checking memory equality, which screwed up some other places but
+fortunately my unit tests helped me figure that out without much
+bloodletting.
+
+The only bug that I can see at this point is only manifest when I draw
+it using OpenGL. If I rotate the camera to put one of the objects in
+front of another, I can see the one that is behind it. Because I am
+pretty vigorously checking the math of my polyhedra I am fairly
+certain that the problem has to do with how I am using or abusing
+OpenGL. I probably have to turn on depth tests or something like that.
+
+
+10/14/06 3:52pm
+
+I figured out the OpenGL thing: it was indeed the depth testing. I had
+to do two things: first, glEnable(GL_DEPTH_TEST), and then in my
+glClear I needed to add in the correct bitmask: 
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+10/14/06 10:59pm
+
+Eric sort of challenged me to rotate one of the pieces a bit, which
+demonstrates a limping version of 'fold'. I am still explicitly
+setting the fold line. Mark challenged me to do a 'double fold', which
+I suppose I could bust out fairly quickly. I don't have any code for
+saying 'fold this thing the long way down the middle', which is about
+what I'd need to programmatically fold something a bunch of times. 
+
+10/15/06 2:03am
+
+(I wrote this to the Wiki) After the last round of screenshots went
+out, Mark asked about folding more than once. In all of the previous
+screenshots I had hard-coded the points of the cut/fold. But in order
+to fold more than once in interesting ways, I either had to hard code
+lots more points, or I would do the programmerly thing and write code
+to figure out the lines. Here it chooses the shortest dimension of the
+biggest face of a polyhedron, splits it, and recursively does the same
+with one of the halves (up to a certain hard-coded depth).
+
+It finally feels like a project!
+
+
+10/16/06 5:43pm
+
+I've cleaned up all of the code in the 'geom' package. This involved
+removing all the commented-out code that was a result of my
+experimentation. I've moved things around so there is a more logical
+layout (e.g. the static methods for producing transformation matrices
+have been moved from 'Vertex' to a 'MathUtils' class). I've also
+removed some classes that I started and quickly abandoned but somehow
+had committed to svn. Finally I have documented things up the wazoo
+and arrived at a source-file structure that puts the @Test methods at
+the very end.
+
+This cleaning process has also helped me to see how the whole thing is
+structured. I get so tied up in the details that I needed something
+like this to help me to step back and check things out from a
+distance.
+
+
+10/27/06 12:35pm
+
+I have taken a long time off from the project because I went back to
+Iowa for my graddad's funeral, and when I got back I had a whole pile
+of other things to do. I think I am back in a position to be 'in the
+zone' now.
+
+Before I went back for the funeral I had dinner with Ellen. I tried to
+explain that I was hesitant to involve sketching in FlatCAD too
+early. I want to hold off on that for the time being because I know
+that I will get obsessed with the sketching aspect and not make any
+forward progress, just like what happened with the Designosaur. I want
+to first get FlatCAD able to do stuff, and then work on the
+sketching. But Ellen disabused me of this notion. I can work on
+sketching sooner than later. I've started to form a plan of attack,
+which I'll get to in a bit.
+
+I was talking with Yas and Kumiyo yesterday about FlatCAD. When you
+give these sorts of 'desk demos' to people, you always change the
+melody to fit your audience. That's not changing your song, but just
+changing which parts you talk about. And given that Kumiyo and Yas are
+interested in (at least partly) sketching, I talked about that. I do
+believe it was the first time that I said anything about what I have
+been thinking since my dinner with Ellen. I'm not sure what exactly I
+said, but Yas reformulated what I was saying much more coherently than
+I originally said it. I'll try to reconstruct the general idea.
+
+The FlatCAD model will be able to be modified in three ways: (1)
+Clicking around with the mouse, (2) Typed commands in FlatLang, and
+(3) sketched input with a stylus. This is a perfect environment to
+explore the pros and cons of each of these three modalities in the
+same design context.
+
+Of course, none of these modalities exist right now, and I am going to
+implement them more or less at the same time. I'll get one or two
+commands working with (fledgling) FlatLang, and them implement those
+same commands for mouse, and then for sketch. Much of the issues
+involved with mouse are the same as those for sketching, such as
+determining what point the user is clicking on.
+
+The first commands will be those that let me indicate a point,
+indicate a line between two points, indicate a cut line, indicate
+which piece to operate on, and remove the indicated piece.
+
+
+10/29/2006 9:27pm
+
+From my recent post on the Wiki: I've been working on a way to bridge
+the GUI and the text input. I can move a little 'turtle' around from
+point to point on the polyhedron by giving it text commands. I also
+wrote a little command for naming the point the turtle is loitering
+on. I did run into some trouble when writing code for showing the name
+on the screen.
+
+After a lot of work crawling around through Mark Napier's excellent
+utility code for LWJGL, I have the labels of points printing on the
+screen. I thought the whole text thing was going to be like maybe a
+twenty minute deal. In fact I thought I was about twenty minutes away
+from knocking that out all day. Five maddening hours later, I have it
+working.
+
+Fortunately, there were lessons to be learned. I've been forced to go
+through other people's GL code in order to figure out what is going
+on. I think I finally have a handle on how textures really work. And I
+discovered that Napier's code takes care of a lot of the daunting
+things that I knew I was going to need to do, such as converting from
+world coordinates to screen coordinates and vice versa. It is good to
+be familiar with somebody else's code, especially when the person who
+wrote it really knows what they're doing.
+
+
+11/1/06 11:25am
+
+I've been stressing about the data model in the past couple of
+days. As of right now my 'model' has just been an array of polyhedra,
+which I just use to draw. There is no notion of what is connected to
+what, and where, and in what manner. This has prevented me (along with
+another problem, described shortly) from being able to model folds
+that span a previous fold. I believe I have a new data structure for
+maintaining the geometric relations between different parts. Before I
+implement that I have to take care of a more pressing problem.
+
+This pressing problem deals with how I have been rotating my parts
+that I fold. I have been careful to model the thickness of the
+material. I think this is important because modeling things like wood
+and plastic makes absolutely no sense if you are using simple 2D
+polygons. But paper is very nearly 2D. If you fold paper a couple of
+times, the thickness does start to come into play.
+
+So far I have modeled a fold as a rotation about a line that is on one
+of the surfaces of a polyhedron. If I do this 180 degrees, the part
+that moves ends up being entirely above the other part--there is no
+overlap. And that kind of fold is useful for thick material that isn't
+pliable like paper. But now if I want to fold that thing again but
+(say) along an orthoganal line, the two points that form my hinge are
+no longer on the plane of any piece of my model. So I can't just hinge
+about that line.
+
+My 'solution' for this is to rotate about a hinge that is in the
+middle of the material. This way a 180-degree fold will make the two
+parts on the same plane. In order to determine which one is on 'top' I
+will have to use some kind of z-order. If a part's z-order becomes too
+large, I should prevent folds, because it wouldn't be possible using
+real paper.
+
+So, my next two tasks are to (1) solve the hinge problem (which should
+not be difficult) and (2) make a new model (which will be a bit harder
+but still seems almost straightforward.)
+
+
+11/2/06 6:02pm
+
+I've implemented the hinge-from-the-middle thing, which was
+painless. I just used my Polygon.findLongestMidline() method, which
+only works if my polygon is a quad, which it always should be since
+this is FLAT-CAD, not ArbitraryShape-CAD.
+
+Now I'm looking at implementing my hairbrained plan on modeling
+connectors (joins and folds) in the same model as the sheets of
+material. In doing this I should really create full-fledged objects
+that represent my connectors, such as "Cut" and "Fold". (It seems a
+bit odd that a "Cut" should be a connector, doesn't it?)
+
+The reason for this is that when I say "cut this sheet", it should be
+doing more than simply giving me back the two halves. I need to know
+where each of the resulting faces of the polyhedron halves came
+from. I also need to know which is the 'raw' face of the resulting
+halves. This helps me retain the parentage relations between an old
+set of objects and a new set of objects.
+
+So instead of
+  Polyhedron[] halves = bigPoly.cut(p1, p2)
+I will have
+  Cut c = new Cut(bigPoly, p1, p2);
+  c.apply()
+  c.halves[] // the two resulting polyhedra
+  c.rawFaces[] // the faces exposed by the cut
+  c.parentageRelations[] // bigPoly.face[1] --> halfA.face[2] and halfB.face[4] and so on
+  c.cutSegment // segment connecting p1 and p2
+
+
+11/6/06 11:16am
+
+When I demoed FlatCAD for some people in the lab last week I got a
+common request. If I name a vertex 'x' and then move away, people
+wanted to be able to directly move back to that vertex by saying "move
+to x". I've implemented that and it is very satisfying to see that it
+has some memory not only of the names, but also that it knows the
+half-edge that was last in use when on that vertex. By that I mean I
+can name a vertex while crawling one face, and then switch to an
+adjacent face that also uses that vertex. When I ask it to move to
+that vertex it will use the half-edge that is on the CURRENT face,
+rather than on the one when I named it.
+
+I am going to hold off on switching to my new model until after Matt
+Mason's visit on Wednesday. Instead i am going to work on inserting
+points along edges and folding. It might not draw nicely because the
+stacking-order thing will come with the new model, but that's OK.
+
+The syntax for inserting points:
+
+insert x ;; insert a point halfway along current visually selected edge
+insert x at n% ;; insert a point n% along that edge
+
+
+11/6/06 7:00pm
+
+Much progress today. I now can insert points using the syntax that I
+described above. I forgot about the hinge problem to begin with, but I
+fixed that after I posted on the Wiki about the programmatic
+fold. Just now I made it so I can store FlatLang commands in a file
+and then load them to reproduce a model as though the user just typed
+them all in by hand. It's coming along!
+
+
+11/29/06 11:
+
+I know it's has been a long time since i've rapped at ya, but I've
+been real busy writing grant proposals and doing my part to help
+reconfigure the master's and PhD program.
+
+I met with Shaun before Thanksgiving and we discussed a bit about how
+the students in the laser cutter class are thinking about using the
+rapid prototyping machinery. He made an important observation:
+
+There are two dominant approaches that you can take when using a tool
+to make something.
+
+  (1) Start with an explicit, "finished" idea, and use the tool to
+      execute your plan.
+  (2) Start with a vague (or no) idea, and use the tool to explore
+      design options.
+
+This model pits two uses of a tool against one another: tool as
+executor, versus tool as exploration device. FlatCAD must be an
+exploration tool first and foremost. If it ends up being used as an
+executor tool, that is just a side effect.
+
+Is there an analogy I can use from another field? Anything that is
+built from modular parts or components is somewhat of a
+candidate. There is a wide range of things there such as construction
+kit toys (Lego, hub-and-strut things, etc), but also professional
+construction materials (2x4s, sheets of plywood and drywall, scaling
+up to prefabricated modules.)
+
+Shaun tells me that American students resist any of this modular
+stuff. I don't know if that is just a cultural thing where Americans
+insist on individuality in everything.
+
+So what do I win by making FlatCAD a modular system and what are the
+development implications with that? One implication is that a modular
+system lends itself well to systems generated from a program of some
+sort. Another implication is that it forces people make modules and
+use the components in some system. I suppose a person could make a
+one-module system that is custom-made, in which case the design
+environment is really just a solid modeller that restricts you to the
+FLAT operations. But the modularity seems to be the important thing,
+otherwise they could just use Rhino or Illustrator to make things to
+cut out.
+
+I think it makes sense to change the data model so that the 3D form is
+just the "shadow on the cave wall", but the thing that casts the
+shadow are 2D planes related together with abstract operations. I have
+drawings of it in my notebooks (p.24 in the new one for example). This
+way I don't store any information in the model that isn't
+"real". Right now I am storing my model as the 3D form that is
+directly drawn to the screen. I felt (and still feel) that it is
+important to model the thickness of the shapes, because 2D planes are
+so unreal to look at that they distract and hide important
+information.
+
+So, today I will design a first attempt at a new kind of model that
+will make it easier to make progress. I don't have to re-write much
+code at all, I think.
+
+
+11/29/06 11:59pm
+
+I began work on a newfangled SceneGraph. I had been operating on the
+assumption that if I have a scenegraph that looks like 
+
+  objectA --> (T) --> objectB
+
+That if I for some reason need to start with objectB, I can get the
+relatively correct position of objectA by simply using the inverse of
+the tranformation matrix:
+
+  objectB --> (inv(T)) --> objectA
+
+I tested this and it appears to work. Obviously, the starting position
+is wrong, but I hope that I can overcome that by recording the last
+know transformation for each object, and then use that transform to
+put the modelview matrix in the right spot for the initial gl draw
+operation.
+
+
+12/16/06 5:19pm
+
+Two weeks have gone by during which time I have spun my wheels a great
+deal on other things like going to Atlanta and writing papers for
+Omer. I am glad that I am very nearly done with taking classes.
+
+Today I talked to Eric about the state of FlatCAD. Earlier in the
+semester I was very gung-ho about FlatCAD, but in the past couple
+months or so I have lost energy because of time commitments to other
+things. And now that I am coming back to FlatCAD, I am having a hard
+time picking up the vibe from before.
+
+What is the point of this project? I asked that question rhetorically
+to Mark the other night and he said that if I really don't know, I
+should stop. Well, I was asking the question rhetorically because I
+know the answer to some degree but I am still having a hard time
+making it completely explicit. Talking with Eric today helped me to
+figure out where I really am with this and what it can do.
+
+When we started FlatCAD we had in mind a CAD tool that worked with
+flat stuff like paper and cardboard and wood and sheet metal and
+plastic, etc. At every step of the way whenever I give an example of
+something that FlatCAD will be able to do, somebody gets on my case
+because some other CAD system already lets you do that. Illustrator is
+a perfectly good vector drawing editor that can let you cut
+things. Rhino's purpose in life is to let people easily make
+sliceforms. Solidworks can be made to do tricks as well, for example
+the early roBlocks and Sticky Bricks prototypes that Eric hacked
+up. So, if my examples of artifacts can also be designed in
+non-FlatCAD systems, what is the point?
+
+The point is that all of these other systems are general purpose
+modelers for letting you solve a huge class of problems, but do not
+provide explicit support for working with the rapid prototyping
+machines. Nor do they explicitly give support for letting you make the
+things that are likely to make using laser cutters.
+
+Down at Georgia Tech we saw this plastic sculpture thing that looked
+like it was sort of wrapping itself around the architecture
+building. That sculpture was made out of laser-cut pieces of plastic
+and then meticulously screwed together after the fact. In order to
+know which pieces went where, each part had some non-alphanumeric
+symbols on it in order to find the adjacent parts.
+
+One of the properties that FlatCAD-designs will have is that the
+pieces are meant to be put together manually afterwards. I can build
+that intelligence in to FlatCAD so that the laser cutter puts marks or
+cuts on the material that help the designer put the thing together
+afterwards.
+
+There will always be questions of the form "Why are you making FlatCAD
+do X? CAD system ABC already lets you do that." The response to this
+should be "That may be true, but how long does it take and how many
+brain cells does it kill in the process?" I wonder if the designers of
+the plastic scupture at GATech went into their CAD program and put the
+symbol on each individual part.
+
+So, I'm not going to make a general-purpose modeler. Instead, I'm
+going to make a modeler of flat stuff using physically possible
+operations. I'm not going to make a mono-purpose modeler that makes
+(for example) dinosaur skeletons. Instead, I'm going to make a
+relatively simple environment for working with flat material using
+common physically possible operations.
+
+One more thing that I picked up from my conversation with Eric was
+that there are common patterns of things that you may make from flat
+stuff. He showed me two examples from the random debris around his
+desk: (1) the hardboard box that he made for the first roBlocks power
+brick, and (2) a paper bag-like thing that is a little carrying case,
+with a nice handle on top. There are other larger scale patterns like
+this, such as the series of folds necessary to make a paper bag (Ellen
+send around a link a while back).
+
+That box was annoying to make, Eric says, and it is straight out of
+the list of things that FlatCAD should be able to make. So, why not
+use that as the first object that I attempt to make? It will show off
+some high-level goals of the project:
+     - Using only flat material
+     - Operations "cut" and "join"
+     - Making and manipulating parameters
+       * length of sides
+       * width of material
+     - Fabrication to a laser cutter
+
+
+1/9/07 1:20pm
+
+Look at how much text I have written about my trials and
+tribulations. How much code have I written that still can't be used to
+do a single thing? This is fucking absurd. I have decided that I need
+YET ANOTHER approach. But this time it will be the approach of:
+
+ * GET SOMETHING WORKING AND ITERATIVELY IMPROVE IT *
+
+On the trip back to Iowa I was thinking of the lowest level
+operations. I can go lower than "cut" and "join". Based on what I
+wrote in the CC2007 workshop paper, a flatcad function may be
+"box(2,2,5)" to make a 2x2x5 inch box. This defers to a number of
+other functions like "finger-joint(matA, matB, nFingers, depth)". That
+in turn uses a function "give(matA, matB, region)" that gives some
+region from one material to another material. I'm not sure about
+keeping that last part but the spirit is reasonable. Anyway back in
+Iowa I was thinking of using CSG operations to do the "give"
+operation. I found a few helpful pages in a book, but I couldn't find
+any 2D CSG algorithms for add, subtract, and union. So I made my own
+by hand and I need to test it out.
+
+Here is my goal for the next chunk of work as expressed by a user
+story:
+
+1. m1 = mat(0,0,2,2) -- makes a material at (0,0) that is 2x2
+2. m2 = finger-joint(m1, 4, 0.1) -- gives one edge 4 fingers of 0.1 depth
+3. h  = hpgl(m2, "fingery.hpgl") -- save HPGL to 'fingery.hpgl'
+
+Meanwhile, I have been spending too much time on the flatcad.org
+system administration. Pissing me off. I'm generally pissed off these
+days, actually.
+
+
+1/23/07 5:35pm
+
+Hi, I just spent two hours of my life fucking around with OpenGL
+trying to get the modelview matrix. Turns out you can't get the
+modelview matrix when you're between glBegin() and glEnd() statements.
+
+Anyway, this is all supposed to be so I can go from the vertices that
+are calculated as the result of LOGO-like relational operations and 3D
+space points. From that I will be able to generate some HPGL.
+
+
+1/24/07 12:02pm
+
+From http://www.luberth.com/cstep/hpgl.htm :
+
+"HPGL uses the plu (short for plotter units) as its form of
+measurement. There are 40 plu per millimeter and 1,016 plu in one
+inch."
+
+1/26/07 3:01pm
+
+My FlatLang interpreter now understands how to distinguish between
+commands that it should immediately execute and commands that should
+be buffered for calling later on. This uses an approach of creating
+blocks of code between 'begin' and 'end' statements. I can
+parameterize 'begin' with some text that I can use to name those
+blocks. So I can do this:
+
+begin square
+  f 1
+  r 90
+  f 1
+  r 90
+  f 1
+  r 90
+  f 1
+  r 90
+end
+
+square
+r 45
+square
+
+... and it won't draw anything until I make the call to 'square'. It
+does the square block and comes back fresh and ready to do the
+subsequent r 45 and square commands, when it does another square that
+is at a 45 angle to the original.
+
+It still does not know how to do parameters, and I need to add in the
+ability to have special blocks such as 'repeat' that have built-in
+functionality.
+
+
+1/27/07 11:39am
+
+Success! Kind of. My function-building was a bit buggy before, but I
+think it works well now. The following program produces a square, and
+demonstrates defining a routine, using an inner repeat block, and
+calling that routine afterwards that is interpreted and displayed.
+
+begin part square
+  begin repeat 4
+    f 1
+    r 90
+  end
+end
+square
+
+My next step is to generate HPGL for each 'part' so I can print things
+out and actually have a construction kit.
+
+
+1/27/07 7:13pm
+
+OK, it generates HPGL that is scaled and translated to fit on the
+first quadrant. The printing process is still dependent on the drawing
+process, so I can't automate printing (I have to jiggle the mouse)
+yet.
+
+I had a couple of mindbenders along the way. First, the Jakarta
+Commons math library threw me for a loop with the two functions:
+RealMatrix.operate(double[] v) and RealMatrix.preMultiply(double[]
+v). If I want p = M * v, I need to do p = M.preMultiply(v). I spent
+probably an hour on that one.
+
+The other mindbender was just a stupid HPGL thing. I have to double up
+the final point for some reason, otherwise the graphics program that I
+am using to debug it (ImageJ) won't notice it.
+
+Still no parameters, but that (and printing out a bunch of these
+things) is tomorrow's goal. Progress feels good, and I am only able to
+do it because I have a coherent story (to my mind) of why I am doing
+what I am doing.
+
+
+
+
+2/2/07 3:20pm
+
+Fun times. I printed out a bunch of construction kit pieces and played
+with them a bit. I got soot all over my hands. The resulting sculpture
+things are interesting to me because I built them. If somebody else
+built them and showed them to me I would probably be ambivalent.
+
+Speaking of soot: I added in the ability for the turtle to rotate out
+of the initial plane, and was able to write a 'buckyball' program that
+generated a 12-sided polyhedron. It turns out that this is the
+chemical structure of one of the molecules that is found in soot.
+
+One side-effect of using turtle geometry for this is that it was easy
+to 'unroll' the buckyball onto the xy plane so we could see each face
+adjacent to the others. This was basically done by supressing the
+'roll' statements that took it out of the plane. The only caveat with
+this is that for every 'roll' statement, it is ambiguous which
+direction the turtle should be drawing in the xy plane. But there are
+only two options for each suppressed roll (either rotate 180 degrees
+about the y axis or don't). So it should be easy to just try all the
+possible binary trees of rotate/don't-rotate to find the set of
+sequences that work.
+
+As for what I am doing right now: I am worried that if I continue with
+my current 'InputParser' class, it will get (or has already become)
+prohibitively difficult to change or add new language features. To
+wit, I distinguish between begin/end statements and other kinds of
+statements using an if..else series of statements. If I am in a
+begin/end statement, I stash the current line of input and put it
+inside an exec list for the begin/end statement.
+
+All of my parsing happens at the line level. I detect the first word
+on each line of input and dredge up a custom interpreter for that line
+and run it. There is no coherent machine state or program
+control. Each line of input is a procedure -- just a sequence of
+statements to execute. There are no functions (procedures with return
+values).
+
+Basically I would like to have a real parsing technique that generates
+an AST that I can use as my program structure. So I am playing around
+with ANTLR and have just started to understand how it works. It's been
+a few hours, and I am only now starting to get some of the subtleties
+hidden between all these semicolons.
+
+
+2/3/2007 1:44am
+
+I'm now trying to decide if I want to use ANTLR 2 or ANTLR 3. On one
+hand, there is oodles of documentation for ANTLR 2, and it is stable
+and will probably do what I need it to. On the other hand ANTLR 3 has
+a much cleaner syntax for defining grammars and has some neat support
+tools for it. But there is not much documentation at the moment. A
+Pragmatic Programmer's book is forthcoming, and may even be out in PDF
+format this month. And FlatLang really isn't so complicated that I
+can't figure things out. I'm pretty sure I will use version 3.
+
+1:56am
+
+ANTLRWorks gives the initial impression of being insanely awesome.
+
+
+2/4/2007 11:10am
+
+It is like 5 degrees Fahrenheit outside at the moment. I do not have
+much food here, and the coffee I have is over a year old. I like to
+get out of the house at least once a day and go do something in the
+world, so I will probably bundle up shortly and go to the 61C and
+work. If I freeze to death on the way, this will be my last entry.
+
+I was looking at Terence Parr's Java grammar as inspiration on how
+'real' grammars are made. There are a couple of insights that I have
+gained from that. First, what exactly is a statement and what is an
+expression? I read some PDF off the web that told me that good
+programmers have this concept woven into the very fabric of their
+being. I don't, so apparently I am not a good programmer. I have an
+intuitive understanding of what they are, but I can't make it
+explicit. Anyway, statements are hunks of code that do some action,
+whereas expressions are hunks of code that produce a value. Lurking in
+there is something of a paradox because their professions are
+essentially the same thing: expressions are just statements whose
+action is to produce a value; statements are just expressions whose
+return value is void.
+
+Here is what Terence has for statement (with some snipped out).
+
+statement
+    : block
+    | 'if' parExpression statement ('else' statement)?
+    | 'for' '(' forControl ')' statement
+    | 'while' parExpression statement
+    | 'do' statement 'while' parExpression ';'
+    | 'return' expression? ';'
+    | ';'
+    | statementExpression ';'
+    | Identifier ':' statement
+    ;
+
+So a statement is really just program control code. Interestingly, the
+second to last production there involves 'statementExpression', which
+is defined thusly:
+
+statementExpression
+    : expression
+    ;
+
+Ah ha. So expressions can be statements! It just seems that the value
+returned by these statementExpressions is not used. People use
+expressions as statements all the time. Say my 'move' function returns
+true or false indicating success. I may not be interested in looking
+at that and just have statements like "move 2; move 3; move 1;" -- and
+ignore the return value.
+
+I found the second interesting thing when I went up to the expression
+definition, where I saw in plain ANTLR code what all these books meant
+when they talked about binding rules and precidence. Expression is
+defined like this:
+
+expression
+     : conditionalExpression (assignmentOperator expression)?
+     ;
+
+Oh, ok, so what is conditionalExpression?
+
+conditionalExpression
+     : conditionalOrExpression ( '?' expression ':' expression )?
+     ;
+
+I am detecting a pattern here. Here's the next one in the chain.
+
+conditionalOrExpression
+    : conditionalAndExpression ( '||' conditionalAndExpression )*
+    ;
+
+... basically, an expression can be one of lots of things that are
+chained together. The version of this from middle school math involves
+the basic arithmetic operations. 3+4*6+2 is 29, not 56. 'My Dear Aunt
+Sally' is the mnenonic for remembering the precidence of
+operators. The things with higher precidence actually appear lower in
+the chain, because everything above them defers downward. At the very
+bottom of this list is 'primary' (among other things), which is
+essentially something whose value can be found directly without
+looking at anything else. The pattern again is:
+
+thing1: thing2 (other things to indicate it could be a thing1)? ;
+
+thing2: thing3 (same for thing2)* ;
+
+..
+
+thingM: thingN (same for thingN)? ;
+
+thingN: primary | literal ;
+
+Notice that the parenthetical statement on the right of those
+productions has either a zero-or-one suffix (the question mark) or
+zero-or-many suffix (the asterisk). This is what lets us have a
+literal that parses correctly as the thing at the top.
+
+Anyway, time to go outside and try to not freeze to death.
+
+
+2/5/07 11:39am
+
+I did not freeze to death yesterday. I may today yet. It is 1 degree
+Fahrenheit, all bright and sunny.
+
+So, the lack of documentation is simultaneously frustrating but it
+also forces me to do some info-spelunking in which I am discovering
+things that have never been discovered before by me.
+
+I have configured my FlatLang.g file so that it tells ANTLR to output
+AST Trees. I am using this funny notation for rewriting matched
+productions that looks something like this:
+
+assignExpr:  varName '=' expr   -> ^(ASSIGN_EXPR varname expr)
+
+As long as I have a section at the top of the .g file like this:
+
+tokens {
+ ...
+  ASSIGN_EXPR;
+ ...
+}
+
+... it will turn the tokens
+
+   varname '=' expr
+
+... into a tree node ASSIGN_EXPR, with child productions varname and
+expr. If either of those productions also have a rewriting rule that
+turns it into a tree node, that tree node will replace the
+sub-productions. It's not really as confusing as I am mis-explaining
+it.
+
+Here is my test program followed by the output of a little tree walker
+(pre-order traversal). The 'type' field in the output indicates one of
+the token constants. For example, 13 is an ID, 14 is a literal number.
+
+------------------------ BEGIN test_prog_03.fl
+x = 5
+
+define triangle (:w, :dir)
+	f (:w)
+	turn (:dir)
+done
+
+define square
+       f (1)
+       turn (90)
+done
+-------------------------- END test_prog_03.fl
+
+--------------------- BEGIN tree walker output
+  PROG line: 1, col: 0 children: 3 type: 4
+    STATEMENT line: 1, col: 0 children: 1 type: 7
+      EXPR line: 1, col: 0 children: 1 type: 11
+        ASSIGNMENT line: 1, col: 0 children: 2 type: 8
+          x line: 1, col: 0 children: 0 type: 13
+          EXPR line: 1, col: 4 children: 1 type: 11
+            5 line: 1, col: 4 children: 0 type: 14
+    FUNCTION_DEF_SIGNATURE line: 3, col: 7 children: 3 type: 5
+      triangle line: 3, col: 7 children: 0 type: 13
+      PARAM_LIST line: 3, col: 18 children: 2 type: 9
+        PARAM line: 3, col: 18 children: 1 type: 10
+          w line: 3, col: 18 children: 0 type: 13
+        PARAM line: 3, col: 22 children: 1 type: 10
+          dir line: 3, col: 22 children: 0 type: 13
+      BLOCK line: 4, col: 1 children: 2 type: 12
+        STATEMENT line: 4, col: 1 children: 1 type: 7
+          EXPR line: 4, col: 1 children: 1 type: 11
+            FUNCTION_CALL line: 4, col: 1 children: 2 type: 6
+              f line: 4, col: 1 children: 0 type: 13
+              EXPR line: 4, col: 5 children: 1 type: 11
+                PARAM line: 4, col: 5 children: 1 type: 10
+                  w line: 4, col: 5 children: 0 type: 13
+        STATEMENT line: 5, col: 1 children: 1 type: 7
+          EXPR line: 5, col: 1 children: 1 type: 11
+            FUNCTION_CALL line: 5, col: 1 children: 2 type: 6
+              turn line: 5, col: 1 children: 0 type: 13
+              EXPR line: 5, col: 8 children: 1 type: 11
+                PARAM line: 5, col: 8 children: 1 type: 10
+                  dir line: 5, col: 8 children: 0 type: 13
+    FUNCTION_DEF_SIGNATURE line: 8, col: 7 children: 2 type: 5
+      square line: 8, col: 7 children: 0 type: 13
+      BLOCK line: 9, col: 7 children: 2 type: 12
+        STATEMENT line: 9, col: 7 children: 1 type: 7
+          EXPR line: 9, col: 7 children: 1 type: 11
+            FUNCTION_CALL line: 9, col: 7 children: 2 type: 6
+              f line: 9, col: 7 children: 0 type: 13
+              EXPR line: 9, col: 10 children: 1 type: 11
+                1 line: 9, col: 10 children: 0 type: 14
+        STATEMENT line: 10, col: 7 children: 1 type: 7
+          EXPR line: 10, col: 7 children: 1 type: 11
+            FUNCTION_CALL line: 10, col: 7 children: 2 type: 6
+              turn line: 10, col: 7 children: 0 type: 13
+              EXPR line: 10, col: 13 children: 1 type: 11
+                90 line: 10, col: 13 children: 0 type: 14
+----------------------- END tree walker output
+
+So here is the contents of my stack at the moment, as far as FlatLang
+is concerned:
+
+- Integrate w/ FlatCAD:
+
+    Integrate the ANTLR-generated source files into FlatCAD. I want to
+    be able to type things in to the text box in FlatCAD and have it
+    interpret it as I do it. For now it doesn't need to take any
+    actions other than simply spit out text to the console so I know
+    it is working.
+
+- Interpret:
+
+    Write code that turns portions of trees into code that runs inside
+    the FlatCAD world. For now this probably means extracting the
+    function definitions and putting them into a table, and then being
+    able to interpret function call statements that invokes those
+    functions using parameters.
+
+- FlatCAD microworld:
+
+    I have an intuitive awareness of what the microworld is, but I
+    haven't committed anything to code yet. This microworld involves
+    nouns like points, lines, polygons, shared edges, directions and
+    angles, and the ability to name all of these things. It also
+    involves verbs that let you move around, define and apply
+    replacement rules, and generate output for rapid prototyping.
+
+Here is my stack for FlatCAD, with immediate focus on BoxCAD:
+
+- Virtual assembly:
+
+    There are a whole lot of interesting features in parts such as the
+    notched triangles from my first construction kit. There are the
+    corners, the points the notches are abstractly positioned along
+    the outside, the points of the notches inside the part, and the
+    position/direction at the start and the end. If I were to write a
+    FlatLang program that let me virtually assemble triangle parts as
+    they would physically assembled, I need to be able to do three
+    things: (1) Put the turtle at the bottom of a notch, (2) rotate
+    the turtle so it is orthoganal to the plane of the first triangle,
+    (3) draw another triangle beginning with the bottom of one of its
+    notches. In order to do these things, I need to be able (1) to
+    name (and refer to the names of) points, (2) determine the surface
+    normals of polygons, (3) put the turtle at a named location and
+    direction, (4) draw established parts beginning with named
+    locations, even if those locations are themselves programmatically
+    defined, such as the bottom of a notch.
+
+- Unrolling 3D assemblies onto 2D plane:
+
+    Since the goal of all of this is to design things for manufacture,
+    I need to have support for intelligently producing schematics for
+    production. A 3D object such as a buckyball can be produced on a
+    2D plane if its constituent polygons can be unrolled onto a single
+    plane. This means that I need to be able to convert the 3D object
+    into one or more 2D objects that are cut from some material,
+    possibly involving fold lines (which may or may not have HPGL
+    meaning) and joints.
+
+- Shape replacement:
+
+    Given an edge (which may be shared between two polygons) or
+    sequence of edges, I need to be able to replace said edge(s) with
+    another sequence of one or more edges. This is required for BoxCAD
+    to work.
+
+BoxCAD is essentially making a 3D box that I can unroll onto 2D that
+involves shape replacements for all of the edges, giving them finger
+joints.
+
+
+2/12/07 12:30pm
+
+Lots more progress. Now I can make modular programs that are spread
+out over multiple files (essentially letting me define reusable
+libraries). Here's what I have done since my last update (which was on
+Feb 5, one week ago).
+
+- Integrated my ANTLR Lexer/Parser into FlatCAD
+
+- Wrote an interpreter that takes context-free AST information and
+  turns it into context-sensitive operations
+
+- FlatCAD microworld is evolving. More on that later.
+
+- Named points. I can say mark("a") to give the current point a
+  name. Note that this is not necessarily unique.
+
+- Virtual Assembly: I can now define a shape with named points and
+  draw copies of that shape starting from arbitrary named points
+
+- Shape replacement: Given a recently drawn shape fragment
+  (i.e. turtle operations that fall between two named points) I can
+  say "instead of doing that, do this..." and give it a block of code
+  that will be replace that section.
+
+
+Current stack of things to do:
+
+- Language support for 'unrolling' (or rather, supress moving out of
+  initial plane). This probably means that the 'roll' and 'pitch'
+  commands will be context sensitive, and I need to have a way to
+  decide which direction to draw.
+
+- Language support things that languages really need to have:
+  arithmetic, relational operators, and flow-control statements:
+
+  - Arithmetic: + - / *
+  - Relational: < <= > >= == !=
+  - Flow-control: if..else if..else, while, repeat
+
+
+2/16/07 12:49pm
+
+I took a few days off of FlatCAD so I could take care of other lame
+things, which were so lame that I can't really even remember what they
+were. I did do a bit of work on the sketching lit review, but only
+really enough to get that sub-processing in my brain. I will try to
+split my 'real work' time evenly between the lit review and FlatCAD.
+
+I didn't finish my list of things on my stack. So I will continue with
+that.
+
+- Make Polygons draw correctly (the concavity problem)
+
+- Redo the turtle list as a tree structure, so instead of adding
+  turtles to an external list, I add turtles to whatever is the
+  currently indexed turtle.
+
+- Figure out how to move to particular places (the 'goto' command)
+
+- Polygon-to-HPGL routine and Many-Polygons-to-HPGL that puts them in
+  a file that is ready to go--won't require tweaking in Corel.
+
+
+4/15/07 6:09pm
+
+It's interesting to read through my progress log and get an idea of
+the kinds of things that I was working on at some point. I haven't
+written in here for a long time.  Today Eric asked if I have been
+keeping a log, which reminded me of this thing. So here's another
+update.
+
+FlatCAD itself can now be used to make little construction kits
+involving rigid pieces that notch together at right angles. So far I
+have only made (1) the Jessica Kit and (2) BoxCAD. I was able to write
+about that work in a short paper for VL/HCC.
+
+My work nowadays is on creating a kind of API for indicating origami
+folds. This is of research interest because I am still using FlatLang
+as the 'assembly language' for generating the form. Never mind that
+below FlatLang there sits OpenGL, along with some geometry trickery in
+my GeometrySoup class, which does post-processing on turtle
+operations.
+
+Origami instructions involves a different approach than the
+construction kit work. With the rigid construction kits, the designer
+drives the turtle around manually, generating global state from a
+series of local operations. In contrast, origami structures begin with
+a global state, which is modified by a series of high-level goals,
+such as "fold this line to that line". The local geometry operations
+to implement that must be found based on the current global state with
+an awareness of the physical limitations of paper (e.g. not folding
+facets through other facets, which is not physically possible). 
+
+Our first attempt at folding was to simply use the existing sequence
+of turtle operations as the global high-level representation. A fold
+could be inserted by replacing opposing 'forward' statements with a
+slightly trickier sequence of turtle operations -- forward, turning,
+rolling, and so on. In doing so, I needed to modify FlatLang to
+support 'quote' and 'eval', allowing me to dynamically change the
+program itself.
+
+Unfortunately, this ended up being insufficient to do what we needed,
+at least in the way we were thinking about it. I worked out another
+way of solving the problem with the cunning use of graphs. So, for the
+past two days, I have been attacking FlatLang with a sledgehammer
+trying to hammer out some of the language things I need to make that
+work. For the most part, this just involved having dynamic structures
+work. There was a huge amount of debugging along with this, and for
+that reason I'm not as far along as I would like. 
+
+But, now I can do things like this:
+
+define edge(start, end)
+  e = "edge"
+  e.start = start
+  e.end = end
+  e
+done
+
+e1 = edge(a,b)
+e2 = edge(b,c)
+e3 = edge(c,a)
+print("e1 is " + e1.start + " to " + e1.end)
+
+... and so on.
+
+I noticed that the Wikipedia code for the Djikstra algorithm looks
+almost like FlatLang code. I've been spending time trying to do what
+is necessary for me to translate the psuedocode to FlatLang without
+too much mental gymnastics.
+
+Maybe I will start writing in here more often...
+
+
+4/23/07
+
+The way I designed lists to operate fundamentally conflicts with the
+way that I designed objects to operate.
+
+Flatlang lists work just like Lisp lists: each element points to the
+next element in a list.
+
+Objects in flatlang are always pass-by-reference, including whenever I
+put them into a list. So I can make a list with capital-O Objects:
+
+myList = [A, B, C]
+
+So now A points to B, and B points to C, and C points to nil. But if I
+make a second list:
+
+myOtherList = [B, C, A]
+
+Now B --> C, C --> A, and A --> nil. If I examine 'myList' at this
+point, it will only contain 'A', since A now points to nil.
+
+Anyway, this basically means I have to redo how lists work (or redo
+how objects work). This is the bug that I noticed last week but
+couldn't recreate earlier today when you were in the lab. On one hand,
+this is bad because I will need to spend time fixing this problem
+rather than the elusive "Folding". On the other hand, this is OK by me
+because now that I see what the bug is it seems that the Lisp way of
+doing things is going to get me into trouble because I'm mixing the
+Lisp-y lambda-calculus way of doing things with the OO reference way
+of doing things that all the modern languages I know of do it. This
+isn't to say that Lisp's way of doing it is bad -- actually I now
+understand why people cling to it so much because of it's elegance.
+
+
+4/27/07 2:19pm 30,000 feet above Texas
+
+I originally intended to redo lists, but I was struck with inspiration
+yesterday morning about how I could go about reworking objects. I
+added yet another register type, ObjRef, which defers to an Obj member
+in all cases except for copying, in which case it makes a new ObjRef
+that points to the same member Obj. It took only about fifteen minutes
+of coding, and maybe another fifteen minutes of messing around with
+the flatlang code to confirm that it works.
+
+Now maybe I have all I need in order to implement the graph algorithms
+necessary for my approach to folding.

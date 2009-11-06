@@ -1,0 +1,14 @@
+mat 0.0675
+
+begin hex
+  begin repeat 6
+    f 0.5
+    notch left 0.135
+    f 0.5
+    l 60
+  end
+end
+
+hex
+
+

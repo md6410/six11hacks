@@ -1,0 +1,57 @@
+FlatCAD meeting notes 9/18/06
+
+Goal: explore the great unknowns, or at least some of them...
+
+Misc Stuff:
+
+	Constraints
+		- Model with data structs - gabe's constraint based layout used graph struct
+		- visualize
+		- interact with/specify
+	Physical Modeling
+		- Collision detection
+		- Working with assemblies, forms, parts
+			* visualize/interact
+			* print out
+	Design Environment. How can it support exploration?
+		- see transformation tree
+		- named spots on tree to support exploration
+		- See "Form Writer" by Mark
+
+We discussed some of the many problems facing us. We spent a
+long time talking about how we can model something as simple
+as folding. What actually happens to the material when it is
+folded? The inside sort of squishes in, and the outside of the
+fold retains its original length. We decided this was probably
+a hard thing to do, and it isn't central to the momentum of
+the project. So, we'll do something else.
+
+Our first throwaway prototype will let us work with completely
+2D material -- paper with no thickness. We will have a UI that
+shows a graphical representation of the current form. The user
+types in commands in a text box at the bottom of the screen.
+These commands specify the operation (e.g. "fold") as well as
+some parameters (e.g. "points 10,5 to 4,0"). The user input is
+the basis for a program the user creates interactively. At
+every step, the model is updated to reflect the user's
+commands. We will model the following operations for the
+throwaway: Fold, Cut, Remove.
+
+Constraints for various operations:
+	Fold:
+		- a line segment indicated by two points
+		- direction (up or down)
+		- angle (e.g. 45 degrees)
+		- which side of the line should move
+			* could be indicated based on the line segment. e.g. the 
+			  left side moves as you walk from start to end points.
+	Cut:
+		- a line segment indicated by two points
+	Remove:
+		- which section to remove
+
+The user's command history forms a linear sequence of
+transformations. Eventually, FlatCAD should support the user
+in going back to previous state (optionally naming it) and
+exploring different possibilities from there. For the
+throwaway we won't do this, though.

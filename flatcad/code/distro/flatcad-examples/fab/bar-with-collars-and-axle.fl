@@ -1,0 +1,28 @@
+; bar-with-collars-and-axle.fl
+;
+; Tests making a collar with multiple collars
+; and axles.
+
+load("fl/fab/bar.fl")
+load("fl/fab/axle_bearing.fl")
+load("fl/fab/collar.fl")
+
+showPolygons(false)
+
+safe define special_bar()
+  axle = axle_bearing()
+  c = collar()
+  b = bar(3.6, 0.8, 2, axle, c)
+  b.n_axles = 1
+  b.n_collars = 1
+  b
+done
+
+special_bar().draw()
+left(145)
+special_bar().draw()
+; left(70)
+; special_bar().draw()
+
+
+laser("d")

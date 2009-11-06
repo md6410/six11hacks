@@ -1,0 +1,139 @@
+
+-------------------- review 1 --------------------
+
+PAPER: 87
+TITLE: FlatLang and FlatCAD: Construction Kits by Code
+
+OVERALL RATING: 0 (borderline paper)
+REVIEWER'S CONFIDENCE: 3 (high)
+----------------------- REVIEW --------------------
+
+This paper gives an overview of FlatCAD and the associated FlatLang Logo-inspired language for creating shapes that
+can be physically instantiated using a device such as a laser cutter. After a brief introduction and introductory
+example, the author reviews related work and gives a fairly detailed description of the FlatLang language, ending the
+paper with some ideas for future work.
+
+The first two sections give a clear introduction to, and rationale for, FlatCAD and FlatLang. However, I have an issue
+with the examples in section 2. What is the point that the author wants to make with figures 3 and 4? Is it that the
+language is concise and easy-to-use? This would imply that functions such as piston_wheel() are built-in. But these
+seem too specific to be built-ins. While it would indeed make programming this example simple, what does it say
+about the language itself? If this is not the point that the author wants to illustrate, what is it then? This is not clear to
+me.
+
+Section 3 tries to position FlatCAD with respect to Adobe Illustrator and similar direct manipulation vector graphics
+design environments with scripting capabilities. While this is very relevant, and even though I do agree with the
+author that programming capabilities do add significant expressive power and sometimes make the design of shapes
+easier, I am not convinced by the author's arguments for having programming as a primary mode of interaction (as
+opposed to a graphical mode).
+
+Related work would benefit from a few words positioning FlatCAD and FlatLang with respect to tangible programming
+and physical interfaces (see, e.g., [1,2] below). I understand that these are not directly addressing the same problems,
+but there is clearly a connection.
+
+[1] Raffle, H. S., Parkes, A. J., and Ishii, H. 2004. Topobo: a constructive assembly
+system with kinetic memory. In Proceedings of the SIGCHI Conference on Human
+Factors in Computing Systems (Vienna, Austria, April 24 - 29, 2004). CHI '04. ACM
+Press, New York, NY, 647-654.
+
+[2] McNerney, T. S. From turtles to Tangible Programming Bricks: explorations in
+physical language design. Personal Ubiquitous Comput. 8, 5 (Sep. 2004), 326-337.
+2004.
+
+My main problem is with the description of FlatLang. While the description of the language is fairly detailed, I miss a
+description of why some choices were made, what is the intended audience for the language (seems to be children
+though this is not stated clearly), how the language is adapted to this audience (human-centric computing
+perspective). There was clearly enough room in the paper to discuss these matters (only using 6+ pages). For
+instance, the language seems to have a relatively high expressive power. But it is not clear from the examples given
+that the language is well-suited to children. At the very least, the examples ought to be illustrating the ease-of-use
+of the language, and I do not believe it is currently the case. Some examples are also far-fetched in nature (Figs. 6 &
+7).
+
+Section 6 should be renamed "Future Work" only, as it does not provide any discussion of the advantages/limitations
+of the language but only gives a list of possible features that would improve the FlatCAD environment.
+
+Minor comments:
+- A few spelling and grammatical errors that should be easy to fix.
+
+
+-------------------- review 2 --------------------
+
+PAPER: 87
+TITLE: FlatLang and FlatCAD: Construction Kits by Code
+
+OVERALL RATING: 0 (borderline paper)
+REVIEWER'S CONFIDENCE: 3 (high)
+----------------------- REVIEW --------------------
+
+This paper describes a language, FlatLang, to create 3D graphics
+that can be also used as input for 3D printers or laser cutters
+to produce physical objects of construction kits, which is
+achieved by a system, called FlatCAD. The paper argues that with
+the proposed language and system users can uild their own
+construction kits.
+
+The presented idea is certainly interesting, but the
+contributions of the paper are not clear. In particular, I see
+three major problems with this paper.
+
+First, the connection of the proposed language to the
+developments of construction kit is only mentioned briefly.
+However, the author should explain how the design of FlatLang
+supports the production of construction kits and how FlatLang
+differs in this respect from other languages. In its present
+form, the paper does little to explain why FlatLang is needed and
+why we couldn't just use an interface for, say Logo. It would be
+very interesting to see, e.g., a static analysis technique that
+could flag programs that produce inconstructible designs.
+
+Second, the comparison with related work is insufficient. It is
+not clear, which of the presented language concepts are original
+and how the language differs from Logo (apart from its syntax).
+Again, such a discussion is needed to motivate the design of a
+new language. Why is FlatLang better than Logo? Maybe it isn't,
+and Logo would work just as well. It is not clear what the
+contribution of this paper is. Is it the language design? Or the
+FlatCAD system?
+
+Finally, the paper lacks some form of evaluation. It is not
+discussed why FlatLang is suited for the intended user group.
+(The paper mentions that FlatLang offers the possibility of using
+relative geometric addressing, but this is also available in
+Logo.)
+
+
+
+Minor remarks
+
+p2: because uses default values -> because it uses default values
+
+p5: What is the meaning of 'from' and its arguments?
+
+p5: The object concept is not well motivated and explained.
+
+
+-------------------- review 3 --------------------
+
+PAPER: 87
+TITLE: FlatLang and FlatCAD: Construction Kits by Code
+
+OVERALL RATING: -1 (weak reject)
+REVIEWER'S CONFIDENCE: 2 (medium)
+----------------------- REVIEW --------------------
+
+The paper describes a LOGO-like  programming language for specifying objects in a  physical construction set. The
+application domain is interesting and highly relevant to VL/HCC.
+
+The approach of using a programming language rather than a visual editor or declarative specification of the desired
+behavior is a little unusual and potentially has some benefits but also may have disadvantages. These advantages and
+disadvantages are not discussed in detail, I think this is a pity.
+
+My main criticism of the paper is the lack of evaluation of the language and associated system. It seems that it has been
+used by other people. What did they like about it? Did they prefer a programming language approach to directly
+sketching the components as in most CAD systems?
+
+The paper is mostly well-written and easy to follow. However, by the end of it I still did not feel like I really understood
+FlatLang and the rationale for all of its design features and the design trade-offs. It just felt like a series of ad-hoc
+extensions to Logo. I found the examples of FlatLang in Figure 4 and Figure 10 difficult to understand. Other minor
+comments:
+* On page 4 you mention that FlatLang provides one-way constraints--can you expand
+* On page 4 you state "The TurtleTree ... than would be necessary"--is there a missing ``otherwise''

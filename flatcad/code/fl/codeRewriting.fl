@@ -1,0 +1,28 @@
+; A silly function to do surgury on
+define foo(a,b)
+  a+b
+done
+
+; This prints out 8.0
+print("foo(6,2) -->", foo(6,2))
+
+; Get the source code in one flat list of tokens
+fooSrc = flatten(source(foo))
+
+; Split the source code into two lists, throwing away
+; the first reference to 'a' since that is just the
+; parameter. This gives halves[0] and halves[1]
+halves = split (quote(a), fooSrc, 1)
+
+; Substitute the variable 'a' with 'a/2' in the second
+; half of the code. This modifies halves[1] in place.
+sub(quote(a), quote(a/2), halves[1])
+
+; Join the code back together into a flat list.
+fooSrc = join(halves[0], halves[1])
+
+; Convert the flat list into a string and evaluate.
+eval(source(fooSrc))
+
+; This prints out 5.0, which is what we want.
+print("foo(6,2) -->", foo(6,2))

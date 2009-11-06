@@ -1,0 +1,93 @@
+; bounding-box.fl - tests using position x,y vals
+
+positions = []
+
+define min(a, b)
+  if (a < b)
+    a
+  else
+    b
+  done
+done
+
+define max(a, b)
+  if (a > b)
+    a
+  else
+    b
+  done
+done
+
+define bug_list()
+
+    minx = 100
+    maxx = -100
+    miny = 100
+    maxy = -100
+
+    remaining = positions
+    repeat(positions.n)
+      minx = min(first(remaining).x, minx)
+      maxx = max(first(remaining).x, maxx)
+      miny = min(first(remaining).y, miny)
+      maxy = max(first(remaining).y, maxy)
+      remaining = rest(remaining)
+    done
+
+    range = object("bounding box")
+    range.max_x = maxx
+    range.max_y = maxy
+    range.min_x = minx
+    range.min_y = miny
+    range
+done
+
+define store()
+  positions = cons(pos(), positions)
+done
+
+define move(amt)
+  forward(amt)
+  store()
+done
+
+define draw_bb(range)
+  up()
+  forward(range.max_y)
+  down()
+  left(90)
+  forward(-1 * range.min_x)
+  left(90)
+  forward(range.max_y - range.min_y)
+  left(90)
+  forward(range.max_x - range.min_x)
+  left(90)
+  forward(range.max_y - range.min_y)
+  left(90)
+  forward(range.max_x)
+done
+
+mark("origin")
+
+move(0.1)
+left(45)
+move(1)
+left(90)
+move(1.4)
+left(100)
+move(3)
+left(45)
+move(0.9)
+left(45)
+move(1)
+right(50)
+move(0.5)
+left(70)
+move(2)
+
+bb = bug_list()
+backto("origin")
+
+draw_bb(bb)
+
+; turtle(0.4)

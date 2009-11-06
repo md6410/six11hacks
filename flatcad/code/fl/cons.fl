@@ -1,0 +1,7 @@
+a = ["hi", "ho"]
+b = cons("moo", a)
+print ("b is now:", b)
+c = rest(b)
+f = first(b)
+print ("The first of b is", f)
+print ("The rest of b is", c)

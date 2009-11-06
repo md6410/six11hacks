@@ -1,0 +1,37 @@
+; polygon_detect_2.fl  - 3/1/07
+
+; This demonstrate's FlatCAD's ability to
+; distinguish polygons. A polygon may be
+; formed explicitly like the triangular faces are
+; or they may be formed implicitly like the
+; square base of the pyramid.
+
+load ("fl/triangle-plain.fl")
+
+define pyramid(s, angle)
+  repeat(4)
+    roll(angle)
+    triangle(s)
+    forward(s)
+    roll(-angle)
+    right(90)
+  done
+done
+
+pyramid(1, 0)          ; make an unrolled pyramid
+
+up()                         ; FlatCAD doesn't form
+forward(3)               ; polygons when the pen
+down()                     ; is up.
+
+pyramid(1.5,125)    ; make a sealed pyramid
+
+up()
+forward(4)
+down()
+pyramid(4, 60)        ; make a floppy pyramid
+
+showPolygons(true)
+hpgl("pyramids.hpgl")
+
+jitter(0,0)

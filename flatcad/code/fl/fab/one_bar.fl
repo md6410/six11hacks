@@ -1,0 +1,8 @@
+; one_bar.fl
+;
+; draws a single bar with axle and collars
+
+load("fl/fab/bar.fl")
+load("fl/fab/axle_bearing.fl")
+
+bar_full(4, 1, 2, 1, axle_bearing(), 1, collar()).draw()

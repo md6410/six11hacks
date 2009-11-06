@@ -1,0 +1,6 @@
+mainList = [ [ "a", "b"], "c", [ ], [ "d", [ "e", "f" ], "g" ] ]
+
+l = flatten (mainList)
+
+print ("l is", l)
+print ("mainList is", mainList)

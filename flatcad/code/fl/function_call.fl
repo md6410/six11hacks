@@ -1,0 +1,21 @@
+define go(x)
+  print("I hear you,", x)
+done
+
+go(2)
+
+myFunc = go
+
+myFunc(3)
+
+define callSomethingWithParam(funName, paramValue)
+
+  ; The following will fail because of the faulty way that I am
+  ; scoping function variables.
+
+  funName(paramValue)
+
+done
+
+callSomethingWithParam(go, 4)
+

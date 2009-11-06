@@ -1,0 +1,30 @@
+define Thingy(xVal, yVal)
+  obj = "thingy"
+  obj.x = xVal
+  obj.y = yVal
+  obj.z = 2.3
+  obj
+done
+
+k = Thingy("a", ["b", 0, 2])
+m = Thingy("c", "d")
+
+print("Item k is", k)
+print("Item k.x is", k.x)
+print("Item k.y is", k.y)
+print("Item k.z is", k.z)
+
+print("Item m is", m)
+print("Item m.x is", m.x)
+print("Item m.y is", m.y)
+print("Item m.z is", m.z)
+
+print(" * Can I mutate things?")
+print("Old:", k.x)
+k.x = k.x + k.x
+print("New:", k.x)
+
+print("Did I screw up implicit values?")
+myList = ["a", "b", "c", "d"]
+print("myList.n should b 4. Is it?", myList.n)
+print("k.y.n should be 3. Is it?", k.y.n)

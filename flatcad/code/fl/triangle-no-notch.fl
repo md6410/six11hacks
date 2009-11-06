@@ -1,0 +1,11 @@
+mat 0.03
+
+begin triangle
+  begin repeat 3
+    f 1
+    r 120
+  end
+end
+
+triangle
+

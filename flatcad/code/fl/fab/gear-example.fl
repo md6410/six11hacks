@@ -1,0 +1,66 @@
+; gear-example.fl
+;
+; Gives an example of how to use the gear.fl file.
+
+
+load("fl/fab/gear.fl")
+load("fl/fab/functions.fl")
+
+mark("origin")
+
+up()
+pitch(90)
+forward(1)
+pitch(-90)
+down()
+
+positions = []
+
+toothLength = 0.5
+toothDepth = 0.2
+holeSize = 0.13
+
+positions = cons(gear(16, toothLength, 
+                                     toothDepth, 
+                              holeSize, 1, 2), positions)
+right(180)
+
+positions = cons(gear(12, toothLength, 
+                                       toothDepth, 
+                              holeSize, 2, 2), positions)
+right(180)
+
+positions = cons(gear(14, toothLength, 
+                                       toothDepth, 
+                              holeSize, 0, 2), positions)
+
+part("chassis")
+bb = bounds(positions)
+
+axle_radius = holeSize * 2.0
+
+amt = axle_radius + 0.4
+
+bb.min_x = bb.min_x - amt
+bb.max_x = bb.max_x + amt
+bb.min_y = bb.min_y - amt
+bb.max_y = bb.max_y + amt
+
+backto("origin")
+draw_bb(bb)
+
+spots = positions
+repeat(positions.n)
+  spot = first(spots)
+  spots = rest(spots)
+  up()
+  drawto(spot)
+  pitch(-90)
+  forward(1)
+  pitch(90)
+  down()
+  centered_polygon(16, axle_radius)
+done
+
+laser("foo")
+

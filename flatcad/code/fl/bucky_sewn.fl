@@ -1,0 +1,35 @@
+; This is a FlatLang file for Shaun Moon's 
+; 'sewometry' buckyball, written by Gabe
+
+load("fl/polygon.fl") ; gives 'polygon'
+
+circleSize = 1 / 60
+offset = 1 / 6
+
+define circles(num, dist)
+  repeat (num)
+    down()
+    polygon(circleSize, 16)
+    up()
+    forward(dist/num)
+    down()
+  done
+done
+
+define sewnPoly (len, sides)
+  repeat(sides)
+    mark("start")
+    up()
+    right(90)
+    forward(offset)
+    left(90)
+    forward(offset)
+    circles(5, len)
+    backto("start")
+    forward(len)
+    right(360/sides)
+  done
+done
+
+sewnPoly(2.2, 5) ; could make squares, tries, etc
+laser("sew-bucky.hpgl")

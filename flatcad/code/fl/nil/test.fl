@@ -1,0 +1,13 @@
+if (x)
+  print("wrong")
+else
+  print("right")
+done
+
+y = object("something")
+
+if (y)
+  print("right")
+else
+  print("wrong")
+done

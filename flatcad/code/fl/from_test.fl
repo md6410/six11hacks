@@ -1,0 +1,19 @@
+forward(0.6)
+mark("a")
+forward(0.4)
+mark("b")
+forward (0.5)
+mark("c")
+forward (0.3)
+mark("d")
+forward (0.4)
+
+from("a", "c")
+    left(45)
+    forward (0.4)
+done
+
+from("b", "d")
+    right(60)
+    forward (0.3)
+done

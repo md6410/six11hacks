@@ -1,0 +1,205 @@
+; gear-old.fl
+;
+; These are functions related to a gear.
+
+load("fl/fab/functions.fl")
+
+define edge(len, depth, angle, isHalf, cut)
+  wo = (2 * len) / 3
+  wi = len / 3
+  tooth(wo, wi, depth, isHalf, cut)
+  left(angle)
+done
+
+define tooth(wo, wi, depth, isHalf, cut)
+  if(isHalf)
+    halfTooth(wo, wi, depth, cut)
+  else
+    fullTooth(wo, wi, depth, cut)
+  done
+done
+
+define halfTooth(wo, wi, depth, cut)
+  wo2 = wo/2
+  wi2 = wi/2
+
+  ;; no drawing -- here I lay down ref points
+  up()
+
+  ;; do the 'inner' line & mark c and d
+  left(90)
+  forward(depth)
+  right(90)
+  forward(wo / 2)
+  forward(wi / 2)
+  if(cut)
+    down()
+  done
+done
+
+define fullTooth(wo, wi, depth, cut)
+  wo2 = wo/2
+  wi2 = wi/2
+  mark("start")
+
+ ;; no drawing -- here I lay down ref points
+  up()
+
+ ;; do the 'outer' line & mark b, e, and f
+  forward(wi2)
+  b = pos()
+  forward(wo)
+  e = pos()
+  forward(wi2)
+  f = pos()
+  backto("start")
+
+ ;; do the 'inner' line & mark c and d
+  left(90)
+  forward(depth)
+  right(90)
+  forward(wo / 2)
+  c = pos()
+  forward(wi)
+  d = pos()
+
+ ;; pen down and connect the dots.
+  backto("start")
+  if (cut)
+    down()
+  done
+  drawto(b)
+  drawto(c)
+  drawto(d)
+  drawto(e)
+  drawto(f)
+
+ ;; ensure we leave at the right pos/dir
+  up()
+  backto("start")
+  forward(wi + wo)
+  if (cut)
+    down()
+  done
+done
+
+define gear(nteeth, len, dep,
+                   holeSize, endTooth, ncollars)
+  part("gear")
+  mark("gear start")
+
+  angle = 360/nteeth
+  repeat(nteeth / 2)
+    edge(len, dep, angle, false, true)
+  done
+  opposite = pos()
+  repeat(nteeth / 2)
+    edge(len, dep, angle, false, true)
+  done
+  up()
+  drawto(opposite, 0.5)
+  down()
+  centered_polygon(4, holeSize)
+  center = pos()
+
+  part("axle bearing")
+  axle_radius = holeSize * 2.0
+  mark("bearing spot")
+  up()
+  pitch(-90)
+  forward(0.5)
+  pitch(90)
+  down()
+  centered_polygon(16, axle_radius)
+  up()
+  down()
+  centered_polygon(4, holeSize)
+  up()
+  backto("bearing spot")
+
+  repeat(ncollars)
+    part("gear collar")
+    up()
+    pitch(90)
+    forward(0.5)
+    pitch(-90)
+    down()
+    centered_polygon(16, holeSize * 3)
+    up()
+    down()
+    centered_polygon(4, holeSize)
+    up()
+  done
+
+  part("adjust")
+  up()
+  backto("gear start")
+  
+  ;; reposition for meshing
+  up()
+  repeat(endTooth)
+    edge(len, dep, angle, false, false)
+  done
+  edge(len, dep, angle, true, false)
+  down()
+  center
+done
+
+mark("origin")
+
+up()
+pitch(90)
+forward(1)
+pitch(-90)
+down()
+
+positions = []
+
+toothLength = 0.5
+toothDepth = 0.2
+holeSize = 0.13
+
+positions = cons(gear(16, toothLength, 
+                                     toothDepth, 
+                              holeSize, 1, 2), positions)
+right(180)
+
+positions = cons(gear(12, toothLength, 
+                                       toothDepth, 
+                              holeSize, 2, 2), positions)
+right(180)
+
+positions = cons(gear(14, toothLength, 
+                                       toothDepth, 
+                              holeSize, 0, 5), positions)
+
+part("chassis")
+bb = bounds(positions)
+
+axle_radius = holeSize * 2.0
+
+amt = axle_radius + 0.4
+
+bb.min_x = bb.min_x - amt
+bb.max_x = bb.max_x + amt
+bb.min_y = bb.min_y - amt
+bb.max_y = bb.max_y + amt
+
+backto("origin")
+draw_bb(bb)
+
+spots = positions
+repeat(positions.n)
+  spot = first(spots)
+  spots = rest(spots)
+  up()
+  drawto(spot)
+  pitch(-90)
+  forward(1)
+  pitch(90)
+  down()
+  centered_polygon(16, axle_radius)
+done
+
+laser("foo")
+

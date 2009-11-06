@@ -1,0 +1,22 @@
+define doThing()
+  forward(1)
+  roll(-45)
+  right(90)
+  forward(0.4)
+  left(90)
+  forward(0.4)
+  left(90)
+  forward(0.4)
+  right(90)
+  roll(45)
+  forward(1)
+done
+
+define weirdSquare()
+  repeat(4)
+    doThing()
+    left(90)
+  done
+done
+
+weirdSquare()

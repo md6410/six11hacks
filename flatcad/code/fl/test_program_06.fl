@@ -1,0 +1,9 @@
+a=4
+print("This just tests the builtin print function.")
+print(:a)
+b=:a
+print(:b)
+a=15
+print (:b)
+print (:a)
+
