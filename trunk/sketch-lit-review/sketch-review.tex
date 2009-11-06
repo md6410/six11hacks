@@ -1,0 +1,93 @@
+\documentclass[11pt]{now}
+\input{packages.tex}
+
+\begin{document}
+
+\isbn{xxxxxxxxxxxxxx}
+
+\DOI{xxxxxxx}
+
+\abstract{Computational support for sketching is an exciting research
+  area at the intersection of design research, human-computer
+  interaction, and artificial intelligence. Despite the prevalence of
+  software tools, most designers begin their work with physical
+  sketches. Modern computational tools largely treat design as a
+  linear process beginning with a specific problem and ending with a
+  specific solution. Sketch based design tools offer another approach
+  that may fit design practice better. This article surveys literature
+  related to such tools. First, we describe the practical basis of
+  sketching---why people sketch, what significance it has in design
+  and problem solving, and the cognitive activities it
+  supports. Second, we survey computational support for sketching,
+  including methods for performing sketch recognition and managing
+  ambiguity, techniques for modeling recognizable elements, and
+  human-computer interaction techniques for working with
+  sketches. Last we propose challenges and opportunities for future
+  advances in this field.}
+
+\articletitle{Computational Support for Sketching in Design: A Review}
+            
+
+\authorname1{Gabe Johnson}
+\affiliation1{Carnegie Mellon University}
+\author1address2ndline{Carnegie Mellon University, }
+\author1country{USA}
+\author1email{johnsogg@cmu.edu}
+
+\authorname2{Mark D. Gross}
+\affiliation2{Carnegie Mellon University}
+\author2address2ndline{Carnegie Mellon University, }
+\author2country{USA}
+\author2email{mdgross@cmu.edu}
+
+\authorname3{Jason Hong}
+\affiliation3{Carnegie Mellon University}
+\author3address2ndline{Carnegie Mellon University, }
+\author3country{USA}
+\author3email{jasonh@cs.cmu.edu}
+
+\authorname4{Ellen Yi-Luen Do}
+\affiliation4{Georgia Institute of Technology}
+\author4address2ndline{Georgia Institute of Technology, }
+\author4country{USA}
+\author4email{ellendo@gatech.edu}
+
+\journal{sample}
+\volume{xx}
+\issue{xx}
+\copyrightowner{xxxxxxxxx}
+\pubyear{2008}
+            
+\maketitle
+
+
+\cleardoublepage \pagenumbering{roman}
+
+\tableofcontents
+
+\clearpage
+
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+
+
+\input{review-1-introduction.tex}
+
+\input{review-2-traditional.tex}
+
+\input{review-3-hardware.tex}
+
+\input{review-4-recognition.tex}
+
+\input{review-5-interaction.tex}
+
+\input{review-6-future.tex}
+
+\newpage
+\bibliographystyle{nowsort}
+\bibliography{sketch-bibliography}
+
+\end{document}
