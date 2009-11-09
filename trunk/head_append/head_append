@@ -11,6 +11,7 @@ if [ $# -eq 2 ]; then
     file=`mktemp`
     cat $1 > $file
     cat $2 >> $file
+    echo $2
     mv $file $2
 else
     echo "head_append: writes one file to top of destination file."
