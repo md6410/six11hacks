@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# head_append: writes a string to the top of a file.
+#
+# Usage: head_append msgFile destFile
+#
+# Outcome: contents of 'msgFile' are copied to the top of destFile,
+# followed by a newline.
+
+if [ $# -eq 2 ]; then
+    file=`mktemp`
+    cat $1 > $file
+    cat $2 >> $file
+    mv $file $2
+else
+    echo "head_append: writes one file to top of destination file."
+    echo "Usage: head_append [msgFile] [destFile]"
+fi
+
+
+
