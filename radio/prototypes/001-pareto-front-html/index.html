@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <title>Software Radio Designer</title>
+    <link href="layout.css" rel="stylesheet" type="text/css"></link>
+    <script language="javascript" type="text/javascript" src="jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
+
+    <script>
+      function make_visible(what) {
+        document.getElementById(what).style.visibility="visible";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Software Radio Designer</h1>
+    <form action="software-radio.tar.gz" method="post">
+      
+      <table>
+	<tr><td>
+	    <b>Dimension 1:</b>
+	  </td>
+	  <td>
+	    <b>Dimension 2:</b>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    <table>
+	      <tr><td><input type="radio" name="dim_1" value="cost">Cost</input></td></tr>
+	      <tr><td><input type="radio" name="dim_1" value="battery" onchange="javascript:make_visible('battery')">Battery Life</input></td></tr>
+	      <tr><td><input type="radio" name="dim_1" value="fairness">Fairness</input></td></tr>
+	      <tr><td><input type="radio" name="dim_1" value="scan">Scan Frequency</input></td></tr>
+	      <tr><td><input type="radio" name="dim_1" value="nlp">Natural Language Processing</input></td></tr>
+	      <tr><td><input type="radio" name="dim_1" value="memory">Memory</input></td></tr>
+	    </table>
+	  </td><td>
+	    <div id="battery" style="visibility:hidden">
+	      <table>
+		<tr><td><input type="radio" name="dim_2" value="cost">Cost</input></td></tr>
+		<tr><td><input type="radio" name="dim_2" value="fairness" onchange="javascript:make_visible('pareto')">Fairness</input></td></tr>
+		<tr><td><input type="radio" name="dim_2" value="scan">Scan Frequency</input></td></tr>
+		<tr><td><input type="radio" name="dim_2" value="nlp">Natural Language Processing</input></td></tr>
+	      </table>
+	    </div>
+	</td></tr>
+      </table>
+      <div id="pareto" style="visibility:hidden">
+	<div id="placeholder" style="width:300px;height:200px"></div>
+      </div>
+      <input type="submit" value="Compile" />
+    </form>
+
+
+<script id="source" language="javascript" type="text/javascript">
+$(function () {
+    var graph = [];
+
+    graph.push([0.0, 12]);
+    graph.push([0.1, 9]);
+    graph.push([0.3, 5.5]);
+    graph.push([0.4, 4.0]);
+    graph.push([0.55, 3.3]);
+    graph.push([0.61, 3.2]);
+    graph.push([0.76, 2.4]);
+    graph.push([0.85, 2.0]);
+
+    var plot = $.plot($("#placeholder"),
+           [ { data: graph, label: "battery(fairness)"} ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: true }
+               },
+               grid: { hoverable: true, clickable: true },
+               yaxis: { min: -1.2, max: 13 },
+               xaxis: { min: -0.05, max: 1.0 }
+             });
+
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    }
+
+    var previousPoint = null;
+    $("#placeholder").bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+
+        if (true || $("#enableTooltip:checked").length > 0) {
+            if (item) {
+                if (previousPoint != item.datapoint) {
+                    previousPoint = item.datapoint;
+                    
+                    $("#tooltip").remove();
+                    var x = item.datapoint[0].toFixed(2),
+                        y = item.datapoint[1].toFixed(2);
+                    
+                    showTooltip(item.pageX, item.pageY,
+                                item.series.label + " of " + x + " = " + y);
+                }
+            }
+            else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
+        }
+    });
+
+    $("#placeholder").bind("plotclick", function (event, pos, item) {
+        if (item) {
+            $("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+            plot.highlight(item.series, item.datapoint);
+        }
+    });
+});
+</script>
+
+  </body>
+</html>
