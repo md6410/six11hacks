@@ -19,18 +19,9 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 
 /**
- * A Twitter scanner, configured by a properties file.
- * 
- * Example properties file:
- * 
- * <tt>
- * username=myCoolUserName 
- * password=ultraSecretPassword 
- * keywords=DARPA,redballoon,redballoons,10balloons,tenballoons
- * fields=text,user/screen_name,user/name,user/id
- * </tt>
+ * Twitter Utility functions container
  **/
-public class Main {
+public class TwitUtil {
   private static StringBuffer tweetVals = new StringBuffer(1024);
   private static int numTweetsProcessed = 0;
   private static long timerMark = 0;
@@ -38,31 +29,7 @@ public class Main {
   public final static String FOLLOW_URL = "http://stream.twitter.com/1/statuses/filter.json";
   private static int periodicUpdate = 50;
 
-  public static void main(String[] args) throws IOException, RecognitionException {
-    convertTime(873489534);
-    if (args.length != 1) {
-      System.err.println("Syntax: java -jar twitscan.jar [property-file]");
-      System.err.println("\nConsider piping standard output to a text file. Status information ");
-      System.err.println("is sent to standard error.");
-      System.err.println("\nExample:");
-      System.err.println("java -jar twitscan.jar jello.props 1>>jello.txt");
-      System.exit(-1);
-    }
-    while (true) {
-      Properties props = loadProperties(args[0]);
-      ArrayList<String> desiredFields = extractDesiredFields(props);
-      try {
-        HttpURLConnection ht = makeConnection(FOLLOW_URL, props.getProperty("username"), props
-            .getProperty("password"), props.getProperty("keywords"));
-        processConnection(ht, desiredFields);
-      } catch (Exception ex) {
-        System.err.println("Exception caught. Reconnecting in a few seconds...");
-        nap(5000);
-      }
-    }
-  }
-
-  private static ArrayList<String> extractDesiredFields(Properties props) {
+  public static ArrayList<String> extractDesiredFields(Properties props) {
     ArrayList<String> desiredFields = new ArrayList<String>();
     String fieldsList = props.getProperty("fields");
     StringTokenizer toks = new StringTokenizer(fieldsList, ",");
@@ -75,7 +42,7 @@ public class Main {
     return desiredFields;
   }
 
-  private static void nap(long sleepyTime) {
+  public static void nap(long sleepyTime) {
     try {
       Thread.sleep(sleepyTime);
     } catch (InterruptedException ex) {
@@ -83,7 +50,7 @@ public class Main {
     }
   }
 
-  private static Properties loadProperties(String fileName) throws FileNotFoundException,
+  public static Properties loadProperties(String fileName) throws FileNotFoundException,
       IOException {
     Properties props = new Properties();
     File propFile = new File(fileName);
@@ -112,7 +79,7 @@ public class Main {
     }
   }
 
-  private static HttpURLConnection makeConnection(String where, String username, String password,
+  public static HttpURLConnection makeConnection(String where, String username, String password,
       String keywords) throws IOException {
     URL url = new URL(where);
     System.err.println("Connecting...");
@@ -134,7 +101,7 @@ public class Main {
     return ht;
   }
 
-  private static void processConnection(HttpURLConnection ht, ArrayList<String> desiredFields)
+  public static void processConnection(HttpURLConnection ht, ArrayList<String> desiredFields)
       throws IOException {
     System.err.println("Connected. Processing tweets...");
     BufferedInputStream buf = new BufferedInputStream(ht.getInputStream());
@@ -154,7 +121,7 @@ public class Main {
     }
   }
 
-  private static void processTweet(String tweet, ArrayList<String> desiredFields) {
+  public static void processTweet(String tweet, ArrayList<String> desiredFields) {
     if (numTweetsProcessed == 0) {
       timerMark = System.currentTimeMillis();
     }
