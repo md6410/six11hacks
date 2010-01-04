@@ -1,0 +1,5 @@
+username=foobarf
+password=1secret1
+minthreshhold=5
+percentageincrease=100
+fields=text,user/screen_name,user/name,user/id
