@@ -11,9 +11,6 @@ package org.six11.twitscan;
 
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 public class JSONLexer extends Lexer {
     public static final int INTEGER=8;
