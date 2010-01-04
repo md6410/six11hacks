@@ -1,0 +1,5 @@
+#search for profanity on twitter. Does it exist?
+username=foobarf
+password=1secret1
+keywords=shit,fuck,cunt,pussy,asshole,dick,prick
+fields=text,user/screen_name,user/name,user/id
