@@ -24,6 +24,4 @@ addjars () {
 addjars lib
 cpmunge build/classes
 
-prog=org.six11.twitscan.Main
-
-java -classpath $CP $prog $@
+java -classpath $CP $@
