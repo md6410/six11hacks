@@ -62,7 +62,7 @@
       </tr>
       <tr>
 	<td>
-	  <div id="urgent"><a href="slippy/">New version of Olive
+	  <div class="urgent"><a href="slippy/">New version of Olive
 	  released (Jan 7 2010)</a></div> 
 	  <br /> <br />
 	  <div class="indented">
