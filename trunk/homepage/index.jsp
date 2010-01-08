@@ -62,8 +62,9 @@
       </tr>
       <tr>
 	<td>
-	  <br />
-	  <br />
+	  <div id="urgent"><a href="slippy/">New version of Olive
+	  released (Jan 7 2010)</a></div> 
+	  <br /> <br />
 	  <div class="indented">
 	    <a href="http://johnsogg.blogspot.com/">Blog</a> - 
 	    <a href="http://picasaweb.google.com/gabe.johnson">Photos</a> -
@@ -116,7 +117,7 @@
       called Slippy, which allows developers to quickly try out ideas
       and easily share code with others, or use code written by
       others. Olive is a work-in-progress, and will serve as the
-      platform for my thesis system. <a href="olive/">You may try out
+      platform for my thesis system. <a href="slippy/">You may try out
       Olive here</a> (but be aware there is no instruction manual
       yet).
     </p>
