@@ -1,0 +1,16 @@
+# COPY THIS FILE TO tomcat.properties AND EDIT IT TO SUIT YOUR DEEPEST DESIRES
+#
+#
+
+# The tomcat server, optionally including the ports if Tomcat doesn't listen on port 80
+#   Example: six11.org
+#   Example: localhost:8080
+tomcat.server=localhost:8080
+
+# URL for the Tomcat manager. This is used by the Tomcat Ant Tasks for deploying.
+tomcat.manager.url=http://${tomcat.server}/manager
+
+# Specify your username and password for the Tomcat Manager here. These should match the
+# values in your Tomcat conf/tomcat-users.xml file.
+tomcat.username=armando
+tomcat.password=whoknows
