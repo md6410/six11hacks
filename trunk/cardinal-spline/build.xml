@@ -1,155 +1,213 @@
 <!-- You may want to do search-replace on the apersand. -->
-<project name="playground" default="compile" basedir=".">
+<project name="cardinal" default="compile" basedir=".">
 
-  <property name="shortName" value="playground" />
-  <property name="prog" value="org.six11.playground.Main" />
-  <property name="build.dir" value="build" />
-  <property name="compile.output.dir" value="${build.dir}/classes" />
-  <property name="compile.src.dir" value="src" />
-  <property name="compile.debug" value="true" />
-  <property name="compile.deprecation" value="true" />
-  <property name="compile.optimize" value="false" />
-  <property name="javadoc.output.dir" value="${build.dir}/docs" />
-  <property name="jar.output" value="${build.dir}/${shortName}.jar" />
+	<property name="propertyFile" value="build.properties" />
 
-  <!-- ==================== Compilation Classpath =========================== -->
+	<!-- ==================== Compilation Classpath =========================== -->
 
-  <path id="compile.classpath">
-    <fileset dir="lib">
-      <include name="*.jar"/>
-    </fileset> 
-  </path>
+	<path id="compile.classpath">
+		<fileset dir="lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
 
-  <taskdef classpathref="compile.classpath" resource="genjar.properties" />
+	<taskdef classpathref="compile.classpath" resource="genjar.properties" />
 
-  <!-- ==================== All Target ====================================== -->
+	<!-- ==================== All Target ====================================== -->
 
-  <target name="all" depends="clean,compile"
-	  description="Clean build and dist directories, then compile"/>
+	<target name="all"
+	        depends="clean,compile"
+	        description="Clean build and dist directories, then compile" />
 
-  <!-- ==================== Prepare Target ================================== -->
+	<!-- ==================== Fail Target (for when no properties are found) == -->
 
-  <target name="prepare">
-    <mkdir dir="${build.dir}" />
-    <mkdir dir="${compile.output.dir}" />
-    <mkdir dir="${javadoc.output.dir}" />
-  </target>
+	<target name="testPropertyFail" unless="propertyFile">
+		<echo message="Could not find a property file. Did you set one?" />
+		<echo message="Here's an example command line:" />
+		<echo message="ant -DpropertyFile=webapp/config/build.properties" />
+		<fail message="Use -DpropertyFile=some_file. See earlier message. " />
+	</target>
 
-  <!-- ==================== Clean Target ==================================== -->
+	<target name="setProperties" depends="testPropertyFail">
+		<echo message="Loading properties from ${propertyFile}" />
+		<property file="${propertyFile}" />
+		<property file="${tomcat.props.file}" />
 
-  <target name="clean"
-	  description="Delete old class files and backup source files">
-    <delete failonerror="false" >
-      <fileset defaultexcludes="no" dir="${compile.output.dir}" includes="**/*.class"/>
-      <fileset defaultexcludes="no" dir="${compile.src.dir}" includes="**/*~"/>
-    </delete>
-    <delete dir="${build.dir}" failonerror="false" />
-  </target>
+		<path id="compile.classpath">
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
 
-  <!-- ==================== Jar Target ====================================== -->
-  
-  <target name="jar"
-	  depends="compile">
-    <echo message="Using directory: ${compile.output.dir}" />
-    <genjar jarfile="${jar.output}">
-      <class name="org.six11.playground.Main"/>
-      <classpath>
-	<fileset dir="lib">
-	  <include name="*.jar" />
-	</fileset>
-	<pathelement path="${compile.output.dir}" />
-      </classpath>
-      <manifest>
-	<attribute name="Main-Class" value="org/six11/playground/Main" />
-      </manifest>
-    </genjar>  
-  </target>
+		<taskdef classpathref="compile.classpath"
+		         resource="genjar.properties" />
+		<taskdef classpathref="compile.classpath"
+		         resource="org/apache/catalina/ant/catalina.tasks" />
+
+	</target>
+
+	<!-- ==================== Prepare Target ================================== -->
+
+	<target name="prepare" depends="setProperties">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${compile.output.dir}" />
+		<mkdir dir="${javadoc.output.dir}" />
+	</target>
+
+	<!-- ==================== Clean Target ==================================== -->
+
+	<target name="clean"
+	        description="Delete old class files and backup source files" depends="setProperties">
+		<delete failonerror="false">
+			<fileset defaultexcludes="no"
+			         dir="${compile.output.dir}"
+			         includes="**/*.class" />
+			<fileset defaultexcludes="no"
+			         dir="${compile.src.dir}"
+			         includes="**/*~" />
+		</delete>
+		<delete dir="${build.dir}" failonerror="false" />
+	</target>
+
+	<!-- ==================== Jar Target ====================================== -->
+
+	<target name="jar" depends="compile">
+		<echo message="Using directory: ${compile.output.dir}" />
+		<genjar jarfile="${jar.output}">
+			<class name="org.six11.cardinal.CardinalSpline" />
+			<classpath>
+				<fileset dir="lib">
+					<include name="*.jar" />
+				</fileset>
+				<pathelement path="${compile.output.dir}" />
+			</classpath>
+			<manifest>
+				<attribute name="Main-Class"
+				           value="org/six11/cardinal/CardinalSpline" />
+			</manifest>
+		</genjar>
+		<copy file="${jar.output}" todir="${webapp.dir}/content" />
+	</target>
 
 
-  <!-- ==================== Compile Target ================================== -->
+	<!-- ==================== Compile Target ================================== -->
 
-  <target name="compile"
-	  depends="prepare"
-	  description="Compile Java sources">
+	<target name="compile" depends="prepare" description="Compile Java sources">
 
-    <!-- Compile Java classes as necessary -->
-    <mkdir    dir="${compile.output.dir}" />
-    <javac srcdir="${compile.src.dir}"
-           destdir="${compile.output.dir}"
-           debug="${compile.debug}"
-	   deprecation="${compile.deprecation}"
-           optimize="${compile.optimize}"
-           source="1.5">
-      <classpath refid="compile.classpath" />
-      <include name="**/*.java" />
-    </javac>
+		<!-- Compile Java classes as necessary -->
+		<mkdir dir="${compile.output.dir}" />
+		<javac srcdir="${compile.src.dir}"
+		       destdir="${compile.output.dir}"
+		       debug="${compile.debug}"
+		       deprecation="${compile.deprecation}"
+		       optimize="${compile.optimize}"
+		       source="1.5">
+			<classpath refid="compile.classpath" />
+			<include name="**/*.java" />
+		</javac>
 
-  </target>
+	</target>
 
 
-  <!-- ==================== Run Target ===================================== -->
+	<!-- ==================== Run Target ===================================== -->
 
-  <target name="run"
-	  description="Runs arbitrary code using this project's classpath"
-	  depends="compile">
-    <java fork="yes" classname="${prog}">
-      <arg value="${args}" />
-      <classpath refid="compile.classpath" />
-      <classpath path="${compile.output.dir}" />
-    </java>
-  </target>
+	<target name="run"
+	        description="Runs arbitrary code using this project's classpath"
+	        depends="compile">
+		<java fork="yes" classname="${prog}">
+			<arg value="${args}" />
+			<classpath refid="compile.classpath" />
+			<classpath path="${compile.output.dir}" />
+		</java>
+	</target>
 
-  <!-- Use Target: will run org.six11.playground.${prog} -->
-  <target name="use"
-	  description="Runs an executable in the org.six11.playground package"
-	  depends="compile">
-    <java fork="yes" classname="org.six11.playground.Main">
-      <arg value="${args}" />
-      <classpath refid="compile.classpath" />
-      <classpath path="${compile.output.dir}" />
-    </java>
-  </target>
+	<!-- Use Target: will run org.six11.cardinal.${prog} -->
+	<target name="use"
+	        description="Runs an executable in the org.six11.cardinal package"
+	        depends="compile">
+		<java fork="yes" classname="org.six11.cardinal.CardinalSpline">
+			<arg value="${args}" />
+			<classpath refid="compile.classpath" />
+			<classpath path="${compile.output.dir}" />
+		</java>
+	</target>
 
-  
+	<!-- ==================== War Target ====================================== -->
 
-  <!-- ==================== Javadoc Target ================================== -->
+	<target name="war"
+	        depends="compile"
+	        description="Make Tomcat deployable WAR file">
+		<war destfile="${build.dir}/${shortName}.war"
+		     webxml="${webapp.dir}/config/web.xml">
+			<fileset dir="${webapp.dir}/content" />
+		</war>
+	</target>
 
-  <target name="javadoc" depends="compile, javadoc.checkProperties"
-	  description="Create Javadoc API documentation">
+	<!-- ==================== War Install Targets ============================= -->
 
-    <mkdir dir="${javadoc.output.dir}"/>
-    <javadoc sourcepath="${compile.src.dir}"
-             destdir="${javadoc.output.dir}"
-	     additionalparam="${breakIterIf14}"
-             packagenames="*"
-             source="1.5">
-      <classpath refid="compile.classpath"/>
-    </javadoc>
-  </target>
+	<target name="war-install"
+	        depends="war"
+	        description="Installs WAR file on Tomcat server.">
+		<echo message="Deploying to manager: ${tomcat.manager.url}..." />
+		<deploy url="${tomcat.manager.url}"
+		        username="${tomcat.username}"
+		        password="${tomcat.password}"
+		        path="/${shortName}"
+		        war="file:${build.dir}/${shortName}.war" />
+	</target>
+	<target name="war-uninstall"
+	        description="Uninstalls the WAR file on Tomcat.">
+		<undeploy url="${tomcat.manager.url}"
+		          username="${tomcat.username}"
+		          password="${tomcat.password}"
+		          path="/${shortName}" />
+	</target>
 
-  <target name="javadoc.private" depends="compile, javadoc.checkProperties"
-	  description="Create Javadoc for internal use (includes private items)">
+	<target name="war-reinstall"
+	        description="Uninstall and existing WAR and redeploy it."
+	        depends="prepare, war-uninstall,war-install" />
 
-    <mkdir dir="${javadoc.output.dir}"/>
-    <javadoc sourcepath="${compile.src.dir}"
-             destdir="${javadoc.output.dir}"
-	     additionalparam="${breakIterIf14}"
-             packagenames="*"
-	     access="private">
-      <classpath refid="compile.classpath"/>
-    </javadoc>
-  </target>
-  
-  <target name="javadoc.checkProperties"
-     description="Sees if we need to use -breakiterator when generating javadoc">
-    <condition property="breakIterIf14" value="-breakiterator">
-      <equals arg1="1.4" arg2="${ant.java.version}"/>
-    </condition>
-    <condition property="breakIterIf14" value="">
-      <not>
-        <equals arg1="1.4" arg2="${ant.java.version}"/>
-      </not>
-    </condition>
-  </target>
+
+	<!-- ==================== Javadoc Target ================================== -->
+
+	<target name="javadoc"
+	        depends="compile, javadoc.checkProperties"
+	        description="Create Javadoc API documentation">
+
+		<mkdir dir="${javadoc.output.dir}" />
+		<javadoc sourcepath="${compile.src.dir}"
+		         destdir="${javadoc.output.dir}"
+		         additionalparam="${breakIterIf14}"
+		         packagenames="*"
+		         source="1.5">
+			<classpath refid="compile.classpath" />
+		</javadoc>
+	</target>
+
+	<target name="javadoc.private"
+	        depends="compile, javadoc.checkProperties"
+	        description="Create Javadoc for internal use (includes private items)">
+
+		<mkdir dir="${javadoc.output.dir}" />
+		<javadoc sourcepath="${compile.src.dir}"
+		         destdir="${javadoc.output.dir}"
+		         additionalparam="${breakIterIf14}"
+		         packagenames="*"
+		         access="private">
+			<classpath refid="compile.classpath" />
+		</javadoc>
+	</target>
+
+	<target name="javadoc.checkProperties"
+	        description="Sees if we need to use -breakiterator when generating javadoc">
+		<condition property="breakIterIf14" value="-breakiterator">
+			<equals arg1="1.4" arg2="${ant.java.version}" />
+		</condition>
+		<condition property="breakIterIf14" value="">
+			<not>
+				<equals arg1="1.4" arg2="${ant.java.version}" />
+			</not>
+		</condition>
+	</target>
 
 </project>

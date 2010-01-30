@@ -1,4 +1,4 @@
-package org.six11.playground;
+package org.six11.cardinal;
 
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
