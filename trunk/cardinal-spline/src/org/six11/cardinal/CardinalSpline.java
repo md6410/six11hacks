@@ -1,3 +1,8 @@
+//
+//  N O T E
+//
+//    The code here is probably flawed. Use at your own risk.
+//
 package org.six11.cardinal;
 
 import java.awt.BorderLayout;
@@ -111,8 +116,10 @@ public class CardinalSpline extends JApplet {
     if (points.size() > 2) {
       Pt first = points.get(0);
       Pt last = points.get(points.size() - 1);
-      first.setVec("slope", new Vec(first, points.get(1)).getUnitVector());
-      last.setVec("slope", new Vec(points.get(points.size() - 2), last).getUnitVector());
+      Vec d = new Vec(first, points.get(1));
+      first.setVec("slope", d.getVectorOfMagnitude(tightness * (d.mag() / 2)));
+      d = new Vec(points.get(points.size() - 2), last);
+      last.setVec("slope", d.getVectorOfMagnitude(tightness * (d.mag() / 2)));
     }
   }
 
