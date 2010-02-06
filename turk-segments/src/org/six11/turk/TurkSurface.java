@@ -17,6 +17,7 @@ import java.util.TreeSet;
 import javax.swing.JPanel;
 
 import org.six11.turk.TurkStudy.Type;
+import org.six11.util.Debug;
 import org.six11.util.gui.Components;
 import org.six11.util.gui.shape.Circle;
 import org.six11.util.pen.Pt;
@@ -187,7 +188,9 @@ public class TurkSurface extends JPanel {
   }
 
   public void setLabeling() {
+    bug("Now labeling.");
     mode = Mode.labeling;
+    segmentCursor = null;
     List<Pt> cornerList = new ArrayList<Pt>(corners);
     segments = new ArrayList<Segment>();
     for (int i = 0; i < cornerList.size() - 1; i++) {
@@ -197,14 +200,20 @@ public class TurkSurface extends JPanel {
     repaint();
   }
   
+  private static void bug(String what) {
+    Debug.out("TurkSurface", what);
+  }
+
   public void setDone() {
     mode = Mode.done;
   }
 
   private void incrementSegmentCursor() {
     if (segmentCursor == null) {
+      bug("segment cursor was null, so now the index is zero.");
       segmentCursorIdx = 0;
     } else {
+      bug("segment cursor was " + segmentCursorIdx);
       segmentCursorIdx++;
     }
     if (segmentCursorIdx < segments.size()) {
