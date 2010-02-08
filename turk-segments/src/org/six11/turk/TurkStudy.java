@@ -3,6 +3,7 @@ package org.six11.turk;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
+import java.awt.geom.GeneralPath;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,17 +12,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 
 import javax.swing.Action;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-import org.six11.util.Debug;
+//import org.six11.util.Debug;
 import org.six11.util.lev.NamedAction;
+import org.six11.util.pen.Pt;
 import org.six11.util.pen.Sequence;
 import org.six11.util.pen.SequenceIO;
 
@@ -32,16 +33,45 @@ import org.six11.util.pen.SequenceIO;
  */
 public class TurkStudy extends JApplet {
 
+  
   private static final String K_CORNER_MODE = "Corner Mode";
   private static final String K_LABEL_MODE = "Label Mode";
 
   TurkSurface surface;
   JPanel buttonBar;
   Map<String, NamedAction> actions;
-  List<ChangeListener> changeListeners;
+  List<TurkListener> turkListeners;
+  
+  
+  public interface TurkListener {
+    public void roundFinished(String sketchName, SortedSet<Pt> corners, List<TurkSegment> segments);
+  }
 
+  static class TurkSegment {
+    TurkStudy.Type type;
+    GeneralPath path;
+
+    public TurkSegment(int start, int end, Sequence seq, TurkStudy.Type type) {
+      this.type = type;
+      this.path = makePath(seq, start, end);
+    }
+  }
+  
+  static GeneralPath makePath(Sequence seq, int start, int end) {
+    GeneralPath gp = new GeneralPath();
+    for (int i = start; i <= end; i++) {
+      Pt pt = seq.get(i);
+      if (i == start) {
+        gp.moveTo(pt.x, pt.y);
+      } else {
+        gp.lineTo(pt.x, pt.y);
+      }
+    }
+    return gp;
+  }
+  
   public void init() {
-    changeListeners = new ArrayList<ChangeListener>();
+    turkListeners = new ArrayList<TurkListener>();
     surface = new TurkSurface();
     buttonBar = new JPanel();
     actions = new HashMap<String, NamedAction>();
@@ -113,14 +143,13 @@ public class TurkStudy extends JApplet {
     }
   }
 
-  public void addChangeListener(ChangeListener lis) {
-    changeListeners.add(lis);
+  public void addTurkListener(TurkListener lis) {
+    turkListeners.add(lis);
   }
   
   private void fireFinished() {
-    ChangeEvent ev = new ChangeEvent(this);
-    for (ChangeListener cl : changeListeners) {
-      cl.stateChanged(ev);
+    for (TurkListener tl : turkListeners) {
+      tl.roundFinished(surface.sketchName, surface.corners, surface.segments);
     }
   }
 
@@ -136,18 +165,19 @@ public class TurkStudy extends JApplet {
     surface.setLabeling();
   }
 
-  void open(InputStream inStream) {
+  void open(String sketchName, InputStream inStream) {
     try {
       BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
       List<Sequence> sequences = SequenceIO.readAll(in);
-      bug("Read " + sequences.size() + " sequences from input stream.");
       surface.clearDrawing();
+      int seqIdx = 0;
       for (Sequence seq : sequences) {
-        surface.addSequence(seq);
+        surface.addSequence(seqIdx++, seq);
       }
-      bug("Reset drawing surface with new data.");
+      surface.setSketchName(sketchName);
+      surface.setCornerFinding();
+      surface.repaint();
     } catch (IOException ex) {
-      bug("Can't read from input stream:");
       ex.printStackTrace();
     }
   }
@@ -156,7 +186,7 @@ public class TurkStudy extends JApplet {
     line, arc, curve, unknown;
   }
 
-  private void bug(String what) {
-    Debug.out("TurkStudy", what);
-  }
+//  private void bug(String what) {
+//    Debug.out("TurkStudy", what);
+//  }
 }

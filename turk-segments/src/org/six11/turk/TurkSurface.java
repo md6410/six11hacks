@@ -16,8 +16,9 @@ import java.util.TreeSet;
 
 import javax.swing.JPanel;
 
+import org.six11.turk.TurkStudy.TurkSegment;
 import org.six11.turk.TurkStudy.Type;
-import org.six11.util.Debug;
+//import org.six11.util.Debug;
 import org.six11.util.gui.Components;
 import org.six11.util.gui.shape.Circle;
 import org.six11.util.pen.Pt;
@@ -30,13 +31,15 @@ import org.six11.util.pen.Sequence;
  */
 public class TurkSurface extends JPanel {
 
+  SortedSet<Pt> corners; // stores locations of user-specified corners
+  List<TurkSegment> segments; // stores user-specified segment types
+  String sketchName; // used to identify which sketch 'corners' and 'segments' goes with.
+
   List<Sequence> sequences;
   List<GeneralPath> paths;
-  SortedSet<Pt> corners;
-  List<Segment> segments;
   Stroke basicStroke;
   Stroke highlightStroke;
-  Segment segmentCursor;
+  TurkSegment segmentCursor;
   int segmentCursorIdx;
 
   Pt cursor; // actual Pt object reference that is nearest the mouse location.
@@ -46,6 +49,8 @@ public class TurkSurface extends JPanel {
     sequences = new ArrayList<Sequence>();
     paths = new ArrayList<GeneralPath>();
     corners = new TreeSet<Pt>();
+    setCornerFinding();
+
     basicStroke = new BasicStroke(3.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
     Stroke outline = new BasicStroke(3.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
     highlightStroke = new CompositeStroke(basicStroke, outline);
@@ -58,10 +63,22 @@ public class TurkSurface extends JPanel {
       public void mouseClicked(MouseEvent ev) {
         addCorner();
       }
+
+      public void mouseExited(MouseEvent ev) {
+        whackCursor(null);
+      }
     };
     addMouseMotionListener(mouseThing);
     addMouseListener(mouseThing);
-    setCornerFinding();
+
+  }
+
+  public SortedSet<Pt> getCorners() {
+    return corners;
+  }
+
+  public List<TurkSegment> getSegments() {
+    return segments;
   }
 
   /**
@@ -86,26 +103,31 @@ public class TurkSurface extends JPanel {
    * Sets the cursor location to the closest sequence point to the given mouse location.
    */
   protected void whackCursor(Pt mouse) {
-    Pt best = null;
-    double bestDist = Double.MAX_VALUE;
-    for (Sequence seq : sequences) {
-      for (Pt pt : seq) {
-        double d = pt.distance(mouse);
-        if (d < bestDist) {
-          bestDist = d;
-          best = pt;
+    if (mouse != null) {
+      Pt best = null;
+      double bestDist = Double.MAX_VALUE;
+      for (Sequence seq : sequences) {
+        for (Pt pt : seq) {
+          double d = pt.distance(mouse);
+          if (d < bestDist) {
+            bestDist = d;
+            best = pt;
+          }
         }
       }
+      cursor = best;
+    } else {
+      cursor = null;
     }
-    cursor = best;
     repaint();
   }
 
   public void paintComponent(Graphics g1) {
-    Graphics2D g = (Graphics2D) g1;
+    super.paintComponent(g1);
+    Graphics2D g = (Graphics2D) g1.create();
     Components.antialias(g);
     g.setPaint(Color.WHITE);
-    g.fill(getBounds());
+    g.fill(getVisibleRect());
     Circle circ = new Circle(0, 0, 10);
 
     if (mode == Mode.cornerFinding) {
@@ -129,16 +151,16 @@ public class TurkSurface extends JPanel {
     if (mode == Mode.labeling) {
       if (segments != null) {
         g.setStroke(basicStroke);
-        for (Segment s : segments) {
+        for (TurkSegment s : segments) {
           switch (s.type) {
-            case line:
-            case arc:
-            case curve:
-              g.setPaint(Color.LIGHT_GRAY);
-              break;
-            case unknown:
-              g.setPaint(Color.BLACK);
-              break;
+          case line:
+          case arc:
+          case curve:
+            g.setPaint(Color.LIGHT_GRAY);
+            break;
+          case unknown:
+            g.setPaint(Color.BLACK);
+            break;
           }
           g.draw(s.path);
         }
@@ -161,25 +183,15 @@ public class TurkSurface extends JPanel {
     repaint();
   }
 
-  public void addSequence(Sequence seq) {
+  public void addSequence(int seqIdx, Sequence seq) {
+    for (Pt pt : seq) {
+      pt.setString("seqIdx", "" + seqIdx);
+    }
     sequences.add(seq);
     corners.add(seq.getFirst());
     corners.add(seq.getLast());
-    GeneralPath gp = makePath(seq, 0, seq.size() - 1);
+    GeneralPath gp = TurkStudy.makePath(seq, 0, seq.size() - 1);
     paths.add(gp);
-  }
-
-  GeneralPath makePath(Sequence seq, int start, int end) {
-    GeneralPath gp = new GeneralPath();
-    for (int i = start; i <= end; i++) {
-      Pt pt = seq.get(i);
-      if (i == start) {
-        gp.moveTo(pt.x, pt.y);
-      } else {
-        gp.lineTo(pt.x, pt.y);
-      }
-    }
-    return gp;
   }
 
   public final void setCornerFinding() {
@@ -188,21 +200,23 @@ public class TurkSurface extends JPanel {
   }
 
   public void setLabeling() {
-    bug("Now labeling.");
     mode = Mode.labeling;
     segmentCursor = null;
     List<Pt> cornerList = new ArrayList<Pt>(corners);
-    segments = new ArrayList<Segment>();
+    segments = new ArrayList<TurkSegment>();
     for (int i = 0; i < cornerList.size() - 1; i++) {
-      segments.add(makeSegment(cornerList.get(i), cornerList.get(i + 1)));
+      TurkSegment tseg = makeSegment(cornerList.get(i), cornerList.get(i + 1));
+      if (tseg != null) {
+        segments.add(tseg);
+      }
     }
     incrementSegmentCursor();
     repaint();
   }
-  
-  private static void bug(String what) {
-    Debug.out("TurkSurface", what);
-  }
+
+//   private static void bug(String what) {
+//   Debug.out("TurkSurface", what);
+//   }
 
   public void setDone() {
     mode = Mode.done;
@@ -210,10 +224,8 @@ public class TurkSurface extends JPanel {
 
   private void incrementSegmentCursor() {
     if (segmentCursor == null) {
-      bug("segment cursor was null, so now the index is zero.");
       segmentCursorIdx = 0;
     } else {
-      bug("segment cursor was " + segmentCursorIdx);
       segmentCursorIdx++;
     }
     if (segmentCursorIdx < segments.size()) {
@@ -222,13 +234,21 @@ public class TurkSurface extends JPanel {
     }
   }
 
-  private Segment makeSegment(Pt a, Pt b) {
-    Segment ret = null;
+  private TurkSegment makeSegment(Pt a, Pt b) {
+    TurkSegment ret = null;
     outer: {
       for (Sequence seq : sequences) {
-        for (Pt pt : seq) {
+        int idxA = -1;
+        int idxB = -1;
+        for (int i = 0; i < seq.size(); i++) {
+          Pt pt = seq.get(i);
           if (a == pt) {
-            ret = new Segment(seq.indexOf(a), seq.indexOf(b), seq, TurkStudy.Type.unknown);
+            idxA = seq.indexOf(a);
+          } else if (b == pt) {
+            idxB = seq.indexOf(b);
+          }
+          if (idxA >= 0 && idxB >= 0) {
+            ret = new TurkSegment(seq.indexOf(a), seq.indexOf(b), seq, TurkStudy.Type.unknown);
             break outer;
           }
         }
@@ -254,16 +274,6 @@ public class TurkSurface extends JPanel {
     }
   }
 
-  private class Segment {
-    TurkStudy.Type type;
-    GeneralPath path;
-
-    public Segment(int start, int end, Sequence seq, TurkStudy.Type type) {
-      this.type = type;
-      this.path = makePath(seq, start, end);
-    }
-  }
-
   public boolean setSegmentType(Type t) {
     if (segmentCursor != null) {
       segmentCursor.type = t;
@@ -271,5 +281,9 @@ public class TurkSurface extends JPanel {
       repaint();
     }
     return (segmentCursorIdx >= segments.size());
+  }
+
+  public void setSketchName(String sketchName) {
+    this.sketchName = sketchName;
   }
 }
