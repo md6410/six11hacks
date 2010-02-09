@@ -175,6 +175,8 @@ public class TurkStudy extends JApplet {
         surface.addSequence(seqIdx++, seq);
       }
       surface.setSketchName(sketchName);
+      CardLayout cards = (CardLayout) buttonBar.getLayout();
+      cards.show(buttonBar, K_CORNER_MODE);
       surface.setCornerFinding();
       surface.repaint();
     } catch (IOException ex) {
