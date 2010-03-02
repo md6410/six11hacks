@@ -69,7 +69,9 @@ public class DrawingStudy extends JApplet {
       HttpUtil ht = new HttpUtil();
       ht.setParam("sketchData", writer.toString(), params);
       // set other params as necessary, like the user ID string
-      ht.post(getCodeBase().toExternalForm(), params);
+      // change the following filename/php script/whatever to your favorite thing.
+      String myUrl = getCodeBase().toExternalForm() + "/sketchDataProcessor.php";
+      ht.post(myUrl, params);
     } catch (Exception ignore) {
       ignore.printStackTrace();
     }
