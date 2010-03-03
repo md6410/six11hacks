@@ -27,8 +27,10 @@ public class DrawingStudy extends JApplet {
 
   Map<String, NamedAction> actions;
   OliveDrawingSurface surface;
+  String amazonID;
 
   public void init() {
+    amazonID="unknown";
     initActions();
     JPanel buttonBar = new JPanel();
     buttonBar.add(new JButton(actions.get("Done")));
@@ -37,6 +39,10 @@ public class DrawingStudy extends JApplet {
     setLayout(new BorderLayout());
     add(buttonBar, BorderLayout.NORTH);
     add(surface, BorderLayout.CENTER);
+  }
+  
+  public void passID(String id) {
+    amazonID = id;
   }
 
   private void initActions() {
@@ -75,9 +81,10 @@ public class DrawingStudy extends JApplet {
 
       HttpUtil ht = new HttpUtil();
       ht.setParam("sketchData", writer.toString(), params);
+      ht.setParam("amazonID", amazonID, params);
       // set other params as necessary, like the user ID string
       // change the following filename/php script/whatever to your favorite thing.
-      String myUrl = "www.diagramstudy.com/scripts" + "/upload.php";
+      String myUrl = getCodeBase().toExternalForm() + "/upload.php";
       ht.post(myUrl, params);
     } catch (Exception ignore) {
       ignore.printStackTrace();
