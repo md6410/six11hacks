@@ -69,9 +69,9 @@ public class DrawingStudy extends JApplet {
       System.out.println("Done.");
       StringBuilder params = new StringBuilder();
 
-    if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "You are about to save the diagram and quit.", "Are you sure?", JOptionPane.YES_NO_OPTION))
-    {
-    }
+      if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "You are about to save the diagram and quit.", "Are you sure?", JOptionPane.YES_NO_OPTION)){
+    	  
+      }
 
       HttpUtil ht = new HttpUtil();
       ht.setParam("sketchData", writer.toString(), params);
