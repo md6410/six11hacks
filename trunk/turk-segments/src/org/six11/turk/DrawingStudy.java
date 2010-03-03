@@ -10,6 +10,8 @@ import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import javax.swing.JOptionPane;
+
 import org.six11.util.io.HttpUtil;
 import org.six11.util.lev.NamedAction;
 import org.six11.util.pen.OliveDrawingSurface;
@@ -66,6 +68,11 @@ public class DrawingStudy extends JApplet {
       System.out.println(writer.toString());
       System.out.println("Done.");
       StringBuilder params = new StringBuilder();
+
+    if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "You are about to save the diagram and quit.", "Are you sure?", JOptionPane.YES_NO_OPTION))
+    {
+    }
+
       HttpUtil ht = new HttpUtil();
       ht.setParam("sketchData", writer.toString(), params);
       // set other params as necessary, like the user ID string
