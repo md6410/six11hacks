@@ -1,16 +1,23 @@
 package org.six11.turk;
 
 import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import javax.swing.JOptionPane;
+
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 import org.six11.util.io.HttpUtil;
 import org.six11.util.lev.NamedAction;
@@ -30,7 +37,7 @@ public class DrawingStudy extends JApplet {
   String amazonID;
 
   public void init() {
-    amazonID="unknown";
+    amazonID = "unknown";
     initActions();
     JPanel buttonBar = new JPanel();
     buttonBar.add(new JButton(actions.get("Done")));
@@ -40,7 +47,7 @@ public class DrawingStudy extends JApplet {
     add(buttonBar, BorderLayout.NORTH);
     add(surface, BorderLayout.CENTER);
   }
-  
+
   public void passID(String id) {
     amazonID = id;
   }
@@ -65,6 +72,18 @@ public class DrawingStudy extends JApplet {
     surface.getSoup().getSequences().clear();
   }
 
+  public byte[] toBytes(BufferedImage image) {
+    byte[] ret = new byte[0];
+    ByteArrayOutputStream bout = new ByteArrayOutputStream();
+    try {
+      ImageIO.write(image, "PNG", bout);
+      ret = bout.toByteArray();
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+    return ret;
+  }
+
   private void done() {
     try {
       List<Sequence> sequences = surface.getSoup().getSequences();
@@ -74,14 +93,15 @@ public class DrawingStudy extends JApplet {
       System.out.println(writer.toString());
       System.out.println("Done.");
       StringBuilder params = new StringBuilder();
-
-      if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "You are about to save the diagram and quit.", "Are you sure?", JOptionPane.YES_NO_OPTION)){
-    	  
-      }
-
+      BufferedImage img = new BufferedImage(getBounds().width, getBounds().height,
+          BufferedImage.TYPE_INT_ARGB);
+      surface.paintComponent(img.getGraphics());
+      byte[] imgData = toBytes(img);
+      String imgDataEncoded = Base64.encode(imgData);
       HttpUtil ht = new HttpUtil();
       ht.setParam("sketchData", writer.toString(), params);
       ht.setParam("amazonID", amazonID, params);
+      ht.setParam("pngByteData", imgDataEncoded, params);
       // set other params as necessary, like the user ID string
       // change the following filename/php script/whatever to your favorite thing.
       String myUrl = getCodeBase().toExternalForm() + "/upload.php";
@@ -89,7 +109,7 @@ public class DrawingStudy extends JApplet {
     } catch (Exception ignore) {
       ignore.printStackTrace();
     }
-    clear();  
+    clear();
   }
 
   @Override
