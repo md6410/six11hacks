@@ -3,7 +3,6 @@ package org.six11.turk;
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -15,10 +14,7 @@ import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import javax.swing.JOptionPane;
-
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-
+import org.six11.util.io.Base64;
 import org.six11.util.io.HttpUtil;
 import org.six11.util.lev.NamedAction;
 import org.six11.util.pen.OliveDrawingSurface;
@@ -97,7 +93,7 @@ public class DrawingStudy extends JApplet {
           BufferedImage.TYPE_INT_ARGB);
       surface.paintComponent(img.getGraphics());
       byte[] imgData = toBytes(img);
-      String imgDataEncoded = Base64.encode(imgData);
+      String imgDataEncoded = Base64.encodeBytes(imgData);
       HttpUtil ht = new HttpUtil();
       ht.setParam("sketchData", writer.toString(), params);
       ht.setParam("amazonID", amazonID, params);
