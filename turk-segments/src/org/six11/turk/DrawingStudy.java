@@ -105,7 +105,7 @@ public class DrawingStudy extends JApplet {
     } catch (Exception ignore) {
       ignore.printStackTrace();
     }
-    clear();
+   // clear();
   }
 
   @Override
