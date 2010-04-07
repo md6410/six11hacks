@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JApplet;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.six11.util.io.Base64;
@@ -30,18 +31,25 @@ public class DrawingStudy extends JApplet {
 
   Map<String, NamedAction> actions;
   OliveDrawingSurface surface;
-  String amazonID;
+  String amazonID = "";
+  JLabel drawName  = null;
+  final short MAX_NUMBER_PAGE = 5;
+  short pageNumber = 1; 
 
   public void init() {
     amazonID = "unknown";
     initActions();
     JPanel buttonBar = new JPanel();
-    buttonBar.add(new JButton(actions.get("Done")));
+    
     buttonBar.add(new JButton(actions.get("Clear")));
+    buttonBar.add(new JButton(actions.get("Next Draw")));
+    buttonBar.add(new JButton(actions.get("Finish")));
     surface = new OliveDrawingSurface();
     setLayout(new BorderLayout());
+    drawName = new JLabel("Drawing " + this.pageNumber + "/" + MAX_NUMBER_PAGE, JLabel.CENTER);
     add(buttonBar, BorderLayout.NORTH);
     add(surface, BorderLayout.CENTER);
+    add(drawName, BorderLayout.SOUTH);
   }
 
   public void passID(String id) {
@@ -50,15 +58,19 @@ public class DrawingStudy extends JApplet {
 
   private void initActions() {
     actions = new HashMap<String, NamedAction>();
-    actions.put("Done", new NamedAction("Done") {
-      public void activate() {
-        done();
-      }
-
-    });
     actions.put("Clear", new NamedAction("Clear") {
+        public void activate() {
+          clear();
+        }
+      });
+    actions.put("Next Draw", new NamedAction("Next Draw") {
       public void activate() {
-        clear();
+	    next_draw();  
+	  }
+	});
+    actions.put("Finish", new NamedAction("Finish") {
+      public void activate() {
+        finish();
       }
     });
   }
@@ -80,7 +92,16 @@ public class DrawingStudy extends JApplet {
     return ret;
   }
 
-  private void done() {
+  private void next_draw() {
+	  if (this.pageNumber++ < MAX_NUMBER_PAGE)
+	  {
+		  drawName.setText("Drawing " + this.pageNumber + "/" + MAX_NUMBER_PAGE);
+		  finish();
+		  clear();
+	  }
+  }
+  
+  private void finish() {
     try {
       List<Sequence> sequences = surface.getSoup().getSequences();
       StringWriter writer = new StringWriter();
