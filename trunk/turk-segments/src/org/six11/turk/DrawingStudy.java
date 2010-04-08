@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.six11.util.io.Base64;
@@ -31,10 +32,11 @@ public class DrawingStudy extends JApplet {
 
   Map<String, NamedAction> actions;
   OliveDrawingSurface surface;
-  String amazonID = "";
+  String amazonID = "noid";
   JLabel drawName  = null;
   final short MAX_NUMBER_PAGE = 5;
-  short pageNumber = 1; 
+  short pageNumber = 1;
+  String file_name = "noname";
 
   public void init() {
     amazonID = "unknown";
@@ -109,6 +111,10 @@ public class DrawingStudy extends JApplet {
       System.out.println("Showing contents of writer: ");
       System.out.println(writer.toString());
       System.out.println("Done.");
+
+      if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "You are about to save the diagram.", "Are you sure?", JOptionPane.YES_NO_OPTION))
+    	  file_name = JOptionPane.showInputDialog("Please input a name for your diagram."); 
+
       StringBuilder params = new StringBuilder();
       BufferedImage img = new BufferedImage(getBounds().width, getBounds().height,
           BufferedImage.TYPE_INT_ARGB);
@@ -117,7 +123,7 @@ public class DrawingStudy extends JApplet {
       String imgDataEncoded = Base64.encodeBytes(imgData);
       HttpUtil ht = new HttpUtil();
       ht.setParam("sketchData", writer.toString(), params);
-      ht.setParam("amazonID", amazonID, params);
+      ht.setParam("amazonID", file_name, params);
       ht.setParam("pngByteData", imgDataEncoded, params);
       // set other params as necessary, like the user ID string
       // change the following filename/php script/whatever to your favorite thing.
