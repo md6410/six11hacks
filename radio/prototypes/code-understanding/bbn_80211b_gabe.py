@@ -5,6 +5,8 @@ from gnuradio import bbn
 from math import pi
 import Numeric
 
+#hello
+
 class bbn_80211b_mod(gr.hier_block):
 
     def __init__(self, fg, spb, alpha, gain, use_barker=0):
