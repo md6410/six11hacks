@@ -43,7 +43,7 @@ SKRUI Draw remains an experimental system, the sketch-based
 interaction techniques it provides show promise.
 
 \begin{classification} % according to http://www.acm.org/class/1998/
-\CCScat{Computer Graphics}{I.3.6}{Methodology and Techniques}
+\CCScat{Computer Graphics}{I.3.6}{Interaction Techniques}
 \end{classification}
 
 \end{abstract}
@@ -60,48 +60,62 @@ shift focus to the editing controls to find and activate the
 appropriate widget before returning to work.
 
 This paper presents several mode switching techniques that address the
-problem of persistent mode. The techniques presented here are
-\emph{transient} because input reverts back to the default sketching
-mode when it is no longer needed. Each transient technique is
-triggered by interpreting sketched gestures.
+problem of persistent mode. The techniques are \emph{transient}
+because input reverts back to the default sketching mode when it is no
+longer needed. Each transient technique is triggered by interpreting
+sketched gestures.
 
 This work presents three techniques: flow selection, scribble-fill,
 and structured ink. They are implemented in a simple cartoon drawing
-environment called SKRUI Draw. Because they are implemented together
-it is possible to evaluate them as an ensemble, from both interaction
-and engineering perspectives.
+environment called SKRUI Draw (shown in Figure~\ref{fig:skrui-draw}).
+
+\begin{figure}[htb]
+  \label{fig:skrui-draw}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/shaun.png}
+  \caption{SKRUI Draw showing an architect's sketch.}
+\end{figure}
 
 \section{Related Work}
 
 The Inferred Mode Protocol~\cite{saund-inferred-mode} provides a
-framework for interacting with a drawing without persistent modes. The
-system recognizes pen input using context to mediate user intent. The
-system might quietly wait for more information, or it could ask the
-user to resolve the problem.
+framework for sketching without persistent modes. The system
+interprets pen input using context to mediate user intent. When
+unclear or ambiguous input is found, the system might wait for more
+information, or it could ask the user to resolve the problem.
 
-Some have developed GUI widgets that are appropriate for pen
-applications, making it easier to invoke modes and commands. CrossY
-demonstrates several pen-centric widgets based on \emph{goal
-  crossing}~\cite{apitz-crossy}, based on the insight is that it is
-easier to move a pointer through a goal than it is to stop inside a
-target~\cite{accot-crossing}.
+Li \textit{et. al} studied several methods for switching modes in
+pen-based systems~\cite{li-mode-switching}. Four of five technique
+reviewed requires special hardware: a pen barrel button, a button for
+the user's non-dominant hand, pen pressure sensing, and the `eraser'
+end of the pen. The last technique, a dwell gesture, requires no
+additional hardware. The dwell technique was the least efficient and
+least liked in their study, while the offhand button was the most
+effective.
+
+Mode-changing gestures should be `different' enough that users are
+unlikely to trigger them by accident but simple enough that they can
+be remembered and issued without error. Scriboli's \emph{delimiters}
+provide a point of departure in this
+regard~\cite{hinckley-scriboli}. The delimiters are gestures that
+appear at the end of a selection stroke that people are unlikely to
+make otherwise, but are easily recognized and enable users to give
+commands on the selected region.
 
 Thierjung \textit{et. al} studied methods for recognizing filled or
 hatched regions by analyzing stroke
 features~\cite{thierjung-hatching}. The current approach is designed
-to be interactive and is recognized before as the stroke is
-made. Thierjung's approach is more extensible but it is not
-interactive.
+to be interactive and is recognized as the stroke is made. Thierjung's
+approach is more extensible but it is not interactive.
 
 A portion of this system extends prior work on Flow
-Selection~\cite{johnson-flow-selection}. It is a method for selecting
-portions of strokes, allowing users to quickly fix portions of a drawn
-stroke. It is issued with a dwell gesture, and a selection will begin
-to `grow' outward from the nearest point on the line. Each point is
-partially selected. The longer the dwell continues, the more strongly
-each point is selected. If the user drags the pen points are
-translated some amount depending on how strongly they are selected and
-how much the pen has moved.
+Selection~\cite{johnson-flow-selection}. It is a method for easily
+selecting and adjusting portions of a drawn stroke. A dwell gesture
+causes a selection to `grow' outward from the nearest point on the
+line. Each point is partially selected. The longer the dwell
+continues, the more strongly each point is selected. If the user drags
+the pen, points are translated some amount depending on how strongly
+they are selected and how much the pen has moved.
 
 \section{Transient Interaction Techniques}
 
@@ -116,11 +130,6 @@ The methods are implemented in a simple cartoon sketching environment
 called SKRUI Draw, written in Java 1.6. These techniques were
 deliberately developed together to get a sense for how well (or not)
 they work as an ensemble.
-
-SKRUI Draw contains a sketch recognition engine based on constraint
-satisfaction and is similar to LADDER~\cite{hammond-ladder}. This
-recognizer identifies time-dependent gestures as well as
-domain-specific symbols.
 
 \subsection{Flow Selection}
 
@@ -187,19 +196,19 @@ Selection~\cite{johnson-flow-selection} in three ways. First, if the
 user begins a flow selection near the end of a stroke, the selection
 will pause momentarily when it reaches a corner. When the corner point
 is 70\% selected and one neighbor is less than 35\% selected, it acts
-as a hinge and is drawn as a large colored dot. If the user drags the
+as a hinge and is shown as a large colored dot. If the user drags the
 stylus, selected points are scaled and rotated about the
 hinge. Figure~\ref{fig:fs-hinge} illustrates this process. Corners are
 found using the MergeCF algorithm~\cite{wolin-smr}.
 
 Second, users can select more than one stroke by tapping before
-starting the flow selection (See Figure~\ref{fig:fs-multi}). In this
-implementation, each tap expands the radius of influence by 30 pixels.
+starting the flow selection (See Figure~\ref{fig:fs-multi}). Each tap
+expands the radius of influence by 30 pixels.
 
 Last, selections persist for a short time after they are made,
 enabling users to select and operate on more than one region of the
 same stroke (see Figure~\ref{fig:fs-heat}). Flow selection can be
-thought of as applying \emph{heat} to a stroke; heated regions are
+thought of as \emph{heating} a stroke; heated regions are
 malleable but \emph{cool} over time until they are no longer
 selected.
 
@@ -331,38 +340,20 @@ clutter, only the three most recently created or activated points are
 used to show guides. After 30 seconds, structured points are no longer
 considered active. Tapping a structured point once reactivates it.
 
-There are several types of guides. A straight line is drawn from the
-most recent point to the current pen location. Straight lines are
-drawn between the three most recently active points. Their midpoints
-are also shown. If there are three active points, they are used to fit
-a circle. Figure~\ref{fig:struct-c} shows all guide types.
+There are several types of guides. A line is drawn from the most
+recent point to the current pen location. Lines connect the three most
+recently active points, and their midpoints are also shown. Three
+active points are used to fit a circle. Figure~\ref{fig:struct} shows
+all guide types.
 
 Structured points may be used to control nearby sketched ink by
-tapping them. Two taps cause nearby lines move. If a line's endpoint
-is near the structured point, it is rotated and scaled to coincide with
-the structured point, using the opposing endpoint as a hinge. When the
+tapping them. Two taps cause nearby lines move (see
+Figure~\ref{fig:struct-b}). If a line's endpoint is near the
+structured point, it is rotated and scaled to coincide with the
+structured point, using the opposing endpoint as a hinge. When the
 middle section of line passes near a structured point, the whole line
-is translated such to meet the structured
-point. Figure~\ref{fig:struct-b} illustrates double-tapping. Tapping
-three times will rectify nearby ink (see Figure~\ref{fig:struct-c}).
-
-% \begin{figure}
-%   \centering \subfigure[A dot-dash-dash gesture.] {
-%     \label{fig:stpt-a} 
-%     \includegraphics[width=0.3\linewidth]{img/st-gesture.pdf}
-%   }
-% \hspace{0.4cm}\subfigure[Structured points work together to provide
-%   graphical guides.] {
-%     \label{fig:stpt-b} 
-%     \includegraphics[width=0.52\linewidth]{img/st-cross.pdf}
-%   }
-%   \caption{Users can create structured points with a dot-dash-dash
-%     gesture. Two or three recently created (or refreshed) structured
-%     points provide guides such as connecting lines, midpoints, and a
-%     bounding circle. These visual effects fade after a while but can
-%     be refreshed by simply tapping existing structured points. }
-%   \label{fig:stpt}
-% \end{figure}
+is translated to meet the structured point. Tapping three times will
+rectify nearby ink (see Figure~\ref{fig:struct-c}).
 
 \begin{figure}
   \centering \subfigure[Rough triangle with three nearby structured points.] {
@@ -387,48 +378,36 @@ three times will rectify nearby ink (see Figure~\ref{fig:struct-c}).
 
 \section{Future Work}
 
-The transient mode-switching techniques described in this paper are
-experimental prototypes. They will be improved and new ones will be
+The mode-switching techniques described in this paper are
+experimental. They will be improved and new ones will be
 added. Progress will be guided in part by user testing, which will
 supply feedback about recognition errors caused by different user
 drawing styles and expectations, as well as preferences about which
 methods feel intuitive.
 
 Further work must be done to simplify SKRUI Draw's software
-architecture to accommodate additional transient modes. Adding new
-modes increases user choice but substantially complicates the
-underlying system architecture. Adding new transient modes also
-increases user cognitive load: gestures must learn and
-remembered. Gestures should be `different' enough that users are
-unlikely to trigger them by accident but simple enough that they can
-be remembered and issued without error. While the set of gestures
-involved in the current work are different enough that they are not
-easily confused, there are only three. Scriboli's \emph{delimiters}
-provide a point of departure in this
-regard~\cite{hinckley-scriboli}. The delimiters are gestures that
-appear at the end of a selection stroke that people are unlikely to
-make otherwise, but are easily recognized and enable users to give
-commands on the selected region.
+architecture to accommodate additional transient modes. Adding modes
+increases user choice but complicates the system architecture. It also
+increases user cognitive load: gestures must be learned and
+remembered.
 
-There are specific improvements to each technique discussed
-earlier. Flow selection can be used at the end of a selection sequence
-(as in Scriboli's Dwell gesture) to give users the ability to perform
-commands on the selected region. This could afford the ability to
-erase and to select colors or thickness properties from the selected
-area. The `heating/cooling' metaphor might support overtrace strokes
-to correct flow-selected areas. Currently flow selection only operates
-on raw ink, but it should be extended to also work on scribble-filled
-regions as well.
+There are planned improvements to each technique discussed
+earlier. Encircling a region and dwelling without lifting the pen (as
+in Scriboli's Dwell gesture) could trigger a flow selection of the
+encircled area, and enable users to perform commands on the selected
+region. This affords the ability to erase and to select colors or
+thickness properties from the selected area. The `heating/cooling'
+metaphor might enable overtrace strokes to correct flow-selected
+areas. Currently flow selection only operates on raw ink, but it
+should be extended to also work on scribble-filled regions as well.
 
 Scribble-fill could use existing elements as guides (both structured
 lines and raw ink.) The filled region should then `stick' to the
 existing boundaries so that changing the guide also changes the filled
-region.
-
-While it is possible (and relatively easy) to create filled regions
-that are not convex, it requires multiple pen strokes. A significant
-improvement to scribble fill would be to generate arbitrarily shaped
-filled regions based on the pen path.
+region. While it is possible (and relatively easy) to create filled
+regions that are not convex, it requires multiple pen strokes. A
+significant improvement to scribble fill would be to generate
+non-convex shapes regions based on the pen path.
 
 It is not clear if the current method for creating structured ink is
 the best way. Mechanical engineers sketching on paper draw guides
@@ -443,11 +422,12 @@ appearance of drawn lines.
 \section{Conclusion}
 
 This paper has presented three transient mode interaction techniques
-for sketch-based design tools. While they are still quite experimental
-they serve as useful objects to think with and might likely lead to a
-set of additional interaction idioms suitable for sketch
-interaction. The Java code for this project is open source and freely
-available on the Internet.
+for sketch-based design tools. While they are still experimental they
+serve as objects to think with and might lead to a set of interaction
+idioms suitable for sketch interaction. The Java code for this project
+is open source and freely available on the Internet. I thank Shaun
+Moon for testing SKRUI Draw and making the sketch in
+Figure~\ref{fig:skrui-draw}.
 
 \bibliographystyle{eg-alpha}
 
