@@ -55,7 +55,7 @@
  *  
  */
 
-grammar Python;
+parser grammar Python;
 
 tokens {
     INDENT;
