@@ -1,0 +1,212 @@
+"When Understanding means Rewriting" by Jeff Atwood
+http://www.codinghorror.com/blog/2006/09/when-understanding-means-rewriting.html
+
+Estimates for how much time coders spend:
+  * Writing new code: 4%
+  * Modifying existing code: 20%
+  * Understanding code: 80%
+
+I suspect these numbers are in general wrong. I personally spend much
+more time writing code, maybe something like 70% of my IDE time is
+spent typing, and of that maybe 2/3 is on modifying existing code. But
+my programming work is mostly experimental. I am making software that
+does not have to be bulletproof, and nobody else will ever edit or
+extend it.
+
+However, if Atwood's estimates have the right magnitude, then it makes
+sense to put a lot of research effort into finding ways to reduce the
+amount of time that programmers spend understanding code.
+
+
+"Guess My Game" by Nate Combs
+http://terranova.blogs.com/terra_nova/2006/08/heat.html
+
+Summarizes the problem with "noun and verb"-style object-oriented
+design. If all the objects are nouns, and they constitute a Kingdom of
+Nouns, then all the verbs (the behavior, the rules) are spread out
+throughout the kingdom. The nouns are certainly important but the
+behavior is disembodied and can be difficult to understand because
+they are so spread out.
+
+
+Natural Programming group at CMU (Brad Myers and friends)
+http://www.cs.cmu.edu/~NatProg/index.html
+
+
+Topes
+http://www.cs.cmu.edu/~NatProg/topes.html
+
+A tope is a loose type that might be instantiated in several lexical
+ways. For example, "Last name", "lastname", "Family name", "surname"
+all refer to a person's last name. A person's name might be written in
+several ways, e.g.: "G. Johnson", "Gabe Johnson", "Gabriel
+G. Johnson", "Johnson, Gabe", "Johnson, G. G.", and so on. Humans are
+often familiar with personal naming conventions, and are likely to
+correctly infer that all of these strings refer to the same name, and
+that "Gabe" is the first name, that "G" is a middle initial, and
+"Johnson" is a last name.
+
+This is related to code understanding because variable names often
+describe the variable's purpose. In these cases the variable name can
+be thought of a sort of tope. For example, a Java file I am editing at
+the moment has the following line:
+
+  Set<Triangle> explored = new HashSet<Triangle>();
+
+In addition to the strong static type system (I'm dealing with a set
+of Triangle instances) there is also an implied purpose to the
+variable. By naming this variable 'explored', readers of this source
+file might infer that the set is to be used in conjunction with an
+exploration process and that when a Triangle has been examined, it is
+added to this set.
+
+
+Thomas D. LaToza, David Garlan, James D. Herbsleb, Brad
+A. Myers. Program Comprehension as Fact Finding. Proc of
+ESEC-FSE'07. Sept 2007
+
+This describes a lab study of 13 programmers who were asked to delve
+through some fairly complex open source code and fix bugs. The
+programmers were not previously familiar with the code. The study
+turns on observing participants and asking them to think aloud as they
+read the source code, trying to uncover what their comprehension
+strategy might be. The authors summarize by stating:
+
+   "[...] program comprehension is driven by beliefs about facts. [..]
+   developers used [explanations] to form chains of facts and elicit
+   constraints they would need to respect in their proposals and
+   changes. A key driver of the program comprehension process was
+   uncertainty. Developers chose how much confidence to express in
+   their hyptheses and made path choice decisions about whether to
+   seek evidence to support them. Developers were uncertain whether a
+   hidden constraint would force them to abandon their changes or
+   unknowingly break a requirement. Developers used sophisticated
+   strategies to judge the likelihood of a hidden constraint's
+   presense such as judging the skill level of the original
+   developer."
+
+In reading the code, developers engaged in several fact-related
+activities including 
+
+  * seeking facts: Deciding when to read a block of code
+
+  * learning facts: Facts that confirm/disconfim expectations
+
+  * critiquing facts: Hypotheses about why code was written as it is
+
+  * explaining facts: Give rationale for existing facts.
+
+  * proposing facts: Declaring how things ought to be.
+
+  * implementing facts: 
+
+
+[unread] A.M. Vans, A. von Mayrhauser, and G. Somlo. Program
+Understanding Behavior during Corrective Maintenance of Large-Scale
+Software. In Int'l J. Human-Computer Studies, vol. 51, no. 1, 31-70,
+July 1999.
+
+
+Andrew J. Ko, Brad A. Myers, and Htet Htet Aung. Six Learning Barriers
+in End-User Programming Systems. 2004.
+
+Gives a framework for thinking about barriers to progress in
+programming tasks: design, selection, coordination, use,
+understanding, and information barriers. This is relevant to code
+understanding in the sense that it provides a structure for talking
+about what a programmer's challenges are, and how they might be
+overcome. This is probably not an exhaustive list. For example, data
+or debugging tasks are not direclty addressed. The 'understanding'
+barrier described in this paper has to do with understanding why a
+program that you have written does what it does'. This is related to
+the broader sense of 'code understanding', which deals with making
+sense of code that others have written. But the time scale is
+different. Ko's sense of understanding concerns a program that the
+user just wrote; the broader sense deals with understanding larger
+components written by other people.
+
+The authors give several possible solutions to each barrier. They use
+a 'factory' metaphor, where the program is a factory, and the
+programmer is the one that made the factory. Objects, functions, or
+other blocks of code are 'machines' on the factory floor. For example,
+one barrier is: "it is difficult to know how machines will interact
+when running." A solution to this is: "Design machines so that they
+may be tested stand-alone or in small groups. They mighte even give
+some simple indicators of what they will do when turned on (such as
+indicating to which machine it will pass a product)."
+
+This work led to Ko's thesis on the Whyline.
+
+
+Kayur Patel, James Fogarty, James A. Landay, Beverly
+Harrison. Investigating Statistical Machine Learning as a Tool for
+Software Development. Proc. of CHI 2008. Florence, Italy. 2008.
+
+This paper sounds like it should be right in our area, but it is
+fairly tangential. It describes how programmers can use machine
+learning techniques as a tool in a system (e.g. building handwriting
+digit recognizers). It does *not* address using machine learning
+techniques for the analysis of code.
+
+
+Uri Dekel. eMoose - A Memory Aid for Software Developers. OOPSLA 2008.
+
+From the introduction: "Among the detailed knowledge and
+specifications that [programmers] make actively seek there may also be
+details of which clients should be made aware even if they were not
+planning to actively seek information about the artifact. Such details
+include: limitations, side effects, restrictions on use and threading,
+contract violations, protocol requirements, allocation
+responsibilities, bugs, and remaining action items, etc."
+
+That paper is a summary of the motivation for his thesis.
+
+
+Uri Dekel. Increasing Awareness of Delocalized Information to
+Facilitate API Usage. PhD Dissertation. School of Computer Science,
+Carnegie Mellon University. December 2009.
+
+This thesis addresses the observation that source code is richly
+annotated with information that is not readily apparent to users of
+that source code. For example, if function f(x) contains the string:
+
+  // Fixme: there is a bug when x is negative
+
+... any programmer that takes time to read f(x)'s definition could see
+this and take appropriate action. However, if we are simply using
+f(x), we may be unaware that there is a problem when x < 0.
+
+Dekel's thesis system, eMoose, exposes these useful pieces of
+information to programmers who are removed from the source of that
+information. In his terms, "eMoose is concerned with addressing the
+problem of delocalization, where important information is present in
+one medium but is useful in the context of another."
+
+His "Related Work" section is a treasure trove. (!!!)
+
+
+Natural Language Program Analysis (NLPA) Group at Univ. of Delaware.
+
+
+Emily Hill, Lori Pollock and K. Vijay-Shanker. Automatically Capturing
+Source Code Context of NL-Queries for Software Maintenance and
+Reuse. In Proc. of ICSE 2009.
+
+This paper describes a natural language querying process for finding
+source code in maintenance or reuse tasks. They extract 'phrases' from
+element signatures (like class names, method sigs, types, formal
+parameters). It is interesting that they do not apparently analyze
+Javadoc (or non-javadoc) comments in relation. Interestingly they seem
+to get decent traction only using these signature phrases. They break
+apart symbol names using lexical rules. Their example: "MP3FileFilter"
+becomes "mp 3 file filter". This is a brave example because a human
+reader would probably segment it differently, as "MP3 File Filter"
+because MP3 is a known thing, while "mp 3" is not. They do use special
+case rules, for example "2" might make sense as the preposition "to"
+(as in the case "jpg2png"). Most of the paper turns on infering the
+grammatical structure of phrases as noun phrases or verb phrases, with
+special types of each, and in some cases, the role of nearby tokens
+such as the indirect object of a verb phrase.
+
+It reminds me strongly of Yunwen's Codebroker stuff from Way Back In
+The Day.
