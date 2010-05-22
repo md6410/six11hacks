@@ -62,9 +62,8 @@
       </tr>
       <tr>
 	<td>
-	  <div class="urgent"><a href="slippy/">New version of Olive
-	  released (Jan 7 2010)</a></div> 
-	  <br /> <br />
+	  <div class="urgent"><a href="skrui/">Try Skrui Draw version
+	  3</a></div> <br /> <br />
 	  <div class="indented">
 	    <a href="http://johnsogg.blogspot.com/">Blog</a> - 
 	    <a href="http://picasaweb.google.com/gabe.johnson">Photos</a> -
