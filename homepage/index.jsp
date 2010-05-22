@@ -108,17 +108,25 @@
     <a name="projects" />
     <h2>Projects (and neat hacks)</h2>
 
+
+    <p>
+      <img border="0" src="skrui/skrui-draw-icon-60px.png" width="60"
+      height="60">&nbsp; &nbsp; <b>Skrui Draw</b> is a simple painting
+      application that is based on pen-centric interaction techniques,
+      often involving sketch recognition. It is a vector-based
+      painting program and lets you save images as PDFs. I made the
+      icon in the application itself (and if you can make a better
+      one, and I am sure you can, make one in Skrui Draw and send it
+      to me). <a href="skrui/">Download and read more about the
+      current status of Skrui Draw over yonder</a>.</p>
+
     <p>
       <img border="0" src="img/olive-thumb.png" width="60" height="60"
       />&nbsp; &nbsp; <b>Olive</b>: Olive is a web-based development
-      environment for developing sketch recognition algorithms or
+      environment for prototyping sketch recognition algorithms or
       interaction techniques. It features a domain-specific language
-      called Slippy, which allows developers to quickly try out ideas
-      and easily share code with others, or use code written by
-      others. Olive is a work-in-progress, and will serve as the
-      platform for my thesis system. <a href="slippy/">You may try out
-      Olive here</a> (but be aware there is no instruction manual
-      yet).
+      called Slippy, which allows developers to quickly try out
+      ideas. <a href="slippy/">You may try out Olive here</a>.
     </p>
 
     <p><img border="0" src="img/sketching-games.png" width="60"
