@@ -210,3 +210,8 @@ such as the indirect object of a verb phrase.
 
 It reminds me strongly of Yunwen's Codebroker stuff from Way Back In
 The Day.
+
+
+Yvonne Dittrich & Kari Rönkkö & Jeanette Eriksson & Christina Hansson & Olle Lindeberg. Cooperative method development. In Empir Software Eng (2008) 13:231–260
+
+Sublime observation on ethnography: "It is no easy task to reveal knowledge about studied social group’s methods, not even with the help of this theoretical underpinning, but studies steered by a specific hypothesis makes such aims impossible: The use of a hypothesis assumes that you already know what you are interested in. (Rönkkö 2005b: 47–55)."
