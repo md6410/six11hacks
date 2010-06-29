@@ -8,13 +8,19 @@ def parseProgramString(progStr, fileName):
     v.visit(tree)
 
 class Visitor(ast.NodeVisitor):
-
+    """
+    Each node in the AST is passed to one of the Visitor's methods. By
+    default, generic_visit is called, but if there is a corresponding
+    visit_XYZ method for the node's type (XYZ in this example) that is
+    called instead. Each of these visiting functions must call the
+    superclass's generic_visit method if you want the node's children
+    to be traversed.
+    """
     def __init__(self, fileName):
         self.where = Where()
         self.where.file = fileName
 
     def generic_visit(self, node):
-        # print (" ~  " + type(node).__name__)
         ast.NodeVisitor.generic_visit(self, node)
     
     def visit_Name(self, node):
@@ -35,9 +41,6 @@ class Visitor(ast.NodeVisitor):
         ast.NodeVisitor.generic_visit(self, node)
         self.where.method = prev_val
 
-#    def visit_Subscript(self, node):
-#        print("Subscript! Yay! Value: " + node.value.id)
-
 class Where:
     def __init__(self):
         self.file = "?"
@@ -50,12 +53,13 @@ class Where:
     def report(self):
         return ""
 
-if (len(sys.argv) == 1): # perform analysis on this script
-    fileObj = open(sys.argv[0], "r")
-    fileContents = fileObj.read()
-    parseProgramString(fileContents, sys.argv[0])
-else:
-    for arg in sys.argv[1:]:
-        fileObj = open(arg, "r")
+if __name__ == "__main__":
+    if (len(sys.argv) == 1): # perform analysis on this script itself
+        fileObj = open(sys.argv[0], "r")
         fileContents = fileObj.read()
-        parseProgramString(fileContents, arg)
+        parseProgramString(fileContents, sys.argv[0])
+    else:
+        for arg in sys.argv[1:]:
+            fileObj = open(arg, "r")
+            fileContents = fileObj.read()
+            parseProgramString(fileContents, arg)
