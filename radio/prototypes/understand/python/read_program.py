@@ -2,25 +2,41 @@
 import sys
 import ast
 
-def explore(t, loc):
-#    print("  Exploring node named " + str(t))
-    if (isinstance(t, ast.Name)):
-        print("Object: " + t.id + " in context: " + str(t.ctx._attributes))
-    for field in ast.iter_fields(t):
-        fieldName = field[0]
-        fieldVal = field[1]
-        try:
-            values = iter(fieldVal)
-            for val in values:
-                if isinstance(val, ast.AST):
-                    explore(val)
-        except:
-#            print(fieldName + " = " + str(fieldVal) + " (type: " + str(type(fieldVal)) + ")")
-            pass
+def parseProgramString(progStr, fileName):
+    v = Visitor(fileName)
+    tree = ast.parse(progStr, fileName, "exec")
+    v.visit(tree)
 
-def parseProgramString(progStr):
-    tree = ast.parse(progStr)
-    explore(tree)
+class Visitor(ast.NodeVisitor):
+
+    def __init__(self, fileName):
+        self.where = Where()
+        self.where.file = fileName
+
+    def generic_visit(self, node):
+        # print (" ~  " + type(node).__name__)
+        ast.NodeVisitor.generic_visit(self, node)
+    
+    def visit_Name(self, node):
+        print(str(self.where) + "\t" + node.id)
+
+    def visit_Load(self, node):
+        pass
+
+    def visit_ClassDef(self, node):
+        prev_val = self.where.klass
+        self.where.klass = node.name
+        ast.NodeVisitor.generic_visit(self, node)
+        self.where.klass = prev_val
+
+    def visit_FunctionDef(self, node):
+        prev_val = self.where.method
+        self.where.method = node.name
+        ast.NodeVisitor.generic_visit(self, node)
+        self.where.method = prev_val
+
+#    def visit_Subscript(self, node):
+#        print("Subscript! Yay! Value: " + node.value.id)
 
 class Where:
     def __init__(self):
@@ -28,11 +44,18 @@ class Where:
         self.klass = "?"
         self.method = "?"
 
+    def __str__(self):
+        return self.file + "\t" + self.klass + "\t" + self.method
+
     def report(self):
         return ""
 
-for arg in sys.argv:
-    fileObj = open(arg, "r")
+if (len(sys.argv) == 1): # perform analysis on this script
+    fileObj = open(sys.argv[0], "r")
     fileContents = fileObj.read()
-    parseProgramString(fileContents)
-
+    parseProgramString(fileContents, sys.argv[0])
+else:
+    for arg in sys.argv[1:]:
+        fileObj = open(arg, "r")
+        fileContents = fileObj.read()
+        parseProgramString(fileContents, arg)
