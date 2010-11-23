@@ -12,7 +12,7 @@ import java.awt.event.MouseMotionAdapter;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.AWTGLCanvas; 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.glu.GLU; 
+import org.lwjgl.util.glu.GLU; 
 
 import org.six11.flatcad.geom.MatrixStack;
 import org.six11.flatcad.geom.Box;
@@ -29,7 +29,7 @@ import org.six11.flatcad.gl.GLDrawable;
 import org.six11.flatcad.model.*;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.glu.GLU.*;
+import static org.lwjgl.util.glu.GLU.*;
 import org.six11.flatcad.geom.Direction;
 import org.six11.util.Debug;
 

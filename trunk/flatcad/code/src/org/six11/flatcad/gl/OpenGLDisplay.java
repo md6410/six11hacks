@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.AWTGLCanvas; 
 import static org.lwjgl.opengl.GL11.*;    // all are GL_* or gl*
-import static org.lwjgl.opengl.glu.GLU.*; // all are GLU_* or glu*
+import static org.lwjgl.util.glu.GLU.*; // all are GLU_* or glu*
 import static org.six11.flatcad.gl.GLApp.buildFont;
 import static org.six11.flatcad.gl.GLApp.glPrint;
 

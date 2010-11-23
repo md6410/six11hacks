@@ -9,7 +9,7 @@ import java.net.URL;
 import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.input.*;
-import org.lwjgl.opengl.glu.*;
+import org.lwjgl.util.glu.*;
 import java.awt.image.*;   // for screenshot
 
 /**
@@ -596,7 +596,6 @@ public class GLApp {
 
     public static int getSettingInt(int whichSetting)
     {
-        //IntBuffer ibuffer = allocInts(16);
         bufferSettingInt.clear();
         GL11.glGetInteger(whichSetting, bufferSettingInt);
         return bufferSettingInt.get(0);
@@ -604,7 +603,6 @@ public class GLApp {
 
     public static FloatBuffer getModelviewMatrix()
     {
-      // /*FloatBuffer*/ bufferModelviewMatrix = allocFloats(16);
       bufferModelviewMatrix.clear();
       GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, bufferModelviewMatrix);
       return bufferModelviewMatrix;
@@ -612,7 +610,6 @@ public class GLApp {
 
     public static FloatBuffer getProjectionMatrix()
     {
-        //FloatBuffer projection = allocFloats(16);
         bufferProjectionMatrix.clear();
         GL11.glGetFloat(GL11.GL_PROJECTION_MATRIX, bufferProjectionMatrix);
         return bufferProjectionMatrix;
@@ -620,7 +617,6 @@ public class GLApp {
 
     public static IntBuffer getViewport()
     {
-        //IntBuffer viewport = allocInts(16);
         bufferViewport.clear();
         GL11.glGetInteger(GL11.GL_VIEWPORT, bufferViewport);
         return bufferViewport;
@@ -691,7 +687,6 @@ public class GLApp {
      */
     public static float getZDepth(int x, int y)
     {
-        //ByteBuffer zdepth = allocBytes(SIZE_FLOAT); //ByteBuffer.allocateDirect(1 * SIZE_FLOAT).order(ByteOrder.nativeOrder());
         bufferZdepth.clear();
         GL11.glReadPixels(x, y, 1, 1, GL11.GL_DEPTH_COMPONENT, GL11.GL_FLOAT, bufferZdepth);
         return ( (float) (bufferZdepth.getFloat(0)));
@@ -706,9 +701,9 @@ public class GLApp {
      */
     public static float getZDepthAtOrigin()
     {
-        float[] resultf = new float[3];
-        project( 0, 0, 0, resultf);
-        return ((int)(resultf[2] * 10000F)) / 10000f;  // truncate to 4 decimals
+        FloatBuffer result = allocFloats(3);
+        project( 0, 0, 0, result);
+        return ((int)(result.get(2) * 10000F)) / 10000f;  // truncate to 4 decimals
     }
 
     /**
@@ -721,13 +716,9 @@ public class GLApp {
      * @param z
      * @param resultf    the screen coordinate as an array of 3 floats
      */
-    public static void project(float x, float y, float z, float[] resultf)
+    public static void project(float x, float y, float z, FloatBuffer resultf)
     {
-        float[] result = new float[3];
-        GLU.gluProject( x, y, z, getModelviewMatrixA(), getProjectionMatrixA(), getViewportA(), result);
-        resultf[0] = result[0];
-        resultf[1] = result[1];
-        resultf[2] = result[2];
+        GLU.gluProject( x, y, z, getModelviewMatrix(), getProjectionMatrix(), getViewport(), resultf);
     }
 
 
@@ -742,13 +733,9 @@ public class GLApp {
      * @param resultf   the world coordinate as an array of 3 floats
      * @see             getWorldCoordsAtScreen()
      */
-    public static void unProject(float x, float y, float z, float[] resultf)
+    public static void unProject(float x, float y, float z, FloatBuffer result)
     {
-        float[] result = new float[3];  // v.9
-        GLU.gluUnProject( x, y, z, getModelviewMatrixA(), getProjectionMatrixA(), getViewportA(), result);
-        resultf[0] = result[0];
-        resultf[1] = result[1];
-        resultf[2] = result[2];
+        GLU.gluUnProject( x, y, z, getModelviewMatrix(), getProjectionMatrix(), getViewport(), result);
     }
 
     /**
@@ -757,18 +744,19 @@ public class GLApp {
      */
     public static float[] getWorldCoordsAtScreen(int x, int y) {
         float z = getZDepthAtOrigin();
-        float[] resultf = new float[3];
-        unProject( (float)x, (float)y, (float)z, resultf);
-        return resultf;
+	FloatBuffer result = allocFloats(3);
+        unProject( (float)x, (float)y, (float)z, result);
+        return result.array();
     }
 
     /**
      * For given screen xy and z depth, return the world xyz coords in a float array.
      */
     public static float[] getWorldCoordsAtScreen(int x, int y, float z) {
-        float[] resultf = new float[3];
-        unProject( (float)x, (float)y, (float)z, resultf);
-        return resultf;
+      // float[] resultf = new float[3];
+      FloatBuffer result = allocFloats(3);
+        unProject( (float)x, (float)y, (float)z, result);
+        return result.array(); 
     }
 
     /**

@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.glu.GLU.*;
+import static org.lwjgl.util.glu.GLU.*;
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
 
