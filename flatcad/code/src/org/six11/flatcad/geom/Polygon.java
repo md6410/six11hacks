@@ -10,7 +10,7 @@ import java.util.Random;
 import org.apache.commons.math.linear.RealMatrix;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.glu.GLU.*;
+import static org.lwjgl.util.glu.GLU.*;
 
 import org.six11.flatcad.gl.GLDrawable;
 import org.six11.flatcad.gl.SelectionModel;

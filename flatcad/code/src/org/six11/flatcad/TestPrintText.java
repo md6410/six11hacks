@@ -30,7 +30,7 @@ import java.nio.*;
 import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.input.*;
-import org.lwjgl.opengl.glu.*;
+import org.lwjgl.util.glu.*;
 
 public class TestPrintText extends GLApp {
     // Handle for texture

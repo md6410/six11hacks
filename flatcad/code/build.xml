@@ -114,6 +114,7 @@
            debug="${compile.debug}"
 	   deprecation="${compile.deprecation}"
            optimize="${compile.optimize}"
+	   includeantruntime="true"
            source="1.5">
       <classpath refid="compile.classpath" />
       <include name="**/*.java" />
