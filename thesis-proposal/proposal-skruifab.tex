@@ -98,7 +98,7 @@ iteratively and interactively making models that can be manufactured
 using rapid fabrication machines. Specifically, the system will
 support users to model objects for production on laser cutters. Such
 objects are composed of flat, rigid parts. Figure \ref{fig:flat} shows
-examples household objects that could be designed using the proposed
+example household objects that could be designed using the proposed
 system and produced with a laser cutter.
 
 This project's first motivation is to empower those who are not
@@ -106,7 +106,7 @@ professional designers to create meaningful objects with rapid
 fabrication machines. It can not be assumed that these users have been
 taught to draw as an architect would have been, nor can it be assumed
 they have invested a great deal of time to learn the often complicated
-modeling software that was developed for professional use.
+modeling software that was developed for professional use. 
 
 The second motivation is to explore the space of sketch-based
 interaction as it applies to modeling physical objects. A success
@@ -183,19 +183,19 @@ system will be evaluated, and a time line for project completion.
 
 \begin{figure}[] 
 \centering
-\subfloat[Initial sketches of possible designs.] { 
+\subfloat[Initial sketches of possible designs (preferred idea is circled).] { 
    \label{fig:initial-sketches}
-   \includegraphics[width=2.0in]{img/physical-sketches.jpg} 
+   \includegraphics[width=1.8in]{img/physical-sketches-circled-part.pdf} 
 }
 \hspace{5mm} \subfloat[Sketch of the user's preferred design in
   greater detail.] {
    \label{fig:final-sketch}
-   \includegraphics[width=2.0in]{img/final-sketch.jpg} 
+   \includegraphics[width=1.8in]{img/final-sketch.jpg} 
 }
 \hspace{5mm} \subfloat[Final physical output made with a laser
   cutter.] {
    \label{fig:final-physical-output}
-   \includegraphics[width=3.0in]{img/final-physical-output.jpg} 
+   \includegraphics[width=3.2in]{img/final-physical-output.jpg} 
 }
 \caption{Initial sketches and photograph of one part of the physical
   output.}
@@ -217,7 +217,7 @@ shown in the lower right corner of the initial sketch. This design
 features two slats supported at each end by side pieces. Toothbrushes
 fit through holes in the top slat and rest on the solid bottom slat.
 
-So far the user had simply been sketching without leveraging
+So far the user had simply been sketching without the benefit of
 computation. But now the user is ready to begin thinking about details
 of how the object will be made, and the system can let the user supply
 information about dimensions.
@@ -226,23 +226,22 @@ There are three unique parts used in this design, shown in
 Figure~\ref{fig:final-sketch}. To illustrate the interaction
 techniques featured in this system, the remainder of this section
 focuses on the design of the part with circular holes in it (shown in
-~Figure\ref{fig:final-physical-output}). Figures
+Figure~\ref{fig:final-physical-output}). Figures
 \ref{fig:ix-draw-bounds}--\ref{fig:ix-draw-guides} depict the design
 process.
 
-From the onset of this process the user realizes that toothbrush
-holders come in many sizes, and it is not completely apparent what the
-``right'' dimensions are. Some properties like width and depth should
-be parametric, which allow the model to produce objects in a variety
-of sizes. Much of the following activity is guided by the desire to
-retain flexibility in the model.
+The user realizes that toothbrush holders come in many sizes, and it
+is not completely apparent what the ``right'' dimensions are. Some
+properties like width and depth should be parametric, which allow the
+model to produce objects in a variety of sizes. Much of the following
+activity is guided by the desire to retain flexibility in the model.
 
 The user begins drawing the part as a rectangle. Even though the user
 knows the finished slat will have notches cut from several locations,
 it is easy to begin by drawing it as a rectangle and removing the
 material for the notches later. The user asks the system to interpret
 the drawing, and the system replaces the input with a beautified
-rectangle.
+rectangle~\cite{pavlidis-beautifier}.
 
 The slat features four notches, each of the same size. To make these
 the user begins by drawing just one. A pen stroke that begins and ends
@@ -253,7 +252,7 @@ been used in earlier systems like Teddy~\cite{igarashi-teddy}.
 Next the user would like to add dimension details to the
 notch. Because the notch is relatively small on the screen, it is
 helpful to zoom in (Figure~\ref{fig:ix-zoom-pan}). Zooming is
-performed by a double-circle gesture, inspired by the zooming
+performed by a double-circle gesture, borrowing the zooming
 technique from Lineogrammer~\cite{zeleznik-lineogrammer}. Clockwise
 and counter-clockwise gestures zoom in and out respectively. For a few
 moments after zooming, a widget appears that lets the user pan to the
@@ -698,10 +697,6 @@ vehicle for this research.
 
 \section{Evaluation}
 
-% - Compare system with SolidWorks, SketchUp, plain paper/pencil to
-% get a baseline of if we are making any progress. Or are we just
-% making things harder?
-
 Interaction techniques are challenging to evaluate. There is a
 tradition in human-computer interaction to evaluate novel interaction
 techniques in a laboratory setting. People perform simple tasks
@@ -710,17 +705,22 @@ approach has its benefits, it avoids the reality that people use
 interaction techniques \textit{with other techniques} and \textit{in
   service of a larger purpose}.
 
-In acknowledgment of this, the proposed system will be evaluated
-holistically. The proposed system offers a set of techniques that are
-intended to work harmoniously together to support users in the
-realistic goal of designing household objects using flat material. To
-evaluate if the system works as intended it will be evaluated in
-comparison with existing tools such as Illustrator, SolidWorks,
-SketchUp, as well as plain pencil and paper. Test participants will be
-asked to design and fabricate a functional object such as the
-toothbrush holder in~Figure\ref{fig:flat-a}.
+In acknowledgment of this, the proposed system will be evaluated as a
+whole, rather than testing isolated pieces. The proposed system offers
+a set of techniques that are intended to work harmoniously together to
+support users in the realistic goal of designing household objects
+using flat material. To test if the system works as intended it will
+be compared with existing tools such as Illustrator, SolidWorks,
+SketchUp, as well as plain pencil and paper. 
 
-This holistic approach will allow me to gauge several factors that
+Formative evaluation will be used throughout the development
+process. Therefore, the exact list of features (and perhaps evaluation
+criteria) must be flexible. Test participants will be asked to design
+and fabricate a functional object such as the toothbrush holder
+in~Figure\ref{fig:flat-a}. Object choice will depend on the system's
+capabilities at the time of testing. 
+
+This whole-system approach will allow me to gauge several factors that
 compare the proposed system with existing WIMP-based tools:
 
 \begin{packed_enum}
@@ -746,42 +746,59 @@ various algorithms. Measures such as user satisfaction should account
 for such aspects: if the system misinterprets input but provides
 adequate methods for recovery, recognition accuracy is not a problem.
 
-Formative evaluation will be used throughout the development
-process. Therefore, the exact list of features (and perhaps evaluation
-criteria) must be flexible. 
-
 \section{Contribution}
 
 Currently there are few interaction techniques for sketch-based
-interfaces, and even fewer examples of coherent sets of
-techniques. This thesis will explore the space of calligraphic
-interaction techniques and will be useful to researchers seeking to
-make sketch-based design systems in contexts beyond the laser cutter
-scenario described above.
+interfaces, and even fewer examples of coherent sets of techniques. As
+stated earlier, it is desirable to provide a design system in which
+the user can do everything without setting down the stylus.
+
+This thesis will explore the space of calligraphic interaction
+techniques to support researchers seeking to make sketch-based design
+systems in contexts beyond the laser cutter scenario described above.
 
 This thesis will contribute the following:
-
 \begin{packed_enum}
-\item A set of calligraphic interaction techniques
-\item An analysis of \textit{when} each technique is appropriate
-\item An analysis of \textit{which techniques} are complementary
-\item Recommendations for developing further techniques
-\item Software engineering implementation details
+\item A set of calligraphic interaction techniques. Some will be based
+  on existing techniques (e.g. Lineogrammer's zoom), others will be
+  novel. Here, \textit{technique} is broadly defined to include
+  interactive onscreen widgets, gestural phrases, and user interface
+  conventions.
+\item An analysis of \textit{the contexts and use cases} when each
+  technique is appropriate. For example, rectification might be
+  appropriate for latter stage design but distracting during early
+  exploratory sketching.
+\item An analysis of \textit{which techniques} are complementary.
+\item Recommendations for developing further techniques.
+\item Software engineering implementation details.
 \end{packed_enum}
+
+The best interactive systems have discoverable, consistent interaction
+techniques working in concert. Companies such as Microsoft and Apple
+have user interaction guidelines for various platforms (Windows,
+Windows Mobile, OS X, iOS) that give developers standard advice for
+developing such systems. No guide yet exists for sketch-based
+interactive systems. This thesis will provide a concrete step to
+providing one.
 
 \section{Time line}
 
-I have already written a good deal of code that will be necessary for
-this project, so it should not take long for an rudimentary prototype
-to be developed. Existing code includes ink analysis and supported
-data structures (such as Masry's Angular Distribution
-Graph~\cite{masry-3d-sketch} among others) and Ouyang's PCA-based
-printed character recognizer~\cite{ouyang-visual-recog}. External tools
-will be used whenever possible.
+In this section I first describe a short schedule for developing the
+sketch-based system, followed by a longer-term schedule for completing
+the dissertation. Important conference paper submission deadlines are
+then listed.
 
-Parkinson's Law posits that ``work expands to fill the allotted
-time''. Believing this, the following time line is perhaps aggressive,
-but also necessary to ensure success. 
+\subsection{System Development}
+
+I have already written a good deal of code this project, so it should
+not take long to develop a rudimentary prototype. Existing code
+includes ink analysis and supported data structures (such as Masry's
+Angular Distribution Graph~\cite{masry-3d-sketch} among others) and
+Ouyang's PCA-based printed character
+recognizer~\cite{ouyang-visual-recog}. External tools will be used
+whenever possible.
+
+The following table presents a tentative schedule for system development.
 
 \vspace{12pt}
 \begin{tabular}{ | l | c | l | }
@@ -828,7 +845,9 @@ predict completion time is to multiply the predicted time by
 three---this brings the expected duration to 27 weeks, or about six
 months. It is of course my intention to work more quickly than this.
 
-\textbf{Important Paper Deadlines}
+\subsection{Dissertation Schedule}
+
+\subsection{Important Paper Deadlines}
 \begin{packed_enum}
 
 \item March 11: IEEE Symposium on Visual Languages and Human-Centric
@@ -844,7 +863,7 @@ months. It is of course my intention to work more quickly than this.
   \textit{(Vancouver)}
 
 \end{packed_enum}
-\singlespacing
+\singlespacing\newpage
 \bibliographystyle{plain}
 
 \bibliography{sketch-bibliography}
