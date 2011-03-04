@@ -80,13 +80,13 @@
     <p>
       Hello. I am a PhD candidate in the <a
       href="http://code.arc.cmu.edu/">Computational Design Lab</a>
-      at <a href="http://cmu.edu/">Carnegie Mellon University</a>. I
-      am also a member of the research staff in the <a
+      at <a href="http://cmu.edu/">Carnegie Mellon University</a>. 
+
+
+In the past I have done various software development or research gigs
+      for Google, Ricoh Research, Stevens Tech (in the <a
       href="http://howe.stevens.edu/research/research-centers/decision-technologies/">Center
-      for Decision Technologies</a> at <a
-      href="http://www.stevens.edu/">Stevens Tech</a>. In the past I
-      have done various software development or research gigs for
-      Google, Ricoh Research, and <a
+      for Decision Technologies</a>) and <a
       href="http://readytalk.com/">ReadyTalk</a>. Before that I was a
       computer science major at <a
       href="http://www.cs.colorado.edu/">the University of Colorado,
