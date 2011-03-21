@@ -285,7 +285,7 @@ public class TextEntry extends JPanel {
       textArea.setCaretColor(Color.RED);
       textArea.setSelectedTextColor(Color.BLUE);
       textArea.setSelectionColor(Color.RED);
-      textArea.setFont(new Font("sansserif", Font.BOLD, 32));
+      textArea.setFont(new Font("sansserif", Font.BOLD, 12));
     }
   }
 
