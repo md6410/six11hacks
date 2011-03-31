@@ -81,25 +81,25 @@ to enable people to take active control of the design of their world,
 rather than being passive consumers of products somebody else has
 made.
 
-However, there remains a gap between the technology used to design and
-the technology used to prototype physical items. Today, a typical
-design process might involve several paper sketches, followed by a
-session with a computer modeling system such as SketchUp, SolidWorks,
-or Rhino. When the designer is satisfied with the CAD model, the rapid
+However, a gap remains between the technology used to design and the
+technology used to prototype physical items. Today, a typical design
+process might involve several paper sketches, followed by a session
+with a computer modeling system such as SketchUp, SolidWorks, or
+Rhino. When the designer is satisfied with the CAD model, the rapid
 fabrication machinery is put to work. The designer can then evaluate
 the output and decide what to do next: keep the design as it is,
 change the CAD model, or ``go back to the drawing board'' and sketch
 new ideas.
 
-This proposal describes an alternate approach that brings the
-sketching and computer modeling activities together in the same
-tool. It lets users sketch as roughly or precisely as they like,
-iteratively and interactively making models that can be manufactured
-using rapid fabrication machines. Specifically, the system will
-support users to model objects for production on laser cutters. Such
-objects are composed of flat, rigid parts. Figure \ref{fig:flat} shows
-example household objects that could be designed using the proposed
-system and produced with a laser cutter.
+This proposal describes an alternate approach that brings sketching
+and computer modeling activities together in the same tool. It lets
+users sketch as roughly or precisely as they like, iteratively and
+interactively making models that can be manufactured using rapid
+fabrication machines. Specifically, the system will support users to
+model objects for production on laser cutters. Such objects are
+composed of flat, rigid parts. Figure \ref{fig:flat} shows example
+household objects that could be designed using the proposed system and
+produced with a laser cutter.
 
 This project's first motivation is to empower those who are not
 professional designers to create meaningful objects with rapid
@@ -112,26 +112,6 @@ The second motivation is to explore the space of sketch-based
 interaction as it applies to modeling physical objects. A success
 criterion is that the user should never need (or want) to set down
 their stylus in favor of keyboard or mouse input.
-
-%% I would even suggest either doing a quick and dirty
-%% study of say 10 undergrads using the tools for the
-%% first time (or maybe 5 undergrad newbies and 5
-%% grad student experts), and get a much better and
-%% detailed sense as to what the problems are. Then, you
-%% could either adapt an existing design framework or
-%% create one to help structure how to think about the
-%% problems at hand.
-
-%% As an example (just making this up), I suspect newbies
-%% will have problems in terms of:
-%% - what is the range of possibilities? What is possible to create?
-%%  Conversely, what is not possible?
-%% - what are design patterns for physical objects?
-%%  (e.g. notches are straightforward, but making something
-%%  more complex like dovetailing isn't obvious to newbs)
-%% - What are common errors that people make when using
-%%  the laser cutter / 3D printer? How to prevent those in
-%%  the design stage?
 
 \begin{figure}
 \centering 
@@ -149,9 +129,14 @@ their stylus in favor of keyboard or mouse input.
 
 \subsection{Thesis Statement}
 
-%% Basically, boiled everything down to 1-3 sentences, which talks or
-%% alludes to the problem, states your solution, and discusses or alludes
-%% to your evaluation.
+This thesis will present a coherent set of calligraphic interaction
+techniques for iteratively making structured drawings to be fabricated
+on a laser cutter. Current computer design tools impose needless and
+unnatural complexity on designers. Sketch-based interaction is chosen
+because of its widespread use in thinking about and representing
+design ideas quickly. If successful, the sketching techniques will
+enable relatively inexperienced designers to design and fabricate
+meaningful artifacts.
 
 \subsection{Conversational Sketch-based Interaction}
 
@@ -160,11 +145,10 @@ The premise of interactive systems is that there is an ongoing
 systems, users ``speak'' with a stylus; computers ``speak'' with
 graphics. Just as humans have social norms for engaging in
 conversation that allow us to talk to people we have not met before,
-there should norms for human-computer interaction in sketch-based
+there should be norms for human-computer interaction in calligraphic
 systems so our experience from one application can be used in the
 next.
 
-% Not sure if this para is necessary but I need something to lead in
 Olsen~\cite{olsen-ui-research} argues the dominant paradigm of ``one
 display, one keyboard, one mouse'' hinders progress in interactive
 systems that use alternate hardware configurations. There is no
@@ -240,6 +224,14 @@ This section illustrates how a user might design the toothbrush holder
 shown in Figure~\ref{fig:flat-a} using the proposed system. There is
 also a video of this process at the URL
 \href{http://vimeo.com/17997357}{http://vimeo.com/17997357}.
+
+This narrative is admittedly contrived, because the user is
+`designing' a part that has already been completed. It is included in
+order to present several proposed interaction techniques as they might
+be used together. The scenario in this section does not address the
+important interaction techniques that might lead a user to create
+several quick drawings used to think about the range of possibilities
+(as shown in Figure~\ref{fig:physical-sketches}).
 
 Some toothbrush holders rest on the sink while others are attached to
 the wall in some way; some hold a single toothbrush while others
@@ -747,6 +739,14 @@ using flat material. To test if the system works as intended it will
 be compared with existing tools such as Illustrator, SolidWorks,
 SketchUp, as well as plain pencil and paper. 
 
+The evaluation criteria in this ``whole system'' analysis focus on
+what users are able to do (or not do) that would be possible with
+traditional structured design software. What is possible to create
+using this system? What is \textit{not} possible? What are the common
+interaction problems or errors? Do users tend to develop particular
+usage patterns that might be exploited? Or do usage patterns indicate
+underlying flaws with the system?
+
 Formative evaluation will be used throughout the development
 process. Therefore, the exact list of features (and perhaps evaluation
 criteria) must be flexible. Test participants will be asked to design
@@ -935,19 +935,7 @@ technical resource. A second paper would focus on the user experience
 and report evaluation findings. I will culminate this work in a long
 CHI paper that would cover both technical and usability topics.
 
-Because system development is just beginning it isn't clear which of
-the following deadlines I can meet for the first two papers.
-
 \begin{packed_enum}
-
-\item March 11: IEEE Symposium on Visual Languages and Human-Centric
-  Computing (VL/HCC 2011). \textit{(Pittsburgh)}
-
-\item March 25: 8th ACM Conference on Creativity and Cognition (C\&C
-  2011) \textit{(Atlanta)}
-
-\item March 30: International Workshop on Visual Languages and
-  Computing (VLC 2011) \textit{(Italy)}
 
 \item April 22: ACM Symposium on User Interface Software and
   Technology (UIST 2011) \textit{(Santa Barbara, CA)}
@@ -969,110 +957,27 @@ the following deadlines I can meet for the first two papers.
 
 \end{document}
 
+%% Kumiyo: activity of sketching vs. sketchy representation
 
-%% Yesterday Kumiyo, Yas, and I (and Yunwen) spent some time viewing
-%% and discussing the video sketch that you made.  I doubt that I can
-%% adequately capture and convey the sense of the discussion (some of
-%% which was in Japanese, a language I, lamentably, do not
-%% understand), but here is an attempt, from memory (the notes also
-%% were in Japanese):
+%% Yas/Kumiyo: The set of techniques facilitate a state of flow. (Can
+%% possibly argue that typical design tools inhibit flow by obliging
+%% users to perform janitarial work, or causing breakdowns due to
+%% overly complex interface).
 
-%% Kumiyo distinguished between sketching (the action of drawing with
-%% a pen) from a sketchy representation (an imprecise diagram or
-%% drawing).  One can, for example, sketch-with-a-pen to produce
-%% precise rectified or beautified representations.  One can also use
-%% a menu-and-palette based mouse interface to produce diagrams or
-%% drawings that do not have precise dimensions or shapes.
+%% Yas: don't need to devote energy to comparing my system with
+%% structured tools. Instead, focus on comparing my tool with other
+%% pen tools.
 
-%% Yas pointed out that your project is entirely different from
-%% menu/palette/mouse interfaces and you need not, and should not,
-%% devote energy to arguing the merits of your system over these
-%% interfaces.  They are simply different.  Rather, he said that your
-%% effort should go to showing that your system is superior to (first)
-%% other pen-based systems, and (second) touch-based systems.  (As an
-%% aside, although Apple doesn't now have a pen-based tablet, they
-%% might well be working on one; Microsoft, on the other hand, doesn't
-%% understand the difference between touch and pen).
+%% Kumiyo: pen vs. fingertip interaction are completely
+%% different. Fingers are too big to see precisely where you're
+%% drawing.
 
-%% Kumiyo felt that the pace, or rhythm of the demo that you
-%% illustrate in your video was important, and that you should
-%% emphasize this.  Yas used the term "flow-friendly" (flow, as in
-%% Czikszentmihaly's book "Flow").  Although the individual techniques
-%% that you show are useful, or potentially useful, it's the larger
-%% frame in which these techniques are used one after another that is
-%% a distinguishing feature of your project.
+%% Yas: Precision and ambiguity (sketchiness) in the same drawing: pen
+%% is the only option (why? because fingers are bad for precision?)
 
-%% Kumiyo, Yas, and Yunwen observed that your toothbrush-holder
-%% example was contrived, in that it was clear that you knew where the
-%% drawing was headed - thus it wasn't a true design scenario.  In a
-%% true design scenario there might be more uncertainty along the path
-%% to completion.
+%% Kumiyo's evaluation criteria:
+%% 1. Nice features that demonstrate power of calligraphic UI
+%%   -- include flow selection
+%% 2. Features integrated nicely with each other & environment
+%% 3. Ability to switch between raw drawing and rectified version
 
-%% Perhaps they will correct my inadequate attempt to report on our
-%% conversation.
-
-
-%% Gabe,
-
-%% First of all, let us stress to you that both Yas and I really like
-%% your tool (or your envisioned tool) shown in the video.  I watched
-%% the video when you sent us the pointer, but it has been sort of
-%% difficult to write my comments/expressions down and I have been
-%% procrastinating in giving you the feedback. My apology.
-
-%% As Mark wrote it, the time for pen-based interface is on the way.
-%% And then you would not even have to argue for using a pen as an
-%% interface.
-
-%% Writing (or drawing) with a fingertip is completely different from
-%% writing with a pen.  One of the obvious reasons is that you cannot
-%% see the point you are writing with the fingertip (you have to
-%% remove your hand to see it). Things like that.
-
-%% Yas put it nicely that when you are writing (or drawing) with a
-%% pen, you sometimes want it to see with some preciseness, such as
-%% how diagram components are proportioned, how they are balanced,
-%% etc. You would definitely need both ambiguous drawing AND precise
-%% alignment, computation, balancing, ..., within a single tool.
-%% Then, pen is the only option.
-
-%% (and that is exactly you are aiming at, it seems).
-
-%% To demonstrate such power, your tool needs to:
-
-%% - consist of nice features that demonstrate the power of pen-based
-%% - UI
-
-%%  (you already have some ideas, and please not forget including
-%%  "flow selection" ! :-) )
-
-%% - the features are nicely integrated within a single tool
-
-%% - be able to switch back and forth between original drawing and its
-%% - rectified representation
-
-%% - << we may come up with more >>
-
-%% During yesterday's meeting, I was telling Mark, Yas and Yunwen
-%% about the time when I saw Takeo's Teddy for the first time (when he
-%% was a Ph.D. student).  People kept asking him why people would use
-%% a pen for creating a 3D object.  He had been struggling a lot to
-%% defend his belief.  But then, when he implemented Teddy, after he
-%% spent significant amount of effort on fine-tuning Teddy for
-%% graceful user experience, people would not ask him such question
-%% (i.e., "why pen?") any more. It became obvious that it has to be
-%% pen-based.
-
-%% I think your tool would be like that too. So you do need to put a
-%% lot of effort in fine-tuning your implementation to ensure graceful
-%% drawing/writing experience.
-
-%% Yas said pen-based tools like yours would be a must for hand-held
-%% note-type device with 500dpi resolution.
-
-%% Good luck and I am really really looking forward to using your
-%% upcoming tool!
-
-%% Just put a lot of effort in designing and fine-tuning the tool, and
-%% please not waste your time/skill/talent coping with irrelevant
-%% questions and challenges :-P
