@@ -113,6 +113,26 @@ interaction as it applies to modeling physical objects. A success
 criterion is that the user should never need (or want) to set down
 their stylus in favor of keyboard or mouse input.
 
+%% I would even suggest either doing a quick and dirty
+%% study of say 10 undergrads using the tools for the
+%% first time (or maybe 5 undergrad newbies and 5
+%% grad student experts), and get a much better and
+%% detailed sense as to what the problems are. Then, you
+%% could either adapt an existing design framework or
+%% create one to help structure how to think about the
+%% problems at hand.
+
+%% As an example (just making this up), I suspect newbies
+%% will have problems in terms of:
+%% - what is the range of possibilities? What is possible to create?
+%%  Conversely, what is not possible?
+%% - what are design patterns for physical objects?
+%%  (e.g. notches are straightforward, but making something
+%%  more complex like dovetailing isn't obvious to newbs)
+%% - What are common errors that people make when using
+%%  the laser cutter / 3D printer? How to prevent those in
+%%  the design stage?
+
 \begin{figure}
 \centering 
 \subfloat[] {
@@ -126,6 +146,12 @@ their stylus in favor of keyboard or mouse input.
 \caption{Household objects made with a laser cutter.}
 \label{fig:flat}
 \end{figure}
+
+\subsection{Thesis Statement}
+
+%% Basically, boiled everything down to 1-3 sentences, which talks or
+%% alludes to the problem, states your solution, and discusses or alludes
+%% to your evaluation.
 
 \subsection{Conversational Sketch-based Interaction}
 
@@ -180,6 +206,14 @@ proposal ends with the thesis contributions, a discussion of how the
 system will be evaluated, and a time line for project completion.
 
 \section{Motivating Scenario}
+
+%% I think the motivating scenario has a big gap between
+%% the problems and solutions. I think it would be good
+%% to conduct a formative study to understand what the
+%% problems people face are. I personally don't have a good
+%% sense as to what these problems are, but looking at
+%% Figures 2a and 2b, I don't get the feeling that the
+%% solutions offered in the video would address them.
 
 \begin{figure}[] 
 \centering
@@ -934,3 +968,111 @@ the following deadlines I can meet for the first two papers.
 \bibliography{sketch-bibliography}
 
 \end{document}
+
+
+%% Yesterday Kumiyo, Yas, and I (and Yunwen) spent some time viewing
+%% and discussing the video sketch that you made.  I doubt that I can
+%% adequately capture and convey the sense of the discussion (some of
+%% which was in Japanese, a language I, lamentably, do not
+%% understand), but here is an attempt, from memory (the notes also
+%% were in Japanese):
+
+%% Kumiyo distinguished between sketching (the action of drawing with
+%% a pen) from a sketchy representation (an imprecise diagram or
+%% drawing).  One can, for example, sketch-with-a-pen to produce
+%% precise rectified or beautified representations.  One can also use
+%% a menu-and-palette based mouse interface to produce diagrams or
+%% drawings that do not have precise dimensions or shapes.
+
+%% Yas pointed out that your project is entirely different from
+%% menu/palette/mouse interfaces and you need not, and should not,
+%% devote energy to arguing the merits of your system over these
+%% interfaces.  They are simply different.  Rather, he said that your
+%% effort should go to showing that your system is superior to (first)
+%% other pen-based systems, and (second) touch-based systems.  (As an
+%% aside, although Apple doesn't now have a pen-based tablet, they
+%% might well be working on one; Microsoft, on the other hand, doesn't
+%% understand the difference between touch and pen).
+
+%% Kumiyo felt that the pace, or rhythm of the demo that you
+%% illustrate in your video was important, and that you should
+%% emphasize this.  Yas used the term "flow-friendly" (flow, as in
+%% Czikszentmihaly's book "Flow").  Although the individual techniques
+%% that you show are useful, or potentially useful, it's the larger
+%% frame in which these techniques are used one after another that is
+%% a distinguishing feature of your project.
+
+%% Kumiyo, Yas, and Yunwen observed that your toothbrush-holder
+%% example was contrived, in that it was clear that you knew where the
+%% drawing was headed - thus it wasn't a true design scenario.  In a
+%% true design scenario there might be more uncertainty along the path
+%% to completion.
+
+%% Perhaps they will correct my inadequate attempt to report on our
+%% conversation.
+
+
+%% Gabe,
+
+%% First of all, let us stress to you that both Yas and I really like
+%% your tool (or your envisioned tool) shown in the video.  I watched
+%% the video when you sent us the pointer, but it has been sort of
+%% difficult to write my comments/expressions down and I have been
+%% procrastinating in giving you the feedback. My apology.
+
+%% As Mark wrote it, the time for pen-based interface is on the way.
+%% And then you would not even have to argue for using a pen as an
+%% interface.
+
+%% Writing (or drawing) with a fingertip is completely different from
+%% writing with a pen.  One of the obvious reasons is that you cannot
+%% see the point you are writing with the fingertip (you have to
+%% remove your hand to see it). Things like that.
+
+%% Yas put it nicely that when you are writing (or drawing) with a
+%% pen, you sometimes want it to see with some preciseness, such as
+%% how diagram components are proportioned, how they are balanced,
+%% etc. You would definitely need both ambiguous drawing AND precise
+%% alignment, computation, balancing, ..., within a single tool.
+%% Then, pen is the only option.
+
+%% (and that is exactly you are aiming at, it seems).
+
+%% To demonstrate such power, your tool needs to:
+
+%% - consist of nice features that demonstrate the power of pen-based
+%% - UI
+
+%%  (you already have some ideas, and please not forget including
+%%  "flow selection" ! :-) )
+
+%% - the features are nicely integrated within a single tool
+
+%% - be able to switch back and forth between original drawing and its
+%% - rectified representation
+
+%% - << we may come up with more >>
+
+%% During yesterday's meeting, I was telling Mark, Yas and Yunwen
+%% about the time when I saw Takeo's Teddy for the first time (when he
+%% was a Ph.D. student).  People kept asking him why people would use
+%% a pen for creating a 3D object.  He had been struggling a lot to
+%% defend his belief.  But then, when he implemented Teddy, after he
+%% spent significant amount of effort on fine-tuning Teddy for
+%% graceful user experience, people would not ask him such question
+%% (i.e., "why pen?") any more. It became obvious that it has to be
+%% pen-based.
+
+%% I think your tool would be like that too. So you do need to put a
+%% lot of effort in fine-tuning your implementation to ensure graceful
+%% drawing/writing experience.
+
+%% Yas said pen-based tools like yours would be a must for hand-held
+%% note-type device with 500dpi resolution.
+
+%% Good luck and I am really really looking forward to using your
+%% upcoming tool!
+
+%% Just put a lot of effort in designing and fine-tuning the tool, and
+%% please not waste your time/skill/talent coping with irrelevant
+%% questions and challenges :-P
