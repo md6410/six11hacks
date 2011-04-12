@@ -9,6 +9,13 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 \usepackage{fontspec,xltxtra,xunicode}
 \usepackage{setspace}
 \defaultfontfeatures{Mapping=tex-text}
@@ -33,17 +40,23 @@
   \setlength{\parsep}{0pt}
 }{\end{enumerate}}
 
-\title{Dissertation Proposal:\\
+\title{Thesis Proposal:\\
 Interaction Techniques for Sketch-based Design}
-\author{Gabe Johnson}
+\author{Gabe Johnson\\Carnegie Mellon University\\ \\ (This is a draft)}
 
 \begin{document}
 \maketitle
+\newpage
+
+\singlespacing
+\tableofcontents
+\doublespacing
+\newpage
 
 \doublespacing % Note: there is also a doublespacing command after the
                % page of figures, since that page changes spacing
                % temporarily.
-
+\addcontentsline{toc}{section}{Abstract}
 \begin{abstract}
 Rapid prototyping machines like laser cutters and 3D printers are
 becoming more common. However, the associated modeling software has a
@@ -60,6 +73,8 @@ appropriate for their tasks and work well as an ensemble.
 Additionally, I will test the utility of this system against existing
 design methods and tools.
 \end{abstract}
+
+\newpage
 
 \section{Problem Statement}
 
@@ -90,6 +105,12 @@ fabrication machinery is put to work. The designer can then evaluate
 the output and decide what to do next: keep the design as it is,
 change the CAD model, or ``go back to the drawing board'' and sketch
 new ideas.
+
+The software proposed here is in a category that does not yet exist
+outside of research labs. Consequently, it is difficult to gauge what
+problems users have with such software without building it. I argue
+that it is beneficial to look beyond current user needs and invent
+tools for the future.
 
 This proposal describes an alternate approach that brings sketching
 and computer modeling activities together in the same tool. It lets
@@ -126,17 +147,6 @@ their stylus in favor of keyboard or mouse input.
 \caption{Household objects made with a laser cutter.}
 \label{fig:flat}
 \end{figure}
-
-\subsection{Thesis Statement}
-
-This thesis will present a coherent set of calligraphic interaction
-techniques for iteratively making structured drawings to be fabricated
-on a laser cutter. Current computer design tools impose needless and
-unnatural complexity on designers. Sketch-based interaction is chosen
-because of its widespread use in thinking about and representing
-design ideas quickly. If successful, the sketching techniques will
-enable relatively inexperienced designers to design and fabricate
-meaningful artifacts.
 
 \subsection{Conversational Sketch-based Interaction}
 
@@ -180,14 +190,58 @@ interact---this phase is about \textit{details}.
 
 \subsection{Proposal Organization}
 
-The remainder of the proposal is organized as follows. First I present
-a hypothetical motivating scenario that describes how the system might
-be used, and relates many of the sketch-based interaction
-techniques. Previous related work on sketch recognition, sketch
-interaction, and rapid fabrication is then discussed. Next I detail my
-own efforts in sketching and design tools for fast fabrication. The
-proposal ends with the thesis contributions, a discussion of how the
-system will be evaluated, and a time line for project completion.
+The remainder of the proposal is organized as follows. First I give a
+brief overview of the thesis goals, scope, and methods. Next I present
+a motivating scenario of how the system might be used, and relates
+many of the sketch-based interaction techniques. Previous related work
+on sketch recognition, sketch interaction, and rapid fabrication is
+then discussed. Next I detail my own efforts in sketching and design
+tools for fast fabrication. The proposal ends with the thesis
+contributions, a discussion of how the system will be evaluated, and a
+time line for project completion.
+
+\section{Thesis Summary}
+
+This section summarizes the purpose, scope, and methods of my
+dissertation.
+
+\subsection{Thesis Statement}
+
+This thesis will present a coherent set of calligraphic interaction
+techniques for iteratively making structured drawings to be fabricated
+on a laser cutter. Current computer design tools impose needless and
+unnatural complexity on designers. Sketch-based interaction is chosen
+because of its widespread use in thinking about and representing
+design ideas quickly. If successful, the sketching techniques will
+enable relatively inexperienced designers to design and fabricate
+meaningful artifacts.
+
+\subsection{Research Scope}
+
+The tool under consideration here supports novice designers in the
+fairly narrow domain of design for 2D laser-cutter fabrication. This
+domain is chosen because laser-cut parts typically have some aspects
+that require precise measurements. While it is necessary to attend to
+several domain-specific aspects of the project, my aim is not to
+create a commercial-grade design environment.
+
+The research scope of this project is to develop calligraphic
+techniques to facilitate the design of these 2D parts. I will evaluate
+these techniques in context of the laser-cutting fabrication design
+domain.
+
+\subsection{Methods}
+
+This dissertation will center on iteratively creating a calligraphic
+design tool. Development will be based on two sources:
+
+\begin{packed_enum}
+\item Prior work: This includes the work of others (largely summarized
+  in \cite{johnson-sketch-review}) and my own past work.
+\item Formative evaluation: I will regularly test the system with CMU
+  students and other volunteers. This means that the plans outlined
+  here could change substantially based on evaluation results.
+\end{packed_enum}
 
 \section{Motivating Scenario}
 
@@ -729,7 +783,7 @@ techniques in a laboratory setting. People perform simple tasks
 designed to evaluate the technique in isolation. While this evaluation
 approach has its benefits, it avoids the reality that people use
 interaction techniques \textit{with other techniques} and \textit{in
-  service of a larger purpose}.
+  service of a larger purpose}. 
 
 In acknowledgment of this, the proposed system will be evaluated as a
 whole, rather than testing isolated pieces. The proposed system offers
@@ -737,7 +791,7 @@ a set of techniques that are intended to work harmoniously together to
 support users in the realistic goal of designing household objects
 using flat material. To test if the system works as intended it will
 be compared with existing tools such as Illustrator, SolidWorks,
-SketchUp, as well as plain pencil and paper. 
+SketchUp, Autodesk SketchBook, as well as plain pencil and paper. 
 
 The evaluation criteria in this ``whole system'' analysis focus on
 what users are able to do (or not do) that would be possible with
@@ -929,55 +983,19 @@ wide spread, best- and worst-case schedules are given.
 \label{sec:important-paper-deadlines}
 
 There are several relevant conference paper deadlines
-approaching. Ideally I would submit to three conferences. One paper
-would detail the system and its capabilities and primarily serve as a
-technical resource. A second paper would focus on the user experience
-and report evaluation findings. I will culminate this work in a long
-CHI paper that would cover both technical and usability topics.
+approaching. Some deadlines include UIST 2011 (April 22), SBIM 2011
+(April 25), DESIRE11 (May 17), and CHI 2012 (September). Ideally I
+would submit to three conferences. One paper would detail the system
+and its capabilities and primarily serve as a technical resource. A
+second paper would focus on the user experience and report evaluation
+findings. I will culminate this work in a long CHI paper that would
+cover both technical and usability topics.
 
-\begin{packed_enum}
-
-\item April 22: ACM Symposium on User Interface Software and
-  Technology (UIST 2011) \textit{(Santa Barbara, CA)}
-
-\item April 25: Sketch Based Interfaces and Modeling (SBIM 2011)
-  \textit{(Vancouver)}
-
-\item May 17: DESIRE11: Creativity and Innovation in Design
-  \textit{(Aarhus)}
-
-\item September: ACM CHI Conference on Human Factors in Computing
-  Systems (CHI 2012) \textit{(Austin, TX)}
-
-\end{packed_enum}
 \singlespacing\newpage
 \bibliographystyle{plain}
 
+\addcontentsline{toc}{section}{References}
 \bibliography{sketch-bibliography}
 
 \end{document}
-
-%% Kumiyo: activity of sketching vs. sketchy representation
-
-%% Yas/Kumiyo: The set of techniques facilitate a state of flow. (Can
-%% possibly argue that typical design tools inhibit flow by obliging
-%% users to perform janitarial work, or causing breakdowns due to
-%% overly complex interface).
-
-%% Yas: don't need to devote energy to comparing my system with
-%% structured tools. Instead, focus on comparing my tool with other
-%% pen tools.
-
-%% Kumiyo: pen vs. fingertip interaction are completely
-%% different. Fingers are too big to see precisely where you're
-%% drawing.
-
-%% Yas: Precision and ambiguity (sketchiness) in the same drawing: pen
-%% is the only option (why? because fingers are bad for precision?)
-
-%% Kumiyo's evaluation criteria:
-%% 1. Nice features that demonstrate power of calligraphic UI
-%%   -- include flow selection
-%% 2. Features integrated nicely with each other & environment
-%% 3. Ability to switch between raw drawing and rectified version
 
