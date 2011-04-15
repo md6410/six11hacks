@@ -40,6 +40,13 @@
   \setlength{\parsep}{0pt}
 }{\end{enumerate}}
 
+\newenvironment{indentwholepara}[1]
+{\begin{list}{}
+         {\setlength{\leftmargin}{#1}}
+         \item[]
+}
+{\end{list}}
+
 \title{Thesis Proposal:\\
 Interaction Techniques for Sketch-based Design}
 \author{Gabe Johnson\\Carnegie Mellon University\\ \\ (This is a draft)}
@@ -104,7 +111,11 @@ Rhino. When the designer is satisfied with the CAD model, the rapid
 fabrication machinery is put to work. The designer can then evaluate
 the output and decide what to do next: keep the design as it is,
 change the CAD model, or ``go back to the drawing board'' and sketch
-new ideas.
+new ideas. It is common for people to physically sketch while making
+revisions or redesigning, because it is often easier and faster than
+working with existing CAD models. This is especially the case with the
+users targetted by this sytem: avocational designers who are not
+necessarily proficient with professional tools.
 
 The software proposed here is in a category that does not yet exist
 outside of research labs. Consequently, it is difficult to gauge what
@@ -112,15 +123,48 @@ problems users have with such software without building it. I argue
 that it is beneficial to look beyond current user needs and invent
 tools for the future.
 
-This proposal describes an alternate approach that brings sketching
-and computer modeling activities together in the same tool. It lets
-users sketch as roughly or precisely as they like, iteratively and
-interactively making models that can be manufactured using rapid
-fabrication machines. Specifically, the system will support users to
-model objects for production on laser cutters. Such objects are
-composed of flat, rigid parts. Figure \ref{fig:flat} shows example
-household objects that could be designed using the proposed system and
-produced with a laser cutter.
+Kirsh and Maglio\cite{kirsh-epistemic-pragmatic} distinguish between
+\textit{pragmatic} and \textit{epistemic} actions. Structured modeling
+tools enable users to manipulate domain elements: boundaries,
+vertices, textures, layers, light sources, and so on. These pragmatic
+actions transform the model. When people sketch, they frequently make
+marks that aid thinking but are not intended to be part of the
+model. These epistemic actions transform the designer's state of mind
+that potentially make it easier to think about how to
+proceed. Computer modeling tools tend to be very good at supporting
+structured, pragmatic actions. Unfortunately, computer tools are poor
+at supporting sketchy, epistemic actions. 
+
+Goel's studies found that designers using structured computer tools
+came up with fewer and less creative ideas than others who sketched
+\cite{goel-sketches-of-thought}. While this study is by now close to
+twenty years old, the nature of structured design tools has not
+changed (and sketching certainly has not). It is faster and easier to
+sketch an idea than it is to produce it in a modeling tool. This rapid
+idea generation leads to more ideas, giving a larger pool from which
+to draw new ideas. Ultimately sketching promotes better design.
+
+Despite the power of sketching for exploring design ideas, structured
+tools are seen as more appropriate for making incremental revisions to
+a single idea. Consider the following quote
+from~\cite{newman-web-designers}:
+
+\begin{quotation}
+\textit{``The beginning of each step I'll do on paper. As soon as I feel
+  like I'm going to be starting any design revisions, then I'll move
+  to [an electronic tool]... because it's easier to make changes to
+  these things.''}
+\end{quotation}
+
+This proposal describes an approach that brings sketching and computer
+modeling activities together in the same tool. It lets users sketch as
+roughly or precisely as they like, iteratively and interactively
+making models that can be manufactured using rapid fabrication
+machines. Specifically, the system will support users to model objects
+for production on laser cutters. Such objects are composed of flat,
+rigid parts. Figure \ref{fig:flat} shows example household objects
+that could be designed using the proposed system and produced with a
+laser cutter.
 
 This project's first motivation is to empower those who are not
 professional designers to create meaningful objects with rapid
@@ -209,7 +253,7 @@ dissertation.
 
 This thesis will present a coherent set of calligraphic interaction
 techniques for iteratively making structured drawings to be fabricated
-on a laser cutter. Current computer design tools impose needless and
+on a laser cutter. Current computer design tools impose needless,
 unnatural complexity on designers. Sketch-based interaction is chosen
 because of its widespread use in thinking about and representing
 design ideas quickly. If successful, the sketching techniques will
