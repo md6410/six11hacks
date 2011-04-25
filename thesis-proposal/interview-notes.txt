@@ -1,0 +1,77 @@
+		   Notes on laser cutter interviews
+
+
+			   == Interview 1 ==
+
+User is a young maker of physical stuff and has a background in
+architecture and product design/development. Has been doing rapid fab
+prototyping and dev for about 3 years.
+
+Primarily uses Rhino for 2D and 3D modeling projects. Will use
+Illustrator/Photoshop to do 'finished' drawings destined for client
+consumption (renderings and so on). He has a lot of experience making
+physical things so he is skilled in finding problems in a design based
+on a sketch, and sometimes doesn't need to even make a drawing to
+reason about how something will (or won't) work.
+
+Observations and "Problems" faced by this user: (scare quotes because
+some are not so much 'problems' as they are things that seemed
+inefficient to me)
+
+* Material properties mattered very early on, particularly for getting
+  some dimensions correct.
+
+* It seemed to be important to have the scale set properly at the
+  beginning.
+
+* Would not model many things in 3D because it is easy enough to do in
+  2D and just know how they go together. Exceptions are when things
+  are bent or join together at weird angles.
+
+* Given the sketch the user could immediately specify many dimensions,
+  but some were missing so he had to 'rough it'. He ended up using
+  existing geometry (whose dimensions were specified) to guide
+  placement of the things he was estimating. E.g. placing the notch
+  directly below the corner above. The corner served as an anchor.
+
+* Rhino lets you enter commands by typing their names (sort of like a
+  command line). 
+
+* Used construction lines and existing geometry as
+  references. Frequetly used structured editing abilities to do things
+  like make two oddly-angled lines parallel, or to nudge a boundary by
+  X millimeters. He would commononly make too many lines and erase
+  them later. This was a repeated tactic.
+
+* Constantly zooming in to adjust geometry and zooming out to see if
+  it looks ok.
+
+* Creating the cutfile was something of an art: he made an artificial
+  cut bed by drawing a 16"x24" rectangle (the size of the physical
+  laser cutter bed). Then he copied the part and pasted/rotated/moved
+  the copies inside the rectangle and tried to use the material
+  efficiently by packing them tightly.
+
+* When starting a new laser cutter project, his first step was to
+  measure the physical thing the new project wil fit on. This involved
+  a quick sketch and writing down the numeric dimensions.
+
+* Within the tool, modal issues caused minor problems. At one point,
+  he was trying to get the mouse to snap to a certain point but it
+  wouldn't until he noticed he had to enter a mode. This wasn't that
+  time consuming, but it was distracting.
+
+* When making a curve, he used a Bezier spline tool and fidgeted
+  around a bit to get it looking correctly.
+
+* He characterizes his process as involving the following:
+
+	  Thinking <--> Sketching <--> Modeling <--> Making
+
+  While the project starts with thinking and ends with making, it is
+  fully possible and likely that the designer's attention can flip
+  between any of these processes as work goes on. For example, there's
+  a lot of thinking done before sketching, though sketching nicely
+  complements thinking. And the designer might make a first physical
+  version with the understanding that errors and issues will be found,
+  which fuels additional thinking/sketching/modeling.
