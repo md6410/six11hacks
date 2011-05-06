@@ -33,6 +33,12 @@
 %% \titleformat*{\subsection}{\Large\bfseries\sffamily}
 %% \titleformat*{\subsubsection}{\large\bfseries\sffamily}
 
+\newcommand{\sectionline}{%
+  \vspace{\baselineskip}%
+  \hspace{\fill}\rule{0.5\linewidth}{.7pt}\hspace{\fill}%
+  \par \vspace{\baselineskip}
+}
+
 \newenvironment{packed_enum}{
 \begin{enumerate}
   \setlength{\itemsep}{1pt}
@@ -47,12 +53,26 @@
 }
 {\end{list}}
 
-\title{Thesis Proposal:\\
-Interaction Techniques for Sketch-based Design}
-\author{Gabe Johnson\\Carnegie Mellon University\\ \\ (This is a draft)}
+\title{Thesis Proposal:\\ Interaction Techniques for Sketch-based
+  Design} \author{Gabe Johnson\\School of Architecture\\Carnegie
+  Mellon University\\ \\ (This is a draft)}
 
 \begin{document}
+\thispagestyle{empty}
 \maketitle
+\vspace{70pt}
+\begin{center}Committee\\
+\vspace{24pt}
+\rule{0.8\linewidth}{0.7pt}
+\\
+\vspace{24pt}
+\textit{Mark D. Gross} (Chair) --- School of Architecture --- CMU\\
+\vspace{8pt}
+\textit{Ellen Yi-Luen Do} --- College of Architecture \& College of Computing --- Georgia Tech\\
+\vspace{8pt}
+\textit{Jason I. Hong} --- Human Computer Interaction Institute --- CMU\\
+\end{center}
+
 \newpage
 
 \singlespacing
@@ -114,7 +134,7 @@ change the CAD model, or ``go back to the drawing board'' and sketch
 new ideas. It is common for people to physically sketch while making
 revisions or redesigning, because it is often easier and faster than
 working with existing CAD models. This is especially the case with the
-users targetted by this sytem: avocational designers who are not
+users targeted by this system: avocational designers who are not
 necessarily proficient with professional tools.
 
 The software proposed here is in a category that does not yet exist
@@ -123,7 +143,7 @@ problems users have with such software without building it. I argue
 that it is beneficial to look beyond current user needs and invent
 tools for the future.
 
-Kirsh and Maglio\cite{kirsh-epistemic-pragmatic} distinguish between
+Kirsh and Maglio~\cite{kirch-epistemic-action} distinguish between
 \textit{pragmatic} and \textit{epistemic} actions. Structured modeling
 tools enable users to manipulate domain elements: boundaries,
 vertices, textures, layers, light sources, and so on. These pragmatic
@@ -252,13 +272,14 @@ dissertation.
 \subsection{Thesis Statement}
 
 This thesis will present a coherent set of calligraphic interaction
-techniques for iteratively making structured drawings to be fabricated
-on a laser cutter. Current computer design tools impose needless,
-unnatural complexity on designers. Sketch-based interaction is chosen
-because of its widespread use in thinking about and representing
-design ideas quickly. If successful, the sketching techniques will
-enable relatively inexperienced designers to design and fabricate
-meaningful artifacts.
+techniques for iteratively making structured drawings that have enough
+detail that objects can be fabricated on a laser cutter. Current
+computer design tools impose needless, unnatural complexity on
+designers. Sketch-based interaction is chosen because of its
+widespread use in thinking about and representing design ideas
+quickly. If successful, the sketching techniques will enable
+relatively inexperienced designers to design and fabricate meaningful
+artifacts.
 
 \subsection{Research Scope}
 
@@ -282,20 +303,12 @@ design tool. Development will be based on two sources:
 \begin{packed_enum}
 \item Prior work: This includes the work of others (largely summarized
   in \cite{johnson-sketch-review}) and my own past work.
-\item Formative evaluation: I will regularly test the system with CMU
+\item Iterative evaluation: I will regularly test the system with CMU
   students and other volunteers. This means that the plans outlined
   here could change substantially based on evaluation results.
 \end{packed_enum}
 
 \section{Motivating Scenario}
-
-%% I think the motivating scenario has a big gap between
-%% the problems and solutions. I think it would be good
-%% to conduct a formative study to understand what the
-%% problems people face are. I personally don't have a good
-%% sense as to what these problems are, but looking at
-%% Figures 2a and 2b, I don't get the feeling that the
-%% solutions offered in the video would address them.
 
 \begin{figure}[] 
 \centering
@@ -697,11 +710,49 @@ publishing to become common. Prior to this, people relied on printing
 companies and graphic designers if they needed to create
 professional-looking printed output. 
 
+
+% Price information: 
+% 2001: 12,900 (ULS 25 watt)
+% 2006: 9,995 (ULS 25 watt)
+% 2010: 8,500 (ULS 25 watt)
+% 2011: 6,850 (ULS 25 watt)
+%
+%   http://www.rcgroups.com/forums/showthread.php?t=16912 claims that
+%   a 25-watt model from Universal Laser systems cost $12,900. Several
+%   comments in that thread are in line with that price estimate for
+%   home-garage-lab use.
+%   http://www.microgeo-usa.com/ProductDetails.asp?ProductCode=universal-laser-VLS2.30
+%   currently prices the ULS 25 watt 16x12 unit as costing $6,850.
+
+% http://55-website.com/xo1/ulsinc/english/PDFs/EJ_VL_Article_Reprint.pdf is a press article from 2006 that prices the 25 watt laser at 10,000
+
 Physical prototyping machines might very well become as common as
 desktop printers, which will change our perception of the role of
-computers~\cite{eisenberg-fab}. Home fabrication means people could
-make their things, from craft items to replacement parts when things
-break. This is a democratizing turn of events, but the current crop of
+computers~\cite{eisenberg-fab}. Figure~\ref{fig:prices} shows prices
+for a comparable~25-Watt,~16''x12'' laser cutter model from Universal
+Laser Systems. These values were found on hobbyist forums on the
+Internet. While these data may not be exact, they do show the price of
+desktop laser cutting machines has been cut by almost half in the past
+ten years. While still out of reach for average hobbyists to afford,
+they are inexpensive enough for schools and ``hackerspaces'' to buy
+for their members.
+
+For designers that do not have access to rapid fabrication machines,
+there are quite a few recently founded Internet-based companies that
+offer fabrication services for designers. For example,
+Pokono\footnote{http://www.pokono.com} lets designers upload cut files
+that are analyzed for correctness, and gives people a wide array of
+material stock (felt, cardboard, acrylic, leather, wood) and colors.
+
+\begin{figure}[h] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{img/prices.png} 
+   \caption{Prices of Universal Laser Systems 25-Watt 16x12 inch
+     machine in various years.}
+   \label{fig:prices}
+\end{figure}
+
+This is a democratizing turn of events, but the current crop of
 software for designing these objects is typically too hard for most
 people to use~\cite{landay-design-tools} and is a limiting factor.
 
@@ -746,7 +797,17 @@ legs. The system includes a sophisticated physical simulator to let
 the designer explore its physicality (for example to determine if it
 will remain upright), and if it will be comfortable. It also allows
 designers to change subtle properties of curves using onscreen control
-handles.
+handles. My proposed system differs from Sketch Chair in two important
+respects. First, Saul's system presumes the user is making a chair or
+chair-like object, and provides highly specialized software analysis
+tools. To borrow from Henry Ford, you can make anything you want, as
+long as it is a chair. My system is more general, so the range of
+possibilities with my tool is wider. Second, Sketch Chair (and many
+systems like it) constrain designers to using a small set of part
+junction types. My system does not propose to include pre-specified
+junction types. This is both liberating (because designers are free to
+chose whichever type they want) but also encumbering (because they
+must design the junctions themselves).
 
 Plushie lets people make bulbous textile objects such as plush toys or
 balloons~\cite{mori-plushie}. Users iteratively design objects by
@@ -756,10 +817,155 @@ tree~\cite{igarashi-teddy}.
 
 \section{My Prior Work}
 
+My work is technology-focused but it is driven by observing
+people. This section first discusses my experience studying designers'
+work practices and the problems they face. I then describe the
+software tools I have made.
+
+\subsection{Designer Observations}
+
+I spent a few weeks at MAYA Design in Pittsburgh during the winter
+of~2005--2006~\cite{johnson-tiny-ethnography}. In this time I
+interviewed designers and their managers and observed the company's
+design culture. I am currently in the midst of conducting a series of
+interviews with designers who design artifacts for production with
+laser cutters. This section relates my findings from both studies.
+
+Informal media accounted for the most visible artifacts of designer
+work practice. Sketches, sticky-notes, and whiteboard drawings were in
+plain view in nearly all employee areas. Even the kitchen had
+whiteboards; when the whiteboards were full I observed people drawing
+directly on the windows. Freehand drawing was a highly valued skill
+and was central to individual designers' work and group communication.
+
+Four of the five designers interviewed showed me their
+sketches. Interestingly, those same designers were less inclined to
+show me computational models such as Illustrator files. While
+designers did not typically voluntarily show me computational
+artifacts, they did show me printed versions of their computational
+models. Nearly all of these printed pages had handwriting and sketches
+on them, sometimes by more than one person. 
+
+People reported they iterate between virtual and paper versions of
+their designs. The designers would edit a computational model with an
+application like Photoshop, and then print a paper copy for personal
+or group use. They would then draw or write directly on that page as
+they explored variations or made refinements. If a paper-based editing
+session was useful, the designers would then manually transfer these
+changes back into their application. The process of printing, editing,
+and manually merging changes was seen a number of times.
+
+More recently I have begun to study designers using laser
+cutters. Like at MAYA, iterating between physical and computer-based
+artifacts appears to be a dominant process for the laser cutter
+users. The current interview study is ongoing. These findings are
+preliminary, but they do agree with my past experience at MAYA.
+
+Three interviews have been conducted to date, and several more are
+planned. The interviews were conducted in whichever location they were
+likely to do this design work. I began by asking each designer to
+describe their design process. Each designer was able to show me
+sketches or videos of their work, and in two cases could take a recent
+project off a nearby shelf. While there are subtle (and some
+substantial) differences in their processes, each designer followed
+the following pattern.
+
+They begin by thinking about a problem and making drawings. Some
+drawings are made to think about how to frame the project (what is it
+for), while others help reason about how to make it (how it works, how
+it fits together). When the idea is reasonably well-formed they will
+make the model in software. 
+
+Following the interview about past design projects, I gave
+participants a sketch (Figure~\ref{fig:interview-sketch}) and asked
+them the implement it using their software tool of choice. The purpose
+of this task was to learn what problems people faced when performing
+the common task of using modeling software to actualize an idea based
+on a sketch.
+
+\begin{figure}
+\centering 
+\subfloat[The part users set out to replicate.] {
+  \label{fig:interview-sketch-1} 
+  \includegraphics[width=0.5\linewidth]{img/laser-me-1.jpg}
+}
+\hspace{1cm} \subfloat[Drawing of how the part is used in context.] {
+    \label{fig:interview-sketch-2}
+    \includegraphics[width=0.5\linewidth]{img/laser-me-2.jpg}
+}
+\caption{Sketches given to participants to implement in modeling software.}
+\label{fig:interview-sketch}
+\end{figure}
+
+One participant used Rhino, while two used Illustrator. The Rhino user
+finished the task in approximately ten minutes while the Illustrator
+users finished in about twenty. All users felt there was enough
+information in the sketch to make the part, even though there were
+some aspects that were not clear, such as the overall width of the
+part. 
+
+Rhino directly supports people to use existing geometric elements when
+placing new ones. For example, the Rhino user created the top edges
+first, and used the top corners as guides to place the notches
+directly below. 
+
+Compared with the Rhino user's approach, the Illustrator users
+employed a fairly haphazard strategy to implement the sketch. The
+first Illustrator user was comfortable with the \textit{Path Finder}
+tool, used to combine shapes by intersecting or subtracting existing
+paths. The other Illustrator user was aware of this tool but was not
+accustomed to using it. Instead, this person would `remove' unwanted
+lines by covering them up with opaque white rectangles. The obscured
+lines would not be visible, and would therefore not be cut. This did
+introduce a good deal of complexity to the task, however. In both
+Illustrator cases, the designers would zoom in and use the mouse or
+keyboard to move vertices and lines until they appeared to align. In
+these cases the program did not assist users to `snap' elements
+together.
+
+Both Illustrator participants used the Undo function routinely. The
+dominant use of this was to revert after making a single failed
+attempt to edit some element. There were a few instances where the
+designer believed their current approach was flawed in such a way that
+it would be better to back up several dozen operations because a
+single decision early on was now observed to be problematic. This is
+consistent with the study by Akers \textit{et. al} on the use of
+undo~\cite{akers-undo}.
+
+From the single observation it appears that Rhino is better suited to
+the task than Illustrator in terms of speed of execution and
+efficiency of operations.
+
+After completing the model for the single part, I asked participants
+to take whatever steps remain before fabricating the final parts
+(roughly sketched in Figure~\ref{fig:interview-sketch-2}). All
+participants then proceeded to generate a \textit{cut file}, which
+involves arranging copies of the finished model on a sheet to make
+efficient use of material. For this step, the Rhino user saved the
+model as a PDF and opened it in Illustrator. This user created a red
+rectangle equal in size to the stock material that would be placed on
+the laser cutter bed. This was done to ensure the laser would not cut
+beyond the available material. The other two participants did not
+perform this step. All three users arranged the parts by copying the
+original, and pasting copies on a new sheet. The copies were then
+rotated and moved to make efficient use of material. The Rhino user's
+cut file is shown in Figure~\ref{fig:cutfile}.
+
+\begin{figure}[h] 
+   \centering
+   \includegraphics[width=4in]{img/participant-1-cutfile.pdf} 
+   \caption{Final cut file. Black indicates cut lines, while red is
+     ignored by the laser cutter and indicates the stock material
+     boundaries.}
+   \label{fig:cutfile}
+\end{figure}
+
+\subsection{Computational Design Tools}
+
 The Designosaur~\cite{oh-fab} is a prototype system for kids to design
 their own wooden dinosaur ``skeletons''. They begin by drawing
 individual bone outlines and specify notch locations where the bone
-joins another. To support this, t user can name bones and use those
+joins another. To support this, the user can name bones and use those
 names indicate how the bones fit together.
 
 We noticed that editing bone boundaries presented some challenges.
@@ -835,7 +1041,7 @@ a set of techniques that are intended to work harmoniously together to
 support users in the realistic goal of designing household objects
 using flat material. To test if the system works as intended it will
 be compared with existing tools such as Illustrator, SolidWorks,
-SketchUp, Autodesk SketchBook, as well as plain pencil and paper. 
+SketchUp, Rhino, as well as plain pencil and paper. 
 
 The evaluation criteria in this ``whole system'' analysis focus on
 what users are able to do (or not do) that would be possible with
@@ -845,12 +1051,12 @@ interaction problems or errors? Do users tend to develop particular
 usage patterns that might be exploited? Or do usage patterns indicate
 underlying flaws with the system?
 
-Formative evaluation will be used throughout the development
+Iterative evaluation will be used throughout the development
 process. Therefore, the exact list of features (and perhaps evaluation
 criteria) must be flexible. Test participants will be asked to design
 and fabricate a functional object such as the toothbrush holder
 in~Figure\ref{fig:flat-a}. Object choice will depend on the system's
-capabilities at the time of testing. 
+capabilities at the time of testing.
 
 This whole-system approach will allow me to gauge several factors that
 compare the proposed system with existing WIMP-based tools:
@@ -865,9 +1071,9 @@ compare the proposed system with existing WIMP-based tools:
 \item How ``learnable'' the interaction style is
 \item How system supports (or does not support) alternate working
   styles
-\item Perception of how well tool helps people \textit{think},
-  \textit{create}, \textit{explore}, \textit{visualize},
-  \textit{specify}, and \textit{fabricate}
+\item How well tool helps people \textit{think}, \textit{create},
+  \textit{explore}, \textit{visualize}, \textit{specify}, and
+  \textit{fabricate}
 \item User feedback: criticism and suggestions
 \end{packed_enum}
 
@@ -917,8 +1123,7 @@ providing one.
 
 In this section I first describe a short schedule for developing the
 sketch-based system, followed by a longer-term schedule for completing
-the dissertation. Important conference paper submission deadlines are
-then listed.
+the dissertation. 
 
 \subsection{System Development}
 \label{sec:system-development-schedule}
@@ -941,25 +1146,27 @@ The following table presents a tentative schedule for system development.
 
   \hline \hline
 
-  Milestone 1 & 2 weeks & Boundaries, interpretation, and rectification. \\
+  Milestone 1 & 1 week & Primitive stroke analysis to generate constraints \\
   
-  Milestone 2 & 1 week & Add/remove material. \\
+  Milestone 2 & 1 week & Establish boundary model \\
 
-  Milestone 3 & 1/2 week & Erase unwanted ink with scribble gesture. \\
+  Milestone 3 & 1 week & Recognize gestures to add/subtract material \\
 
-  Milestone 4 & 1/2 week & Implement zoom and pan widgets. \\ 
+  Milestone 4 & 1/2 week & Erase unwanted ink with scribble gesture. \\
 
-  Milestone 5 & 1 week & Indicate and name linear dimensions. \\
+  Milestone 5 & 1/2 week & Implement zoom and pan widgets. \\ 
 
-  Milestone 6 & 1/2 week & Indicate and name angular and location dimensions. \\
+  Milestone 6 & 1 week & Indicate and name linear dimensions. \\
 
-  Milestone 7 & 1/2 week & Indicate guides (points, lines, circles). \\ 
+  Milestone 7 & 1/2 week & Indicate and name angular and location dimensions. \\
 
-  Milestone 8 & 1 week & Indicate hints and use them for interpretation. \\ 
+  Milestone 8 & 1/2 week & Indicate guides (points, lines, circles). \\ 
 
-  Milestone 9 & 1 week & Indicate parameter values (scalar) \\ 
+  Milestone 9 & 1 week & Indicate hints and use them for interpretation. \\ 
 
-  Milestone 10 & 1 week & Indicate parameter values (expression) \\
+  Milestone 10 & 1 week & Indicate parameter values (scalar) \\ 
+
+  Milestone 11 & 1 week & Indicate parameter values (expression) \\
 
   \hline
   
@@ -980,7 +1187,6 @@ to multiply the predicted time by three---this brings the expected
 duration to 27 weeks, or about six months. It is of course my
 intention to work more quickly than this.
 
-
 \subsection{Dissertation Schedule}
 
 The schedule for completing and defending the dissertation
@@ -988,7 +1194,7 @@ follows. Because the completion time for system building has such a
 wide spread, best- and worst-case schedules are given.
 
 \vspace{12pt}
-\begin{tabular}{ | l | c | p{70mm} | }
+\begin{tabular}{ | l | c | p{80mm} | }
   \hline
 
   \textbf{Component} & \textbf{Num. Weeks} & \textbf{Remark} \\
@@ -998,42 +1204,30 @@ wide spread, best- and worst-case schedules are given.
   System Development & 9--27 weeks & Schedule given above in
   section~\ref{sec:system-development-schedule}. \\
 
-  Conference Paper Writing & 4 weeks & Important conferences listed in
-  part~\ref{sec:important-paper-deadlines}. \\
+  User Interviews & 2--4 weeks & Understand current problems and
+  processes. \\
 
-  System Evaluation & 4 weeks & Includes modifications based on
-  feedback. \\ 
+  System Evaluation & 2--4 weeks & Includes modifications based on
+  feedback. Concurrent with system development. \\ 
 
-  Dissertation draft & 4 weeks & Can borrow from the literature
-  survey~\cite{johnson-sketch-review}, this proposal, and conference
-  papers included in this schedule. \\
+  Dissertation draft & 4--8 weeks & Borrow from literature
+  survey~\cite{johnson-sketch-review} and this proposal. \\
 
-  Dissertation revisions & 3 weeks & Could take much longer, esp. if
-  additional system building is required.\\
+  Dissertation revisions & 3--8 weeks & ---\\
 
-  Defense preparation & 2 weeks & \\
+  Defense preparation & 2 weeks & ---\\
 
   \hline
-  
-  & \multicolumn{2}{|c|}{9--27 weeks development, 17 weeks other = 26--44 weeks total} \\
+
+  \multicolumn{3}{|c|}{
+    Summary: 9--27 weeks development, 13--26 weeks other = 
+    \textit{22--53 weeks total}
+  } \\
 
   \hline
 
 \end{tabular}
 \vspace{12pt}
-
-
-\subsection{Important Paper Deadlines}
-\label{sec:important-paper-deadlines}
-
-There are several relevant conference paper deadlines
-approaching. Some deadlines include UIST 2011 (April 22), SBIM 2011
-(April 25), DESIRE11 (May 17), and CHI 2012 (September). Ideally I
-would submit to three conferences. One paper would detail the system
-and its capabilities and primarily serve as a technical resource. A
-second paper would focus on the user experience and report evaluation
-findings. I will culminate this work in a long CHI paper that would
-cover both technical and usability topics.
 
 \singlespacing\newpage
 \bibliographystyle{plain}
