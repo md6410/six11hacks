@@ -2,7 +2,7 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[margin=1.25in]{geometry}
 \usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption,subfig}
 \usepackage{graphicx}
@@ -18,9 +18,11 @@
 }
 \usepackage{fontspec,xltxtra,xunicode}
 \usepackage{setspace}
+\setcounter{tocdepth}{2}
 \defaultfontfeatures{Mapping=tex-text}
 %\setromanfont[Mapping=tex-text]{Baskerville}
-\setromanfont{Fanwood Text}
+%\setromanfont{Fanwood Text}
+\setromanfont{PT Serif}
 %\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans}
 %\setsansfont[Scale=MatchLowercase]{Cabin}
 %\setmonofont[Scale=MatchLowercase]{Andale Mono}
@@ -85,20 +87,21 @@
                % temporarily.
 \addcontentsline{toc}{section}{Abstract}
 \begin{abstract}
-Rapid prototyping machines like laser cutters and 3D printers are
-becoming more common. However, the associated modeling software has a
-significant learning challenge for novice users. I propose to create a
-modeling system that allows for design of objects via freehand
-sketching, a skill that most people already have. Sketch-based
-interaction is viewed as a promising design method, but unlike
-traditional WIMP applications there are no standard interaction
-techniques for sketch-based applications. The proposed system will
-explore sketch-based interaction techniques for moderately complex
-tasks such as the design of objects for production via laser cutter. I
-will develop a series of sketch-based interaction techniques that are
-appropriate for their tasks and work well as an ensemble. 
-Additionally, I will test the utility of this system against existing
-design methods and tools.
+Rapid prototyping machines such as laser cutters and 3D printers are
+becoming more common. However, the associated modeling software needed
+to create designs that can be made with these machines poses a
+significant learning challenge for inexpert users and can be hard to
+use even for those with experience. I propose to create a modeling
+system that allows for design of objects via freehand sketching, a
+skill that many people already have. Sketch-based interaction is a
+promising design paradigm, but unlike traditional WIMP applications
+there are no standard interaction techniques for sketch-based
+applications. The proposed system will explore sketch-based
+interaction techniques for moderately complex tasks such as the design
+of objects for production via laser cutter. I will develop a set of
+sketch-based interaction techniques that empower laser cutter users to
+create models. Additionally, I will test the utility of this system
+against existing design methods and tools.
 \end{abstract}
 
 \newpage
@@ -115,7 +118,7 @@ potential solutions. Freehand drawing is an activity that nearly all
 designers---professional and avocational alike---readily employ.
 
 Ideas that begin as rough sketches may eventually be prototyped with
-rapid prototyping machinery such as 3D printers, CNC routers, or laser
+rapid fabrication machinery such as 3D printers, CNC routers, or laser
 cutters. Over time, this sort of machinery will become more
 affordable, utilize a wider range of materials, and produce
 higher-quality output. Rapid fabrication machines offer the potential
@@ -157,17 +160,17 @@ at supporting sketchy, epistemic actions.
 
 Goel's studies found that designers using structured computer tools
 came up with fewer and less creative ideas than others who sketched
-\cite{goel-sketches-of-thought}. While this study is by now close to
-twenty years old, the nature of structured design tools has not
+\cite{goel-sketches-of-thought}. Although this study is by now close
+to twenty years old, the nature of structured design tools has not
 changed (and sketching certainly has not). It is faster and easier to
 sketch an idea than it is to produce it in a modeling tool. This rapid
 idea generation leads to more ideas, giving a larger pool from which
 to draw new ideas. Ultimately sketching promotes better design.
 
-Despite the power of sketching for exploring design ideas, structured
-tools are seen as more appropriate for making incremental revisions to
-a single idea. Consider the following quote
-from~\cite{newman-web-designers}:
+While sketching is regarded as a highly effective technique for
+exploring design ideas, structured editors are seen as more
+appropriate for making incremental revisions to a single
+idea. Consider the following quote from~\cite{newman-web-designers}:
 
 \begin{quotation}
 \textit{``The beginning of each step I'll do on paper. As soon as I feel
@@ -216,7 +219,7 @@ their stylus in favor of keyboard or mouse input.
 
 The premise of interactive systems is that there is an ongoing
 ``conversation'' between the user and computer. In sketch-based
-systems, users ``speak'' with a stylus; computers ``speak'' with
+systems, users ``speak'' with a stylus; computers ``talk back'' with
 graphics. Just as humans have social norms for engaging in
 conversation that allow us to talk to people we have not met before,
 there should be norms for human-computer interaction in calligraphic
@@ -226,11 +229,11 @@ next.
 Olsen~\cite{olsen-ui-research} argues the dominant paradigm of ``one
 display, one keyboard, one mouse'' hinders progress in interactive
 systems that use alternate hardware configurations. There is no
-standard for sketch-based interaction, where typical hardware is a
-pen-sensitive display and stylus. In recent years, researchers have
-begun to give more attention to interaction aspects of sketch
-recognition-based user interfaces, but the extent of this work remains
-limited.
+standard for set of interaction techniques and idioms for sketch-based
+systems, where hardware is a pen-sensitive display and stylus. In
+recent years, researchers have begun to give more attention to
+interaction aspects of sketch recognition-based user interfaces, but
+the extent of this work remains limited.
 
 For each of the several technical challenges in sketch-based systems
 research there is a human component. Segmentation and recognition are
@@ -242,10 +245,10 @@ recognized? How does the system tell the user what has been
 recognized? When should this occur? How can the user work with the
 system to recover from mistakes?
 
-The answer to these questions presumably begins with ``it depends on
-what the user is trying to achieve.'' In the proposed system, ideas
-are gradually refined from sketches into manufacturable models. The
-user's goals are different early in this process compared with latter
+The answer to these questions begins with ``it depends on what the
+user is trying to achieve.'' In the proposed system, ideas are
+gradually refined from sketches into manufacturable models. The user's
+goals are different early in this process compared with latter
 stages. Early in this process the user's goal is to simply record
 ideas, possibly to share with other people. The early phase is usually
 about \textit{big ideas}. Later, the user's goals might be to add
@@ -255,14 +258,16 @@ interact---this phase is about \textit{details}.
 \subsection{Proposal Organization}
 
 The remainder of the proposal is organized as follows. First I give a
-brief overview of the thesis goals, scope, and methods. Next I present
-a motivating scenario of how the system might be used, and relates
-many of the sketch-based interaction techniques. Previous related work
-on sketch recognition, sketch interaction, and rapid fabrication is
-then discussed. Next I detail my own efforts in sketching and design
-tools for fast fabrication. The proposal ends with the thesis
-contributions, a discussion of how the system will be evaluated, and a
-time line for project completion.
+brief overview of the thesis goals, scope, and methods. Next I give
+details on the design domain my system will support. To give a better
+sense of the system I intend to build, I then present a motivating
+scenario of how the system might be used, and relates many of the
+sketch-based interaction techniques. Previous related work on sketch
+recognition, sketch interaction, and rapid fabrication is then
+discussed. Next I detail my own efforts in sketching and design tools
+for fast fabrication. The proposal ends with the thesis contributions,
+a discussion of how the system will be evaluated, and a time line for
+project completion.
 
 \section{Thesis Summary}
 
@@ -286,14 +291,13 @@ artifacts.
 The tool under consideration here supports novice designers in the
 fairly narrow domain of design for 2D laser-cutter fabrication. This
 domain is chosen because laser-cut parts typically have some aspects
-that require precise measurements. While it is necessary to attend to
-several domain-specific aspects of the project, my aim is not to
-create a commercial-grade design environment.
+that require precise measurements. 
 
 The research scope of this project is to develop calligraphic
 techniques to facilitate the design of these 2D parts. I will evaluate
 these techniques in context of the laser-cutting fabrication design
-domain.
+domain. This domain is chosen because it a 2D environment is easier to
+develop than a 3D tool.
 
 \subsection{Methods}
 
@@ -304,9 +308,351 @@ design tool. Development will be based on two sources:
 \item Prior work: This includes the work of others (largely summarized
   in \cite{johnson-sketch-review}) and my own past work.
 \item Iterative evaluation: I will regularly test the system with CMU
-  students and other volunteers. This means that the plans outlined
-  here could change substantially based on evaluation results.
+  students and other volunteers. 
 \end{packed_enum}
+
+\section{New Makers, New Tools}
+
+There is a growing community of self-described \textit{makers} who
+design and build many kinds of physical
+things~\cite{gershenfeld-fab}. Some are electronic or robotic gizmos,
+while others are composed of traditional material but designed or made
+with modern technology. The ranks of these ``new
+makers''~\cite{gross-new-makers} include mechanical engineers,
+industrial designers, artists, computer programmers, architects, and
+many others. It is common for these people to be relatively untrained
+in aspects of their craft, such as using modeling software, designing
+or assembling electronics, or making visually appealing physical
+constructions. It is rare to find any individual person that is an
+expert in all of these topics, but it is common that a person knows
+something about a lot of them.
+
+It is possible that we are beginning to see a shift from an economy
+based on mass-production (in factories) to one that includes
+mass-customization (in homes and community centers). Rapid fabrication
+machines continue to decline in price while improving in quality. It
+is conceivable that in the not-so-distant future, small manufacturing
+machines will be as common as desktop printers~\cite{economist-fab}. A
+new sector of small businesses use rapid fabrication to cater to the
+needs of hobbyist designers as well as people that need highly
+customized goods (e.g. prosthetic limbs)~\cite{nyt-rapidfab}.
+
+The surge of home manufacturing is made possible by a number of
+related factors. First, there is a trend away from a culture of
+consumption towards a culture of production. This is most visibly
+reflected in the democratization of modern media where the users
+become the dominant producers of content (e.g. social networking
+systems like Facebook or the game Minecraft). People are once again
+beginning to participate in the design of the world around them.
+
+Second, there is a developing support structure for the new makers,
+including physical shared space, Internet resources, magazines, and
+conferences. \textit{Hacker spaces} are physical locations where
+people can meet, share ideas, and work on projects. Hacker spaces
+commonly have various tools and supplies available to members. Online
+stores such as Sparkfun and model sharing sites like Thingiverse and
+3D Warehouse give hackers easy access to supplies. There are several
+Internet-based companies (e.g. Pokono) that offer fabrication
+services. O'Reilly's \textit{Make Magazine} is a popular periodical
+catering to this community. O'Reilly also puts on several
+\textit{Maker Faire} gatherings every year where physical hackers can
+meet.
+
+Last, physical hacking is made accessible by the increasing
+availability and affordability of rapid fabrication machines like 3D
+printers, CNC mills, and laser cutters. This work focuses on projects
+that use laser cutters. Figure~\ref{fig:prices} shows prices for a
+comparable~25-Watt,~16''x12'' laser cutter model from Universal Laser
+Systems (these values were found on hobbyist web forums). While these
+data may not be exact, they do show the price of desktop laser cutting
+machines has been cut by almost half in the past ten years. While
+still out of reach for most people to afford, they are becoming
+inexpensive enough for schools and hacker spaces to own.
+
+% Price information: 
+% 2001: 12,900 (ULS 25 watt)
+% 2006: 9,995 (ULS 25 watt)
+% 2010: 8,500 (ULS 25 watt)
+% 2011: 6,850 (ULS 25 watt)
+%
+%   http://www.rcgroups.com/forums/showthread.php?t=16912 claims that
+%   a 25-watt model from Universal Laser systems cost $12,900. Several
+%   comments in that thread are in line with that price estimate for
+%   home-garage-lab use.
+%   http://www.microgeo-usa.com/ProductDetails.asp?ProductCode=universal-laser-VLS2.30
+%   currently prices the ULS 25 watt 16x12 unit as costing $6,850.
+
+% http://55-website.com/xo1/ulsinc/english/PDFs/EJ_VL_Article_Reprint.pdf is a press article from 2006 that prices the 25 watt laser at 10,000
+\begin{figure}[h] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=3in]{img/prices.pdf} 
+   \caption{Declining prices of Universal Laser Systems 25-Watt 16x12
+     inch laser cutter (US Dollars).}
+   \label{fig:prices}
+\end{figure}
+
+\subsection{Current Design Practices}
+
+\begin{figure}[h] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{img/translate-sketch-to-computer.jpg} 
+   \caption{A common part of designing for laser cutters: translating
+     a hand-made sketch to a computer modeling tool. The sketch
+     includes a 3D depiction of the result, with important dimension
+     values written down.}
+   \label{fig:translating-to-computer}
+\end{figure}
+
+Laser cutters (and other rapid fabrication machines) are a relatively
+new addition to the design studio. Further, many of the people using
+laser cutters are avocational designers that lack formal design
+education.
+
+I am currently conducting interviews and observations to better
+understand how people think about, model, and make things using laser
+cutters. In addition to these interviews I have several years of
+exposure and some direct experience on this topic.
+
+\subsection{Laser Cutters and Fabricated Output}
+
+A laser cutter can be thought of as a very fast, strong, and precise
+automated razor blade. They cut through flat material (paper, wood,
+plastic, metal, etc.) from directly above.
+
+Some items can be made entirely with a laser cutter. These projects do
+not involve other machines or material, aside from the occasional
+screw or glue. Other projects might be made partly with a laser
+cutter, and partly with other machines. Sometimes an artifact is
+designed with to allow it to interact with another object that already
+exists. This places additional constraints on the design because it
+must conform to existing measurements. The car-mounted smart phone
+holder in Figure~\ref{fig:phone-holder} is one such example. If we are
+given another similar device with slightly different dimensions, we
+might simply change some parameters and cut another holder.
+
+\begin{figure}[h] %  figure placement: here, top, bottom, or page
+   \centering
+   \includegraphics[width=4in]{img/phone-holder.jpg} 
+   \caption{A laser-cut smart phone holder designed to fit around a
+     particular device and mounted on the dash of a car (by Davide
+     Prato).}
+   \label{fig:phone-holder}
+\end{figure}
+
+\subsection{Current Tools, Current Problems}
+
+Rapid fabrication hardware requires software. Currently, modeling
+tools for rapid fabrication are almost exclusively designed for
+professional, expert users. The personal computing industry was only
+able to take off when intuitive interfaces were developed that allowed
+ordinary people to use them. If rapid fabrication is to become common,
+software modeling tools must be made accessible by ordinary
+users~\cite{lipson-homefactory}.
+
+Today, designers can choose among several modeling tools for laser
+cutter projects. As a minimum requirement, the tool must be able to
+produce a vector graphics file, where colors indicate which action the
+laser takes (e.g. cut through material or etch into it). Adobe
+Illustrator is the most commonly used package. Others include Rhino,
+InkScape, AutoCAD, and SolidWorks.
+
+Illustrator is a general-purpose vector graphics tool. Specialized
+design tools like Rhino or SolidWorks are perhaps more appropriate for
+this kind of modeling, but many people are already familiar with
+Illustrator from other 2D vector graphics editors. 
+
+I interviewed designers to find out more about their work practices
+and better understand how they use their tools. They have
+substantially different backgrounds: all have training in some form of
+design, ranging from mechanical engineering to graphic design to
+architecture. I began by asking each person to describe how they
+work. Each designer was able to show me sketches or videos of their
+work. While there are subtle (and some substantial) differences in
+their processes, each followed the following pattern.
+
+They begin by thinking about a problem and making drawings by
+hand. Some sketches are made to think about how to frame the project
+(what is it for), while others help reason about how to make it (how
+it works, how it fits together). Some designers explicitly noted that
+sketching is a necessary part of the process; it would not be possible
+to move forward without making freehand drawings. When the idea is
+reasonably well-formed they will implement the model with a software
+tool. It is common for this to involve translating a hand-made sketch
+to a computer model (Figure~\ref{fig:translating-to-computer}). 
+
+Following the interview about their work practices, I gave
+participants a sketch (Figure~\ref{fig:interview-sketch}) and asked
+them the implement it using their software tool of choice. The purpose
+of this task was to learn what problems people met when executing the
+common task of translating a sketch to a computer model.
+
+\begin{figure}[h]
+\centering 
+\subfloat[The part users set out to replicate.] {
+  \label{fig:interview-sketch-1} 
+  \includegraphics[width=0.5\linewidth]{img/laser-me-1.jpg}
+}
+\hspace{1cm} \subfloat[Drawing of how the part is used in context.] {
+    \label{fig:interview-sketch-2}
+    \includegraphics[width=0.5\linewidth]{img/laser-me-2.jpg}
+}
+\caption{Sketches given to participants to implement in modeling software.}
+\label{fig:interview-sketch}
+\end{figure}
+
+To design an object suitable for laser cutting, participants used
+Illustrator (3 users) or Rhino (1 user). In all cases, a designer's
+strategy involved a number of common activities: creating or editing
+boundaries, aligning or snapping items, using guide lines or reference
+points, measuring distances, specifying or changing lengths and
+angles, and creating finished ``cut files'' to send to the laser
+cutter. These tasks are in addition to selecting/deselecting, zooming,
+panning, and so on.
+
+Participants in this experiment spent a good deal of time on operating
+overhead. Overhead includes (1) trying to find the appropriate tool
+for the next task, and (2) recovering from errors made when the wrong
+tool was selected, or (3) when the tool did not behave consistently
+with the user's intention. I have not performed an analysis of the
+low-level actions people performed, however I estimate that in my
+experiments, more than 50\% of a designers time is spent this way.
+
+For example, one user was aware of Illustrator's ``Path Finder'' tool
+and wanted to use it. This user searched the program's menu structure
+and hovered over buttons to read tool tips before finding it. Next,
+the designer invoked various functions of the Path Finder, using the
+keyboard shortcut to undo after each attempt, as he searched for the
+correct mode within the Path Finder's subcommand palette. This process
+lasted approximately 80 seconds before finally being able to continue.
+
+Participants used the Undo function routinely. The dominant use of
+this was to revert after making a single failed attempt to edit some
+element. There were a few instances where the designer believed their
+current approach was flawed in such a way that it would be better to
+back up several dozen operations because a single decision early on
+was now observed to be problematic. This is consistent with the study
+by Akers \textit{et. al} on the use of undo~\cite{akers-undo}.
+
+One may argue that the problems associated with operating overhead can
+be solved by experience or by addressing particular usability
+problems. Obviously, masterful Illustrator or Rhino users exist and
+would have no problem executing the design task from my
+experiment. However, the target audience for this research is
+avocational users, not experts. Cooper argues that the set of people
+that are truly expert users is not only quite small, it also changes
+over time \cite{cooper-inmates}. A person might maintain expert status
+for some time, but eventually stops using the program as often, and
+eventually becomes an intermediate user, and will generally remain an
+intermediate user.
+
+This notion of \textit{perpetual intermediates} is evident in the
+designers I interviewed. One participant was a trained graphic
+designer and (according to the user's peers) was an Illustrator
+expert. However, this designer used some rather strange strategies
+during the translation task. In order to remove an unwanted line, this
+designer chose to create an opaque white rectangle to obscure it,
+rather than erase it. (``Don't tell anyone I did this'', he said at
+the time).
+
+Similar episodes are common: a person \textit{should} know the
+`correct' action, but takes an alternate approach. The alternate way
+may achieve the intended effect, but it might be less efficient (more
+operations, longer execution time) or it might introduce unwanted
+complexity (e.g. invisible white objects in the model).
+
+\subsection{Implications for Design}
+
+The design observations described above account for a relatively small
+slice of hackers designing for laser cutters. It would be unwise to
+base an entire research agenda on these few interviews. However, the
+current proposal is based on much more than these observations. I have
+several years of experience working in an environment where both
+undergraduate and graduate students made things with rapid fabrication
+machines (including a laser cutter). The recently conducted interviews
+validate the observations I have been making for years: current design
+tools are hard to learn, provide poor interaction for novice or
+occasional users, and do not support idea exploration or informal
+representation that is so important during early design.
+
+HCI practitioners often conduct usability studies to uncover
+particular problems in applications. The issues uncovered by these
+studies are then addressed by changing the software. This iterative
+process continues over years, leading to incremental
+improvements~\cite{buxton-sketching}.
+
+The interviews and observations from my study confirm that using
+current tools involve a great deal of needless overhead for the target
+population. However, rather than use this as a basis for incremental
+improvement to existing tools, I am interested in developing new tools
+the explore an alternate interaction paradigm that is easier and more
+effective for typical non-expert designers.
+
+The ultimate goal of any laser cutter project is to make a final
+assembly that is made from laser-cut parts. Based on my interviews
+with the designers and my own experience, I identify four supporting
+goals that serve the larger practical goal of making finished
+laser-cut assemblies. These sub-goals include making rough drawings
+used to help structure the problem and possible solutions; adding
+precise details to drawings; and supporting quick manufacturing and
+editing.
+
+\subsubsection{Supporting Goal 1: Make Rough Representation} 
+
+Designers need strategies to help think about (1) what the whole
+assembly should work and look like, (2) what individual pieces should
+be made, and (3) how those individual pieces fit together. This is
+most commonly done via sketching on paper. Some designers make
+rough physical models as well.
+
+Current tools do not make any significant allowance for this goal. The
+system proposed here is based on sketching as the primary input
+method. This will let users be as rough, abstract, and imprecise as
+they like.
+
+\subsubsection{Supporting Goal 2: Make Precise Specification}
+
+Users would like to be able to easily specify some (but not
+necessarily all) dimensions. This is the main purpose of most current
+modeling tools, though it is often difficult for people to do it
+effectively. For example, in the translate task, there are two notches
+that are specified to be 20cm apart (refer to
+Figure~\ref{fig:interview-sketch-1}). Several participants created
+temporary geometry (rectangles and lines) that were set to 20cm long
+and placed onscreen. This served as a ruler that the designer could
+then use to position the notches. The ruler was then erased.
+
+The proposed tool is somewhat unique in the area of sketch-based
+design tools in that it will give users the ability to be quite
+precise in identifying dimensions and constraints. It is hoped that
+using sketch recognition can allow people to state their intentions
+substantially faster than using difficult-to-use structured tools.
+
+\subsubsection{Supporting Goal 3: Rapid Editing and Manufacture}
+
+Participants reported they use a rapid \textit{model-make-evaluate}
+loop. They make several versions of objects with the laser cutter
+before it becomes final, because it is important to be able hold it in
+their hands. This is sometimes to determine if they made an execution
+error. Equally as as often, the physical ``rough draft'' is necessary
+to evaluate their idea. Laser cutter projects tend to be fairly quick
+and inexpensive in comparison to some other fabrication machinery like
+3D printing.
+
+Current tools impose clumsy requirements on designers to prepare
+models for laser cutting. For example, the cut line color need to have
+the RGB tuple $(0,0,255)$, and line thickness has to be ``hair line''
+at 0.01mm. Managing this overhead is time-consuming. The proposed tool
+will handle this overhead on the user's behalf.
+
+A common problem exposed by making a physical draft is the discovery
+that pieces do not fit together properly. Some dimensions (such as
+notch widths) must then change. However, changing one dimension might
+have unwanted side-effects, causing a cascade of issues the designer
+must identify and fix, while trying to avoid introducing new problems.
+
+The proposed modeling tool assumes that the user might change the
+shape or parameterization of models later on, and facilitate these
+changes without creating more problems along the way. 
 
 \section{Motivating Scenario}
 
@@ -403,12 +749,14 @@ with writing (Figure~\ref{fig:ix-notch-param}).
 The first notch's geometry should be replicated for the next
 three. The user can give the system a
 \textit{hint}~\cite{mcdaniel-gamut} by selecting existing
-elements. The selection is used as a strong suggestion for the next
-editing operations. The user selects the notch by tracing over it. The
-selection is graphically acknowledged. Next the three more notches are
-drawn at the appropriate places. The \textit{nd} and \textit{nw}
-parameters are implicitly copied from the original to the other
-notches because they were part of the hint (see
+elements. The selection is used as a recognition candidate for the
+next editing operations---if the user sketches something that
+resembles a recently formed selection, the likelihood the user is
+replicating the selection is boosted. The user selects the notch by
+tracing over it. The selection is graphically acknowledged. Next the
+three more notches are drawn at the appropriate places. The
+\textit{nd} and \textit{nw} parameters are implicitly copied from the
+original to the other notches because they were part of the hint (see
 Figure~\ref{fig:ix-hints}).
 
 The user proceeds to give names to the height and width lengths. In
@@ -603,7 +951,7 @@ central to the schooling: architects, industrial and interaction
 designers, and mechanical engineers are all explicitly taught to
 sketch. And even though sketching is not taught in other design
 domains (like software engineering), freehand drawing is still
-commonly done. Even people that consider themselves non-designers make
+commonly done. Even people who consider themselves non-designers make
 quick drawings to help think through everyday problems like how the
 furniture in their house might be arranged. Freehand drawing is done
 by people of all ages~\cite{goldschmidt-backtalk} and experience
@@ -703,63 +1051,13 @@ sketch- and pen-based interaction techniques. Also, because it is in
 support of machined output, it is necessary that the drawing give
 enough detail that objects can be manufactured.
 
-\subsection{Rapid Fabrication}
-
-In the 1980s, inexpensive but high-quality printers enabled desktop
-publishing to become common. Prior to this, people relied on printing
-companies and graphic designers if they needed to create
-professional-looking printed output. 
-
-% Price information: 
-% 2001: 12,900 (ULS 25 watt)
-% 2006: 9,995 (ULS 25 watt)
-% 2010: 8,500 (ULS 25 watt)
-% 2011: 6,850 (ULS 25 watt)
-%
-%   http://www.rcgroups.com/forums/showthread.php?t=16912 claims that
-%   a 25-watt model from Universal Laser systems cost $12,900. Several
-%   comments in that thread are in line with that price estimate for
-%   home-garage-lab use.
-%   http://www.microgeo-usa.com/ProductDetails.asp?ProductCode=universal-laser-VLS2.30
-%   currently prices the ULS 25 watt 16x12 unit as costing $6,850.
-
-% http://55-website.com/xo1/ulsinc/english/PDFs/EJ_VL_Article_Reprint.pdf is a press article from 2006 that prices the 25 watt laser at 10,000
-
-Physical prototyping machines might very well become as common as
-desktop printers, which will change our perception of the role of
-computers~\cite{eisenberg-homespun}. Figure~\ref{fig:prices} shows
-prices for a comparable~25-Watt,~16''x12'' laser cutter model from
-Universal Laser Systems. These values were found on hobbyist forums on
-the Internet. While these data may not be exact, they do show the
-price of desktop laser cutting machines has been cut by almost half in
-the past ten years. While still out of reach for average hobbyists to
-afford, they are inexpensive enough for schools and ``hackerspaces''
-to buy for their members.
-
-For designers that do not have access to rapid fabrication machines,
-there are quite a few recently founded Internet-based companies that
-offer fabrication services for designers. For example,
-Pokono\footnote{http://www.pokono.com} lets designers upload cut files
-that are analyzed for correctness, and gives people a wide array of
-material stock (felt, cardboard, acrylic, leather, wood) and colors.
-
-\begin{figure}[h] %  figure placement: here, top, bottom, or page
-   \centering
-   \includegraphics[width=4in]{img/prices.png} 
-   \caption{Prices of Universal Laser Systems 25-Watt 16x12 inch
-     machine in various years.}
-   \label{fig:prices}
-\end{figure}
-
-This is a democratizing turn of events, but the current crop of
-software for designing these objects is typically too hard for most
-people to use~\cite{landay-design-tools} and is a limiting factor.
+\subsection{Sketching for Rapid Fabrication}
 
 Sketching has long been a subject of study by makers of physical
 things. Leonardo da Vinci's legendary sketchbooks are an early example
 of the utility of sketching for both thinking and for
 specifying. Demonstrations of the earliest computer-based sketching
-system, Sketchpad~\cite{sutherland-sketchpad}, were often focused on
+system, Sketchpad~\cite{sutherland-sketchpad}, mostly focused on
 drawing machinable parts.
 
 Until fairly recently, many systems for 3D modeling or fabrication
@@ -777,8 +1075,8 @@ concluded and the job of the computer is to translate the drawing into
 a 3D model. This contrasts with interactive approaches that aim to
 support an ongoing conversation between the human and computer. A
 conversational system tacitly acknowledges that the user's ideas are
-not fully formed from the onset, but become progressively clearer as
-they work.
+not fully formed from the onset, but become progressively clearer and
+more defined as they work.
 
 With the availability of prototyping machines, sketch-based systems
 for fabrication are beginning to receive attention. The Furniture
@@ -816,159 +1114,14 @@ tree~\cite{igarashi-teddy}.
 
 \section{My Prior Work}
 
-My work is technology-focused but it is driven by observing
-people. This section first discusses my experience studying designers'
-work practices and the problems they face. I then describe the
-software tools I have made.
-
-\subsection{Designer Observations}
-
-I spent a few weeks at MAYA Design in Pittsburgh during the winter
-of~2005--2006~\cite{johnson-tiny-ethnography}. In this time I
-interviewed designers and their managers and observed the company's
-design culture. I am currently in the midst of conducting a series of
-interviews with designers who design artifacts for production with
-laser cutters. This section relates my findings from both studies.
-
-Informal media accounted for the most visible artifacts of designer
-work practice. Sketches, sticky-notes, and whiteboard drawings were in
-plain view in nearly all employee areas. Even the kitchen had
-whiteboards; when the whiteboards were full I observed people drawing
-directly on the windows. Freehand drawing was a highly valued skill
-and was central to individual designers' work and group communication.
-
-Four of the five designers interviewed showed me their
-sketches. Interestingly, those same designers were less inclined to
-show me computational models such as Illustrator files. While
-designers did not typically voluntarily show me computational
-artifacts, they did show me printed versions of their computational
-models. Nearly all of these printed pages had handwriting and sketches
-on them, sometimes by more than one person. 
-
-People reported they iterate between virtual and paper versions of
-their designs. The designers would edit a computational model with an
-application like Photoshop, and then print a paper copy for personal
-or group use. They would then draw or write directly on that page as
-they explored variations or made refinements. If a paper-based editing
-session was useful, the designers would then manually transfer these
-changes back into their application. The process of printing, editing,
-and manually merging changes was seen a number of times.
-
-More recently I have begun to study designers using laser
-cutters. Like at MAYA, iterating between physical and computer-based
-artifacts appears to be a dominant process for the laser cutter
-users. The current interview study is ongoing. These findings are
-preliminary, but they do agree with my past experience at MAYA.
-
-Three interviews have been conducted to date, and several more are
-planned. The interviews were conducted in whichever location they were
-likely to do this design work. I began by asking each designer to
-describe their design process. Each designer was able to show me
-sketches or videos of their work, and in two cases could take a recent
-project off a nearby shelf. While there are subtle (and some
-substantial) differences in their processes, each designer followed
-the following pattern.
-
-They begin by thinking about a problem and making drawings. Some
-drawings are made to think about how to frame the project (what is it
-for), while others help reason about how to make it (how it works, how
-it fits together). When the idea is reasonably well-formed they will
-make the model in software. 
-
-Following the interview about past design projects, I gave
-participants a sketch (Figure~\ref{fig:interview-sketch}) and asked
-them the implement it using their software tool of choice. The purpose
-of this task was to learn what problems people faced when performing
-the common task of using modeling software to actualize an idea based
-on a sketch.
-
-\begin{figure}
-\centering 
-\subfloat[The part users set out to replicate.] {
-  \label{fig:interview-sketch-1} 
-  \includegraphics[width=0.5\linewidth]{img/laser-me-1.jpg}
-}
-\hspace{1cm} \subfloat[Drawing of how the part is used in context.] {
-    \label{fig:interview-sketch-2}
-    \includegraphics[width=0.5\linewidth]{img/laser-me-2.jpg}
-}
-\caption{Sketches given to participants to implement in modeling software.}
-\label{fig:interview-sketch}
-\end{figure}
-
-One participant used Rhino, while two used Illustrator. The Rhino user
-finished the task in approximately ten minutes while the Illustrator
-users finished in about twenty. All users felt there was enough
-information in the sketch to make the part, even though there were
-some aspects that were not clear, such as the overall width of the
-part. 
-
-Rhino directly supports people to use existing geometric elements when
-placing new ones. For example, the Rhino user created the top edges
-first, and used the top corners as guides to place the notches
-directly below. 
-
-Compared with the Rhino user's approach, the Illustrator users
-employed a fairly haphazard strategy to implement the sketch. The
-first Illustrator user was comfortable with the \textit{Path Finder}
-tool, used to combine shapes by intersecting or subtracting existing
-paths. The other Illustrator user was aware of this tool but was not
-accustomed to using it. Instead, this person would `remove' unwanted
-lines by covering them up with opaque white rectangles. The obscured
-lines would not be visible, and would therefore not be cut. This did
-introduce a good deal of complexity to the task, however. In both
-Illustrator cases, the designers would zoom in and use the mouse or
-keyboard to move vertices and lines until they appeared to align. In
-these cases the program did not assist users to `snap' elements
-together.
-
-Both Illustrator participants used the Undo function routinely. The
-dominant use of this was to revert after making a single failed
-attempt to edit some element. There were a few instances where the
-designer believed their current approach was flawed in such a way that
-it would be better to back up several dozen operations because a
-single decision early on was now observed to be problematic. This is
-consistent with the study by Akers \textit{et. al} on the use of
-undo~\cite{akers-undo}.
-
-From the single observation it appears that Rhino is better suited to
-the task than Illustrator in terms of speed of execution and
-efficiency of operations.
-
-After completing the model for the single part, I asked participants
-to take whatever steps remain before fabricating the final parts
-(roughly sketched in Figure~\ref{fig:interview-sketch-2}). All
-participants then proceeded to generate a \textit{cut file}, which
-involves arranging copies of the finished model on a sheet to make
-efficient use of material. For this step, the Rhino user saved the
-model as a PDF and opened it in Illustrator. This user created a red
-rectangle equal in size to the stock material that would be placed on
-the laser cutter bed. This was done to ensure the laser would not cut
-beyond the available material. The other two participants did not
-perform this step. All three users arranged the parts by copying the
-original, and pasting copies on a new sheet. The copies were then
-rotated and moved to make efficient use of material. The Rhino user's
-cut file is shown in Figure~\ref{fig:cutfile}.
-
-\begin{figure}[h] 
-   \centering
-   \includegraphics[width=4in]{img/participant-1-cutfile.pdf} 
-   \caption{Final cut file. Black indicates cut lines, while red is
-     ignored by the laser cutter and indicates the stock material
-     boundaries.}
-   \label{fig:cutfile}
-\end{figure}
-
-\subsection{Computational Design Tools}
-
 The Designosaur~\cite{oh-fab} is a prototype system for kids to design
-their own wooden dinosaur ``skeletons''. They begin by drawing
+their own wooden dinosaur ``skeletons''. Users begin by drawing
 individual bone outlines and specify notch locations where the bone
-joins another. To support this, the user can name bones and use those
-names indicate how the bones fit together.
+joins another. To support this, the user can name bones and apply
+those names to indicate how bones fit together.
 
 We noticed that editing bone boundaries presented some challenges.
-First, dinosaur model bones ares frequently symmetric (e.g. ribs or
+First, dinosaur model bones are frequently symmetric (e.g. ribs or
 vertebrae). The system featured a simple ``mirror mode'' that helped
 users make the parts symmetric about the horizontal or vertical axes.
 Second, it is useful to be able to change the shape of bones
@@ -989,7 +1142,7 @@ pen up to end the operation, or hold it still once again to smooth the
 region. This is helpful in cases where the user input includes
 unwanted bumps or jagged lines.
 
-While the Designosaur is based on sketching, the follow-on system is
+Whereas the Designosaur is based on sketching, the follow-on system is
 based on programming. FlatCAD is a system for designing and
 manufacturing things on a laser cutter by writing programs in a
 language called FlatLang~\cite{johnson-flatcad}.  FlatLang features a
@@ -1024,6 +1177,12 @@ proposed work seeks to establish a better understanding of what
 constitutes good sketch-based interaction. The proposed system is a
 vehicle for this research.
 
+%% TODO: Maybe a screen shot of Designosaur or the output, and for
+%% FlatCAD.
+
+%% TODO: Need to add a few paragraphs for (1) Skrui Draw, (2) my Ouyang
+%% writing recognizer implementation, (3) what I have of SkruiFab so far.
+
 \section{Evaluation}
 
 Interaction techniques are challenging to evaluate. There is a
@@ -1034,13 +1193,13 @@ approach has its benefits, it avoids the reality that people use
 interaction techniques \textit{with other techniques} and \textit{in
   service of a larger purpose}. 
 
-In acknowledgment of this, the proposed system will be evaluated as a
-whole, rather than testing isolated pieces. The proposed system offers
-a set of techniques that are intended to work harmoniously together to
-support users in the realistic goal of designing household objects
-using flat material. To test if the system works as intended it will
-be compared with existing tools such as Illustrator, SolidWorks,
-SketchUp, Rhino, as well as plain pencil and paper. 
+Therefore, the proposed system will be evaluated as a whole, rather
+than testing isolated pieces. The proposed system offers a set of
+techniques that are intended to work harmoniously together to support
+users in the realistic goal of designing household objects using flat
+material. To test if the system works as intended it will be compared
+with existing tools such as Illustrator, SolidWorks, SketchUp, Rhino,
+as well as plain pencil and paper.
 
 The evaluation criteria in this ``whole system'' analysis focus on
 what users are able to do (or not do) that would be possible with
@@ -1114,9 +1273,12 @@ The best interactive systems have discoverable, consistent interaction
 techniques working in concert. Companies such as Microsoft and Apple
 have user interaction guidelines for various platforms (Windows,
 Windows Mobile, OS X, iOS) that give developers standard advice for
-developing such systems. No guide yet exists for sketch-based
-interactive systems. This thesis will provide a concrete step to
-providing one.
+developing such systems. Pen- and touch-oriented interaction guides
+exist for TabletPCs and (recently) the iPad, but these devices are by
+no means sketch-based in that the interaction is still expected to be
+largely unambiguous, and requires little interpretation. No guide yet
+exists for sketch-based interactive systems. This thesis will provide
+a concrete step to providing one.
 
 \section{Time line}
 
@@ -1183,8 +1345,7 @@ with a laser cutter.
 
 A common heuristic project managers use to predict completion time is
 to multiply the predicted time by three---this brings the expected
-duration to 27 weeks, or about six months. It is of course my
-intention to work more quickly than this.
+duration to 27 weeks, or about six months.
 
 \subsection{Dissertation Schedule}
 
