@@ -68,12 +68,12 @@ catering to this community. O'Reilly also puts on several
 \textit{Maker Faire} gatherings every year where physical hackers can
 meet.
 
-Last, physical hacking is made accessible by the availability of rapid
-fabrication machines like 3D printers, CNC mills, and laser
-cutters. This work focuses on projects that use laser
-cutters. Figure~\ref{fig:prices} shows prices for a
+Last, physical hacking is made accessible by the increasing
+availability and affordability of rapid fabrication machines like 3D
+printers, CNC mills, and laser cutters. This work focuses on projects
+that use laser cutters. Figure~\ref{fig:prices} shows prices for a
 comparable~25-Watt,~16''x12'' laser cutter model from Universal Laser
-Systems. These values were found on hobbyist web forums. While these
+Systems (these values were found on hobbyist web forums). While these
 data may not be exact, they do show the price of desktop laser cutting
 machines has been cut by almost half in the past ten years. While
 still out of reach for most people to afford, they are becoming
@@ -130,15 +130,15 @@ automated razor blade. They cut through flat material (paper, wood,
 plastic, metal, etc.) from directly above.
 
 Some items can be made entirely with a laser cutter. These projects do
-not involve other forms of machinery, aside from the occasional screw
-or glue. Other projects might be made partly with a laser cutter, and
-partly with other machines. Sometimes an artifact is designed with to
-allow it to interact with another object that already exists. This
-places additional constraints on the design because it must conform to
-existing measurements. The car-mounted smart phone holder in
-Figure~\ref{fig:phone-holder} is one such example. If we are given
-another similar device with slightly different dimensions, we might
-simply change some parameters and cut another holder.
+not involve other machines or material, aside from the occasional
+screw or glue. Other projects might be made partly with a laser
+cutter, and partly with other machines. Sometimes an artifact is
+designed with to allow it to interact with another object that already
+exists. This places additional constraints on the design because it
+must conform to existing measurements. The car-mounted smart phone
+holder in Figure~\ref{fig:phone-holder} is one such example. If we are
+given another similar device with slightly different dimensions, we
+might simply change some parameters and cut another holder.
 
 \begin{figure}[h] %  figure placement: here, top, bottom, or page
    \centering
@@ -149,7 +149,7 @@ simply change some parameters and cut another holder.
    \label{fig:phone-holder}
 \end{figure}
 
-\subsection{Software Modeling Tools}
+\subsection{Current Tools, Current Problems}
 
 Rapid fabrication hardware requires software. Currently, modeling
 tools for rapid fabrication are almost exclusively designed for
@@ -168,18 +168,17 @@ InkScape, AutoCAD, and SolidWorks.
 
 Illustrator is a general-purpose vector graphics tool. Specialized
 design tools like Rhino or SolidWorks are perhaps more appropriate for
-modeling, but many people are already familiar with Illustrator from
-other 2D graphics projects. For those unfamiliar with any of these
-tools, Illustrator is viewed as the most approachable because it is
-seen as having the easiest learning curve.
+this kind of modeling, but many people are already familiar with
+Illustrator from other 2D vector graphics editors. 
 
-The designers I have interviewed have substantially different
-backgrounds. All have training in some form of design, ranging from
-mechanical engineering to graphic design to architecture. I began by
-asking each person to describe how they work. Each designer was able
-to show me sketches or videos of their work. While there are subtle
-(and some substantial) differences in their processes, each followed
-the following pattern.
+I interviewed designers to find out more about their work practices
+and better understand how they use their tools. They have
+substantially different backgrounds: all have training in some form of
+design, ranging from mechanical engineering to graphic design to
+architecture. I began by asking each person to describe how they
+work. Each designer was able to show me sketches or videos of their
+work. While there are subtle (and some substantial) differences in
+their processes, each followed the following pattern.
 
 They begin by thinking about a problem and making drawings by
 hand. Some sketches are made to think about how to frame the project
@@ -191,7 +190,7 @@ reasonably well-formed they will implement the model with a software
 tool. It is common for this to involve translating a hand-made sketch
 to a computer model (Figure~\ref{fig:translating-to-computer}). 
 
-Following the interview about past design projects, I gave
+Following the interview about their work practices, I gave
 participants a sketch (Figure~\ref{fig:interview-sketch}) and asked
 them the implement it using their software tool of choice. The purpose
 of this task was to learn what problems people met when executing the
@@ -213,7 +212,7 @@ common task of translating a sketch to a computer model.
 
 To design an object suitable for laser cutting, participants used
 Illustrator (3 users) or Rhino (1 user). In all cases, a designer's
-strategy involved a number of common tasks: creating or editing
+strategy involved a number of common activities: creating or editing
 boundaries, aligning or snapping items, using guide lines or reference
 points, measuring distances, specifying or changing lengths and
 angles, and creating finished ``cut files'' to send to the laser
@@ -225,9 +224,8 @@ overhead. Overhead includes (1) trying to find the appropriate tool
 for the next task, and (2) recovering from errors made when the wrong
 tool was selected, or (3) when the tool did not behave consistently
 with the user's intention. I have not performed an analysis of the
-low-level actions people performed (using GOMS or
-similar\cite{unknown}), however I estimate that in my experiments,
-more than 50\% of a designers time is spent this way.
+low-level actions people performed, however I estimate that in my
+experiments, more than 50\% of a designers time is spent this way.
 
 For example, one user was aware of Illustrator's ``Path Finder'' tool
 and wanted to use it. This user searched the program's menu structure
@@ -250,14 +248,27 @@ be solved by experience or by addressing particular usability
 problems. Obviously, masterful Illustrator or Rhino users exist and
 would have no problem executing the design task from my
 experiment. However, the target audience for this research is
-avocational users, not experts.
+avocational users, not experts. Cooper argues that the set of people
+that are truly expert users is not only quite small, it also changes
+over time \cite{cooper-inmates}. A person might maintain expert status
+for some time, but eventually stops using the program as often, and
+eventually becomes an intermediate user, and will generally remain an
+intermediate user.
 
-Cooper argues that the set of people that are truly expert users is
-not only quite small, it also changes over time
-\cite{cooper-inmates}. A person might become an expert and sustain
-that status for some time, but eventually stops using the program as
-often, and eventually becomes an intermediate user. A substantial
-portion of \textit{perpedual intermediate}.
+This notion of \textit{perpetual intermediates} is evident in the
+designers I interviewed. One participant was a trained graphic
+designer (according to the user's peers) was an Illustrator
+expert. However, this designer used some rather strange strategies
+during the translation task. In order to remove an unwanted line, this
+designer chose to create an opaque white rectangle to obscure it,
+rather than erase it. (``Don't tell anyone I did this'', he said at
+the time).
+
+Similar episodes are common: a person \textit{should} know the
+`correct' action, but takes an alternate approach. The alternate way
+may achieve the intended effect, but it might be less efficient (more
+operations, longer execution time) or it might introduce unwanted
+complexity (e.g. invisible white objects in the model).
 
 \section{Implications for Design}
 
@@ -273,11 +284,84 @@ tools are hard to learn, provide poor interaction for novice or
 occasional users, and do not support idea exploration or informal
 representation that is so important during early design.
 
-I am interested in developing an alternate basis of interaction that
-is easier and more effective for typical non-expert designers. The
-interviews and observations from my study confirm that using current
-tools involve a great deal of needless overhead for the target
-population.
+HCI practitioners often conduct usability studies to uncover
+particular problems in applications. The issues uncovered by these
+studies are then addressed by changing the software. This iterative
+process continues over years, leading to incremental
+improvements~\cite{buxton-sketching}.
+
+The interviews and observations from my study confirm that using
+current tools involve a great deal of needless overhead for the target
+population. However, rather than use this as a basis for incremental
+improvement to existing tools, I am interested in developing new tools
+the explore an alternate interaction paradigm that is easier and more
+effective for typical non-expert designers.
+
+The ultimate goal of any laser cutter project is to make a final
+assembly that is made from laser-cut parts. Based on my interviews
+with the designers and my own experience, I identify four supporting
+goals that serve the larger practical goal of making finished
+laser-cut assemblies. These sub-goals include making rough drawings
+used to help structure the problem and possible solutions; adding
+precise details to drawings; and supporting quick manufacturing and
+editing.
+
+\subsection{Supporting Goal 1: Make Rough Representation} 
+
+Designers need strategies to help think about (1) what the whole
+assembly should work and look like, (2) what individual pieces should
+be made, and (3) how those individual pieces fit together. This is
+most commonly done via sketching on paper. Some designers make
+rough physical models as well.
+
+Current tools do not make any significant allowance for this goal. The
+system proposed here is based on sketching as the primary input
+method. This will let users be as rough, abstract, and imprecise as
+they like.
+
+\subsection{Supporting Goal 2: Make Precise Specification}
+
+Users would like to be able to easily specify some (but not
+necessarily all) dimensions. This is the main purpose of most current
+modeling tools, though it is often difficult for people to do it
+effectively. For example, in the translate task, there are two notches
+that are specified to be 20cm apart. Several participants created
+temporary geometry (rectangles and lines) that were set to 20cm long
+and placed onscreen. This served as a ruler that the designer could
+then use to position the notches. The ruler was then erased.
+
+The proposed tool is somewhat unique in the area of sketch-based
+design tools in that it will give users the ability to be quite
+precise in identifying dimensions and constraints. It is hoped that
+using sketch recognition can allow people to state their intentions
+substantially faster than using difficult-to-use structured tools.
+
+\subsection{Supporting Goal 3: Rapid Editing and Manufacture}
+
+Participants reported they use a rapid \textit{model-make-evaluate}
+loop. They make several versions of objects with the laser cutter
+before it becomes final, because it is important to be able hold it in
+their hands. This is sometimes to determine if they made an execution
+error. Equally as as often, the physical ``rough draft'' is necessary
+to evaluate their idea. Laser cutter projects tend to be fairly quick
+and inexpensive in comparison to some other fabrication machinery like
+3D printing.
+
+Current tools impose clumsy requirements on designers to prepare
+models for laser cutting. For example, the cut line color need to have
+the RGB tuple $(0,0,255)$, and line thickness has to be ``hair line''
+at 0.01mm. Managing this overhead is time-consuming. The proposed tool
+will handle this overhead on the user's behalf.
+
+A common problem exposed by making a physical draft is the discovery
+that pieces do not fit together properly. Some dimensions (such as
+notch widths) must then change. However, changing one dimension might
+have unwanted side-effects, causing a cascade of issues the designer
+must identify and fix, while trying to avoid introducing new problems.
+
+The proposed modeling tool assumes that the user might change the
+shape or parameterization of models later on, and facilitate these
+changes without creating more problems along the way. 
 
 \bibliographystyle{plain}
 \addcontentsline{toc}{section}{References}
