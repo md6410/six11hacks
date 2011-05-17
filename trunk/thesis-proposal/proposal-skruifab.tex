@@ -204,11 +204,13 @@ cutters. Such objects are composed of flat, rigid parts. Figure
 using the proposed system and produced with a laser cutter.
 
 This project's first motivation is to empower those who are not
-professional designers to create meaningful objects with rapid
-fabrication machines. It can not be assumed that these users have been
-taught to draw as an architect would have been, nor can it be assumed
-they have invested a great deal of time to learn the often complicated
-modeling software that was developed for professional use. 
+professional designers to create objects with rapid fabrication
+machines. It can not be assumed that these users have been taught to
+draw as an architect would have been, nor can it be assumed they have
+invested a great deal of time to learn the often complicated modeling
+software that was developed for professional use. Therefore, the
+project must enable people to design without presenting an
+intimidating learning curve.
 
 The second motivation is to explore the space of sketch-based
 interaction as it applies to modeling physical objects. A success
@@ -236,18 +238,22 @@ The premise of interactive systems is that there is an ongoing
 systems, users ``speak'' with a stylus; computers ``talk back'' with
 graphics. Just as humans have social norms for engaging in
 conversation that allow us to talk to people we have not met before,
-there should be norms for human-computer interaction in calligraphic
-systems so our experience from one application can be used in the
-next.
+there should be interaction norms for working with sketch-based
+systems so our experience can be portable among various sketch-based
+applications.
 
 Olsen~\cite{olsen-ui-research} argues the dominant paradigm of ``one
 display, one keyboard, one mouse'' hinders progress in interactive
-systems that use alternate hardware configurations. There is no
-standard for set of interaction techniques and idioms for sketch-based
-systems, where hardware is a pen-sensitive display and stylus. In
-recent years, researchers have begun to give more attention to
-interaction aspects of sketch recognition-based user interfaces, but
-the extent of this work remains limited.
+systems that use alternate hardware configurations. This is because it
+is expedient to replicate mouse/keyboard interaction on new devices,
+even if the hardware is different. New systems architectures are
+needed to more appropriately take advantage of new hardware
+configurations. There is little agreement on interaction techniques
+for sketch-based systems, where hardware is a pen-sensitive display
+and stylus. In recent years, researchers have begun to give more
+attention to interaction aspects of sketch recognition-based user
+interfaces, but the extent of this work remains limited. This topic is
+discussed further in Section~\ref{sec:rw-interaction}.
 
 For each of the several technical challenges in sketch-based systems
 research there is a human component. Segmentation and recognition are
@@ -267,7 +273,10 @@ stages. Early in this process the user's goal is to simply record
 ideas, possibly to share with other people. The early phase is usually
 about \textit{big ideas}. Later, the user's goals might be to add
 specific details such as lengths, angles, and how different parts
-interact---this phase is about \textit{details}.
+interact---this phase is about \textit{details}. And the iterative,
+dynamic nature of many projects might see designers walking back their
+detailed work to try different big ideas. Ideally, the system should
+support designers to work at either level at any time.
 
 \subsection{Proposal Organization}
 
@@ -297,8 +306,7 @@ computer design tools impose needless, unnatural complexity on
 designers. Sketch-based interaction is chosen because of its
 widespread use in thinking about and representing design ideas
 quickly. If successful, the sketching techniques will enable
-relatively inexperienced designers to design and fabricate meaningful
-artifacts.
+relatively inexperienced designers to design and fabricate artifacts.
 
 \subsection{Research Scope}
 
@@ -335,15 +343,14 @@ There is a growing community of self-described \textit{makers} who
 design and build many kinds of physical
 things~\cite{gershenfeld-fab}. Some are electronic or robotic gizmos,
 while others are composed of traditional material but designed or made
-with modern technology. The ranks of these ``new
-makers''~\cite{gross-new-makers} include mechanical engineers,
-industrial designers, artists, computer programmers, architects, and
-many others. It is common for these people to be relatively untrained
-in aspects of their craft, such as using modeling software, designing
-or assembling electronics, or making visually appealing physical
-constructions. It is rare to find any individual person that is an
-expert in all of these topics, but it is common that a person knows
-something about a lot of them.
+with modern technology. The ``new makers''~\cite{gross-new-makers}
+include mechanical engineers, industrial designers, artists, computer
+programmers, architects, and many others. It is common for these
+people to be relatively untrained in aspects of their craft, such as
+using modeling software, designing or assembling electronics, or
+making visually appealing physical constructions. It is rare to find
+any individual person that is an expert in all of these topics, but it
+is common that a person knows something about a lot of them.
 
 It is possible that we are beginning to see a shift from an economy
 based on mass-production (in factories) to one that includes
@@ -370,7 +377,7 @@ people can meet, share ideas, and work on projects. Hacker spaces
 commonly have various tools and supplies available to members. Online
 stores such as Sparkfun and model sharing sites like Thingiverse and
 3D Warehouse give hackers easy access to supplies. There are several
-Internet-based companies (e.g. Pokono) that offer fabrication
+Internet-based companies (e.g. Ponoko) that offer fabrication
 services. O'Reilly's \textit{Make Magazine} is a popular periodical
 catering to this community. O'Reilly also puts on several
 \textit{Maker Faire} gatherings every year where physical hackers can
@@ -428,8 +435,7 @@ education.
 
 I am currently conducting interviews and observations to better
 understand how people think about, model, and make things using laser
-cutters. In addition to these interviews I have several years of
-exposure and some direct experience on this topic.
+cutters. 
 
 \subsection{Laser Cutters and Fabricated Output}
 
@@ -478,13 +484,14 @@ this kind of modeling, but many people are already familiar with
 Illustrator from other 2D vector graphics editors. 
 
 I interviewed designers to find out more about their work practices
-and better understand how they use their tools. They have
-substantially different backgrounds: all have training in some form of
-design, ranging from mechanical engineering to graphic design to
-architecture. I began by asking each person to describe how they
-work. Each designer was able to show me sketches or videos of their
-work. While there are subtle (and some substantial) differences in
-their processes, each followed the following pattern.
+and better understand how they use their tools\footnote{At the time of
+  this writing I have conducted four interviews. More are
+  planned.}. They have substantially different backgrounds: all have
+training in some form of design, ranging from mechanical engineering
+to graphic design to architecture. I began by asking each person to
+describe how they work. Each designer was able to show me sketches or
+videos of their work. While there are subtle (and some substantial)
+differences in their processes, each followed the following pattern.
 
 They begin by thinking about a problem and making drawings by
 hand. Some sketches are made to think about how to frame the project
@@ -498,7 +505,7 @@ to a computer model (Figure~\ref{fig:translating-to-computer}).
 
 Following the interview about their work practices, I gave
 participants a sketch (Figure~\ref{fig:interview-sketch}) and asked
-them the implement it using their software tool of choice. The purpose
+them to implement it using their software tool of choice. The purpose
 of this task was to learn what problems people met when executing the
 common task of translating a sketch to a computer model.
 
@@ -675,6 +682,7 @@ shape or parameterization of models later on, and facilitate these
 changes without creating more problems along the way. 
 
 \section{Motivating Scenario}
+\label{sec:motivating-scenario}
 
 \begin{figure}[] 
 \centering
@@ -1024,6 +1032,7 @@ such meta-recognition can ease the recognition task by reducing the
 amount of input to interpret.
 
 \subsection{Calligraphic Interaction}
+\label{sec:rw-interaction}
 
 Applications often interpret user input differently depending on which
 \textit{mode} the program is in (e.g. line mode, circle mode, text
@@ -1323,7 +1332,10 @@ Ouyang's PCA-based printed character
 recognizer~\cite{ouyang-visual-recog}. External tools will be used
 whenever possible.
 
-The following table presents a tentative schedule for system development.
+The following table presents a tentative schedule for system
+development. This schedule assumes I will implement the system as
+described in Section\ref{sec:motivating-scenario}. It will change if
+my user study indicates I should focus on something else.
 
 \vspace{12pt}
 \begin{tabular}{ | l | c | l | }
@@ -1421,32 +1433,4 @@ wide spread, best- and worst-case schedules are given.
 \bibliography{sketch-bibliography}
 
 \end{document}
-
-% how do you accellerate the process by which they become good
-
-% where do they spend the most time?
-
-% the multiple undo problem: backing up 3 minutes, fixing for another
-% 3 = 6 minute mistake.
-
-% q1: what's the effective role of sketching?
-
-% q2: how to reconcile the rough nature of sketching and the precise
-% demands of laser cutters?
-
-% maybe: start with a physical sketch, scanned, as the basis for
-% gradually making it structured.
-
-% paul debevec, image use in modeling
-
-% make a taxoomy of the things people make, trying to create on the
-% ponoko blog. make a list of 
-
-% Fred Brooks: (no silver bullet)
-
-% accidental: problems that would be fixed over time
-
-% essential: no matter how much better our software gets, we still
-% have to deal with them.
-
 
