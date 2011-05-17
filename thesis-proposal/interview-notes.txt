@@ -255,12 +255,12 @@ occupy so much of his time.
 
   - because he was zoomed in he put something in the wrong spot. Used
     ^Z a bunch of times to back up and get the measuring rectangle to
-    algin the notch.
+    align the notch.
 
   - the opaque white boxes give him some trouble because he moves
     boundary lines in such a way that they become covered.
 
   - he realizes he can use pathfinder to fix the boundary line
-    obscurred problem, but doesn't pursue that option very far. just
+    obscured problem, but doesn't pursue that option very far. just
     moves the opaque things around.
 
