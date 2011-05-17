@@ -55,9 +55,10 @@
 }
 {\end{list}}
 
-\title{Thesis Proposal:\\ Interaction Techniques for Sketch-based
-  Design} \author{Gabe Johnson\\School of Architecture\\Carnegie
-  Mellon University\\ \\ (This is a draft)}
+\title{Thesis Proposal:\\Interaction Techniques for Sketch-based
+  Design\\for Rapid Prototyping using Laser Cutters} \author{Gabe
+  Johnson\\School of Architecture\\Carnegie Mellon
+  University\\ \\ (This is a draft)}
 
 \begin{document}
 \thispagestyle{empty}
@@ -87,21 +88,30 @@
                % temporarily.
 \addcontentsline{toc}{section}{Abstract}
 \begin{abstract}
-Rapid prototyping machines such as laser cutters and 3D printers are
-becoming more common. However, the associated modeling software needed
-to create designs that can be made with these machines poses a
-significant learning challenge for inexpert users and can be hard to
-use even for those with experience. I propose to create a modeling
-system that allows for design of objects via freehand sketching, a
-skill that many people already have. Sketch-based interaction is a
-promising design paradigm, but unlike traditional WIMP applications
-there are no standard interaction techniques for sketch-based
-applications. The proposed system will explore sketch-based
-interaction techniques for moderately complex tasks such as the design
-of objects for production via laser cutter. I will develop a set of
-sketch-based interaction techniques that empower laser cutter users to
-create models. Additionally, I will test the utility of this system
-against existing design methods and tools.
+Rapid prototyping machines such as laser cutters are becoming more
+common. Designers commonly make quick sketches to aid thinking about
+the problem and possible solutions. Sketching is a skill that even
+untrained people can perform to some useful degree. Unlike sketching,
+modeling software needed to design things that can be made with laser
+cutters poses a significant learning challenge for inexpert users and
+can be hard to use even for those with experience. Freehand sketches
+often capture critical elements of the design, such as object shapes,
+curvature qualities of boundaries, and numeric parameters like
+lengths---all of which must be communicated to a computer in order to
+produce on a laser cutter.
+
+I propose to create a modeling system that allows for design of
+objects via iterative freehand sketching. Sketch-based interaction is
+a promising design paradigm, but unlike traditional applications there
+are no standard interaction techniques for sketch-based
+applications. Standardizing interaction techniques allow people to use
+other applications more easily. The proposed system will explore
+sketch-based interaction techniques for moderately complex tasks such
+as the design of objects for production via laser cutter. I will
+develop a set of sketch-based interaction techniques that empower
+laser cutter users to create models. Additionally, I will test the
+utility of this system against existing tools commonly used for
+designing objects for laser cutters.
 \end{abstract}
 
 \newpage
@@ -135,16 +145,15 @@ fabrication machinery is put to work. The designer can then evaluate
 the output and decide what to do next: keep the design as it is,
 change the CAD model, or ``go back to the drawing board'' and sketch
 new ideas. It is common for people to physically sketch while making
-revisions or redesigning, because it is often easier and faster than
-working with existing CAD models. This is especially the case with the
-users targeted by this system: avocational designers who are not
-necessarily proficient with professional tools.
+revisions or redesigning, because it is often easier and faster to
+sketch than working with existing CAD models. This is especially the
+case with the users targeted by this system: avocational designers who
+are not necessarily proficient with professional tools.
 
 The software proposed here is in a category that does not yet exist
-outside of research labs. Consequently, it is difficult to gauge what
-problems users have with such software without building it. I argue
-that it is beneficial to look beyond current user needs and invent
-tools for the future.
+outside of research labs. Consequently, it is important to build such
+software to explore the possibilities. I argue that it is beneficial
+to look beyond current user needs and invent tools for the future.
 
 Kirsh and Maglio~\cite{kirch-epistemic-action} distinguish between
 \textit{pragmatic} and \textit{epistemic} actions. Structured modeling
@@ -165,7 +174,9 @@ to twenty years old, the nature of structured design tools has not
 changed (and sketching certainly has not). It is faster and easier to
 sketch an idea than it is to produce it in a modeling tool. This rapid
 idea generation leads to more ideas, giving a larger pool from which
-to draw new ideas. Ultimately sketching promotes better design.
+to draw new ideas. Ultimately sketching promotes better design by
+allowing designers to explore more ideas and variations within those
+ideas~\cite{goel-sketches-of-thought,schon-kinds-of-seeing}.
 
 While sketching is regarded as a highly effective technique for
 exploring design ideas, structured editors are seen as more
@@ -180,9 +191,12 @@ idea. Consider the following quote from~\cite{newman-web-designers}:
 \end{quotation}
 
 This proposal describes an approach that brings sketching and computer
-modeling activities together in the same tool. It lets users sketch as
-roughly or precisely as they like, iteratively and interactively
-making models that can be manufactured using rapid fabrication
+modeling activities together in the same tool. This tool belongs to
+area of sketch-based interaction and modeling (SBIM). These
+applications are sometimes called calligraphic systems or Computer
+Aided Sketching (CAS). The proposed tool lets users sketch as roughly
+or precisely as they like, iteratively and interactively making models
+that can be manufactured using rapid fabrication
 machines. Specifically, the system will support users to employ
 calligraphic interaction to model objects for production on laser
 cutters. Such objects are composed of flat, rigid parts. Figure
@@ -288,16 +302,20 @@ artifacts.
 
 \subsection{Research Scope}
 
-The tool under consideration here supports novice designers in the
+The tool under consideration here supports inexpert designers in the
 fairly narrow domain of design for 2D laser-cutter fabrication. This
 domain is chosen because laser-cut parts typically have some aspects
-that require precise measurements. 
+that require precise measurements.
 
 The research scope of this project is to develop calligraphic
 techniques to facilitate the design of these 2D parts. I will evaluate
 these techniques in context of the laser-cutting fabrication design
-domain. This domain is chosen because it a 2D environment is easier to
-develop than a 3D tool.
+domain. This domain is chosen for several reasons. 2D environments are
+easier to develop than a 3D tool. I have experience making a laser
+cutter design tool (which is described later). Last, laser cutters are
+relatively quick when compared to 3D printer fabrication (on the order
+of minutes compared with hours), so this domain will allow me to
+iterate more rapidly.
 
 \subsection{Methods}
 
@@ -576,44 +594,45 @@ HCI practitioners often conduct usability studies to uncover
 particular problems in applications. The issues uncovered by these
 studies are then addressed by changing the software. This iterative
 process continues over years, leading to incremental
-improvements~\cite{buxton-sketching}.
-
-The interviews and observations from my study confirm that using
-current tools involve a great deal of needless overhead for the target
-population. However, rather than use this as a basis for incremental
-improvement to existing tools, I am interested in developing new tools
-the explore an alternate interaction paradigm that is easier and more
-effective for typical non-expert designers.
+improvements~\cite{buxton-sketching}. The interviews and observations
+from my study confirm that using current tools involve a great deal of
+needless overhead for the target population. However, rather than use
+this as a basis for incremental improvement to existing tools, I am
+interested in developing new tools the explore an alternate
+interaction paradigm that is easier and more effective for typical
+non-expert designers.
 
 The ultimate goal of any laser cutter project is to make a final
 assembly that is made from laser-cut parts. Based on my interviews
-with the designers and my own experience, I identify four supporting
-goals that serve the larger practical goal of making finished
-laser-cut assemblies. These sub-goals include making rough drawings
-used to help structure the problem and possible solutions; adding
-precise details to drawings; and supporting quick manufacturing and
-editing.
+with the designers and my own experience, I identify several themes of
+user goals and needs.
 
-\subsubsection{Supporting Goal 1: Make Rough Representation} 
+\subsubsection{Theme: Rough Representation} 
 
 Designers need strategies to help think about (1) what the whole
 assembly should work and look like, (2) what individual pieces should
-be made, and (3) how those individual pieces fit together. This is
-most commonly done via sketching on paper. Some designers make
-rough physical models as well.
+be made, and (3) how those individual pieces fit together. It is
+exceedingly difficult for designers to compose nontrivial plans
+without external aid. This is most commonly done via sketching on
+paper. Some designers make rough physical models as well. Sketching is
+important for transformational thinking. But sketching is also a
+physical activity involving incremental production of visual elements
+to support cognitive processing. The activity of sketching can be
+understood as an epistemic action; the outcome---a sketch---is the
+result of a sequence of pragmatic actions.
 
 Current tools do not make any significant allowance for this goal. The
 system proposed here is based on sketching as the primary input
 method. This will let users be as rough, abstract, and imprecise as
 they like.
 
-\subsubsection{Supporting Goal 2: Make Precise Specification}
+\subsubsection{Theme: Precision}
 
-Users would like to be able to easily specify some (but not
-necessarily all) dimensions. This is the main purpose of most current
-modeling tools, though it is often difficult for people to do it
-effectively. For example, in the translate task, there are two notches
-that are specified to be 20cm apart (refer to
+Designers of laser cut items would like to be able to specify some
+(but not necessarily all) dimensions. This is the main purpose of most
+current modeling tools, though it is often difficult for people to do
+it effectively. For example, in the translate task, there are two
+notches that are specified to be 20cm apart (refer to
 Figure~\ref{fig:interview-sketch-1}). Several participants created
 temporary geometry (rectangles and lines) that were set to 20cm long
 and placed onscreen. This served as a ruler that the designer could
@@ -623,14 +642,14 @@ The proposed tool is somewhat unique in the area of sketch-based
 design tools in that it will give users the ability to be quite
 precise in identifying dimensions and constraints. It is hoped that
 using sketch recognition can allow people to state their intentions
-substantially faster than using difficult-to-use structured tools.
+(regarding precision) substantially faster than with structured tools.
 
-\subsubsection{Supporting Goal 3: Rapid Editing and Manufacture}
+\subsubsection{Theme: Rapid Editing and Manufacture}
 
 Participants reported they use a rapid \textit{model-make-evaluate}
-loop. They make several versions of objects with the laser cutter
-before it becomes final, because it is important to be able hold it in
-their hands. This is sometimes to determine if they made an execution
+loop. They produce several versions of objects with the laser cutter
+before it is finished. It is important to be able hold laser cut
+output in their hands to determine if they made an execution
 error. Equally as as often, the physical ``rough draft'' is necessary
 to evaluate their idea. Laser cutter projects tend to be fairly quick
 and inexpensive in comparison to some other fabrication machinery like
@@ -640,7 +659,10 @@ Current tools impose clumsy requirements on designers to prepare
 models for laser cutting. For example, the cut line color need to have
 the RGB tuple $(0,0,255)$, and line thickness has to be ``hair line''
 at 0.01mm. Managing this overhead is time-consuming. The proposed tool
-will handle this overhead on the user's behalf.
+will handle this overhead on the user's behalf. Another laser-cutter
+specific problem concerns arranging the objects to cut. All objects
+must be inside a bounding rectangle that represents the stock material
+that will lay on the laser cutter bed.
 
 A common problem exposed by making a physical draft is the discovery
 that pieces do not fit together properly. Some dimensions (such as
@@ -677,8 +699,14 @@ changes without creating more problems along the way.
 
 This section illustrates how a user might design the toothbrush holder
 shown in Figure~\ref{fig:flat-a} using the proposed system. There is
-also a video of this process at the URL
-\href{http://vimeo.com/17997357}{http://vimeo.com/17997357}.
+also a video of this process as
+well~\footnote{http://vimeo.com/17997357}. This is included as a
+narrative to help the reader understand some of the general qualities
+the resulting system will include. It is not an exhaustive list of
+interaction techniques that will necessarily be implemented. The
+interaction described here is intended to allow people to
+\textit{quickly} and \textit{iteratively} use sketch input to
+gradually create precise models.
 
 This narrative is admittedly contrived, because the user is
 `designing' a part that has already been completed. It is included in
