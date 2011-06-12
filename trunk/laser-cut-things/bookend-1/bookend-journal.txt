@@ -1,0 +1,17 @@
+Book end
+
+I designed this for 3mm hardboard. I suspect acrylic would be too brittle. It would have been nice (probably) to use thin material so the books sitting on the little flat part at the bottom don't get elevated too much, but I only had the hardboard and the acrylic.
+
+Anyway, I was able to draw the sheets in about 15 minutes, which included time for thinking about what I wanted and some variation. I drew angle braces that were quarter-circles (basically).
+
+Next I went into Omnigraffle to specify things, and that took roughly 2 hours. Omnigraffle is helpful in schizophrenic ways. It will tell you when things align *sometimes* but not other times. I don't understand what the necessary conditions for it helping are. The helpfulness is often counterproductive because it makes really dumb inferences sometimes (like the distance between A and B looks sort of like unrelated distance C-D).
+
+The lack of good measuring tools is an issue. I wanted to position objects 2cm from the edge, for example. In order to find out where 2cm is I made lines of the right length and stuck them in the model, temporarily, until I thought I was done with them. Sometimes I would need to recreate them. Annoying.
+
+Omnigraffle has the idea of 'magnets' that let you attach lines and such to existing objects in particular places (endpoints, center, etc.). This is helpful but it seems that once you use a magnet to bring two lines together, they become a single object. So I could not make a triangle using three magneted lines and then erase one---it would delete all three.
+
+I made an initial cut on paper and it looked OK so I used the hardwood for the second cut. It turned out OK except two of the slots were the wrong size. I don't understand how this could have happened because I measured them fairly carefully. I probably inadvertently changed them at some point because I am not an expert Omnigraffle user. At any rate, Omnigraffle doesn't offer much help in letting me see the values of dimensions I've created, and since it was off by about 0.4mm, it was not obvious there was a problem. So I had to waste time and material fixing this.
+
+The center of this slot was supposed to be 2cm from the edge. I was unsure if this constraint would still be satisfied if I just made it wider (since this involves moving the top and bottom lines). So I basically had to reestablish my ruler lines and remake the slot.
+
+I used glue on the final version because it seemed necessary. It looks like it will work, but I would make one important change. Right now the angle brackets have long tabs that dig in to slots in the vertical and horizontal pieces. I would change this to use several tabs/slots to improve stability. Probably would only need two slots on bottom and top rather than just one. I might also consider adding an additional horizontal and vertical layer so the tabs can't over-extend through the slots. But that would make the whole thing taller and would take up considerably more material.
