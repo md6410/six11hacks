@@ -1,0 +1,11 @@
+Pen Holder
+
+I started with the toothbrush holder file but changed almost all of it.
+
+I wanted to be able to hold a bunch of pens, but I didn't want it to be too big. I settled on a six-hole design with two rows. I picked the largest pen on KJ's desk (a Prismacolor art marker) and measured it with calipers, and sized the holes just large enough to accept that pen.
+
+I used the Bezier tool to change the support structures to have a more interesting shape. It is just a curved thing, but it looks better than the straight line deal.
+
+I cut and assembled it without incident. It works quite well and looks nice too. No structural problems that I can see.
+
+It might be improved by having an angle to it so you can see things more easily from a sitting angle. But that might cause problems because gravity points down and you depend on that to help put pens in.
