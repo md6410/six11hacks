@@ -58,7 +58,7 @@
 \title{Thesis Proposal:\\Interaction Techniques for Sketch-based
   Design\\for Rapid Prototyping using Laser Cutters} \author{Gabe
   Johnson\\School of Architecture\\Carnegie Mellon
-  University\\ \\ (This is a draft)}
+  University}
 
 \begin{document}
 \thispagestyle{empty}
@@ -106,12 +106,10 @@ a promising design paradigm, but unlike traditional applications there
 are no standard interaction techniques for sketch-based
 applications. Standardizing interaction techniques allow people to use
 other applications more easily. The proposed system will explore
-sketch-based interaction techniques for moderately complex tasks such
-as the design of objects for production via laser cutter. I will
-develop a set of sketch-based interaction techniques that empower
-laser cutter users to create models. Additionally, I will test the
-utility of this system against existing tools commonly used for
-designing objects for laser cutters.
+sketch-based interaction techniques for moderately complex projects
+involving the design of objects for production via laser
+cutter. Additionally, I will test the utility of this system against
+existing tools commonly used for designing objects for laser cutters.
 \end{abstract}
 
 \newpage
@@ -299,14 +297,9 @@ dissertation.
 
 \subsection{Thesis Statement}
 
-This thesis will present a coherent set of calligraphic interaction
-techniques for iteratively making structured drawings that have enough
-detail that objects can be fabricated on a laser cutter. Current
-computer design tools impose needless, unnatural complexity on
-designers. Sketch-based interaction is chosen because of its
-widespread use in thinking about and representing design ideas
-quickly. If successful, the sketching techniques will enable
-relatively inexperienced designers to design and fabricate artifacts.
+This thesis holds that iterative sketch-recognition based interaction
+can be a useful and usable paradigm for design in the domain of
+laser-cut items.
 
 \subsection{Research Scope}
 
@@ -336,6 +329,18 @@ design tool. Development will be based on two sources:
 \item Iterative evaluation: I will regularly test the system with CMU
   students and other volunteers. 
 \end{packed_enum}
+
+\subsection{Objectives Beyond This Thesis}
+
+The research involved in this thesis is part of a larger interest in
+helping to bring sketch-based interaction to people in areas beyond
+the laser cutter domain presented here. Sketching is done by designers
+of many kinds, from architecture to industrial design, and from
+software to civil engineering. Nor is freehand drawing only a tool for
+`design': diagrams and mathematical graphs are commonly seen on
+whiteboards in classrooms and corporate meeting rooms. It is hoped
+that the current work will improve the body of knowledge related to
+sketch-based interactive systems.
 
 \section{New Makers, New Tools}
 
@@ -642,7 +647,7 @@ it effectively. For example, in the translate task, there are two
 notches that are specified to be 20cm apart (refer to
 Figure~\ref{fig:interview-sketch-1}). Several participants created
 temporary geometry (rectangles and lines) that were set to 20cm long
-and placed onscreen. This served as a ruler that the designer could
+and placed on-screen. This served as a ruler that the designer could
 then use to position the notches. The ruler was then erased.
 
 The proposed tool is somewhat unique in the area of sketch-based
@@ -1064,7 +1069,7 @@ Last, mode can be managed as it is in traditional applications, where
 people use on-screen widgets. These widgets may be present at all
 times~\cite{forbus-nusketch-battlespace}, invoked via
 gesture~\cite{grossman-hover-widgets,kurtenbach-marking-menus} or by
-placing the pen near onscreen
+placing the pen near on-screen
 ink~\cite{marinkas-shadowbutton,grossman-handle-flag}.
 
 Design sketches often involve a combination of text and pictures. In
@@ -1085,6 +1090,67 @@ modal input when possible. The proposed work integrates many more
 sketch- and pen-based interaction techniques. Also, because it is in
 support of machined output, it is necessary that the drawing give
 enough detail that objects can be manufactured.
+
+\begin{table}[h]
+\begin{center}
+\small{
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Need} & \textbf{Technique} &  \textbf{Example} \\
+\hline \hline
+
+Select Item & Lasso Select & ScanScribe~\cite{saund-scanscribe},
+Scriboli~\cite{hinckley-scriboli}, Handle
+flags~\cite{grossman-handle-flag}\\
+
+Delete & Scribble-out & GRAIL~\cite{ellis-grail},
+Pegasus~\cite{igarashi-pegasus} \\
+
+Undo/Redo & Gesture & Lineogrammer~\cite{zeleznik-lineogrammer},
+Scriboli~\cite{hinckley-scriboli}\\
+
+Zoom/Pan & Gesture & Lineogrammer~\cite{zeleznik-lineogrammer}\\
+
+Discern Text, Graphics & Recognizer, Gesture & Shilman
+\textit{et. al.}~\cite{shilman-discerning-structure} \\
+
+Assign Constraint & Gesture, Mode &
+SketchPad~\cite{sutherland-sketchpad},
+Stretch-a-sketch~\cite{gross-stretch-a-sketch}\\
+
+Remove/add from shape & Ink Recognition & Teddy~\cite{igarashi-teddy} \\
+
+Deform shape & Ink Recognition & SmoothSketch~\cite{karpenko-smoothsketch} \\
+
+Create guides/rulers & ? & ? \\
+
+Resize/move object & Context widgets & Hover widgets~\cite{grossman-hover-widgets} \\
+
+Hatch/fill region & Ink recognition & Thierjung \textit{et. al.}~\cite{thierjung-hatching} \\
+
+Set pen properties & Crossing widgets & Crossy~\cite{apitz-crossy} \\
+
+Train recognizer & Drawn example(s) & \$1 Recogn.~\cite{wobbrock-dollar},
+Elect. Cocktail Napkin~\cite{gross-ecn-uist} \\
+
+Invoke recognizer & Gesture, Button & Shadow
+button~\cite{marinkas-shadowbutton}, Li
+\textit{et. al.}~\cite{li-mode-switching}\\
+
+\hline
+\end{tabular}}
+\end{center}
+\caption{Interaction needs and techniques/systems that support and
+  explore them.}
+\label{tab:sketch-needs}
+\end{table}%
+
+Table~\ref{tab:sketch-needs} serves as a map of some of the needs
+users might commonly have when using a sketch-based system. This list
+is by no means exhaustive. Instead, it illustrates the variety of the
+common tasks have been addressed for sketch-based systems. When
+developing my system I will borrow heavily from these and other
+systems.
 
 \subsection{Sketching for Rapid Fabrication}
 
@@ -1128,7 +1194,7 @@ a chair's seat and back rest, and using a different drawing mode, add
 legs. The system includes a sophisticated physical simulator to let
 the designer explore its physicality (for example to determine if it
 will remain upright), and if it will be comfortable. It also allows
-designers to change subtle properties of curves using onscreen control
+designers to change subtle properties of curves using on-screen control
 handles. My proposed system differs from Sketch Chair in two important
 respects. First, Saul's system presumes the user is making a chair or
 chair-like object, and provides highly specialized software analysis
@@ -1293,7 +1359,7 @@ This thesis will contribute the following:
 \item A set of calligraphic interaction techniques. Some will be based
   on existing techniques (e.g. Lineogrammer's zoom), others will be
   novel. Here, \textit{technique} is broadly defined to include
-  interactive onscreen widgets, gestural phrases, and user interface
+  interactive on-screen widgets, gestural phrases, and user interface
   conventions.
 \item An analysis of \textit{the contexts and use cases} when each
   technique is appropriate. For example, rectification might be
