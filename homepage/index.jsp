@@ -48,7 +48,7 @@
 	</td>
 	<td valign="top">
 	  <p>
-	    <div class="head">Gabe Johnson's Homepage</div>
+	    <div class="head">Gabe Johnson</div>
 	    <br />
 	    <br />
 	  </p>
