@@ -1,0 +1,82 @@
+Intro:
+
+Sketch It, Make It, or SIMI, is a sketch-based tool that lets people design
+items for laser cutting.
+
+SIMI takes rough, hand drawn input and recognizes it. Some input is
+turned into linework, like straight lines, elliptical arcs, or
+freeform splines. I tell SIMI to recognize what I've done by pressing
+a button with my non-dominant hand.
+
+The system can also recognize input as commands. I can make the corner
+of this triangle be a right angle by drawing half-square symbol
+nearby. I can also make these two sides be the same length using this
+hash gesture. No matter how I deform the triangle, SIMI will always
+try to keep these two rules intact.
+
+Some commands are activated right away so I don't need to press the
+button. I can make a little circle here to latch these linestogether
+at their ends. And erasing works right away too, so I can erase
+structured or unstructured ink.
+
+I can also make reference points by making a fat dot. When there's
+just one point, it shows me a circle centered at the guide point, and
+a straight line. And these just follow the pen around. I can use this
+to put lines just where I want them. If I have two reference points it
+gives me circles based on these two points, a straight edge, and also
+this perpendicular bisector. So I can easily find the midpoint of two
+points. If I have three fat dots it forms a circle. Drawing
+approximately over this guide lets me make circular arcs.
+
+I can change freeform curves using flow selection. I just press the
+pen down near a spline and hold it for a while to heat it up, and then  
+move the pen without lifting up. I can also manipulate curves by
+ moving their endpoints around. And this is just an affine
+transformation of the curve.
+
+So here's a longer example that shows everything in a single design
+session. I'm going to try to replicate this picture frame holder part
+that looks like this.
+
+I'll start by drawing some of the basic geometry. I hit the button and
+it recognizes syntax. Straight lines are green, the elliptical arc
+here is magenta, and the spline is in cyan.
+
+SIMI automatically joined together these lines, but it didn't have
+enough confidence that these segments should join up. I can fix this
+by manually latching them by drawing a little circle around them like
+that. 
+
+Now I'll add the bottom part, and it sees that I've finished the path
+all the way around, so it sees this as a complete stencil and fills it
+in using a darker color. I could send this to the laser cutter at this
+point.
+
+But I'm not done quite yet, because I know that the picture frame has
+to slide in to this slot right here, so I have a little more to do. I
+can add right angles to match the shape of the frame. And the bottom
+should be just big enough to accept the picture frame, so I'll select
+this line and change its length to 1.2 centimeters. And it moves
+things around so all the constraints are satisfied.
+
+I'm going to change this shape on the left to make it curvier. I'll
+use flow selection on this in a couple spots. Notice that the
+constraints over here still hold.
+
+Next, I'm going to replace this elliptical arc over here with part of
+a circle. I'll just erase the ellipse, and add some reference points
+to give me the circular guide. I want a guide that passes through the
+top and bottom and this third point out here.
+
+It looks a little lopsided to me right now, so I'm going to play
+around a bit. I can select points by drawing fat dots on them, and
+then drag them somewhere. And I can deselect that point by circling
+it. I'll do something similar on the other side. And the spline keeps
+its general shape all this time.
+
+Last, I'll make sure the sides of the slot are big enough, so I'll
+tell them to be specific sizes. I can move the bottom around to adjust
+the angle, since I want the picture frame to sit at an angle.
+
+  So I'm basically done now. All I have to do is select it, and drag it
+off to my laser cutter.
