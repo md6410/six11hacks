@@ -1,0 +1,145 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{uist}
+
+\begin{document}
+
+% --- Copyright notice ---
+\conferenceinfo{UIST'11}{October 16-19, 2011, Santa Barbara, CA, USA}
+\CopyrightYear{2011}
+\crdata{978-1-4503-0716-1/11/10}
+
+% Uncomment the following line to hide the copyright notice
+\toappear{}
+% ------------------------
+
+\bibliographystyle{plain}
+
+\title{Sketch It, Make It: Freehand Drawing for Precision Rapid Fabrication}
+
+\author{
+\parbox[t]{9cm}{\centering
+	     {\em Author One}\\
+	     Institution Name\\
+             City, ST, USA\\
+	     user@institution.net}
+\parbox[t]{9cm}{\centering
+	     {\em Author Two}\\
+	     Institution Name\\
+             City, ST, USA\\
+	     user@institution.net}
+}
+
+\maketitle
+
+% TODO: change this
+\abstract Abstract goes here. Abstract goes here. Abstract goes
+here. Abstract goes here. Abstract goes here. Abstract goes
+here. Abstract goes here. Abstract goes here. Abstract goes
+here. Abstract goes here. Abstract goes here. Abstract goes
+here. Abstract goes here. Abstract goes here. Abstract goes here.
+
+\classification{I.3.5 [Computational Geometry and Object Modeling]: Modeling packages}
+
+% TODO: change this
+\terms{Design, Human Factors}
+
+\keywords{sketching, rapid fabrication, design tools, constraints}
+
+\tolerance=400 % prevent words from sticking out in the margin
+
+%% \begin{figure}[tb]
+%% \vspace{1.9in}
+%% \caption{A figure caption.  It is set in 9 point Helvetica type, with a
+%% 0.5 cm wider margin on both left and right sides.} 
+%% \label{fig-example}
+%% \end{figure}
+
+\section{INTRODUCTION}
+* Personal fabrication
+  - introduce ponoko because it is used later
+* Laser cutting
+* examples
+* why is design for laser cutting hard?
+  - tools mismatch
+  - allude to Illustrator study
+  - common tasks in this little domain:
+    + make notches
+    + use precise measurements
+    + angle and length matching
+    + items sometimes must join together
+* made tool SIMI to explore solutions to these problems
+  - sketch tool. why is this the right paradigm?
+  - contributions
+
+\section{RELATED WORK}
+Related work on ...
+
+* tools for design (various domains like UI design, graphic design, CAD)
+* fabrication
+* sketching
+* informal interfaces 
+
+\section{USER OBSERVATIONS}
+
+\subsection{Formative Study}
+
+* illustrator
+* describe things made in study
+* list problems we saw: x y z
+
+\subsection{Ponoko Analysis}
+
+* examined 50 laser-cut objects from ponoko
+* common properties from analysis: (examples only)
+  - symmetry
+  - angle
+  - material
+  - joint types
+
+\section{SKETCH IT, MAKE IT}
+
+* recall common tasks described in
+  - intro
+  - formative study
+  - ponoko analysis
+* lots of screenshots
+* map problems from earlier (x y z) to solutions in simi
+* overview of interaction
+
+\subsection{Implementation}
+
+* Stylus with offhand button
+* Recognizes syntax and gestures
+* Syntax: lines, elliptical arcs, splines, circles, ellipses
+* Gestures:
+  - Latch (3 kinds) 
+  - Erase 
+  - undo/redo
+  - right angle
+  - same-length 
+  - flow-selection
+  - guide points
+  - select stencils
+* Constraints
+  - introduce what they are
+  - list types supported: right angle, same length, co-terminate, specific length
+  - visual appearance
+* Stencils (with or without holes)
+
+\section{EVALUATION}
+
+* screenshots/photos from user study
+* other results from user study...
+
+\section{ACKNOWLEDGMENTS}
+
+% TODO: remove
+Every paper should cite \cite{sutherland-sketchpad}, if only to placate BibTeX.
+
+% TODO: fill this in later. Leave left blank for blind review.
+
+\bibliography{simi}
+
+\end{document}
