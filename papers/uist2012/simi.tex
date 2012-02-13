@@ -2,6 +2,9 @@
 
 \usepackage{times}
 \usepackage{uist}
+%\usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption,subfig}
+\usepackage{caption,subfig}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -53,35 +56,86 @@
 %% \end{figure}
 
 \section{INTRODUCTION}
-* Personal fabrication
 
-  - introduce ponoko/thingiverse because they are used later
+A growing community of self-described \textit{makers} design and build
+many kinds of physical things~\cite{gershenfeld-fab}. Some are
+electronic or robotic gizmos, while others are made from traditional
+material. These ``new makers''~\cite{gross-new-makers} are empowered
+by rapid fabrication machines like 3D printers and laser cutters.
 
-* Laser cutting
+It is possible that we are beginning to see a shift from an economy
+based on mass-production (in factories) to one that includes
+mass-customization (in homes, schools, and community
+centers)~\cite{economist-fab}. Rapid fabrication machines continue to
+decline in price while improving in quality. A new sector of
+businesses use rapid fabrication to cater to the needs of hobbyist
+designers as well as people that need highly customized
+goods~\cite{nyt-rapidfab}.  For example, companies such as Ponoko
+fabricate and send users physical output based on digital models
+uploaded over the web.
 
-* examples
+Laser cutters are among the more popular rapid fabrication
+machines. They can be thought of as a very fast, strong, and precise
+automated razor blade, cutting through flat material (paper, wood,
+plastic, metal, etc.) from directly above. Many items can be made
+entirely with a laser cutter, aside from the occasional screw or glue.
+Figure~\ref{fig:laser-example} shows several examples of useful items
+made with laser cutters.
 
-* why is design for laser cutting hard?
+\begin{figure}[h]
+\centering 
+\subfloat[] {
+  \label{fig:laser-example-a} 
+  \includegraphics[width=0.4\linewidth]{img/flat-b.jpg}
+}
+\subfloat[] {
+    \label{fig:laser-example-b}
+    \includegraphics[width=0.4\linewidth]{img/flat-b.jpg}
+}
+\caption{Laser cut items.}
+\label{fig:laser-example}
+\end{figure}
 
-  - tools mismatch
+Today, designers can choose among several modeling tools for laser
+cutter projects. Adobe Illustrator, a general-purpose vector graphics
+editor, is the most commonly used tool. Illustrator is full-featured
+and has an interface new users find familiar. However, participants in
+a formative study had a hard time using Illustrator quickly and
+effectively when designing for laser cutters. Specialized CAD tools
+like Rhino or SolidWorks are perhaps more appropriate for this kind of
+modeling but they also have a substantial learning curve. If rapid
+fabrication is to become common, appropriate modeling tools must be
+made accessible to ordinary users~\cite{lipson-homefactory}.
 
-  - allude to Illustrator study
+Laser cut items are composed of parts cut from solid, flat pieces of
+material. The primary concern of the designer is to define the path
+taken by the laser cutter. Parts may be put together in various ways.
+Pieces can be glued or screwed together in layers. Alternately the
+user can design joints so the parts fit together. Most joints have
+small margins of error. It is important that lengths, angles, and
+relative position be indicated with precision for the parts to fit
+together as they should.
 
-  - common tasks in this little domain:
+In this paper, we present a modeling tool called ``Sketch It, Make
+It'' (SIMI).  It is based on recognizing short sequences of sketched
+input with a stylus. By using freehand drawn input, SIMI enables the
+designer to iteratively and incrementally create laser cut models that
+fit precise specifications.
 
-    + make notches
+We are inspired by the potential of freehand drawing as a basis for
+our tool for several reasons. Sketching is quick and can be easily
+learned. The technology is simple.  Unlike structured editing
+software, a designer does not need to set the pencil's mode to line,
+circle, or anything else. A freehand sketch can provide enough
+information that others can translate it into a digital model. 
 
-    + use precise measurements
+The primary contribution of this work is a system that embodies a new
+way of designing precise 2D shapes by incremental sketch recognition
+and rectification.
 
-    + angle and length matching
+\subsection{Paper Organization}
 
-    + items sometimes must join together
 
-* made tool SIMI to explore solutions to these problems
-
-  - sketch tool. why is this the right paradigm?
-
-  - contributions
 
 \section{RELATED WORK}
 Related work on ...
@@ -97,6 +151,7 @@ Related work on ...
 \section{USER OBSERVATIONS}
 
 \subsection{Formative Study}
+\label{sec:formative}
 
 * illustrator
 
