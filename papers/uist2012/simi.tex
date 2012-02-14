@@ -3,7 +3,8 @@
 \usepackage{times}
 \usepackage{uist}
 %\usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption,subfig}
-\usepackage{caption,subfig}
+\usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption}
+\usepackage{subfig}
 \usepackage{graphicx}
 
 \begin{document}
@@ -179,27 +180,171 @@ ParSketch~\cite{naya-parsketch} enables designers to create parametric
 commands. It uses pressure to distinguish between linework (high
 pressure) and constraint commands (lower pressure).
 
-\section{USER OBSERVATIONS}
+\section{EMPIRICAL OBSERVATIONS}
+
+To better understand the domain of laser cutter fabrication we
+conducted several related empirical studies. We analyzed laser-cut
+items on community web sites to find common features. We also
+interviewed people with experience designing these artifacts, and
+watched how they worked. Last, we conducted a user study of Sketch It,
+Make It to measure designer attitudes how effectively people were able
+to use the tool.
 
 \subsection{Artifact Analysis}
 
-* examined 60ish laser-cut objects from ponoko and thingiverse
+Ponoko and Thingiverse are two popular web sites for selling or
+sharing items that can be made with rapid fabrication like laser
+cutters and 3D printers. We selected 55 laser-cut projects and
+examined their attributes to better understand what people are really
+making with laser cutters. The results of this analysis are shown in
+Figure~\ref{fig:ponoko}.
 
-* common properties from analysis: (examples only)
-  - symmetry
+\begin{figure}[h]
+  \includegraphics[width=0.9\linewidth]{img/ponoko-analysis.png}
+  \caption{Frequency of certain attributes were present in laser-cut
+    projects from Ponoko and Thingiverse.}
+  \label{fig:ponoko}
+\end{figure}
 
-  - angle
+We used a set of ten properties to characterize each project. These
+were chosen based on our own experience with items made with laser
+cutters, as well as from observations from the formative study
+discussed shortly. These properties are:
 
-  - material
+\begin{itemize}
+\item \textit{Right Angle}: Dominant edges meet at 90-degree angles.
+\item \textit{Notch and Finger Joints}: Two parts come together using one of
+  the joints illustrated in Figure~\ref{fig:joint}.
+\item \textit{Single part}: Project is composed of a single, flat piece of
+  material (e.g. a coaster).
+\item \textit{Fasteners}: Clear use of glue, screws, or bolts.
+\item \textit{Symmetry}: Radial or linear symmetry is a dominant feature.
+\item \textit{Rounded Corners}: Right-angle corners are slightly blunt.
+\item \textit{Raster etch}: Laser cutter etched patterns (e.g. words,
+  images) rather than cutting through material.
+\item \textit{Non-stencil lines}: Instances where thin lines were cut.
+\item \textit{Repeating geometry}: Linework is repeated several times.
+\end{itemize}
 
-  - joint types
+\begin{figure}[h]
+\centering 
+\subfloat[Notch joints.] {
+  \label{fig:joint-notch} 
+  \includegraphics[width=0.4\linewidth]{img/joint-notch.png}
+}
+\subfloat[Finger joints, alternately called box joints.] {
+    \label{fig:joint-finger}
+    \includegraphics[width=0.4\linewidth]{img/joint-finger.png}
+}
+\caption{Two common joint types.}
+\label{fig:joint}
+\end{figure}
+
+The purpose of single part projects were typically artistic, using
+expressive, curvy linework. Among those objects composed of more than
+one piece, nearly all used finger or notch joints
+(Fig.~\ref{fig:joint}). The rest used fasteners.
+
+The more professional-looking models were generally the ones that used
+rounded corners. Raster etching was also used for artistic effect in
+several cases. ``Non-stencil lines'' are thin lines cut all the way
+through material. They can be used for artistic effect (e.g. to allow
+light through). When used on flexible material they allow the part to
+stretch differently.
+
+Repeating geometry was found in most models (joints were excluded from
+consideration). These patterns involve sequences of lines or curves
+with consistent length and angles. Some patterns were quite ornate.
 
 \subsection{Formative Study}
 \label{sec:formative}
 
-* illustrator
+We interviewed designers to find out more about their work practices
+and to better understand how they use their tools. The participants
+have substantially different backgrounds: all have training in some
+form of design, including mechanical engineering, graphic design, and
+architecture. Each participant was asked to describe their design
+process, and to show sketches or videos of their work. While there are
+subtle (and some substantial) differences in their process, each
+followed the following pattern.
 
-* describe things made in study
+They begin by thinking about a problem and making drawings by
+hand. Some sketches are made to think about how to frame the project
+(what it is for), while others help reason about how to make it (how
+it works, how it fits together). Some designers explicitly noted that
+sketching is a necessary part of the process; it would not be possible
+to move forward without making freehand drawings. When the idea is
+reasonably well-formed they will implement the model with a software
+tool. It is common for this to involve translating a hand-made sketch
+to a computer model (Figure~\ref{fig:translate}).
+
+\begin{figure}[h]
+  \includegraphics[width=0.9\linewidth]{img/translate-sketch-to-computer.jpg}
+  \caption{A common part of desgining for laser cutters: translating a
+    hand-made sketch to a computer modelling tool. The sketch includes
+    a perspective drawing of the desired result, and 2D diagrams of
+    individual parts with important dimensions indicated.}
+  \label{fig:translate}
+\end{figure}
+
+Following the work practices interview, participants were asked to
+implement the sketch shown in Figure~\ref{fig:interview-sketch} using
+their software tool of choice. The purpose of this was to learn what
+problems people encountered when executing the common task of
+translating a sketch to a computer model.
+
+\begin{figure}[h]
+\centering 
+\subfloat[The part users set out to replicate.] {
+  \label{fig:interview-sketch-1} 
+  \includegraphics[width=0.9\linewidth]{img/laser-me-1.jpg}
+}
+
+\subfloat[Drawing of how the part is used in context.] {
+    \label{fig:interview-sketch-2}
+    \includegraphics[width=0.9\linewidth]{img/laser-me-2.jpg}
+}
+\caption{Participants were asked to implement the above using modeling
+  software.}
+\label{fig:interview-sketch}
+\end{figure}
+
+Participants mostly chose to implement the sketch with Illustrator (5
+users), while another chose Rhino. In all cases, a designer's strategy
+involved common activities: creating or editing boundaries, aligning
+or snapping items, using guide lines or reference points, measuring
+distances, specifying or changing lengths and angles, and creating
+finished ``cut files'' that will be sent to the laser cutter. These
+tasks are in addition to selecting/deselecting onscreen elements,
+zooming, panning, and so on.
+
+Participants in this experiment spent a good deal of time on operating
+overhead. This includes (1) trying to find the appropriate tool for
+the next task, (2) recovering from errors made when the wrong tool was
+selected, or (3) when the tool behavior was inconsistent with the
+user's intention. Approximately 50\% of the designer's time was spent
+in this way.
+
+For example, one user was aware of Illustrator's ``Path Finder'' tool
+and wanted to use it. The user searched the program's menu structure
+and slowly hovered over toolbar buttons to read tool tips before
+finding it. Next, the designer invoked various functions of the Path
+Finder, using the keyboard shortcut to undo after each attempt, as he
+searched for the correct mode within the subcommand palette. This
+process lasted approximately 80 seconds before finally being able to
+continue.
+
+Occasionally participants used features in rather strange ways to
+achieve a desired outcome. In order to remove an unwanted line, one
+participant (a graphic designer) chose to create an opaque white
+rectangle to obscure it, rather than erase it. (``Don't tell anyone I
+did this'', he said at the time).
+
+Similar episodes are common: a person \textit{should} know the
+`correct' action, but takes an alternate approach. The alternative
+might achieve the intended effect, but it might be less efficient
+(more operations, longer execution time) or it might introduce
+unwanted complexity (such as the invisible white rectangle).
 
 * list problems we saw: x y z
 
