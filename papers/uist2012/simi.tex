@@ -133,31 +133,53 @@ The primary contribution of this work is a system that embodies a new
 way of designing precise 2D shapes by incremental sketch recognition
 and rectification.
 
-\subsection{Paper Organization}
-
-
-
 \section{RELATED WORK}
-Related work on ...
 
-* tools for design (various domains like UI design, graphic design, CAD)
+While ``the design process'' has important differences between
+domains, there are two common properties to nearly all design
+efforts. First, designers sketch throughout the process, particularly
+in the beginning. Second, a computer tool is used to formalize the
+design. This is confirmed by observations of graphic
+designers~\cite{wong-rr-prototypes}, automotive
+engineers~\cite{kara-styling}, and software
+developers~\cite{dekel-improvised-notation}. Freehand drawing is a
+powerful means for thinking and specifying design intent, but it is
+disconnected from the computer aided portion of the design
+process~\cite{company-sketching-in-engineering}. 
 
-* fabrication
+Computer support for fabrication design has been a topic of interest
+for several decades, alternately called computer aided design (CAD) or
+computer aided manufacturing (CAM). Sutherland's SketchPad
+system~\cite{sutherland-sketchpad} is among the earliest and most
+influential examples of interactive design software. SketchPad users
+controlled the system by setting modes and parameters with one hand
+and drawing on the screen with a light pen in the other. This form of
+input enabled people to create mechanical parts that conformed to
+engineering requirements. 
 
-* sketching
+More recently, novel interfaces have been developed that enable users
+to model items for fabrication by sketching. For example,
+Plushie~\cite{mori-plushie} lets people design soft objects like
+stuffed animals. Users create 3D models of bulbous objects by
+sketching in a manner similar to Teddy~\cite{igarashi-teddy}. The
+program creates a set of 2D shapes that users can cut from fabric,
+sew, and fill with stuffing. 
 
-* informal interfaces 
+Sketch Chair is a more recent example of a tool that helps make design
+for rapid fabrication more accessible~\cite{saul-sketch-chair}. It
+lets users sketch the contours of a chair's seat and back rest, and
+using a different drawing mode, add legs. The system includes a
+sophisticated physical simulator to let the designer explore its
+physicality (for example to determine if it will remain upright). It
+also allows designers to change subtle properties of curves using
+on-screen control handles.
+
+ParSketch~\cite{naya-parsketch} enables designers to create parametric
+2D models by incrementally recognizing sketched geometry and
+commands. It uses pressure to distinguish between linework (high
+pressure) and constraint commands (lower pressure).
 
 \section{USER OBSERVATIONS}
-
-\subsection{Formative Study}
-\label{sec:formative}
-
-* illustrator
-
-* describe things made in study
-
-* list problems we saw: x y z
 
 \subsection{Artifact Analysis}
 
@@ -171,6 +193,16 @@ Related work on ...
   - material
 
   - joint types
+
+\subsection{Formative Study}
+\label{sec:formative}
+
+* illustrator
+
+* describe things made in study
+
+* list problems we saw: x y z
+
 
 \section{SKETCH IT, MAKE IT}
 
@@ -231,9 +263,6 @@ Related work on ...
 * other results from user study...
 
 \section{ACKNOWLEDGMENTS}
-
-% TODO: remove
-Every paper should cite \cite{sutherland-sketchpad}, if only to placate BibTeX.
 
 % TODO: fill this in later. Leave left blank for blind review.
 
