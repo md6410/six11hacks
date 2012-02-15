@@ -180,15 +180,13 @@ ParSketch~\cite{naya-parsketch} enables designers to create parametric
 commands. It uses pressure to distinguish between linework (high
 pressure) and constraint commands (lower pressure).
 
-\section{EMPIRICAL OBSERVATIONS}
+\section{FORMATIVE STUDY}
 
 To better understand the domain of laser cutter fabrication we
-conducted several related empirical studies. We analyzed laser-cut
-items on community web sites to find common features. We also
-interviewed people with experience designing these artifacts, and
-watched how they worked. Last, we conducted a user study of Sketch It,
-Make It to measure designer attitudes how effectively people were able
-to use the tool.
+conducted two related empirical studies. We analyzed laser-cut items
+on community web sites to find common features. We also interviewed
+people with experience designing these artifacts, and watched how they
+worked. 
 
 \subsection{Artifact Analysis}
 
@@ -291,7 +289,9 @@ Following the work practices interview, participants were asked to
 implement the sketch shown in Figure~\ref{fig:interview-sketch} using
 their software tool of choice. The purpose of this was to learn what
 problems people encountered when executing the common task of
-translating a sketch to a computer model.
+translating a sketch to a computer model. Each session lasted
+approximately an hour and was split evenly between the interview and
+implementation portions.
 
 \begin{figure}[h]
 \centering 
@@ -304,8 +304,8 @@ translating a sketch to a computer model.
     \label{fig:interview-sketch-2}
     \includegraphics[width=0.9\linewidth]{img/laser-me-2.jpg}
 }
-\caption{Participants were asked to implement the above using modeling
-  software.}
+\caption{Participants were asked to implement the stencil at the top
+  using modeling software.}
 \label{fig:interview-sketch}
 \end{figure}
 
@@ -315,8 +315,8 @@ involved common activities: creating or editing boundaries, aligning
 or snapping items, using guide lines or reference points, measuring
 distances, specifying or changing lengths and angles, and creating
 finished ``cut files'' that will be sent to the laser cutter. These
-tasks are in addition to selecting/deselecting onscreen elements,
-zooming, panning, and so on.
+tasks are in addition to selecting/deselecting onscreen elements, or
+viewport management like zooming and panning.
 
 Participants in this experiment spent a good deal of time on operating
 overhead. This includes (1) trying to find the appropriate tool for
@@ -335,10 +335,10 @@ process lasted approximately 80 seconds before finally being able to
 continue.
 
 Occasionally participants used features in rather strange ways to
-achieve a desired outcome. In order to remove an unwanted line, one
-participant (a graphic designer) chose to create an opaque white
-rectangle to obscure it, rather than erase it. (``Don't tell anyone I
-did this'', he said at the time).
+achieve a desired outcome. In order to remove an unwanted segment of a
+polyline, one participant (a graphic designer) chose to create an
+opaque white rectangle to obscure it, rather than erase it. (``Don't
+tell anyone I did this'', he said at the time). 
 
 Similar episodes are common: a person \textit{should} know the
 `correct' action, but takes an alternate approach. The alternative
@@ -346,32 +346,65 @@ might achieve the intended effect, but it might be less efficient
 (more operations, longer execution time) or it might introduce
 unwanted complexity (such as the invisible white rectangle).
 
-* list problems we saw: x y z
+To summarize, these are the common tasks and problems found during
+this interview study:
 
+\begin{itemize}
+\item creating/editing boundaries
+\item aligning/snapping items
+\item using guide lines or reference points
+\item measuring distances
+\item specifying lengths/angles
+\item creating cut files
+\item selecting/deselecting
+\item viewport management
+\item finding and entering tool modes
+\item recover from error (tool or user error)
+\item `correct' action is unknown or hard to do
+\end{itemize}
 
 \section{SKETCH IT, MAKE IT}
 
-* recall common tasks described in
+Based on observation of designer work practices and the artifacts they
+make, we have developed \textit{Sketch It, Make It} (SIMI), a
+sketch-based tool for modeling laser cut items. We aim to address many
+of the problems with currrent modeling systems enumerated above while
+giving people a tool that specifically supports designing laser-cut
+items.
 
-  - intro
+% * map problems from earlier (x y z) to solutions in simi
 
-  - formative study
+% * overview of interaction
 
-  - ponoko analysis
+SIMI users draw with a stylus and can use an offhand button for a few
+actions. The system recognizes input as either geometric linework or
+gestural commands. Linework includes straight lines, elliptical arcs,
+splines, circles, and ellipses. 
 
-* lots of screenshots
+Users can issue commands on linework by drawing gestures. Some
+gestures are recognized and acted on immediately, such as the erase
+(scribble) gesture. Others, such as commands to constrain segments be
+the same length, are recognized after the user presses the button, or
+after a timeout.
 
-* map problems from earlier (x y z) to solutions in simi
+When the user makes a closed 2D path, the system recognizes it as a
+stencil. Stencils are shapes that can be placed on the virtual laser
+cutter plane. Several copies of a stencil can be added. The system
+generates a vector file that can be sent to a laser cutter without
+modification.
 
-* overview of interaction
+After laser cutting the stencils, the user can assemble them to their
+final configuration. Several examples of projects made with SIMI are
+shown in Figure~\ref{fig:laser-example}.
 
 \subsection{Implementation}
 
-* Stylus with offhand button
+%* Stylus with offhand button
 
-* Recognizes syntax and gestures
-
-* Syntax: lines, elliptical arcs, splines, circles, ellipses
+The guiding principle we used when developing SIMI is that the
+designer should never need to set down their pen. Most input is
+provided entirely with a stylus. A single button used by the
+non-dominant hand gives access to additional commands.
 
 * Gestures:
 
