@@ -277,9 +277,10 @@ tool. It is common for this to involve translating a hand-made sketch
 to a computer model (Figure~\ref{fig:translate}).
 
 \begin{figure}[h]
+  \centering
   \includegraphics[width=0.9\linewidth]{img/translate-sketch-to-computer.jpg}
-  \caption{A common part of desgining for laser cutters: translating a
-    hand-made sketch to a computer modelling tool. The sketch includes
+  \caption{A common part of designing for laser cutters: translating a
+    hand-made sketch to a computer modeling tool. The sketch includes
     a perspective drawing of the desired result, and 2D diagrams of
     individual parts with important dimensions indicated.}
   \label{fig:translate}
@@ -315,8 +316,8 @@ involved common activities: creating or editing boundaries, aligning
 or snapping items, using guide lines or reference points, measuring
 distances, specifying or changing lengths and angles, and creating
 finished ``cut files'' that will be sent to the laser cutter. These
-tasks are in addition to selecting/deselecting onscreen elements, or
-viewport management like zooming and panning.
+tasks are in addition to selecting/deselecting on-screen elements, or
+view port management like zooming and panning.
 
 Participants in this experiment spent a good deal of time on operating
 overhead. This includes (1) trying to find the appropriate tool for
@@ -357,7 +358,7 @@ this interview study:
 \item specifying lengths/angles
 \item creating cut files
 \item selecting/deselecting
-\item viewport management
+\item view port management
 \item finding and entering tool modes
 \item recover from error (tool or user error)
 \item `correct' action is unknown or hard to do
@@ -368,7 +369,7 @@ this interview study:
 Based on observation of designer work practices and the artifacts they
 make, we have developed \textit{Sketch It, Make It} (SIMI), a
 sketch-based tool for modeling laser cut items. We aim to address many
-of the problems with currrent modeling systems enumerated above while
+of the problems with current modeling systems enumerated above while
 giving people a tool that specifically supports designing laser-cut
 items.
 
@@ -404,35 +405,228 @@ shown in Figure~\ref{fig:laser-example}.
 The guiding principle we used when developing SIMI is that the
 designer should never need to set down their pen. Most input is
 provided entirely with a stylus. A single button used by the
-non-dominant hand gives access to additional commands.
+non-dominant hand gives access to additional commands. The gestures
+used to give commands or make constraints are summarized below.
 
-* Gestures:
+\subsubsection{Latching}
 
-  - Latch (3 kinds) 
+It is usually desirable for adjacent linework to meet at a common
+point. Latching is the process of combining adjacent segments (lines,
+splines, arcs, \textit{etc.} so they meet at a common point. For
+example, a square may be drawn with with four strokes, leaving a total
+of eight unique pen-down/pen-up locations, but a square should have
+only four corners.
 
-  - Erase 
+SIMI provides two methods for latching segments together. One way is
+automatic: the system analyzes new linework and tries to find cases
+where the user probably meant their segments to join together, and
+adjusts one or more segments to conform to the likely
+outcome. Automatic latching can be problematic if it is too
+zealous. Early approaches only used distance to find which segments
+should be latched~\cite{herot-latch-corners}: if two endpoints were
+within $x$ units of one another, latch them. This works well when
+segment lengths are large relative to $x$. But when the segments are
+short, the latcher will merge points when the designer did not want
+them to join. 
 
-  - undo/redo
+SIMI's automatic latching process uses length and the segment
+direction at the endpoint. It creates an \textit{endcap}: a line
+segment centered at an end point that is a fraction of the line length
+(currently 0.1) that follows the tangent at the end point. For nearby
+segments to be automatically latched, the related endcaps must
+intersect. SIMI can latch two or more segments in this manner.
 
-  - right angle
+The automatic latching process is intentionally conservative to avoid
+causing user frustration. This means it is common for the automatic
+process to not find all the places where the user wanted lines to
+meet. To counter this, SIMI gives users a very simple method to latch
+segments: simply draw a small circle around the endpoints to latch.
 
-  - same-length 
+Most (or all) linework in SIMI is meant to compose stencils, which are
+sequences of latched segments. It is therefore necessary for the
+designer to be able to find segments are not latched. The system draws
+a red marker at lonely endpoints to expose un-latched segments.
 
-  - flow-selection
+There are three ways segments can be manually latched together:
+endpoint latching, continuation, and T-junctions. Endpoint latching is
+what the automatic latcher tries to do. Continuation latching is when
+the user brings together two segments that are close to the same
+direction at the joined point. Continuation latching replaces two
+segments with a single larger segment. A T-junction is when a segment
+endpoint is latched to the middle of a second segment. This splits the
+second segment in two.
 
-  - guide points
+\subsubsection{Erase}
 
-  - select stencils
+Users may want to remove linework for various reasons: deleting
+unwanted or accidental items, or as part of a deliberate strategy to
+cut away geometry to allow new shapes to
+emerge~\cite{zeleznik-lineogrammer}. Like latching, erasing is a
+common task so it is given a simple, easy gesture.
 
-* Constraints
+Erasing is performed with a scribble gesture. During development we
+tried various algorithms for detecting erasure. The first attempts
+would were computationally intensive enough that they could only be
+performed one time after the pen was released. However, test users
+found that it was difficult to perform the gesture correctly. If it
+was not done right, the input would be recognized as linework and
+remain on the canvas, which would then need to be erased using the
+same problem-prone algorithm. This caused considerable user
+frustration.
 
-  - introduce what they are
+Our new algorithm for detecting erasure is easy for the user to
+perform, and It is efficient enough to run as the pen stroke is in
+progress. When an erasure gesture is detected in mid-stroke, it
+provides visual feedback that gives users confidence and avoids
+frustration.
 
-  - list types supported: right angle, same length, co-terminate, specific length
+Erase (scribble) gestures are detected as follows. The first task is
+to to assign each point $P_i$ with a time stamp $T_i$, a curvilinear
+distance $D_i$, and a heading vector $H_i$. Curvilinear distance is
+the path length along the stroke from the first point: $D_0$ is zero,
+and the rest are $D_i = distance(P_{i-1}, P_i)$.
 
-  - visual appearance
+A pen stroke will not be considered an erasure if the pen has not
+moved more than some minimum distance from the start point (we use 10
+pixels).
 
-* Stencils (with or without holes)
+The heading $H_i$ for point is a normalized vector from $P_{i-k}$ to
+$P_{i+k}$, for a window size of some $k$ (we use $k=1$ but for more
+sensitive input surfaces $k$ should be larger). The first $k$ points
+use $H_k$ for their heading.
+
+The next task is to add points to a list of samples $S$. If $D_i$ is
+more than some threshold beyond the most recently added sample point,
+$P_i$ is added to $S$. When a new sample point is added, it assembles
+a sub-list $R$ of recent sample points that occurred within $t$
+milliseconds (our implementation uses 100ms). If the angle between any
+point in $R$ and the new point is greater than some value (we use $\pi$
+radians), it increments a `corner' value for the current pen
+stroke. When more than some number of corners is found for a stroke,
+the system marks the current input as an erase scribble and stops
+additional recognition until the pen is lifted.
+
+Because the sample list depends on a relatively short time period, the
+user must scribble with vigor to cause the erase gesture to
+activate. If the user intends to erase but does not draw fast enough,
+they quickly learn that they can just scribble a little faster and
+wait for the visual feedback to tell them that their stroke is an
+erasure.
+
+\subsubsection{Undo and Redo}
+
+Another way to recover from unwanted actions---particularly a sequence
+of them---is to use undo. SIMI enables users to undo by holding the
+offhand button down and dragging the pen to the left. Every 40 pixels
+change in the x dimension causes an undo action. Redo is done by
+dragging to the right. This lets the designer undo several actions by
+simply dragging farther to the left. Both undo and redo actions can be
+triggered by the same stroke by changing direction. This lets the
+designer seek for a prior state by gesturing.
+
+\subsubsection{Right Angle Constraints}
+
+SIMI enables designers to add geometric constraints via drawn
+gestures. In traditional drafting, a right angle is often indicated
+with a brace symbol at the intersection of the two edges. SIMI
+recognizes drawn input that looks like that brace and adds a new
+constraint for the associated segments. Erasing either segment in a
+right-angle constraint also removes the constraint.
+
+\subsubsection{Length Constraints}
+
+Another convention from drafting is to use hash marks to indicate that
+two lengths are the same length. SIMI recognizes two or more hash
+marks crossing line segments as a gesture to create a \textit{same
+  length constraint}. If the user hashes a line segment that is
+already involved in a same-length constraint, that segment is added to
+the existing one. Removing a segment involved in a same-length
+constraint only deletes the constraint if it is the last one.
+
+A same-length constraint is satisfied when all the lengths are the
+same. This tends to mean that the final length is the mean value of
+the initial lengths.
+
+SIMI also lets designers give specific length requirements. Currently
+this is done by selecting a line (by over-tracing a portion of it) and
+typing a number. Handwriting recognition would be preferred.
+
+If one of the segments in a same-length constraint is given a
+particular length, all segments take on that particular length.
+
+\subsubsection{Flow Selection}
+
+Flow selection~\cite{johnson-flow-selection} is a technique to
+manipulate curves organically. The may `heat up' portions of curved
+segments by holding the pen down nearby. Then, without picking the pen
+up, the user can move the heated region by dragging the pen. Points
+along the curve move more if they are `hotter'.
+
+\subsubsection{Reference Points and Guides}
+
+The user may create handles used to move segment endpoints around by
+drawing `reference points'. These are dots made by swirling the pen
+around in a small area (within 9 pixels) for a short time period (less
+than 500ms). The user can then reposition them to adjust attached
+geometry.
+
+When reference points are present, the system shows guides that can
+aid additional drawing. When there is one dot, the system uses the
+pen's hover location, drawing a circle centered at the dot, and a line
+passing through both. This can be useful if the designer wants to make
+a hole centered at a particular location.
+
+Two reference points give the user three circles, two lines, and shows
+the midpoint. Three reference points give the user a circle that
+passes through them, and indicates that circle's center.
+
+\subsection{Constraints}
+
+SIMI lets designers establish \textit{constraints} that enforce some
+geometric relationship among items~\cite{borning-thinglab}. For
+example, the user might draw a triangle and establish a right angle
+constraint. No matter how the user manipulates the drawing (moving
+vertices or changing segment lengths), the constraint engine will try
+to ensure that particular corner remains a right angle.
+
+SIMI uses an iterative, numeric solver that seeks to minimize the
+total error of all constraints. A constraint's error is reported as
+how far each related points must move until the constraint is
+satisfied. However, points may be involved in many constraints, so it
+is not generally possible to simply move points to where they satisfy
+each constraint. To resolve contending constraints, the system
+accumulates a change vector for each point by polling each
+constraint. Each point is moved a small amount along its change
+vector, and the process continues until the total error becomes very
+small.
+
+It is possible for the solver to get trapped in a loop as points
+oscillate between several values. We use a `heat' metaphor as in
+simulated annealing to avoid this case: the amount that points move
+varies randomly, and is larger when there is more heat. Gradually the
+system `cools off' and the points should settle in to a satisfactory
+configuration.
+
+Using a small number of primitive constraints related to distances and
+angles, SIMI can create higher-level user constraints such as those
+that keep segments at right angles or to be the same length.
+
+\subsection{Stencils}
+
+SIMI's final product is a ``cut file'': a vector drawing that can be
+given to a laser cutter. This cut file typically contains a number of
+stencils, which are closed 2D shapes that define the laser's
+path. Stencils may have arbitrarily complex boundary geometry,
+providing the edges do not intersect one another. Stencils can also
+have any number of holes in them, which could be used for joints,
+fasteners, or some other purpose.
+
+To identify stencils, SIMI forms a graph with segment endpoints as
+nodes and segments as edges. It then runs a depth-first search. The
+longest path that forms a cycle from a given point is considered a
+possible stencil. After completing the search, only the longest paths
+are kept. Stencils are visually represented by shading the
+interior. 
 
 \section{EVALUATION}
 
