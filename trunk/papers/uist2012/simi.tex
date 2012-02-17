@@ -1,8 +1,11 @@
 \documentclass{article}
 
+
 \usepackage{times}
 \usepackage{uist}
 %\usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption,subfig}
+%\usepackage{setspace}
+%\doublespace
 \usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption}
 \usepackage{subfig}
 \usepackage{graphicx}
@@ -10,9 +13,9 @@
 \begin{document}
 
 % --- Copyright notice ---
-\conferenceinfo{UIST'11}{October 16-19, 2011, Santa Barbara, CA, USA}
-\CopyrightYear{2011}
-\crdata{978-1-4503-0716-1/11/10}
+%\conferenceinfo{UIST'11}{October 16-19, 2011, Santa Barbara, CA, USA}
+%\CopyrightYear{2011}
+%\crdata{978-1-4503-0716-1/11/10}
 
 % Uncomment the following line to hide the copyright notice
 \toappear{}
@@ -101,21 +104,14 @@ Today, designers can choose among several modeling tools for laser
 cutter projects. Adobe Illustrator, a general-purpose vector graphics
 editor, is the most commonly used tool. Illustrator is full-featured
 and has an interface new users find familiar. However, participants in
-a formative study had a hard time using Illustrator quickly and
-effectively when designing for laser cutters. Specialized CAD tools
-like Rhino or SolidWorks are perhaps more appropriate for this kind of
-modeling but they also have a substantial learning curve. If rapid
-fabrication is to become common, appropriate modeling tools must be
-made accessible to ordinary users~\cite{lipson-homefactory}.
-
-Laser cut items are composed of parts cut from solid, flat pieces of
-material. The primary concern of the designer is to define the path
-taken by the laser cutter. Parts may be put together in various ways.
-Pieces can be glued or screwed together in layers. Alternately the
-user can design joints so the parts fit together. Most joints have
-small margins of error. It is important that lengths, angles, and
-relative position be indicated with precision for the parts to fit
-together as they should.
+our formative study had a hard time using Illustrator quickly and
+effectively because they spent a great deal of effort looking for
+appropriate functions among the many features that are irrelevant to
+laser cutters. Specialized CAD tools like Rhino or SolidWorks are
+perhaps more appropriate for this kind of modeling but they also have
+a substantial learning curve. If rapid fabrication is to become
+common, appropriate modeling tools must be made accessible to ordinary
+users~\cite{lipson-homefactory}.
 
 In this paper, we present a modeling tool called ``Sketch It, Make
 It'' (SIMI).  It is based on recognizing short sequences of sketched
@@ -130,33 +126,50 @@ software, a designer does not need to set the pencil's mode to line,
 circle, or anything else. A freehand sketch can provide enough
 information that others can translate it into a digital model. 
 
+\subsection{Contributions}
+
+This paper presents the results of a formative study on how people
+design items for laser cutting. We also provide an analysis of
+artifacts from Maker community web sites that reveals specific
+properties common to many laser cutter projects.
+
 The primary contribution of this work is a system that embodies a new
 way of designing precise 2D shapes by incremental sketch recognition
-and rectification.
+and rectification. We conducted a user study on how this tool can be
+used to better support design for laser cutter projects.
+
+\section{BACKGROUND}
+
+Laser cut items are composed of parts cut from solid, flat pieces of
+material. The primary concern of the designer is to define the path
+taken by the laser cutter. Parts may be put together in various ways.
+Pieces can be glued or screwed together in layers. Alternately the
+user can design joints so the parts fit together. Most joints have
+small margins of error. It is important that lengths, angles, and
+relative position be indicated with precision for the parts to fit
+together as they should.
 
 \section{RELATED WORK}
 
 While ``the design process'' has important differences between
-domains, there are two common properties to nearly all design
-efforts. First, designers sketch throughout the process, particularly
-in the beginning. Second, a computer tool is used to formalize the
-design. This is confirmed by observations of graphic
-designers~\cite{wong-rr-prototypes}, automotive
+domains, there are two common properties to nearly all design efforts,
+including design for laser cutters. First, designers sketch throughout
+the process, particularly in the beginning. Second, a computer tool is
+used to formalize the design. This is confirmed by observations of
+graphic designers~\cite{wong-rr-prototypes}, automotive
 engineers~\cite{kara-styling}, and software
 developers~\cite{dekel-improvised-notation}. Freehand drawing is a
 powerful means for thinking and specifying design intent, but it is
 disconnected from the computer aided portion of the design
-process~\cite{company-sketching-in-engineering}. 
+process~\cite{company-sketching-in-engineering}.
 
 Computer support for fabrication design has been a topic of interest
 for several decades, alternately called computer aided design (CAD) or
-computer aided manufacturing (CAM). Sutherland's SketchPad
-system~\cite{sutherland-sketchpad} is among the earliest and most
-influential examples of interactive design software. SketchPad users
-controlled the system by setting modes and parameters with one hand
-and drawing on the screen with a light pen in the other. This form of
-input enabled people to create mechanical parts that conformed to
-engineering requirements. 
+computer aided manufacturing (CAM). While current interaction is
+mostly performed with a keyboard and a mouse, this was not always the
+case. For example, SketchPad~\cite{sutherland-sketchpad} users
+controlled the computer by setting modes and parameters with one hand
+and drew on the screen with a light pen in the other. 
 
 More recently, novel interfaces have been developed that enable users
 to model items for fabrication by sketching. For example,
@@ -175,96 +188,48 @@ physicality (for example to determine if it will remain upright). It
 also allows designers to change subtle properties of curves using
 on-screen control handles.
 
-ParSketch~\cite{naya-parsketch} enables designers to create parametric
-2D models by incrementally recognizing sketched geometry and
-commands. It uses pressure to distinguish between linework (high
-pressure) and constraint commands (lower pressure).
+Most work on sketch-based interfaces focuses on the early phases of
+design when people are thinking about framing the problem and
+solution. Sketch-based systems such as Plushie and Sketch Chair enable
+people to make things they otherwise would not be able to, but the
+designer hands off a great deal of control to the system. Further,
+they support only a narrow class of artifacts.
 
-\section{FORMATIVE STUDY}
+The literature is not completely devoid of sketch-based systems that
+support precision, however. ParSketch~\cite{naya-parsketch} enables
+designers to create parametric 2D models by incrementally recognizing
+sketched geometry and commands. It uses pressure to distinguish
+between linework (high pressure) and constraint commands (lower
+pressure). Pegasus~\cite{igarashi-pegasus} and Lineogrammer are
+sketch-based drawing tools that lets users make clean, rectified
+vector graphics. They work on the principle of interactive
+beautification, which supports iterative sketch/rectify sequences.
+
+\section{BACKGROUND STUDY}
 
 To better understand the domain of laser cutter fabrication we
-conducted two related empirical studies. We analyzed laser-cut items
-on community web sites to find common features. We also interviewed
-people with experience designing these artifacts, and watched how they
-worked. 
+conducted two related empirical studies. We interviewed people with
+experience designing these artifacts, and watched how they
+worked. This helps form a picture of the kinds of tasks and problems
+designers face when designing for laser cutters. We also analyzed
+laser-cut items on community web sites to find common features.
 
-\subsection{Artifact Analysis}
-
-Ponoko and Thingiverse are two popular web sites for selling or
-sharing items that can be made with rapid fabrication like laser
-cutters and 3D printers. We selected 55 laser-cut projects and
-examined their attributes to better understand what people are really
-making with laser cutters. The results of this analysis are shown in
-Figure~\ref{fig:ponoko}.
-
-\begin{figure}[h]
-  \includegraphics[width=0.9\linewidth]{img/ponoko-analysis.png}
-  \caption{Frequency of certain attributes were present in laser-cut
-    projects from Ponoko and Thingiverse.}
-  \label{fig:ponoko}
-\end{figure}
-
-We used a set of ten properties to characterize each project. These
-were chosen based on our own experience with items made with laser
-cutters, as well as from observations from the formative study
-discussed shortly. These properties are:
-
-\begin{itemize}
-\item \textit{Right Angle}: Dominant edges meet at 90-degree angles.
-\item \textit{Notch and Finger Joints}: Two parts come together using one of
-  the joints illustrated in Figure~\ref{fig:joint}.
-\item \textit{Single part}: Project is composed of a single, flat piece of
-  material (e.g. a coaster).
-\item \textit{Fasteners}: Clear use of glue, screws, or bolts.
-\item \textit{Symmetry}: Radial or linear symmetry is a dominant feature.
-\item \textit{Rounded Corners}: Right-angle corners are slightly blunt.
-\item \textit{Raster etch}: Laser cutter etched patterns (e.g. words,
-  images) rather than cutting through material.
-\item \textit{Non-stencil lines}: Instances where thin lines were cut.
-\item \textit{Repeating geometry}: Linework is repeated several times.
-\end{itemize}
-
-\begin{figure}[h]
-\centering 
-\subfloat[Notch joints.] {
-  \label{fig:joint-notch} 
-  \includegraphics[width=0.4\linewidth]{img/joint-notch.png}
-}
-\subfloat[Finger joints, alternately called box joints.] {
-    \label{fig:joint-finger}
-    \includegraphics[width=0.4\linewidth]{img/joint-finger.png}
-}
-\caption{Two common joint types.}
-\label{fig:joint}
-\end{figure}
-
-The purpose of single part projects were typically artistic, using
-expressive, curvy linework. Among those objects composed of more than
-one piece, nearly all used finger or notch joints
-(Fig.~\ref{fig:joint}). The rest used fasteners.
-
-The more professional-looking models were generally the ones that used
-rounded corners. Raster etching was also used for artistic effect in
-several cases. ``Non-stencil lines'' are thin lines cut all the way
-through material. They can be used for artistic effect (e.g. to allow
-light through). When used on flexible material they allow the part to
-stretch differently.
-
-Repeating geometry was found in most models (joints were excluded from
-consideration). These patterns involve sequences of lines or curves
-with consistent length and angles. Some patterns were quite ornate.
-
-\subsection{Formative Study}
+\subsection{Formative Study on Designer Work Practices}
 \label{sec:formative}
 
-We interviewed designers to find out more about their work practices
-and to better understand how they use their tools. The participants
-have substantially different backgrounds: all have training in some
-form of design, including mechanical engineering, graphic design, and
-architecture. Each participant was asked to describe their design
-process, and to show sketches or videos of their work. While there are
-subtle (and some substantial) differences in their process, each
-followed the following pattern.
+We interviewed six designers to find out more about their work
+practices and to better understand how they use their tools. The
+participants have substantially different backgrounds: all have
+training in some form of design, including mechanical engineering,
+graphic design, and architecture. The participants were all part of
+our tool's target demographic: people who were interested in making
+things with laser cutters as a hobby. 
+
+Each session lasted approximately an hour and was split evenly between
+the interview and implementation portions. Participants were asked to
+describe their design process, and to show sketches or videos of their
+work. While there are subtle (and some substantial) differences in
+their process, each followed the following pattern.
 
 They begin by thinking about a problem and making drawings by
 hand. Some sketches are made to think about how to frame the project
@@ -290,9 +255,7 @@ Following the work practices interview, participants were asked to
 implement the sketch shown in Figure~\ref{fig:interview-sketch} using
 their software tool of choice. The purpose of this was to learn what
 problems people encountered when executing the common task of
-translating a sketch to a computer model. Each session lasted
-approximately an hour and was split evenly between the interview and
-implementation portions.
+translating a sketch to a computer model. 
 
 \begin{figure}[h]
 \centering 
@@ -364,6 +327,73 @@ this interview study:
 \item `correct' action is unknown or hard to do
 \end{itemize}
 
+\subsection{Artifact Analysis}
+
+Ponoko and Thingiverse are two popular web sites for selling or
+sharing items that can be made with rapid fabrication like laser
+cutters and 3D printers. Ponoko has thousands of user-designed items
+for sale, most of which are produced with laser cutters. Thingiverse
+is a warehouse of digital models that mostly contains 3D objects but
+has a fair number of designs for laser cutters. We selected 55
+laser-cut projects from these two sites by browsing their catalog. We
+then examined the project attributes to better understand what people are
+really making with laser cutters. The results of this analysis are
+shown in Figure~\ref{fig:ponoko}.
+
+\begin{figure}[h]
+  \includegraphics[width=0.9\linewidth]{img/ponoko-analysis.png}
+  \caption{Frequency of certain attributes were present in laser-cut
+    projects from Ponoko and Thingiverse.}
+  \label{fig:ponoko}
+\end{figure}
+
+We used a set of ten properties to characterize each project. These
+were chosen based on our own experience with items made with laser
+cutters, as well as from observations from the formative study
+discussed shortly. These properties are summarized now and described
+in greater detail below:
+
+\begin{itemize}
+\item \textit{Right Angle}: Dominant edges meet at 90-degree angles.
+\item \textit{Notch and Finger Joints}: Two parts come together using one of
+  the joints illustrated in Figure~\ref{fig:joint}.
+\item \textit{Single part}: Project is composed of a single, flat piece of
+  material (e.g. a coaster).
+\item \textit{Fasteners}: Clear use of glue, screws, or bolts.
+\item \textit{Symmetry}: Radial or linear symmetry is a dominant feature.
+\item \textit{Rounded Corners}: Right-angle corners are slightly blunt.
+\item \textit{Raster etch}: Laser cutter etched patterns (e.g. words,
+  images) rather than cutting through material.
+%\item \textit{Non-stencil lines}: Instances where thin lines were cut.
+\item \textit{Repeating geometry}: Linework is repeated several times.
+\end{itemize}
+
+\begin{figure}[h]
+\centering 
+\subfloat[Notch joints.] {
+  \label{fig:joint-notch} 
+  \includegraphics[width=0.4\linewidth]{img/joint-notch.png}
+}
+\subfloat[Finger joints, alternately called box joints.] {
+    \label{fig:joint-finger}
+    \includegraphics[width=0.4\linewidth]{img/joint-finger.png}
+}
+\caption{Two common joint types.}
+\label{fig:joint}
+\end{figure}
+
+The purpose of single part projects were typically artistic, using
+expressive, curvy linework. Among those objects composed of more than
+one piece, nearly all used finger or notch joints
+(Fig.~\ref{fig:joint}). The rest used fasteners.
+
+The more professional-looking models were generally the ones that used
+rounded corners. Raster etching was also used for artistic effect in
+several cases. Repeating geometry was found in most models (joints
+were excluded from consideration). These patterns involve sequences of
+lines or curves with consistent length and angles. Some patterns were
+quite ornate.
+
 \section{SKETCH IT, MAKE IT}
 
 Based on observation of designer work practices and the artifacts they
@@ -371,7 +401,7 @@ make, we have developed \textit{Sketch It, Make It} (SIMI), a
 sketch-based tool for modeling laser cut items. We aim to address many
 of the problems with current modeling systems enumerated above while
 giving people a tool that specifically supports designing laser-cut
-items.
+items. 
 
 % * map problems from earlier (x y z) to solutions in simi
 
@@ -399,6 +429,54 @@ final configuration. Several examples of projects made with SIMI are
 shown in Figure~\ref{fig:laser-example}.
 
 \subsection{Implementation}
+
+\begin{figure}[h]
+\centering \subfloat[Automatic: endpoints merge when endcaps intersect
+  (illustrated in blue).] {
+  \label{fig:latch-auto} 
+  \includegraphics[width=0.43\linewidth]{img/latch-auto-endcaps.pdf}
+}\hspace{5mm}
+\subfloat[Latching endpoints.] {
+  \label{fig:latch-endpoint} 
+  \includegraphics[width=0.43\linewidth]{img/latch-manual-endpoint.pdf}
+}
+\\
+\subfloat[Latching continuation.] {
+    \label{fig:latch-continuation}
+    \includegraphics[width=0.43\linewidth]{img/latch-manual-continuation.pdf}
+}\hspace{5mm}
+\subfloat[Latching T-Junction.] {
+    \label{fig:latch-tjunct}
+    \includegraphics[width=0.43\linewidth]{img/latch-manual-tjunct.pdf}
+}
+\caption{Automatic and manual latching used to bring segments together.}
+\label{fig:latch}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/erase-all.pdf}
+  \caption{Erase gesture: before, during, and after.}
+  \label{fig:erase}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/constraints-all.pdf}
+  \caption{Gestures for adding a right angle (left) and same-length.}
+  \label{fig:constraints}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/guides-all.pdf}
+  \caption{Reference points and guides. The first three panels show
+    one, two, and three reference points and the guides that are
+    displayed as a result. The designer uses the circular guide to
+    create the circular arc shown in the final panel.}
+  \label{fig:guides}
+\end{figure}
+
 
 %* Stylus with offhand button
 
