@@ -60,27 +60,22 @@
 
 \section{INTRODUCTION}
 
-A growing community of self-described \textit{makers} design and build
+A growing community of self-described \textit{Makers} design and build
 many kinds of physical things~\cite{gershenfeld-fab}. Some are
 electronic or robotic gizmos, while others are made from traditional
 material. These ``new makers''~\cite{gross-new-makers} are empowered
-by rapid fabrication machines like 3D printers and laser cutters.
-
-A new sector of businesses use rapid fabrication to cater to hobbyist
-designers as well as people who need highly customized
-goods~\cite{nyt-rapidfab}.  For example, companies such as Ponoko
-fabricate physical output from digital models that users upload over
-the web.
+by rapid fabrication machines like 3D printers and laser
+cutters. 
 
 Laser cutters are among the more common and affordable fabrication
 machines. They can be thought of as a very fast, strong, and precise
 automated razor, cutting through flat material (paper, wood, plastic,
-metal, etc.) from directly above. Many things can be made entirely
-with a laser cutter, sometimes fastened with screws or glue.
+metal, etc.). Many things can be made entirely with a laser cutter,
+sometimes fastened with screws or glue.
 Figure~\ref{fig:laser-example} shows several examples of useful items
 made with laser cutters.
 
-\begin{figure}[h]
+\begin{figure}[b]
 \centering 
 \subfloat[] {
   \label{fig:laser-example-a} 
@@ -94,30 +89,44 @@ made with laser cutters.
 \label{fig:laser-example}
 \end{figure}
 
+A new sector of businesses use rapid fabrication to cater to hobbyist
+designers as well as people who need highly customized goods. For
+example, companies such as Ponoko fabricate physical output from
+digital models that users upload over the web. 
+
 Today, designers can choose among several modeling tools for laser
-cutter projects. Adobe Illustrator, a general-purpose, full-featured
-vector graphics editor, is the most commonly used tool. It has an
+cutter projects. The most commonly used tool is Adobe Illustrator, a
+general-purpose, full-featured vector graphics editor. It has an
 interface new users find familiar. Despite this familiarity,
 participants in our formative study had a hard time using Illustrator
 quickly and effectively because they spent a great deal of effort
 looking for appropriate functions among the many features that are
 extraneous to laser cutters. Expert designers use specialized CAD
 tools such as Rhino or SolidWorks are perhaps more appropriate for
-this kind of modeling but they have a substantial learning curve. If
-design by end-users is to become common, appropriate modeling tools
-must be made accessible to ordinary users~\cite{lipson-homefactory}.
+this kind of modeling, but those tools have a substantial learning
+curve. If design by end-users is to become common, appropriate
+modeling tools must be made accessible to ordinary
+users~\cite{lipson-homefactory}.
 
 We present ``Sketch It, Make It'' (SIMI), a modelling tool based on
 recognizing short sequences of input sketched with a stylus. Using
 freehand drawn input, SIMI enables the designer to iteratively and
 incrementally create laser cut models to precise specifications.
 
+Research on sketch-based modeling tools~\cite{johnson-sketch-review}
+typically see sketching as an activity done mostly in the early phases
+of design. Tools based on this assumption are justifiably oriented
+towards supporting inprecise input without placing undue focus on
+unimportant detail. Only a few sketch-based systems support designers
+in later stages when it is important to focus on precision. 
+
 We are inspired by the potential of freehand drawing as a basis for
-our tool for several reasons. Sketching is quick and can be easily
-learned. The technology is simple and modeless: unlike structured
-editing software, a designer does not need to set the pencil's mode to
-line, circle, or anything else. And, a freehand sketch can provide
-enough information to translate into a digital model.
+precision modeling for several reasons. Sketching is quick and can be
+easily learned. The technology is simple and modeless: unlike
+structured editing software, a designer does not need to set the
+pencil's mode to line, circle, or anything else. And, a freehand
+sketch can provide enough information to translate into a digital
+model.
 
 \subsection{Contributions}
 
@@ -126,17 +135,25 @@ design items for laser cutting. We also provide an analysis of
 artifacts from Maker community web sites that reveals specific
 properties common to many laser cutter projects.
 
-The primary contribution of this work is a system that embodies a new
-way of designing precise 2D shapes by incremental sketch recognition
-and rectification. We conducted a user study of how this tool helps
-people to design for laser cutter projects.
+The primary contribution is a system characterized by iterative,
+incremental sketch-based modeling for designing precise 2D shapes
+for laser cutting. Prior work on sketch-based modeling tools explored
+only narrow topics in the space (like corner finding, recognition
+algorithms, or mode switching). We improve on existing sketch-based
+interaction techniques and bring them together in a system whose sum
+is greater than its parts. The system's success depends on how well
+the individual features work well together. While this might sound
+trivial, it is not. We believe our system gives users a remarkably
+fluid environment for designing laser cut items.
+
+We then present results of a user study of this tool. % TODO: more...
 
 \section{BACKGROUND}
 
 Laser cut designs are composed of parts cut from solid, flat pieces of
-material and assembled into configurations in various ways: laminated,
-notched, bolted together, \textit{etc}. The primary concern of the
-designer is to define the outline of parts produced with the laser
+material and assembled in various ways: laminated, notched, bolted
+together, \textit{etc}. The primary concern of the designer is to
+define the outline of parts produced with the laser
 cutter. Alternately the user can design joints so the parts fit
 together. Most joints have small margins of error. It is imperative
 that lengths, angles, and relative position be indicated with
@@ -156,10 +173,84 @@ powerful means for thinking and specifying design intent, but it is
 disconnected from the computer aided portion of the design
 process~\cite{company-sketching-in-engineering}.
 
+\subsection{Sketch-based interaction}
+
+% Mark says: The Related Work section should include not only projects
+% about sketch-to-fab, but also representative sketch projects that
+% don't address fabrication.  Although SIMI is a tool for making
+% drawings for laser cutter production, it does have potential for
+% broader use, and regardless, reviewers will compare it with other
+% non-fab sketch systems.  Therefore the RW section may as well tackle
+% SIMI in the context of sketch systems in general.
+
+% A few of the more well-known and relevant sketching systems:
+
+% * SILK, because it let you interact with the recognized elements of
+%   the sketch
+
+The rough appearance of freehand sketches support designers to see
+past unimportant details, letting them focus on the big picture. Much
+prior work argues that rectification is antagonistic to
+design~\cite{gross-cocktail}, at least during the conceptual
+phases. SILK is a sketch-based tool for quickly drawing user
+interfaces~\cite{landay-silk-chi}. While the system recognizes user
+input as UI elements like menus, scrollbars or buttons. The system
+lets the designer use the recognized sketch, even as it retains its
+rough appearance. Finally, SILK can translate the recognized sketch
+into a working implementation.
+
+% * Pegasus, because of interactive beautification, 2D vector drawing,
+%   constraint inference. Also Murugappan's beautification thing.
+
+% In here, I need to say something about the tradeoffs of recognizing
+% too much. Systems like Pegasus and Murugappan's thing are pretty
+% aggressive about inferring constraints. This leads to very nice
+% looking drawings, but it also precludes the user from making things
+% that can't be inferred.
+
+Some work takes an alternate view on the appearance of sketched
+input. Systems such as Pegasus~\cite{igarashi-pegasus} and recent work
+by Murugappan \textit{et. al}~\cite{murugappan-beautification}
+`beautify' the drawing by replacing rough input with cleaned up
+graphic elements like lines or arcs. These 2D graphics systems infer
+the user's intention by inferring geometric constraints. If more than
+one constraint is possible, the system lets the user choose among a
+small number of alternatives. These tools enable users to quickly and
+easily make clean-looking vector graphics. However, the aggressive
+inferencing might prevent users from making drawings that have subtle
+but important features the system can not infer.
+
+% * EverybodyLovesSketch, because it lowers the barrier for normal
+%   people to create complex 3D models with a coherent set of
+%   interaction techniques.
+
+Sketch input is an appealing way to interact with computers because it
+is apparently natural and easy for users to provide. Unfortunately,
+sketch recognizers are not sophisticated enough to reliably interpret
+drawings. Researchers have created ways to attend the gap between the
+input people would like to provide and the computer's ability to make
+sense of it. This is often done by asking users to draw in certain
+ways (e.g. shapes must be drawn with single strokes) to conform to the
+recognizer's capabilities, like in SILK. Others develop or refine
+sketch-based interaction techniques that that are natural for humans
+to use and easier for the computer to understand.
+
+Teddy~\cite{igarashi-teddy} and more recently
+EverybodyLovesSketch~\cite{bae-everybody} are two examples of this
+second category. They both provide a small grammar of easy-to-use
+gestures that people use to create and edit 3D drawings. The ease and
+power of these systems is evident: children can learn and use them to
+create seemingly complex models. EverybodyLovesSketch in particular
+seeks to enable a broad audience to create 3D perspective conceptual
+sketches by choosing a set of gestures and tools that work well
+together.
+
+\subsection{Sketch-based modeling for fabrication}
+
 Computer support for fabrication design has been a topic of interest
 for several decades, under the rubric of computer aided design
 (CAD)/computer aided manufacturing (CAM). While today interaction is
-mostly performed with a keyboard and a mouse, this was not always the
+mostly performed with a keyboard and mouse, this was not always the
 case. For example, SketchPad~\cite{sutherland-sketchpad} users
 controlled the design by setting modes and parameters with one hand
 and drew directly on the screen with a light pen in the other.
@@ -362,9 +453,9 @@ detail below:
 \item \textit{Symmetry}: Radial or linear symmetry is a dominant feature.
 \item \textit{Rounded Corners}: Right-angle corners are slightly blunt.
 \item \textit{Raster etch}: Laser cutter etched patterns (e.g. words,
-  images) rather than cutting through material.
-%\item \textit{Non-stencil lines}: Instances where thin lines were cut.
-\item \textit{Repeating geometry}: Linework is repeated several times.
+  images) rather than cutting all the way through material.
+\item \textit{Repeating geometry}: Linework is repeated several times,
+  often in a way that suggests procedural generation.
 \end{itemize}
 
 \begin{figure}[h]
@@ -427,8 +518,8 @@ of projects made with SIMI.
 \subsection{Implementation}
 
 \begin{figure}[h]
-\centering \subfloat[Automatic: endpoints merge when endcaps intersect
-  (illustrated in blue).] {
+\centering \subfloat[Automatic: merge when endcaps intersect
+  (drawn in blue).] {
   \label{fig:latch-auto} 
   \includegraphics[width=0.43\linewidth]{img/latch-auto-endcaps.pdf}
 }\hspace{5mm}
@@ -449,30 +540,6 @@ of projects made with SIMI.
 \label{fig:latch}
 \end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{img/erase-all.pdf}
-  \caption{Erase gesture: before, during, and after.}
-  \label{fig:erase}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{img/constraints-all.pdf}
-  \caption{Gestures for adding a right angle (left) and same-length.}
-  \label{fig:constraints}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{img/guides-all.pdf}
-  \caption{Reference points and guides. The first three panels show
-    one, two, and three reference points and the guides that are
-    displayed as a result. The designer uses the circular guide to
-    create the circular arc shown in the final panel.}
-  \label{fig:guides}
-\end{figure}
-
 
 %* Stylus with offhand button
 
@@ -491,16 +558,16 @@ the process of combining adjacent segments (lines, splines, arcs,
 draw a square with with four strokes, and eight unique pen-down/pen-up
 locations, but a square should have only four corners.
 
-SIMI provides two methods for latching segments. One is automatic: the
-system analyzes new linework for cases where the user probably meant
-their segments to join together, and adjusts one or more segments to
-join. Automatic latching can be problematic if it is too
-zealous. Early approaches used only distance to find which segments
-should be latched~\cite{herot-latch-corners}: if two endpoints were
-within $x$ units of one another, latch them. This works well when
-segment lengths are large relative to $x$. But when the segments are
-short, the latcher merges points that the designer intended to remain
-distinct.
+SIMI provides two methods for latching segments, illustrated in
+Figure~\ref{fig:latch}. One is automatic: the system analyzes new
+linework for cases where the user probably meant their segments to
+join together, and adjusts one or more segments to join. Automatic
+latching can be problematic if it is too zealous. Early approaches
+used only distance to find which segments should be
+latched~\cite{herot-latch-corners}: if two endpoints were within $x$
+units of one another, latch them. This works well when segment lengths
+are large relative to $x$. But when the segments are short, the
+latcher merges points that the designer intended to remain distinct.
 
 SIMI's automatic latcher uses length and the segment direction at the
 endpoint. It creates an \textit{endcap}: a line segment centered at an
@@ -530,6 +597,13 @@ to the middle of another segment, splits the second segment in two.
 
 \subsubsection{Erase}
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/erase-all.pdf}
+  \caption{Erase gesture: before, during, and after.}
+  \label{fig:erase}
+\end{figure}
+
 Users may want to remove linework for various reasons: deleting
 unwanted or accidental items, or as part of a deliberate strategy to
 cut away geometry to allow new shapes to
@@ -546,7 +620,8 @@ caused considerable frustration.
 Our new algorithm for detecting erasure is easy to perform, and is
 efficiently runs during as the pen stroke. When an erasure gesture is
 detected mid-stroke, it provides visual feedback that gives users
-confidence and avoids frustration.
+confidence and avoids frustration. Figure~\ref{fig:erase} shows an
+erase gesture with the visual feedback.
 
 Erase (scribble) gestures are detected as follows. First we assign
 each point $P_i$ with a time stamp $T_i$, a curvilinear distance
@@ -590,16 +665,22 @@ right. Both undo and redo actions can be triggered by the same stroke
 by changing direction. This lets the designer seek a prior state by
 dragging left and right.
 
-\subsubsection{Right Angle Constraints}
+\subsubsection{Right Angle and Length Constraints}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/constraints-all.pdf}
+  \caption{Gestures for adding a right angle (left) and same-length.}
+  \label{fig:constraints}
+\end{figure}
 
 Designers add geometric constraints via drawn gestures. In traditional
 drafting and standard geometry diagrams, a brace symbol at the
 intersection of the two edges indicates a right angle. SIMI recognizes
 drawn input that looks like that brace and adds a constraint on the
-associated segments. Erasing either segment in a right-angle
+associated segments. These are shown in
+Figure~\ref{fig:constraints}. Erasing either segment in a right-angle
 constraint also removes the constraint.
-
-\subsubsection{Length Constraints}
 
 Another convention from drafting is to use tick marks to indicate that
 two lengths are the same length. SIMI recognizes two or more ticks
@@ -620,15 +701,40 @@ length, all segments take on that particular length.
 
 \subsubsection{Flow Selection}
 
+\begin{figure}[h]
+\centering \subfloat[Selecting (``heating'') points along a curve near
+  the stylus. The selection grows with time. ] {
+  \label{fig:fs-1} 
+  \includegraphics[width=0.4\linewidth]{img/fs-1.pdf} }
+\hspace{3mm}
+\subfloat[Deforming the heated region by moving the stylus.] {
+  \label{fig:fs-2} 
+  \includegraphics[width=0.4\linewidth]{img/fs-2.pdf}
+}
+\caption{Flow selection.}
+\label{fig:fs}
+\end{figure}
+
 Flow selection~\cite{johnson-flow-selection} is a technique to
-manipulate curves organically. The user `heats up' portions of curved
-segments by holding the pen down near the curve. Then, without picking
-the pen up, the user moves the heated region by dragging the
-pen. Points along the curve move more if they are `hotter'.
+manipulate curves organically (Figure~\ref{fig:fs}). The user `heats
+up' portions of curved segments by holding the pen down near the
+curve. Then, without picking the pen up, the user moves the heated
+region by dragging the pen. Points along the curve move more if they
+are `hotter'.
 
 % TODO: add to flow selection section.
 
 \subsubsection{Reference Points and Guides}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/guides-all.pdf}
+  \caption{Reference points and guides. The first three panels show
+    one, two, and three reference points and the guides that are
+    displayed as a result. The designer uses the circular guide to
+    create the circular arc shown in the final panel.}
+  \label{fig:guides}
+\end{figure}
 
 The user may create handles to move segment endpoints around by
 drawing `reference points'. These are dots made by swirling the pen
@@ -636,16 +742,17 @@ around in a tiny area (within 9 pixels) quickly (less than 500ms). The
 user can then reposition reference points to adjust attached geometry.
 
 When reference points are present, the system shows guides to aid
-additional drawing. When there is one reference point, the system uses
-the pen's hover location, drawing a circle centered at the reference
-point, and a line passing through both. This can be used to make a
-hole centered at a particular location.
+additional drawing. The possible combinations are illustrated in
+Figure~\ref{fig:guides}. When there is one reference point, the system
+uses the pen's hover location, drawing a circle centered at the
+reference point, and a line passing through both. This can be used to
+make a hole centered at a particular location.
 
 Two reference points give the user three circles, two lines, and shows
 the midpoint. Three reference points give the user a circle that
 passes through them, and indicates that circle's center.
 
-\subsection{Constraints}
+\subsection{Constraint Engine}
 
 SIMI lets designers establish \textit{constraints} that enforce some
 geometric relationship among items~\cite{borning-thinglab}. For
@@ -697,6 +804,8 @@ interior.
 * other results from user study...
 
 \section{ACKNOWLEDGMENTS}
+
+For those about to rock, we salute you.
 
 % TODO: fill this in later. Leave left blank for blind review.
 
