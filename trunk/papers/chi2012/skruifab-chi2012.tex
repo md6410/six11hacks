@@ -9,10 +9,7 @@
 \title{Sketch It, Make It: Sketching precise drawings for laser cutting}
 
 \numberofauthors{4}
-% Notice how author names are alternately typesetted to appear ordered
-% in 2-column format; i.e., the first 4 autors on the first column and
-% the other 4 auhors on the second column.  Actually, it's up to you
-% to strictly adhere to this author notation.
+
 \author{
   \alignauthor{
   	\textbf{Gabe Johnson}\\
@@ -32,18 +29,18 @@
   	\affaddr{Georgia Inst. of Technology}\\
   	\affaddr{Atlanta GA}\\
   	\email{ellendo@gatech.edu}\\
-  }%\alignauthor{
-  %	\textbf{Jason I. Hong}\\
-  %	\affaddr{Carnegie Mellon University}\\
-  %	\affaddr{Pittsburgh PA}\\
-  %	\email{jasonh@cs.cmu.edu}\\
-  %}\\
+  }\alignauthor{
+  	\textbf{Jason I. Hong}\\
+  	\affaddr{Carnegie Mellon University}\\
+  	\affaddr{Pittsburgh PA}\\
+  	\email{jasonh@cs.cmu.edu}\\
+  }\\
 }
 
 \teaser{
   \centering
   \includegraphics[width=0.87\columnwidth]{img/skruifab-full.png}
-  \caption{Sketch It, Make It enables users to quickly create precise vector
+  \caption{SIMI enables users to quickly create precise vector
     drawings like this using sketch-based interaction.}
   \label{fig:sample}
 }
@@ -82,14 +79,13 @@
 \maketitle
 
 \begin{abstract}
-Sketch It, Make It (SIMI) is a modeling tool that enables
-non-experts to design items for fabrication with laser cutters. SIMI
-recognizes rough, freehand input as a user iteratively edits a
-structured vector drawing. The tool combines the strengths of
-sketch-based interaction with the power of constraint-based
-modeling. Several sketch-based interaction techniques are combined to
-present a coherent system that makes it easier to design for laser
-cutters.
+Sketch It, Make It (SIMI) is a modeling tool that enables non-experts
+to design items for fabrication with laser cutters. SIMI recognizes
+rough, freehand input as a user iteratively edits a structured vector
+drawing. The tool combines the strengths of sketch-based interaction
+with the power of constraint-based modeling. Several interaction
+techniques are combined to present a coherent system that makes it
+easier to make precise designs for laser cutters.
 \end{abstract}
 
 \keywords{\plainkeywords}
@@ -124,11 +120,10 @@ work.
 
 Unfortunately, people often have difficulty using modeling software
 when designing for these machines. The system described in this paper
-aims to make it easier and faster to move from idea to
-specification. Observing that freehand drawing is a common way to
-easily give form to ideas, we use this as a starting point for our
-design tool.
-
+aims to make it easier and faster for hobbyists and amateurs to move
+from idea to specification. Observing that freehand drawing is a
+common way to easily give form to ideas, we use this as a starting
+point for our design tool.
 
 % =============================================================================
 \section{Sketch It, Make It (SIMI)}
@@ -138,35 +133,44 @@ SIMI presents a set of mutually cohesive sketch-based interaction
 techniques for modeling items that will be produced on a laser
 cutter. The guiding heuristic for developing these techniques is that
 the user should never need to set down the pen. Input is provided
-entirely with a stylus and a single button used with the non-dominant
-hand.
+entirely with a stylus and optionally a single button used with the
+non-dominant hand.
 
 Many techniques demonstrated in SIMI are inspired by other
-sketch-based tools such as ParSketch~\cite{naya-parsketch} and
-Lineogrammer~\cite{zeleznik-lineogrammer}. Like SIMI, those systems
-supported users to iteratively build structured 2D models using sketch
-input.
+sketch-based tools such as ParSketch~\cite{naya-parsketch}, and
+Lineogrammer~\cite{zeleznik-lineogrammer}, and
+Pegasus~\cite{igarashi-pegasus}. Like SIMI, those systems supported
+users to iteratively build structured 2D models using sketch input.
 
-SIMI does not have persistent modes. Rather than requiring users to
-invoke modal tools such as line, select, erase, and so on, SIMI
-dynamically deduces the user's intention via recognition.
+The focus of this work is to produce a useful and usable sketch-based
+design tool for the domain of laser cutting. The main challenge in
+achieving this was the lack of a set of interaction sketch-based
+techniques that work in harmony. Prior work has focused largely on
+individual techniques that clearly map problems to solutions. In
+contrast, our system address the challenge of developing a system that
+integrates many experimental interaction techniques into a coherent
+whole.
 
-In general, the system collects rough pen input and waits for the user
-to request recognition by pressing the offhand button. The first two
-panes of Figure~\ref{fig:bigexample} illustrate this. In the first
-pane, the designer simply adds one or more ink strokes. When the user
-presses the button, SIMI attempts to recognize the designer's
-intention by analyzing the most recent batch of digital ink. Here the
-input was interpreted as creating line work: straight lines are green,
-and the upper-right edge is a free form spline. Closed shapes are
-shaded slightly, indicating complete stencils ready for laser cutting.
+The system collects rough pen input and invokes recognition after
+either a timeout is reached (we use 900ms), or when the user presses
+the offhand button. The first two panes of Figure~\ref{fig:bigexample}
+illustrate this. When recognition is invoked, SIMI attempts to
+interpret the designer's intention by analyzing the most recent
+ink. SIMI works best when the recognizer has only a small number of
+strokes (e.g. 6 or fewer) to work with. The intended interaction is a
+rhythmic cycle where the user draws a few strokes, invokes recognition,
+and continues.
+
+The shape made in Figure~\ref{fig:bigexample} is composed of straight
+lines and a free-form spline. Closed shapes are shaded slightly,
+indicating complete stencils ready for laser cutting. Stencil
+interiors are allowed to have holes (e.g. to accept screws).
 
 SIMI first segments input into primitive parts: dots, lines,
 elliptical arcs, and splines. We use a segmentation and corner finding
 strategy based on MergeCF~\cite{wolin-smr}. Elliptical segments may be
-at any orientation, and are found using the least-squares method
-described by Fitzgibbon
-\textit{et. al}~\cite{fitzgibbon-ellipse-fitting}.
+at any angle, and are found with the least-squares method described by
+Fitzgibbon \textit{et. al}~\cite{fitzgibbon-ellipse-fitting}.
 
 SIMI also recognizes commands that manipulate existing geometry
 (illustrated in Figure~\ref{fig:bigexample}). All commands are
@@ -174,14 +178,14 @@ context-sensitive. For example, SIMI recognizes a right angle when it
 identifies a half-square symbol near the intersection of two line
 segments.
 
-Most commands are recognized only after the button is pressed, but a
-few frequently used commands are immediate. These are triggered by
-gestures that are unlikely to be confused with other commands or line
-work. Other commands can make use of the fact that they might comprise
-several pen strokes. For example, to make two lines the same length
-the user draws a short hash over each line, as shown at the lower
-left. The user may hash several lines to constrain them all to be the
-same length, and press the button to invoke the command.
+SIMI does not have persistent modes. Rather than requiring users to
+invoke modal tools such as line, select, erase, and so on, SIMI
+deduces the user's intention via recognition.
+
+Most commands are recognized after the timeout or when the button is
+pressed. But some frequently used commands (erase, latch) are
+immediate, and are triggered by gestures that are unlikely to be
+confused with other ink.
 
 \subsection{Latching}
 
@@ -207,62 +211,58 @@ same length, and press the button to invoke the command.
 \end{figure}
 }
 
-SIMI supports latching endpoints of two nearby segments. Latching can
-be performed automatically or manually by user command. The system
+SIMI supports latching endpoints of two nearby segments. The system
 automatically latches endpoints just after recognizing new line
-work. For each newly-found segment, SIMI identifies all other segments
-with nearby endpoints and forms candidate pairs. For each pair,
-segment extensions are extrapolated based on the segment's type
-(e.g. line or arc) (shown in light, thin lines in
-Figure~\ref{fig:latch}. The extensions are 10\% of the total line
-length, or 10 pixels, whichever is larger. If the two extended
-segments intersect near the related endpoints, SIMI latches them.
+work. For each new segment, SIMI identifies all others with nearby
+endpoints and forms candidate pairs. For each pair, segment extensions
+are extrapolated based on the segment's type (e.g. line or arc) (shown
+in light, thin lines in Figure~\ref{fig:latch}. The extensions are
+10\% of the total line length, or 10 pixels, whichever is larger. If
+the two extended segments intersect, SIMI latches them.
 
-We have implemented a way to quickly merge nearby points
-manually. This technique was inspired by the lasso gesture in Bae's
-EverybodyLovesSketch system~\cite{bae-everybody}. To merge nearby
-endpoints, the user draws a small circle around them. This gesture is
-recognized and acted upon immediately.
+SIMI lets users quickly merge nearby points manually. This technique
+was inspired by the lasso gesture in Bae's EverybodyLovesSketch
+system~\cite{bae-everybody}. To merge nearby endpoints, the user draws
+a small circle around them.
 
 \subsection{Scribble Erase}
 
 The designer removes items by scratching them out. Line work,
-constraints, and unrecognized ink can all be erased. Only gestures
-bigger than a certain size (100px currently) and took longer than half
-a second to make are considered. The erase gesture is recognized by
-computing the density of pen sample points in the gesture's convex
-hull. If the density is higher than a certain threshold it is accepted
-as a potential erase gesture. Next, suitable targets are sought. If
-only one object is underneath the gesture's convex hull, it is
-removed. If the erase gesture covers several objects, SIMI intersects
-the gesture's hull with each object's hull, and computes the ratio of
-the area of the intersection region with the area of the object's
-hull. These ratios are clustered using k-means, and the top cluster's
-objects are removed, making it possible to accurately remove small
-items.
+constraints, and unrecognized ink can all be erased. The scribble
+recognizer executes as the stroke is made. It recognizes scribbles by
+sampling the most recent pen input and looks for abrupt changes in
+direction. When enough of these abrupt changes are found in a short
+time period it triggers an erase and signals this with visual
+feedback.
+
+Next, suitable targets are sought. If only one object is underneath
+the scribble, it is removed. If the gesture covers several objects,
+SIMI compares the scribble's area with each object's area. When more
+than 60\% of an object is under scribble, it is erased. If no objects
+match that rule, then the one with the most area under the scribble is
+removed. This makes it possible to accurately remove small items that
+are near larger ones.
 
 \subsection{Right Angle}
 
-Right angles are frequently needed in laser-cut items. To make two
-sketch lines perpendicular, the user draws two short lines that meet,
-in the conventional `right angle' symbol. If this symbol appears near
-a junction that is 90$^{\circ}$ (\pm15$^{\circ}$), the segments
-composing that junction will be constrained to meet at a right angle,
-as shown in Figure~\ref{fig:right-angle}. Size and context
-requirements disambiguate a right angle command from
-ink used to draw similarly-shaped line work.
+Right angles are frequently needed in laser-cut items. To make
+perpendicular, the user draws two short lines that meet, in the
+conventional `right angle' symbol. If this symbol appears near a
+junction that is 90$^{\circ}$ (\pm15$^{\circ}$), the segments
+composing that junction will be constrained to meet at exactly a right
+angle, as shown in Figure~\ref{fig:right-angle}.
 
 \subsection{Same Length}
 
-Users may instruct SIMI to make two or more segments the same length
-by drawing hashes over them. This can be done in one batch (as shown
-in Figure~\ref{fig:bigexample}), or in several batches by hashing
-one constrained segment and one or more unconstrained segments. The
-unconstrained segments are then brought into the set of related edges.
+Users may instruct SIMI to make several segments the same length by
+drawing hashes on them. This can be done in one batch (as in
+Figure~\ref{fig:bigexample}), or in several by hashing a constrained
+segment and additional unconstrained segments. The constraint engine
+uses the mean length as the target value.
 
 \subsection{Flow Selection}
 
-SIMI supports lets users edit the shape of splines by using flow
+SIMI lets users edit the shape of curves by using flow
 selection~\cite{johnson-flow-selection}. The user briefly dwells the
 pen near a spline, growing the selection area. Then, without lifting
 the stylus up, the designer moves it to reshape the selected region.
@@ -271,16 +271,15 @@ the stylus up, the designer moves it to reshape the selected region.
 
 Most of SIMI's commands relate to establishing geometric rules
 (constraints), such as ``make this line perpendicular to that line'',
-``make these three segments the same length''. SIMI's custom-built
-constraint engine for 2D geometry is a numeric, iterative solver. As
-constraints are added or removed, the solver repeatedly manipulates
-vertices and other objects until all the constraints are satisfied, or
-until it determines it can not find a solution. Sutherland used this
-approach in his SketchPad system~\cite{sutherland-sketchpad}. 
+``make these segments the same length''. SIMI's custom-built 2D engine
+is a numeric, iterative solver. The engine incrementally moves
+vertices and other objects until all constraints are satisfied, or
+until it determines it can not find a solution. The details of the
+constraint solver are beyond the scope of this paper.
 
 \section{Future Work}
 
-The work borrows conventions from disciplines such as mechanical
+This work borrows conventions from disciplines such as mechanical
 engineering and architecture. Techniques like hatching (e.g. to
 indicate similar regions) deserve consideration. We are currently
 exploring ways to use temporary guides (e.g. straight edges, French
@@ -288,21 +287,16 @@ curves) to aid drawing.
 
 SIMI should also support zooming. Laser-cut items often contain small
 regions that require great detail that are difficult to draw without
-zooming in.
-
-The system does not yet recognize character input for adding
-dimensions to angles and lengths. For now we ``cheat'' by
-allowing keyboard input. 
-
-The custom constraint engine makes it it possible to include
-additional geometry rules in the future, such as the ability to use
-surface tangents.
+zooming in. The system does not yet recognize character input for
+adding dimensions to angles and lengths. For now we ``cheat'' by
+allowing keyboard input.
 
 In the near future we will begin testing SIMI with students who
 regularly use laser cutters. This will help guide development.
 
 \balance
 \bibliographystyle{acm-sigchi}
-\bibliography{sketch-bibliography}
+\bibliography{simi}
 
 \end{document}
+
