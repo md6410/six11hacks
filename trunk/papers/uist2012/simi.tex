@@ -508,7 +508,7 @@ detail below:
     \label{fig:joint-finger}
     \includegraphics[width=0.4\linewidth]{img/joint-finger.png}
 }
-\caption{Two common methods join parts. Notch joints are used when
+\caption{Two common methods to join parts. Notch joints are used when
   parts intersect along part midsections; finger joints (alternately
   called box joints) join parts along edges.}
 \label{fig:joint}
@@ -570,7 +570,7 @@ After cutting the stencils, the user can assemble them to their final
 configuration. Figure~\ref{fig:laser-example} shows several examples
 of projects made with SIMI.
 
-\subsection{Implementation}
+\subsection{Sketch Interaction Techniques}
 
 \begin{figure}[h]
 \centering \subfloat[Automatic: merge when endcaps intersect
@@ -607,11 +607,16 @@ below.
 
 \subsubsection{Latching}
 
-Users often want adjacent lines to meet at a common point. Latching is
-the process of combining adjacent segments (lines, splines, arcs,
-\textit{etc.}) so they meet at a common point. For example, users may
-draw a square with with four strokes, and eight unique pen-down/pen-up
-locations, but a square should have only four corners.
+Users often want adjacent lines to meet at a common point. In the user
+evaluation designers struggle to make lines coterminate. Sometimes the
+designer would simply extend the lines past each other to ensure the
+laser path will make the corner correctly. 
+
+Latching is the process of combining adjacent segments (lines,
+splines, arcs, \textit{etc.}) so they meet at a common point. For
+example, users may draw a square with with four strokes, and eight
+unique pen-down/pen-up locations, but a square should have only four
+corners.
 
 SIMI provides two methods for latching segments, illustrated in
 Figure~\ref{fig:latch}. One is automatic: the system analyzes new
@@ -621,7 +626,7 @@ latching can be problematic if it is too zealous. Early approaches
 used only distance to find which segments should be
 latched~\cite{herot-latch-corners}: if two endpoints were within $x$
 units of one another, latch them. This works well when segment lengths
-are large relative to $x$. But when the segments are short, the
+are large relative to $x$. But when the segments are short, a naive
 latcher merges points that the designer intended to remain distinct.
 
 SIMI's automatic latcher uses length and the segment direction at the
@@ -711,16 +716,33 @@ can just scribble a little faster and wait for the visual feedback.
 
 \subsubsection{Undo and Redo}
 
-Another way to recover from unwanted actions---particularly a sequence
-of them---is to undo. Users undo by holding down the offhand button
-and dragging the pen to the left. Every 40 pixels left triggers one
-undo action. This lets the designer undo several actions by simply
-dragging farther to the left. Redo is done by dragging to the
-right. Both undo and redo actions can be triggered by the same stroke
-by changing direction. This lets the designer seek a prior state by
-dragging left and right.
+Participants in our designer evaluation used the feature in two
+distinct ways: to revert state following epistemic actions and
+usability problems~\cite{akers-undo}. First, the Undo function gives
+designers confidence to modify their work to see what changes might
+look like. These epistemic actions~\cite{kirsch-epistemic-action}
+support creative exploration. If the designer does not like their
+modifications they simply Undo to a prior state. The second class of
+Undo events stems from errors: either usability problems or user
+error. Regardless of the reason for invoking Undo, it is clearly a
+useful feature. 
+
+Users undo by holding down the offhand button and dragging the pen to
+the left. Every 40 pixels left triggers one undo action. This lets the
+designer undo several actions by simply dragging farther to the
+left. Redo is done by dragging to the right. Both undo and redo
+actions can be triggered by the same stroke by changing
+direction. This lets the designer seek a prior state by dragging left
+and right.
 
 \subsubsection{Right Angle and Length Constraints}
+
+Most laser cut stencils employ right angles, symmetry, and repeated
+geometry (see Figure~\ref{fig:ponoko}). Designers can create stencils
+that have these properties by imposing geometric constraints. A
+constraint is a rule that enforces some mathematical property, usually
+in the form of a geometric relationship among two or more
+elements.
 
 \begin{figure}[h]
   \centering
@@ -729,7 +751,7 @@ dragging left and right.
   \label{fig:constraints}
 \end{figure}
 
-Designers add geometric constraints via drawn gestures. In traditional
+In SIMI, designers add constraints with drawn gestures. In traditional
 drafting and standard geometry diagrams, a brace symbol at the
 intersection of the two edges indicates a right angle. SIMI recognizes
 drawn input that looks like that brace and adds a constraint on the
@@ -756,6 +778,17 @@ length, all segments take on that particular length.
 
 \subsubsection{Flow Selection}
 
+% Justify wrt user study and Ponoko analysis
+
+About a third of the models we looked at in our Ponoko analysis
+involved curves that are typically modeled using splines (e.g. Bezier
+curves). SIMI provides Flow Selection~\cite{johnson-flow-selection}
+that enables users to manipulate create and modify splines
+(Figure~\ref{fig:fs}). The user `heats up' portions of curved segments
+by holding the pen down near the curve. Then, without picking the pen
+up, the user moves the heated region by dragging the pen. Points along
+the curve move more if they are `hotter'. 
+
 \begin{figure}[h]
 \centering \subfloat[Selecting (``heating'') points along a curve near
   the stylus. The selection grows with time. ] {
@@ -770,16 +803,26 @@ length, all segments take on that particular length.
 \label{fig:fs}
 \end{figure}
 
-Flow selection~\cite{johnson-flow-selection} is a technique to
-manipulate curves organically (Figure~\ref{fig:fs}). The user `heats
-up' portions of curved segments by holding the pen down near the
-curve. Then, without picking the pen up, the user moves the heated
-region by dragging the pen. Points along the curve move more if they
-are `hotter'.
-
 % TODO: add to flow selection section.
 
 \subsubsection{Reference Points and Guides}
+
+% Justify wrt user study and Ponoko analysis
+
+In our study on designers, we noticed people measuring distances and
+drawing temporary lines used to anchor subsequent linework. For
+example, the stencil illustrated in
+Figure~\ref{fig:interview-sketch-1} calls for a semi-circular region
+in the middle of the top edge. Participants noted that their preferred
+strategy for making this stencil was to draw a long line along the
+top, and add the circular region afterwards. However, none of the
+Illustrator users were able to successfully take this strategy because
+they did not know how to find the midpoint of the line. Instead of
+carrying out their desired plan they measured the distance of the top,
+and added co-linear lines with half the length that met in the
+middle. This was an error-prone and time-consuming process. To support
+strategies like the one mentioned above, SIMI gives users the ability
+to use reference points and guides.
 
 \begin{figure}[h]
   \centering
@@ -792,7 +835,7 @@ are `hotter'.
 \end{figure}
 
 The user may create handles to move segment endpoints around by
-drawing `reference points'. These are dots made by swirling the pen
+drawing reference points. These are dots made by swirling the pen
 around in a tiny area (within 9 pixels) quickly (less than 500ms). The
 user can then reposition reference points to adjust attached geometry.
 
@@ -858,11 +901,16 @@ interior.
 
 * other results from user study...
 
+\section{FUTURE WORK}
+
+Future work...
+
 \section{ACKNOWLEDGMENTS}
+
+% TODO: fill this in later. Leave left blank for blind review.
 
 For those about to rock, we salute you.
 
-% TODO: fill this in later. Leave left blank for blind review.
 
 \bibliography{simi}
 
