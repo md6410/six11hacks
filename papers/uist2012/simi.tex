@@ -89,29 +89,25 @@ made with laser cutters.
 \label{fig:laser-example}
 \end{figure}
 
-A new sector of businesses use rapid fabrication to cater to hobbyist
-designers as well as people who need highly customized goods. For
-example, companies such as Ponoko fabricate physical output from
-digital models that users upload over the web. 
-
 Today, designers can choose among several modeling tools for laser
 cutter projects. The most commonly used tool is Adobe Illustrator, a
 general-purpose, full-featured vector graphics editor. It has an
 interface new users find familiar. Despite this familiarity,
-participants in our formative study had a hard time using Illustrator
-quickly and effectively because they spent a great deal of effort
-looking for appropriate functions among the many features that are
-extraneous to laser cutters. Expert designers use specialized CAD
-tools such as Rhino or SolidWorks are perhaps more appropriate for
-this kind of modeling, but those tools have a substantial learning
-curve. If design by end-users is to become common, appropriate
-modeling tools must be made accessible to ordinary
-users~\cite{lipson-homefactory}.
+participants in our formative study (presented later) had a hard time
+using Illustrator quickly and effectively. While Illustrator is a
+powerful, feature-rich tool, it is intended primarily for graphic
+design and does not provide support for the domain-specific activity
+of designing for laser cutters. Experts use specialized CAD tools such
+as Rhino or SolidWorks, which are perhaps more appropriate for this
+kind of modeling, but also have a substantial learning curve. If
+design by avocational users is to become common, appropriate modeling
+tools must be made accessible~\cite{lipson-homefactory}.
 
-We present ``Sketch It, Make It'' (SIMI), a modelling tool based on
-recognizing short sequences of input sketched with a stylus. Using
-freehand drawn input, SIMI enables the designer to iteratively and
-incrementally create laser cut models to precise specifications.
+We present ``Sketch It, Make It'' (SIMI), a modeling tool for laser
+cutter design based on recognizing short sequences of input sketched
+with a stylus. Using freehand drawn input, SIMI enables the designer
+to iteratively and incrementally create laser cut models to precise
+specifications.
 
 Research on sketch-based modeling tools~\cite{johnson-sketch-review}
 typically see sketching as an activity done mostly in the early phases
@@ -131,18 +127,20 @@ model.
 \subsection{Contributions}
 
 This paper presents the results of a formative study on how people
-design items for laser cutting. We also provide an analysis of
-artifacts from Maker community web sites that reveals specific
-properties common to many laser cutter projects.
+design items for laser cutting. We relate the process that avocational
+designers use, and also their frustration with current structured
+modeling tools. We also provide an analysis of artifacts from Maker
+community web sites that reveal specific properties common to many
+laser cutter projects.
 
 The primary contribution is a system characterized by iterative,
-incremental sketch-based modeling for designing precise 2D shapes
-for laser cutting. Prior work on sketch-based modeling tools explored
-only narrow topics in the space (like corner finding, recognition
-algorithms, or mode switching). We improve on existing sketch-based
-interaction techniques and bring them together in a system whose sum
-is greater than its parts. The system's success depends on how well
-the individual features work well together. While this might sound
+incremental sketch-based modeling for designing precise 2D shapes for
+laser cutting. Prior work on sketch-based modeling techniques explored
+only narrow topics (like corner finding, recognition algorithms, or
+mode-switching). We improve on existing sketch-based interaction
+techniques and bring them together in a system whose sum is greater
+than its parts. The system's success depends on how well the
+individual features work well together. While this might sound
 trivial, it is not. We believe our system gives users a remarkably
 fluid environment for designing laser cut items.
 
@@ -152,22 +150,51 @@ We then present results of a user study of this tool. % TODO: more...
 
 Laser cut designs are composed of parts cut from solid, flat pieces of
 material and assembled in various ways: laminated, notched, bolted
-together, \textit{etc}. The primary concern of the designer is to
-define the outline of parts produced with the laser
-cutter. Alternately the user can design joints so the parts fit
-together. Most joints have small margins of error. It is imperative
-that lengths, angles, and relative position be indicated with
-precision so that the parts to fit together as they should.
+together, \textit{etc}. Alternately the user can design joints so the
+parts fit together. Most joints have small margins of error. It is
+imperative that lengths, angles, and relative position be indicated
+with precision so that the parts to fit together as they should.
+
+The primary concern of the designer is to use the modeling tool to
+specify the outline of parts produced with the laser cutter. The
+modeling tool should output a file using vector graphics to define
+part shapes, and raster images indicating etching. 
+
+Many material types can be used, depending on the laser cutter. A
+medium-sized machine has a cut bed supporting material about 18 by 24
+inches (approx. 46 by 61 cm) and can cut through at most 3/8'' (1 cm)
+soft wood. Common materials for cutting include wood, plastic,
+leather, and paper. Different materials require different laser speed
+and intensity settings to achieve a quality cut. Hard material like
+metal can be etched on such machines. To cut through metal, a much
+more powerful machine is needed. 
+
+The laser leaves a gap in its wake, called a \textit{kerf}. The kerf
+size depends on the speed and intensity of the laser. A typical laser
+kerf is between about 0.2mm and 0.5mm on a 40 watt cutter. This is an
+important consideration when designing facets whose tolerances are
+small with respect to kerf. A notch joint, for example, is ineffective
+if it is 0.1 mm too large or small.
+
+The time to cut items depends on speed and intensity settings, and on
+the size and complexity of the cut path. For example, the assembly
+shown in~Figure\ref{fig:TODO} took about five minutes to fabricate and
+used about \$3.50 (2012 USD) in material. 
+
+% unlike some other past tools in sketching, precision is paramount
+% here (explain why). This argument should go either here or when SIMI
+% is first introduced in depth.
 
 \section{RELATED WORK}
 
 While ``the design process'' has important differences between
-domains, two properties are common to nearly all design work,
-including design for laser cutters. First, designers sketch throughout
-the process, especially in the beginning. Second, a computer tool is
-used to render the design more precisely. This is confirmed by
-observations of graphic designers~\cite{wong-rr-prototypes},
-automotive engineers~\cite{kara-styling}, and software
+domains, two properties are common to many types of modern design
+work, including design for laser cutters. First, designers sketch
+throughout the process, especially in the beginning. Second, a
+computer tool is used to render the design more precisely. This is
+confirmed by observations of graphic
+designers~\cite{wong-rr-prototypes}, automotive
+engineers~\cite{kara-styling}, and software
 developers~\cite{dekel-improvised-notation}. Freehand drawing is a
 powerful means for thinking and specifying design intent, but it is
 disconnected from the computer aided portion of the design
@@ -175,38 +202,23 @@ process~\cite{company-sketching-in-engineering}.
 
 \subsection{Sketch-based interaction}
 
-% Mark says: The Related Work section should include not only projects
-% about sketch-to-fab, but also representative sketch projects that
-% don't address fabrication.  Although SIMI is a tool for making
-% drawings for laser cutter production, it does have potential for
-% broader use, and regardless, reviewers will compare it with other
-% non-fab sketch systems.  Therefore the RW section may as well tackle
-% SIMI in the context of sketch systems in general.
-
-% A few of the more well-known and relevant sketching systems:
-
-% * SILK, because it let you interact with the recognized elements of
-%   the sketch
-
 The rough appearance of freehand sketches support designers to see
 past unimportant details, letting them focus on the big picture. Much
 prior work argues that rectification is antagonistic to
 design~\cite{gross-cocktail}, at least during the conceptual
-phases. SILK is a sketch-based tool for quickly drawing user
-interfaces~\cite{landay-silk-chi}. While the system recognizes user
-input as UI elements like menus, scrollbars or buttons. The system
-lets the designer use the recognized sketch, even as it retains its
-rough appearance. Finally, SILK can translate the recognized sketch
-into a working implementation.
+phases. One system that takes this perspective is SILK. It is a
+sketch-based tool for quickly drawing user
+interfaces~\cite{landay-silk-chi}. It recognizes user input as UI
+elements like menus, scrollbars or buttons. The system lets the
+designer interact with the recognized sketch, even as it retains its
+rough appearance. Finally, SILK can translate the drawing into
+computer code that implements the drawing. 
 
-% * Pegasus, because of interactive beautification, 2D vector drawing,
-%   constraint inference. Also Murugappan's beautification thing.
-
-% In here, I need to say something about the tradeoffs of recognizing
-% too much. Systems like Pegasus and Murugappan's thing are pretty
-% aggressive about inferring constraints. This leads to very nice
-% looking drawings, but it also precludes the user from making things
-% that can't be inferred.
+% So: SILK throws it over the wall when conceptual design is done,
+% expecting the designer to finish the job in code (e.g. how does one
+% set the exact pixel alignment or padding if not in code?) SIMI lets
+% users give precise details without the need for help from grown-up
+% tools.
 
 Some work takes an alternate view on the appearance of sketched
 input. Systems such as Pegasus~\cite{igarashi-pegasus} and recent work
@@ -220,9 +232,9 @@ easily make clean-looking vector graphics. However, the aggressive
 inferencing might prevent users from making drawings that have subtle
 but important features the system can not infer.
 
-% * EverybodyLovesSketch, because it lowers the barrier for normal
-%   people to create complex 3D models with a coherent set of
-%   interaction techniques.
+% So: While inferencing is powerful, it also prevents one from making
+% subtle distinctions. E.g. the designer wants a circle *near* a line
+% but not tangent to it. SIMI enables this level of control.
 
 Sketch input is an appealing way to interact with computers because it
 is apparently natural and easy for users to provide. Unfortunately,
@@ -244,6 +256,10 @@ create seemingly complex models. EverybodyLovesSketch in particular
 seeks to enable a broad audience to create 3D perspective conceptual
 sketches by choosing a set of gestures and tools that work well
 together.
+
+% So: power and ease of use are not mutually exclusive, but it
+% requires careful tuning of interaction techniques to make it
+% work. SIMI builds on this.
 
 \subsection{Sketch-based modeling for fabrication}
 
@@ -273,19 +289,21 @@ control handles.
 
 Most work on sketch-based interfaces focuses on the early phases of
 design when people are thinking about framing the problem and
-solution. Sketch-based systems such as Plushie and Sketch Chair enable
-people to make things they otherwise would not be able to, but the
-designer relinquishes a great deal of control to the system. Further,
-they support only a narrow class of artifacts.
+solution. Domain-oriented tools such as Plushie and Sketch Chair
+enable people to make things they otherwise would not be able to, but
+the designer relinquishes a great deal of control to the system. In
+contrast, SIMI users retain the ability to specify as much or as
+little as they like at the expense of domain-specific assistance.
 
-A few sketch-based systems support
+SIMI builds on the work of a fairly small but interesting set of
+sketch-based systems that support
 precision. ParSketch~\cite{naya-parsketch} enables designers to create
 parametric 2D models by incrementally recognizing sketched geometry
 and commands. It uses pressure to distinguish between linework (high
-pressure) and constraint commands (lower pressure). Sketch-based
-drawing tools Pegasus~\cite{igarashi-pegasus} and Lineogrammer let
-users make clean, rectified vector graphics. They work on the
-principle of interactive beautification, which supports iterative
+pressure) and constraint commands (lower pressure). Lineogrammer is a
+sketch-based 2D drawing tool that lets users make clean, rectified
+vector graphics. Like Pegasus~\cite{igarashi-pegasus}, it works on the
+principle of interactive beautification, supporting iterative
 sketch/rectify sequences. Many sketch-based systems invoke recognition
 after the user has added a complete sketch. The interactive nature of
 these precision-oriented systems means the system has less work to do
@@ -294,26 +312,30 @@ accurate recognition and higher user satisfaction.
 
 \section{BACKGROUND STUDY}
 
-To better understand the domain of laser cutter fabrication we
-conducted two related empirical studies. We interviewed people with
-experience designing these artifacts, and watched them work. From this
-we form a picture of the kinds of tasks and problems designers face
-when designing for laser cutters. We also analyzed laser-cut items on
-community web sites to find common features.
+To better understand the design and development practices involved
+with laser cutter fabrication we conducted two related empirical
+studies. We interviewed people with experience designing these
+artifacts, and watched them work. We also analyzed laser-cut items on
+community web sites to find common features. These studies were
+conducted to help us better understand the kinds of tasks and problems
+designers face when designing for laser cutters, which in turn
+informed development on SIMI.
 
 \subsection{Formative Study on Designer Work Practices}
 \label{sec:formative}
 
 We interviewed six designers to learn about their work practices and
-to understand how they use their tools. The participants had
-substantially different backgrounds, but all were trained in some form
-of design, including mechanical engineering, graphic design, and
-architecture. The participants were part of our tool's target
-demographic: people who were interested in making things with laser
-cutters as a hobby.
+to understand how they use their tools. All participants had
+substantially different backgrounds, and were trained in some form of
+design, including mechanical engineering, graphic design, and
+architecture. They were experienced with designing for and using laser
+cutters. The participants were part of our tool's target demographic:
+people who were interested in making things with laser cutters as a
+hobby. 
 
 Each session lasted approximately an hour and was split evenly between
-interview and implementation. We asked participants to describe their
+interview and implementation. We met participants in their own work
+environments (offices or labs). Participants were to describe their
 design process, and to show sketches or videos of their work. While
 there are differences (some subtle) in their process, each followed
 the same overall pattern.
@@ -397,24 +419,41 @@ might achieve the intended effect, but it might be less efficient
 (more operations, longer execution time) or it might introduce
 unwanted complexity (such as the invisible white rectangle).
 
-To summarize, we found the common tasks and problems found following
-our interview study:
+To summarize, we found common tasks and problems found in interview
+study and formed three main groups:
 
 \begin{itemize}
-\item creating/editing boundaries
-\item aligning/snapping items
-\item using guide lines or reference points
-\item measuring distances
-\item specifying lengths/angles
-\item creating cut files
-\item selecting/deselecting
-\item view port management
-\item finding and entering tool modes
-\item recover from error (tool or user error)
-\item `correct' action is unknown or hard to do
+\item \textit{Defining geometry:} Creating/editing boundaries,
+  aligning items, using guide lines or reference points, measuring
+  distances, and specifying lengths or angles.
+\item \textit{Managing the editing tool:} Selecting/deselecting
+  objects, view port management, finding and entering tool modes, and
+  recovering from errors.
+\item \textit{Cutfile:} Finalizing the cutfile by creating copies of
+  items when more than one is needed, and positioning stencils.
 \end{itemize}
 
+
+%% \begin{itemize}
+%% \item creating/editing boundaries
+%% \item aligning/snapping items
+%% \item using guide lines or reference points
+%% \item measuring distances
+%% \item specifying lengths/angles
+%% \item creating cut files
+%% \item selecting/deselecting
+%% \item view port management
+%% \item finding and entering tool modes
+%% \item recover from error (tool or user error)
+%% \item `correct' action is unknown or hard to do
+%% \end{itemize}
+
 \subsection{Artifact Analysis}
+
+To learn more about the characteristics of laser-cut assemblies made
+by DIY makers, we analyzed finished items from two web-based
+communities. Together with the study on how people make items, this
+helps inform development of SIMI.
 
 Ponoko and Thingiverse are two currently popular web sites for selling
 or sharing items that can be made with rapid fabrication like laser
@@ -431,7 +470,8 @@ really making with laser cutters. The results of this analysis are
 shown in Figure~\ref{fig:ponoko}.
 
 \begin{figure}[h]
-  \includegraphics[width=0.9\linewidth]{img/ponoko-analysis.png}
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/ponoko-graph.pdf}
   \caption{Frequency of certain attributes were present in laser-cut
     projects from Ponoko and Thingiverse.}
   \label{fig:ponoko}
@@ -464,11 +504,13 @@ detail below:
   \label{fig:joint-notch} 
   \includegraphics[width=0.4\linewidth]{img/joint-notch.png}
 }
-\subfloat[Finger joints, alternately called box joints.] {
+\subfloat[Finger (box) joints.] {
     \label{fig:joint-finger}
     \includegraphics[width=0.4\linewidth]{img/joint-finger.png}
 }
-\caption{Two common joint types.}
+\caption{Two common methods join parts. Notch joints are used when
+  parts intersect along part midsections; finger joints (alternately
+  called box joints) join parts along edges.}
 \label{fig:joint}
 \end{figure}
 
@@ -491,9 +533,22 @@ sketch-based tool for modeling laser cut items. We aim to address
 problems with current modeling systems enumerated above in a tool that
 specifically supports designing laser-cut items.
 
-% * map problems from earlier (x y z) to solutions in simi
+Design for laser cutting requires precision. The greatest distinction
+between SIMI and prior sketch-based desgin tools is its ability to
+give users the ability to accurately specify geometry. That is, the
+user may change lengths, distances, or angles by arbitrarily small (or
+large) values. But in keeping with the spirit of sketch-based
+modelling, the user is not obliged to give details if they are not
+important.
 
-% * overview of interaction
+%% The focus of this work is to produce a useful and usable sketch-based
+%% design tool for the domain of laser cutting. The main challenge in
+%% achieving this was the lack of a set of interaction sketch-based
+%% techniques that work in harmony. Prior work has focused largely on
+%% individual techniques that clearly map problems to solutions. In
+%% contrast, our system address the challenge of developing a system that
+%% integrates many experimental interaction techniques into a coherent
+%% whole.
 
 SIMI users draw with a stylus and can use an offhand button for a few
 actions. The system recognizes input as either geometric linework or
