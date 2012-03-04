@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,6 +70,7 @@ public class RenderTest extends JPanel {
   public static Random rand = new Random(System.currentTimeMillis());
   protected boolean useClip;
   protected boolean useImage;
+  private BufferedImage bg;
   private Set<Ball> balls;
   private long msSum;
   private int msSumN;
@@ -138,6 +140,10 @@ public class RenderTest extends JPanel {
     rp.registerKeyboardAction(actions.get("remove ball"), s, JComponent.WHEN_IN_FOCUSED_WINDOW);
   }
 
+  public static boolean randBool() {
+    return rand.nextBoolean();
+  }
+
   public static float randFloatBetween(float lower, float higher) {
     float diff = higher - lower;
     return lower + (rand.nextFloat() * diff);
@@ -159,8 +165,13 @@ public class RenderTest extends JPanel {
     long start = System.currentTimeMillis();
     Graphics2D g = (Graphics2D) g1;
     Dimension s = getSize();
-    g.setColor(Color.BLACK);
-    g.fill(getVisibleRect());
+    if (bg == null || bg.getWidth(null) != s.width || bg.getHeight(null) != s.height) {
+      bg = new BufferedImage(s.width, s.height, BufferedImage.TYPE_INT_RGB);
+      Graphics2D bgG = bg.createGraphics();
+      bgG.setColor(Color.BLACK);
+      bgG.fill(getVisibleRect());
+    }
+    g.drawImage(bg, 0, 0, null);
     for (Ball ball : balls) {
       if (useClip) {
         g.setClip(ball.getClip());
@@ -204,4 +215,5 @@ public class RenderTest extends JPanel {
       }
     }
   }
+
 }
