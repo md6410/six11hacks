@@ -12,11 +12,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.media.opengl.*;
 import javax.media.opengl.awt.GLJPanel;
 import javax.media.opengl.glu.GLU;
@@ -30,6 +37,7 @@ import javax.swing.KeyStroke;
 import static java.lang.Math.*;
 
 import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.GLBuffers;
 import com.jogamp.opengl.util.awt.TextRenderer;
 
 public class GLRenderTest implements GLEventListener, MouseListener, MouseMotionListener {
@@ -78,8 +86,12 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
   protected List<GLBall> balls;
   protected List<Point2D> points;
   protected MouseEvent click;
+  protected MouseEvent move;
+  protected int mouseX, mouseY;
   private GLU glu;
   private MouseEvent drag;
+  protected boolean requestStore = false;
+  protected int prevMouseX, prevMouseY;
 
   public GLRenderTest() {
     ms = 0;
@@ -96,8 +108,70 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
     handleMouseEvents(drawable);
     update();
     render(drawable);
+    showPixelColor(drawable);
     long end = System.currentTimeMillis();
     ms = end - start;
+    if (requestStore) {
+      long startStore = System.currentTimeMillis();
+      requestStore = false;
+      GL2 gl = drawable.getGL().getGL2();
+      out.println("Requesting store...");
+      int w = drawable.getWidth();
+      int h = drawable.getHeight();
+      int bytesPerPix = 3; // rgb
+      int bufSize = w * h * bytesPerPix;
+      ByteBuffer pRGB = ByteBuffer.allocate(bufSize);
+      gl.glReadPixels(0, 0, w, h, GL.GL_RGB, GL.GL_UNSIGNED_BYTE, pRGB);
+      pRGB.rewind();
+      BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+      byte[] data = pRGB.array();
+      for (int i = 0; i < data.length; i = i + bytesPerPix) {
+        // I don't believe the mask (0xff) is necessary for the final result
+        // but it is useful for printing these values, because it removes the sign.
+        int r = (int) data[i + 0] & 0xff;
+        int g = (int) data[i + 1] & 0xff;
+        int b = (int) data[i + 2] & 0xff;
+        int rgb = r << 16 | g << 8 | b; // unpack pixels
+        int imgIdx = i / bytesPerPix;
+        int x = imgIdx % w;
+        int y = (h - 1) - (imgIdx / w); // have to invert y because opengl and java disagree which way is up
+        img.setRGB(x, y, rgb);
+      }
+      long imgBufDone = System.currentTimeMillis();
+      out.println("Stored BufferedImage. Writing to disk...");
+      File imFile = new File("gl-test.png");
+      try {
+        ImageIO.write(img, "png", imFile);
+        long endStore = System.currentTimeMillis();
+        long storeDuration = endStore - startStore;
+        out.println("Wrote " + imFile.getAbsolutePath() + " in " + storeDuration + " ms ("
+            + (imgBufDone - startStore) + " to create buffered image)");
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private void showPixelColor(GLAutoDrawable drawable) {
+    if (mouseX == prevMouseX && mouseY == prevMouseY) {
+      return;
+    }
+    GL gl = drawable.getGL();
+    int w = 1;
+    int h = 1;
+    int pixelSize = 3; // RGB
+    int bufferSize = w * h * pixelSize;
+    ByteBuffer pRGB = ByteBuffer.allocateDirect(bufferSize);
+    gl.glReadPixels(mouseX, drawable.getHeight() - mouseY, w, h, GL.GL_RGB, GL.GL_UNSIGNED_BYTE,
+        pRGB);
+    pRGB.rewind();
+    int r = (int) pRGB.get() & 0xff;
+    int g = (int) pRGB.get() & 0xff;
+    int b = (int) pRGB.get() & 0xff;
+    System.out.println(mouseX + ", " + mouseY + ": " + r + " " + g + " " + b);
+    prevMouseX = mouseX;
+    prevMouseY = mouseY;
   }
 
   private void handleMouseEvents(GLAutoDrawable drawable) {
@@ -113,6 +187,10 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
       points.add(new Point2D.Float(spot[0], spot[1]));
       out.println("got drag. there are now " + points.size() + " points");
       drag = null;
+    }
+    if (move != null) {
+      mouseX = move.getPoint().x;
+      mouseY = move.getPoint().y;
     }
   }
 
@@ -132,20 +210,17 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
         mvmatrix, 0, projmatrix, 0, viewport, 0, wcoord, 0);
     System.out.println("World coords at z=0.0 are ( " //
         + wcoord[0] + ", " + wcoord[1] + ", " + wcoord[2] + ")");
-    //    glu.gluUnProject((float) x, (float) realy, 1.0f, //
-    //        mvmatrix, 0,
-    //        projmatrix, 0,
-    //        viewport, 0, 
-    //        wcoord, 0);
-    //    System.out.println("World coords at z=1.0 are (" //
-    //                       + wcoord[0] + ", " + wcoord[1] + ", " + wcoord[2]
-    //                       + ")");
     return wcoord;
   }
 
   void installKeyboardEvents(JRootPane rp) {
     Map<String, Action> actions = new HashMap<String, Action>();
 
+    actions.put("store", new AbstractAction() {
+      public void actionPerformed(ActionEvent e) {
+        requestStore = true;
+      }
+    });
     actions.put("add ball", new AbstractAction() {
       public void actionPerformed(ActionEvent e) {
         balls.add(new GLBall());
@@ -157,10 +232,9 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
         balls.remove(ballArr[RenderTest.randIntBetween(0, ballArr.length - 1)]);
       }
     });
-    KeyStroke s = (KeyStroke) KeyStroke.getKeyStroke(KeyEvent.VK_C, 0);
-    rp.registerKeyboardAction(actions.get("toggle clip"), s, JComponent.WHEN_IN_FOCUSED_WINDOW);
-    s = (KeyStroke) KeyStroke.getKeyStroke(KeyEvent.VK_I, 0);
-    rp.registerKeyboardAction(actions.get("toggle image"), s, JComponent.WHEN_IN_FOCUSED_WINDOW);
+    KeyStroke s = (KeyStroke) KeyStroke.getKeyStroke(KeyEvent.VK_S, 0);
+    rp.registerKeyboardAction(actions.get("store"), s, JComponent.WHEN_IN_FOCUSED_WINDOW);
+
     s = (KeyStroke) KeyStroke.getKeyStroke(KeyEvent.VK_A, 0);
     rp.registerKeyboardAction(actions.get("add ball"), s, JComponent.WHEN_IN_FOCUSED_WINDOW);
     s = (KeyStroke) KeyStroke.getKeyStroke(KeyEvent.VK_R, 0);
@@ -179,7 +253,7 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
     gl.glLoadIdentity();
     gl.glOrtho(-1, 1, 1, -1, 0, 1);
     gl.glMatrixMode(GL2.GL_MODELVIEW);
-    gl.glClearColor(1f, 1f, 1f, 1f);
+    gl.glClearColor(1f, 0.5f, 0.2f, 0.8f);
     gl.glDisable(GL2.GL_DEPTH_TEST);
     gl.glEnable(GL2.GL_BLEND);
     gl.glEnable(GL2.GL_LINE_SMOOTH);
@@ -208,7 +282,7 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
     for (GLBall ball : balls) { // draw all balls.
       ball.renderBall(drawable);
     }
-    
+
     // draw the one scribble.
     gl.glLineWidth(2.6f);
     gl.glColor3f(0f, 0f, 0f);
@@ -219,7 +293,7 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
       }
     }
     gl.glEnd();
-    
+
     // draw info.
     textRenderer.beginRendering(drawable.getWidth(), drawable.getHeight());
     textRenderer.setColor(0.0f, 0.8f, 0.8f, 1f);
@@ -265,8 +339,8 @@ public class GLRenderTest implements GLEventListener, MouseListener, MouseMotion
   }
 
   @Override
-  public void mouseMoved(MouseEvent arg0) {
-    // TODO Auto-generated method stub
+  public void mouseMoved(MouseEvent ev) {
+    move = ev;
 
   }
 }
