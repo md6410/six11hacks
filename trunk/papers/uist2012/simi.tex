@@ -1,10 +1,10 @@
 \documentclass{article}
 
 \usepackage{times}
-\usepackage{uist}
+%\usepackage{uist}
 %\usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption,subfig}
-%\usepackage{setspace}
-%\doublespace
+\usepackage{setspace}
+\doublespace
 \usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption}
 \usepackage{subfig}
 \usepackage{graphicx}
@@ -818,52 +818,6 @@ more.
 
 % TODO: add to flow selection section.
 
-% \subsubsection{Reference Points and Guides}
-
-% Justify wrt user study and Ponoko analysis
-
-%% In our study on designers, we noticed people measuring distances and
-%% drawing temporary lines used to anchor subsequent linework. For
-%% example, the stencil illustrated in
-%% Figure~\ref{fig:interview-sketch-1} calls for a semi-circular region
-%% in the middle of the top edge. Participants noted that their preferred
-%% strategy for making this stencil was to draw a long line along the
-%% top, and add the circular region afterwards. However, none of the
-%% Illustrator users were able to successfully take this strategy because
-%% they did not know how to find the midpoint of the line. Instead of
-%% carrying out their desired plan they measured the distance of the top,
-%% and added co-linear lines with half the length that met in the
-%% middle. This was an error-prone and time-consuming process. To support
-%% strategies like the one mentioned above, SIMI gives users the ability
-%% to use reference points and guides.
-
-%% \begin{figure}[h]
-%%   \centering
-%%   \includegraphics[width=0.9\linewidth]{img/guides-all.pdf}
-%%   \caption{Reference points and guides. The first three panels show
-%%     one, two, and three reference points and the guides that are
-%%     displayed as a result. The designer uses the circular guide to
-%%     create the circular arc shown in the final panel.}
-%%   \label{fig:guides}
-%% \end{figure}
-
-%% The user may create handles to move segment endpoints around by
-%% drawing `reference points'. These are dots made by swirling the pen
-%% around in a tiny area (within 9 pixels) quickly (less than 500ms). The
-%% user can then reposition the reference points to adjust attached
-%% geometry by dragging them.
-
-%% When reference points are present, the system offers guides to aid
-%% additional drawing. The possible combinations are illustrated in
-%% Figure~\ref{fig:guides}. When there is one reference point, the system
-%% uses the pen's hover location, drawing a circle centered at the
-%% reference point, and a line passing through both. This can be used to
-%% make a hole centered at a particular location.
-
-%% Two reference points give the user three circles, two lines, and shows
-%% the midpoint. Three reference points give the user a circle that
-%% passes through them, and indicates that circle's center.
-
 \subsection{Constraint Engine}
 
 SIMI lets designers establish \textit{constraints} that enforce
@@ -913,33 +867,57 @@ workshop with undergraduate architecture students. Second, we compare
 experienced SIMI user's strategy for making an object with that of
 experienced Illustrator users.
 
+
+\begin{figure}[t]
+\centering \subfloat[Questions on feature ease of use.] {
+  \label{fig:survey-feature-ease} 
+  \includegraphics[width=0.8\linewidth]{img/feature-ease-of-use.pdf}
+}
+\\
+\subfloat[Questions on how well liked (or disliked) features were.] {
+    \label{fig:survey-feature-attitude}
+    \includegraphics[width=0.8\linewidth]{img/feature-attitude.pdf}
+}
+\\
+\subfloat[Questions on the system as a whole.] {
+    \label{fig:survey-program-attitude}
+    \includegraphics[width=0.8\linewidth]{img/program-attitude.pdf}
+}
+\caption{Survey results from the workshop with undergraduate
+  architecture students. 40 students responded to the questionnaire.}
+
+\label{fig:survey}
+\end{figure}
+
 \subsection{Student Workshop}
 
-We held a workshop with 60 undergraduate architecture students in
-order to gather qualitative feedback about how easy or difficult SIMI
-was to learn and use. The primary author ran the workshop, held over
-two days in a room equipped with iMacs and Wacom Intuos tablets. To
-accommodate everybody, each day was divided into three sessions of
-twenty students. Each session lasted half an hour, meaning each
-student used SIMI for an hour.
+We held a workshop with 60 undergraduate architecture students to
+gather qualitative feedback about how easy or difficult SIMI is to
+learn and use. The primary author ran the workshop, held over two days
+in a room equipped with iMacs and Wacom Intuos tablets. To accommodate
+everybody, each day was divided into three sessions of twenty
+students.
+
+Each session lasted half an hour, meaning each student used SIMI for
+an hour. This duration is adequate to gague a new user's ability to
+learn the system and to measure first impressions.
 
 % thing 1: Using tablet was difficult.
-
-Initially, students complained that the tablet hardware was difficult
-to use, but they acclimated to it after about ten minutes. 
 
 % thing 2: Very little confusion on how to make geometry and
 %    constraints. Erasing was difficult until they were shown how to
 %    do it.
 
-After they had adjusted to using the tablets, they quickly learned to
-make linework and create constraints. At first they had trouble with
-erasing and using control dots, but learned to use these features in
-time. The students had access to a video demonstrating how various
-techniques were performed, as well as a paper ``cheet sheet'', but did
-not use them. Rather than use these resources, the students would ask
-the primary author. Receiving personal help seemed to be far superior
-because assistance could be tailored to their particular needs.
+Initially, students complained that the tablet hardware was difficult
+to use, but they acclimated to it after about ten minutes. After
+adjusting, they quickly learned to make linework and make
+constraints. At first they had trouble erasing and using control
+points, but learned to use these features in time. The students had
+access to a video demonstrating how various techniques were performed,
+as well as a paper ``cheet sheet'', but did not use them. Instead, the
+students would ask somebody (e.g. the author, or the student next to
+them) who knew how to do it. Personal help was superior because
+assistance could be tailored to their particular needs.
 
 % thing 3: Most comments were about missing features, not about how to
 %    use the system.
@@ -950,22 +928,119 @@ modeling) were both new to them. However, on the second day, most
 questions and comments regarded missing features, not about how to use
 the system. 
 
-The students were given an extra credit assignment to complete a short
-survey. \textit{Results of survey here... probably a couple paragraphs
-  and a table/figure for the data. Hopefully the above statement about
-  questions/comments being about missing features is corroborated by
-  the survey results.}
+Following the workshop, students were given an extra credit assignment
+to complete a short survey. This generated 40 responses, summarized in
+Figure~\ref{fig:survey}. The survey had three sets of questions, all
+on a 5-point scale with 1 being the negative answer, 5 the positive
+answer. The first set asked how easy (or hard) each interaction method
+was to use. The second set of questions measured the student's
+attitude about the techniques.
+
+Only the Erase and Control Dot gestures seemed to give people
+trouble. These are the only gestures that incorporate timing. Erasing
+must be done with a quick, vigorous shake of the pen. Control dots
+must be made quickly, or SIMI is likely to interpret the input as the
+beginning of a flow selection.
+
+The last set of questions polled students about their perception of
+the program as a whole: e.g. how easy it was to learn, to use, and
+remember. While the students reported the system was easy to learn,
+the responses indicate they found it difficult to use. This might be
+explained by both the limited time available (each user had only one
+hour), and the novelty of the hardware.
+
+To close, we asked (1) how much people would like to continue using
+the system as it is currently, and (2) how likely they would be to try
+it again later when it was debugged and nicely tuned. The responses to
+these two questions are in stark contrast: most of the students did
+not want to continue using SIMI as it is today, owing to bugs and lack
+of features (they are used to using commercial design tools). Despite
+this, all but oneresponse to the second question was either 4/5 or
+5/5.
+
+The enthusiasm about the interaction paradigm of sketching was evident
+in comments left by some of the respondents. For example:
+
+\begin{itemize}
+\item ``This is the start of a great program, and once it is polished it
+  will be extremely useful.''
+\item ``The program seems like it could be really cool to use in the
+  future. I really enjoyed using a tablet and stylus. It made
+  designing fun.''
+\end{itemize}
 
 \subsection{Expert Designer Strategy Analysis}
 
+A second method of evaluating SIMI as a system is to examine the
+actions an expert user takes when making something, and to compare
+this with an existing tool. This analysis is not meant to be an
+exhaustive statistical expedition. It is meant to illustrate how SIMI
+is different from (and similar to) existing tools.
 
+We asked an expert Adobe Illustrator user to verbally describe the
+sequence of discrete actions necessary to replicate the table shown
+in~Figure~\ref{fig:table}. We asked the designer to record all the
+steps necessary for an inexperienced user to replicate their
+protocol. We recorded this verbal description and coded each action
+into one of five categories:
+
+\textit{Persistent mode change}: Change the tool input state so
+subsequent input is interpreted in context of that tool (e.g. line
+drawing mode). User must enter another persistent mode to exit the
+first.
+
+\textit{Specify value}: Specify a dimension or location.
+
+\textit{Specify target}: Indicate (select) an element for a subsequent
+operation.
+
+\textit{Transformation}: Apply an operation that changes existing
+model elements (e.g. move or erase something)
+
+\textit{Transient mode change}: Temporarily change the tool mode so
+input is interpreted differently. This kind of mode change is part of
+a phrase, and will revert to another mode when the phrase is complete.
+
+As an example, the first three actions were: (1) press the M key to
+enter rectangle drawing mode, (2) type rectangle dimensions, (3) place
+the rectangle on the drawing canvas. The first action is a persistent
+mode change, while the second two specify values.
+
+%% mode change	M key
+%% specify value	Type dimensions
+%% specify value	Place table top
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\linewidth]{img/table.jpg}
+  \caption{A laser-cut table for sale on Ponoko. We asked expert
+    designers how they would replicate this object using either
+    Illustrator or SIMI.}
+  \label{fig:table}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ l c c }
+\textbf{Action type} & \textbf{Illustrator} & \textbf{SIMI} \\
+\hline
+Persistent mode change & 12 & 0 \\
+Specify value & 17 & 7 \\
+Specify target & 7 & 4 \\
+Transformation & 6 & 27 \\
+Transient mode change & 2 & 0 \\
+\end{tabular}
+\label{tab:expert}
+\caption{Frequency of action types in the design protocol of expert
+  Adobe Illustrator and SIMI users. }
+\end{table}
 
 \section{IMPLEMENTATION}
 
 SIMI is programmed in approximately 20,000 lines of Java code. It uses
 the Java binding for OpenGL (JOGL) for graphics and NIST's JAMA
-package for linear algebra. When packaged as an executable, the Mac OS
-X application is 8.2 megabytes.
+package for linear algebra. When packaged as a self-contained
+executable, the Mac OS X application is 8.2 megabytes.
 
 \section{FUTURE WORK}
 
