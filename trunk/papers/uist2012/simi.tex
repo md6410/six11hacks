@@ -1,10 +1,10 @@
 \documentclass{article}
 
 \usepackage{times}
-%\usepackage{uist}
+\usepackage{uist}
 %\usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption,subfig}
-\usepackage{setspace}
-\doublespace
+%\usepackage{setspace}
+%\doublespace
 \usepackage[config, font=small, labelfont={sf,bf}, textfont=sf]{caption}
 \usepackage{subfig}
 \usepackage{graphicx}
@@ -61,6 +61,23 @@ for Precise Rapid Fabrication}
 
 \section{INTRODUCTION}
 
+\begin{figure}[b]
+\centering 
+\subfloat[] {
+  \label{fig:cintiq} 
+  \includegraphics[width=0.45\linewidth]{img/simi-with-cintiq.png} 
+}
+\subfloat[] {
+    \label{fig:lg-pencil-holder}
+    \includegraphics[width=0.45\linewidth]{img/lg-pencil-holder.png}
+}
+\caption{Sketch It, Make It lets users design laser cut items with
+  sketch-based interaction. \subref{fig:cintiq}: using SIMI with a
+  Wacom Cintiq. \subref{fig:lg-pencil-holder}: laser-cut pencil
+  holder designed by an undergraduate student using SIMI.}
+\label{fig:laser-example}
+\end{figure}
+
 A growing community of self-described \textit{Makers} design and build
 many kinds of physical things~\cite{gershenfeld-fab}. Some are
 electronic gizmos, while others are made entirely from traditional
@@ -73,21 +90,6 @@ automated razor, cutting flat material (paper, wood, plastic, metal,
 etc.). Many things can be made with only a laser cutter, sometimes
 fastened with screws or glue.  Figure~\ref{fig:laser-example} shows
 several examples of laser cut objects.
-
-\begin{figure}[b]
-\centering 
-\subfloat[] {
-  \label{fig:laser-example-a} 
-  \includegraphics[width=0.4\linewidth]{img/flat-b.jpg}
-}
-\subfloat[] {
-    \label{fig:laser-example-b}
-    \includegraphics[width=0.4\linewidth]{img/flat-b.jpg}
-}
-\caption{Laser cut items.}
-\label{fig:laser-example}
-\end{figure}
-
 
 
 Today, designers can choose among several modeling tools for laser
@@ -136,19 +138,22 @@ enough information to translate into a precise digital model.
 
 \subsection{Research Contributions}
 
-This paper offers four contributions: First we present the results of
-a formative study on how people design objects for laser cutting. We
+This paper offers three contributions: First we present the results of
+a formative study on the design of objects for laser cutting. We
 describe the process taken by avocational designers and their
 difficulties in using structured modeling tools. We also analyze of
 artifacts from popular Maker community web sites that reveal specific
-design features common to many laser cutter projects.
+features common to many laser cutter projects.
 
 Second, we introduce \textit{Sketch It, Make It} (SIMI), a tool
 supporting incremental sketch-based modeling for designing precise 2D
-shapes for laser cutting. Prior work on sketch-based modeling
-techniques explored specific topics (e.g., corner finding, recognition
-algorithms, mode-switching). We improve on existing sketch-based
-interaction techniques and bring them together in an ensemble.
+shapes for laser cutting. SIMI provides a suite of mutually harmonious
+sketch-based interaction techniques to support the transition between
+a rough idea and precise, machinable output. Prior work on
+sketch-based modeling techniques explored specific topics (e.g.,
+corner finding, recognition algorithms, mode-switching). We improve on
+existing sketch-based interaction techniques and bring them together
+in an ensemble.
 
 Third, we present an evaluation of SIMI. The system's success depends
 on how well its individual features work together. We believe our
@@ -209,7 +214,7 @@ means for thinking and recording design intent, but as many have
 observed, it is disconnected from the computer aided phase of the
 design process~\cite{company-sketching-in-engineering}.
 
-\subsection{Sketch-based interaction}
+\subsection{Sketch-Based Design Tools}
 
 The rough appearance of freehand sketches encourages designers to see
 beyond unimportant details, letting them make big-picture
@@ -217,26 +222,26 @@ decisions. Much prior work argues that beautification (e.g. redrawing
 crudely drawn lines as straight segments) is antagonistic to
 design~\cite{gross-cocktail}, at least during the conceptual
 phases. SILK~\cite{landay-silk-chi} and DENIM~\cite{lin-denim} are
-systems that take this perspective. They are sketch-based tools for
-quickly drawing user interfaces. SILK lets users quickly draw GUIs,
-recognizing input as UI elements like menus, scrollbars or buttons and
-transforms the recognized sketch to a working implementation, while
-retaining its rough appearance. DENIM is a drawing tool for creating
-rough models for web sites. It recognizes a small set of
-context-sensitive gestures.
+take this perspective. They are sketch-based tools for quickly drawing
+user interfaces. SILK lets users quickly draw GUIs, recognizing input
+as UI elements like menus, scrollbars or buttons and transforms the
+recognized sketch to a working implementation, while retaining its
+rough appearance. DENIM is a tool for creating rough models for web
+sites. It recognizes a small set of context-sensitive gestures.
 
 Designing roughly helps the user avoid thinking about details that are
-not yet important. For example letting designers place an interface
-element, without needing to specify that it is 12 pixels to the left
-of some other element. Eventually some of these values must be given
-explicitly. Since SILK and DENIM are not designed for that purpose, a
-second tool (e.g. a text editor) must be used.
+not yet important. For example, SILK lets designers place an interface
+element without needing to specify that it is 12 pixels left of some
+other element. Later, when the design is implemented, some of these
+values must be given explicitly. 
 
-% So: SILK throws it over the wall when conceptual design is done,
-% expecting the designer to finish the job in code (e.g. how does one
-% set the exact pixel alignment or padding if not in code?) SIMI lets
-% users give precise details without the need for help from grown-up
-% tools.
+Since SILK and DENIM are not designed for that purpose, a second tool
+(e.g. a text editor) must be used. Changes made in subsequent tools
+are not available in prior stages. This means that once the designer's
+work shifts to later tools it is inconvenient to revert to earlier
+tools. To avoid this contentious relationship between ``sketching
+tools'' and ``making tools'', we designed SIMI to support both cases
+and to help the user transition between them easily.
 
 Some work takes an alternate view on the appearance of sketched
 input. Systems such as Pegasus~\cite{igarashi-pegasus} and recent work
@@ -246,14 +251,17 @@ or arcs. These 2D graphics systems infer the user's intention by
 detecting geometric relationships. If more than one relationship is
 possible, the system lets the user choose among a few
 alternatives. These tools enable users to quickly and easily make
-simple vector graphics. However, the aggressive inferencing can make
-it difficult to make drawings that have subtle features the system can
-not detect.
+simple vector graphics. 
+
+However, aggressive automatic inferencing can make it difficult to
+make drawings that have subtle features the system can not detect. In
+SIMI, we keep automatic inference to a minimum, and provide fast easy
+methods for making corrections.
 
 Sketch input is an appealing way to interact with computers because
 users find it easy to provide. Unfortunately, sketch recognizers are
 not yet sophisticated enough to reliably interpret arbitrary
-drawings. Therefore researchers have created ways to close the gap
+drawings. Therefore researchers have sought ways to close the gap
 between input that people provide and the computer's ability to make
 sense of it. For example a system may require users to draw in certain
 ways (e.g. shapes must be drawn with single strokes, as in SILK) to
@@ -261,26 +269,24 @@ conform to the recognizer's capabilities.
 
 While inferencing is powerful, it also prevents users from making
 subtle distinctions. For example, an overly zealous inferencing engine
-might snap objects together when ther designer would like to them to
+might snap objects together when the designer would like to them to
 simply be near one another without touching. 
-% SIMI enables this level of control.
 
 Well-known systems such as Teddy~\cite{igarashi-teddy} and
 EverybodyLovesSketch~\cite{bae-everybody} are among those that develop
-or refine sketch-based interaction techniques that that are both
-natural for humans to use and easier for the computer to understand.
-They provide a small grammar of easy-to-make gestures for people to
-create and edit 3D drawings. The ease and power of these systems is
-evident: even children can learn and use them to make complex
+sketch-based interaction techniques that that are both natural for
+humans to use and easier for the computer to understand.  They provide
+a small grammar of easy-to-make gestures to create and edit 3D
+drawings. The ease and power of these systems is evident: even
+children can learn and use them to make complex
 models. EverybodyLovesSketch in particular seeks to enable a broad
 audience to create 3D perspective conceptual sketches by providing a
-set of gestures and tools that work well together. However, it is hard
-to engineer with these tools because they do not provide users the
-ability to give dimensions to arbitrary lengths or angles.
+set of gestures and tools that work well together. 
 
-% So: power and ease of use are not mutually exclusive, but it
-% requires careful tuning of interaction techniques to make it
-% work. SIMI builds on this.
+However, it is hard to engineer with these tools because they do not
+provide users the ability to give dimensions to lengths or
+angles. SIMI lets users give specific values to sketched geometry,
+letting users create engineered output.
 
 \subsection{Sketch-based modeling for fabrication}
 
@@ -309,18 +315,16 @@ whether will remain upright).
 
 Domain-oriented tools such as Plushie and Sketch Chair enable people
 to make things they otherwise would be unable to, but the designer
-relinquishes a great deal of control to the system. In contrast, SIMI
-users retain the ability to specify as much or as little as they like,
-but without the help from domain-centric computation.
-
-% TODO: Mark says: the above paragraphi is important, but it's not
-% clear how. For example plushie doesn't let you make whatever you
-% want? That is, your point here is that these systems constrain the
-% user to a specific design space, but is that true?
+relinquishes a great deal of control to the system. For example, a few
+strokes is enough to define the basic geometry for Sketch Chair to
+generate a seat. But the system makes important decisions like how the
+pieces join. In contrast, SIMI users retain the ability to specify as
+much or as little as they like, but without the help from
+domain-centric computation.
 
 SIMI builds on the work of a fairly small but interesting set of
-sketch-based systems that support precision. With
-ParSketch~\cite{naya-parsketch} designers create parametric 2D models
+sketch-based systems that support precision.
+ParSketch~\cite{naya-parsketch} lets users create parametric 2D models
 by incrementally recognizing sketched geometry and commands. It uses
 pressure to distinguish between linework (high pressure) and
 constraint commands (lower
@@ -331,23 +335,21 @@ interactive beautification, supporting iterative sketch/rectify
 sequences. The interactive nature of these precision-oriented systems
 means the system has less work to do when its recognizer/rectifier is
 invoked, leading to more accurate recognition and more satisfied
-users.
-
-% TODO: Jason says: Again, want to end with a stronger differentiator
-% of what's new and interesting and different here from past work. Is
-% it the integration? Is it the specification of precision? Is it the
-% domain?  (Could argue it's more general than SketchChair)
+users. Our work builds on this by (1) giving a collection of
+sketch-based editing techniques that work well for giving precise
+details, and (2) giving the ability to transition from a sketch into
+physical laser-cut output.
 
 \section{BACKGROUND STUDY}
 
 To better understand the design practices involved with laser cutter
-fabrication we conducted two related formative studies. We interviewed
-people with experience designing these artifacts and watched them
-work. We also surveyed and analyzed laser-cut items found on community
-web sites to find common features. We conducted these studies to
-better understand the kinds of tasks and problems designers face when
-designing for laser cutters, which in turn informed SIMI's
-development.
+fabrication we conducted two related background studies. These studies
+help us to better understand the kinds of tasks and problems designers
+face when designing for laser cutters, which in turn informed SIMI's
+development.  In the first formative study, we interviewed people with
+experience designing these artifacts and watched them work. In the
+second, we surveyed and analyzed laser-cut items found on community
+web sites to find common features.
 
 \subsection{Formative Study on Designer Work Practices}
 \label{sec:formative}
@@ -451,7 +453,7 @@ interview study belong to three main groups:
 \item \textit{Managing the editing tool:} Selecting/deselecting
   objects, view port management, finding and entering tool modes, and
   recovering from errors.
-\item \textit{Cutfile:} Finalizing the cutfile by creating copies of
+\item \textit{Cut file:} Finalizing the cut file by creating copies of
   items when more than one is needed, and positioning stencils.
 \end{itemize}
 
@@ -492,7 +494,7 @@ observations from the formative study. These properties are summarized
 here and described in greater detail below:
 
 \begin{itemize}
-\item \textit{Symmetry}: Radial or linear symmetry is a dominant feature.
+\item \textit{Symmetry}: Radial/linear symmetry is present.
 \item \textit{Repeating geometry}: Linework is repeated several times,
   often in a way that suggests procedural generation.
 \item \textit{Right Angle}: Edges meet at 90-degree angles.
@@ -549,15 +551,6 @@ distances, to specific values. But in keeping with the spirit of
 sketch-based modelling, the user is not obliged to give details if
 they are not important.
 
-%% The focus of this work is to produce a useful and usable sketch-based
-%% design tool for the domain of laser cutting. The main challenge in
-%% achieving this was the lack of a set of interaction sketch-based
-%% techniques that work in harmony. Prior work has focused largely on
-%% individual techniques that clearly map problems to solutions. In
-%% contrast, our system address the challenge of developing a system that
-%% integrates many experimental interaction techniques into a coherent
-%% whole.
-
 SIMI users draw with a stylus, using a button with thier other hand
 for a few actions. The system recognizes input as either geometric
 linework or gestural commands. Linework includes straight lines,
@@ -599,7 +592,8 @@ projects made with SIMI.
     \label{fig:latch-tjunct}
     \includegraphics[width=0.43\linewidth]{img/latch-manual-tjunct.pdf}
 }
-\caption{Automatic and manual latching used to bring segments together.}
+\caption{Automatic and manual latching. This is the term for bringing
+  segments together to meet at a common point.}
 \label{fig:latch}
 \end{figure}
 
@@ -863,10 +857,14 @@ represented by shading the interior.
 \section{SYSTEM EVALUATION}
 
 We evaluated Sketch It, Make It in two ways. First, we conducted a
-workshop with undergraduate architecture students. Second, we compare
-experienced SIMI user's strategy for making an object with that of
-experienced Illustrator users.
+workshop with undergraduate architecture students to gather feedback
+about how useful and usable it was, and to solicit other comments. We
+were interested to determine if sketch-based interaction could be used
+to make precisely-defined designs for fabrication.
 
+Second, we compare experienced SIMI user's strategy for making an
+object with that of an experienced Illustrator user. This was done to
+compare how these starkly different tools require designers to work.
 
 \begin{figure}[t]
 \centering \subfloat[Questions on feature ease of use.] {
@@ -902,25 +900,18 @@ Each session lasted half an hour, meaning each student used SIMI for
 an hour. This duration is adequate to gague a new user's ability to
 learn the system and to measure first impressions.
 
-% thing 1: Using tablet was difficult.
-
-% thing 2: Very little confusion on how to make geometry and
-%    constraints. Erasing was difficult until they were shown how to
-%    do it.
-
 Initially, students complained that the tablet hardware was difficult
 to use, but they acclimated to it after about ten minutes. After
 adjusting, they quickly learned to make linework and make
 constraints. At first they had trouble erasing and using control
-points, but learned to use these features in time. The students had
-access to a video demonstrating how various techniques were performed,
-as well as a paper ``cheet sheet'', but did not use them. Instead, the
-students would ask somebody (e.g. the author, or the student next to
-them) who knew how to do it. Personal help was superior because
-assistance could be tailored to their particular needs.
+points, but learned to use these features in time. 
 
-% thing 3: Most comments were about missing features, not about how to
-%    use the system.
+%% The students had access to a video demonstrating how various
+%% techniques were performed, as well as a paper ``cheet sheet'', but did
+%% not use them. Instead, the students would ask somebody (e.g. the
+%% author, or the student next to them) who knew how to do it. Personal
+%% help was superior because assistance could be tailored to their
+%% particular needs.
 
 We were expecting students to have a harder time using SIMI because
 the hardware (tablets) and interaction paradigm (sketch-based
@@ -969,7 +960,13 @@ in comments left by some of the respondents. For example:
   designing fun.''
 \end{itemize}
 
-\subsection{Expert Designer Strategy Analysis}
+Not all commentary was positive. System crashes and bugs frustrated
+the students, who are not accustomed to using research prototype
+software. Aside from bug-related comments, most negative comments
+concerned missing features (for example, students wanted a constraint
+to make lines parallel).
+
+\subsection{Task-Tool Analysis}
 
 A second method of evaluating SIMI as a system is to examine the
 actions an expert user takes when making something, and to compare
@@ -979,10 +976,18 @@ is different from (and similar to) existing tools.
 
 We asked an expert Adobe Illustrator user to verbally describe the
 sequence of discrete actions necessary to replicate the table shown
-in~Figure~\ref{fig:table}. We asked the designer to record all the
+in Figure~\ref{fig:table}. We asked the designer to record all the
 steps necessary for an inexperienced user to replicate their
-protocol. We recorded this verbal description and coded each action
-into one of five categories:
+protocol. 
+
+As an example, the first three actions were: (1) press the M key to
+enter rectangle drawing mode, (2) type rectangle dimensions, and (3)
+place the rectangle on the drawing canvas. The first action is a
+persistent mode change, while the second two specify values.
+
+A similar transcript was recorded for SIMI (the primary author
+provided the protocol). The verbal descriptions were broken into
+discrete actions, and each action coded using five categories:
 
 \textit{Persistent mode change}: Change the tool input state so
 subsequent input is interpreted in context of that tool (e.g. line
@@ -1000,15 +1005,6 @@ model elements (e.g. move or erase something)
 \textit{Transient mode change}: Temporarily change the tool mode so
 input is interpreted differently. This kind of mode change is part of
 a phrase, and will revert to another mode when the phrase is complete.
-
-As an example, the first three actions were: (1) press the M key to
-enter rectangle drawing mode, (2) type rectangle dimensions, (3) place
-the rectangle on the drawing canvas. The first action is a persistent
-mode change, while the second two specify values.
-
-%% mode change	M key
-%% specify value	Type dimensions
-%% specify value	Place table top
 
 \begin{figure}[h]
   \centering
@@ -1034,6 +1030,25 @@ Transient mode change & 2 & 0 \\
 \caption{Frequency of action types in the design protocol of expert
   Adobe Illustrator and SIMI users. }
 \end{table}
+
+The action frequency (listed in Table~\ref{tab:expert}) shows how
+distict each tool is used to create the same output. Roughly the same
+number of actions was taken in both cases (Illustrator:~44,
+SIMI:~38). 
+
+To make an object using Illustrator, an expert issues a series of
+\textit{Select, Specify} actions: either enter a persistent tool
+(e.g. line mode) mode or select a modeling element (e.g. a line on the
+screen), then specify a value or position by typing a number or moving
+the mouse.
+
+In contrast, most discrete actions with SIMI involve transforming
+geometry that is already on the screen, for example, constraining two
+existing lines to meet at a common point or form a right angle. A
+single sketched gesture fluidly performs both \textit{Select} and
+\textit{Specify} operations thatrequire two distinct actions in
+Illustrator. For example, right angle gesture necessarily indicates
+the line segments to be constrained.
 
 \section{IMPLEMENTATION}
 
