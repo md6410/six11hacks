@@ -39,7 +39,7 @@
 \usepackage[letterpaper,twoside,vscale=.8,hscale=.75,nomarginpar,hmarginratio=1:1]{geometry}
 
 % Provides a draft mark at the top of the document. 
-\draftstamp{\today}{DRAFT}
+\draftstamp{Draft generated on \today}{}
 
 \begin {document} 
 \frontmatter
@@ -47,18 +47,17 @@
 %initialize page style, so contents come out right (see bot) -mjz
 \pagestyle{empty}
 
-\title{ %% {\it \huge Thesis Proposal}\\
-{\bf Awesome Work in Computer Science}}
-\author{Me}
-\date{January 3006}
-\Year{3006}
+\title{
+{\bf Sketch-based Interaction for Design}}
+\author{Gabriel Goehring Johnson}
+\date{September 2012}
+\Year{2012}
 \trnumber{}
 
 \committee{
-Nearly Divine Personage, Chair \\
-Someone else \\
-Yet another person \\
-Someone from a strange and faraway land
+Mark D. Gross (Dept. of Architecture, CMU), Chair \\
+Jason I. Hong (Human Computer Interaction Institute, CMU)\\
+Ellen Yi-Luen Do (Georgia Institute of Technology)
 }
 
 \support{}
@@ -67,12 +66,13 @@ Someone from a strange and faraway land
 % copyright notice generated automatically from Year and author.
 % permission added if \permission{} given.
 
-\keywords{Stuff, More Stuff}
+\keywords{Sketching, Design, Pen Computing, Laser Cutters, Rapid
+  Prototyping, SBIM, Interaction Design, HCI}
 
 \maketitle
 
 \begin{dedication}
-For my dog
+\input{dedication.tex}
 \end{dedication}
 
 \pagestyle{plain} % for toc, was empty
@@ -81,14 +81,12 @@ For my dog
 %% into different files and input them into this file...
 
 \begin{abstract}
-A short summary.
+\input{abstract.tex}
 \end{abstract}
 
 \begin{acknowledgments}
-My advisor is cool.
+\input{ack.tex}
 \end{acknowledgments}
-
-
 
 \tableofcontents
 \listoffigures
@@ -99,13 +97,12 @@ My advisor is cool.
 %% Double space document for easy review:
 %\renewcommand{\baselinestretch}{1.66}\normalsize
 
-\input{chap-intro.tex}
-\input{chap-rw.tex}
-\input{chap-techniques.tex}
-\input{chap-overview.tex}
-\input{chap-details.tex}
-\input{chap-users.tex}
-\input{chap-conclusion.tex}
+\input{chap-intro.tex}      % motivation, research scope, approach, contributions
+\input{chap-rw.tex}         % trad. design sketching, sketch recog (mini things)., SBIM overview
+\input{chap-overview.tex}   % rapid fab, laser cutting, 'the process', introduce SIMI from high level
+\input{chap-details.tex}    % N techniques: linework, erase, right angle, pan/zoom, etc.
+\input{chap-users.tex}      % formative studies, summative evaluation, casual reactions
+\input{chap-conclusion.tex} % recap all, future for design is good if keyboard/mouse will just die
 
 %\appendix
 %\include{appendix}
@@ -120,6 +117,6 @@ My advisor is cool.
 %\newcommand{\bibpreamble}{This text goes between the ``Bibliography''
 %  header and the actual list of references}
 \bibliographystyle{plainnat}
-\bibliography{register} %your bib file
+\bibliography{sketch-bibliography} %your bib file
 
 \end{document}
