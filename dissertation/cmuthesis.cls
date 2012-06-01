@@ -68,7 +68,7 @@
 \vskip 3em
 
 \begin{center}
-    School of Computer Science \\
+    School of Architecture \\
     Carnegie Mellon University \\
     Pittsburgh, PA 15213
 \end{center}
