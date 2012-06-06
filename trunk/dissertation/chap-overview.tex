@@ -5,14 +5,7 @@ cutting as the narrow area. Describe the kind of users in this space:
 ranging from students to hobbyists to professional designers. What is
 the range of how the machines are used? What is made with them?
 
-
-\section{Rapid Fabrication}
-
-broad area
-
-\section{Laser Cutting}
-
-narrow area
+\section{Rapid Fabrication and Laser Cutting}
 
 Talk about the machines, what they cost, what they can cut, what kind
 of output they provide, how long it takes to use, other operation
@@ -21,30 +14,84 @@ concerns like ventilation and inert gas.
 Talk about the requirements imposed on the designer by the machine: 2D
 cutfiles, material management, laser kerf issues. 
 
-\section{Designer Workflow}
-
 Then go into the typical process: design on paper, translate to CAD,
 print it out, evaluate what to do next, then either go back to a prior
 step or call it good enough. The bottleneck in this 'rapid' process is
 often software due to how hard it is to learn and use.
 
+\section{Motivating Scenarios}
 
-\section{Sketch It Make It} 
+First a little one on making a triangular angle brace. This is a
+simple example that illustrates the system's capabilities and how the
+user interacts with it. It explains the UI layout, the modeless
+interaction, sketch recognition, constraints, and cutfile generation.
 
-People sketch like it is going out of style, until they are confronted
-with telling a computer what's up. Then they have to switch into this
-really strange way of 'designing' by using a keyboard and mouse,
-because that's what is convenient for the computer.
+\subsection{Pictureframe Holder Example}
 
-I took all of this sketch recognition stuff that computery people have
-been talking about for years and actually made something that
-demonstrates (to a small but compelling degree) that we really can
-design specific precise things by drawing them. It isn't exactly like
-drawing on paper, but it is more like paper than it is like working
-with nasty CAD.
+The second example is cribbed from the video. It is of the user
+designing a picture frame holder. It involves:
 
-This is an overview. make a story of somebody having a need, then step
-through the process of designing, roughly at first, then with more
-detail. No details on how the techniques work, but ok to say what they
-are and what they look like. This is about behavior as a whole.
+\begin{itemize}
+\item Using a tablet, most likely a `blind' tablet with separate
+  display. Introduces hand/eye coordination issues.
+\item Having the idea in the first place
+\item Drawing roughly
+\item Mistakes: errors (the user or the system makes errors) vs. ``on
+  second thought'' mistakes
+\item Adding details
+\item Imagining 3D construction. Admit the tool should support this
+  directly
+\item Fabrication: making the cutfile, laser cutting, and assembling
+\item (maybe) another iteration
+\end{itemize}
 
+\subsection{Technical Challenges Met By SIMI}
+
+The above section describes the user's needs, and how the user
+interacts with the system. This section introduces broadly how the
+system is built to support those needs and interaction. The technical
+aspects are:
+
+\begin{itemize}
+\item Ink parsing (finding corners and segments, removing hooks)
+\item Recognition (dynamic or post-hoc)
+  \begin{itemize}
+  \item Glyphs (akin to character recognition, like right angles)
+  \item Gesture (recognizes grammatical patterns like erase or
+    encircle)
+  \end{itemize}
+\item Disambiguation of recognized things
+\item Data model and constraints
+  \begin{itemize}
+  \item User sketches things, system reates/maintains constraints
+  \item Uses iterative, numerical relaxation method
+  \item Only has X basic constraint types underlying everything
+  \item High-level ``user constraints'' composed of low-level constraints
+  \end{itemize}
+\item Cutfile generation
+  \begin{itemize}
+  \item Basic typewriter algorithm. nothing fancy
+  \item Scales things appropriately
+  \item PDF output for Illustrator, SVG output for Ponoko (explain why
+    format matters)
+  \end{itemize}
+\end{itemize}
+
+From the user's perspective, SIMI gives a new kind of experience
+because it:
+
+\begin{itemize}
+\item Is ``modeless''. Should describe the mode problem, why
+  overcoming it is such an important thing, and why it is especially
+  pertinent to sketch-based interaction. (because if we have modes, we
+  are essentially on slippery-slope to MouseCAD)
+\item Is incremental, rather than one-big-batch style recognition that
+  is so popular
+\item Uses ``more natural'' input. The pen is easier to manipulate
+  than the mouse. Naturalness is a common term but is ultimately
+  meaningless because all design tools are artificial. Could say it
+  has less cognitive and ergonomic demands than modal, mouse-based
+  tools
+\item From a domain perspective it is not over featured, so it is
+  clear how to proceed.
+\end{itemize}

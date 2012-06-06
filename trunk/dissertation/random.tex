@@ -292,4 +292,64 @@ The system will understand the following input:
   \end{packed_enum}
 \end{packed_enum}
 
+\subsection{Recognition}
+
+SkruiFab will attempt to recognize input on demand---pressing a
+keyboard button or activating it via a pen widget onscreen. The system
+will recognize three broad categories of input:
+
+\begin{packed_enum}
+\item Diagrammatic: 2D graphics, stencil boundaries, modeling
+  operations, arrows, etc.
+\item Sentential: Text (parameters, annotations), numbers
+\item Unknown: Ink that can not or will not be recognized until
+  explicitly instructed to do so
+\end{packed_enum}
+
+Diagrammatic recognition will be based on Gestalt principles. Lexemes
+include lines, curves, dots, and corners; grammar is based on domain
+semantics and perceptual (and temporal) principles like continuity,
+colinearity, cotermination, repetition, symmetry, and so
+forth. Existing information in the model is used to improve
+recognition. For example, a dashed line is used to indicate a
+guide. If the drawing already contains reference points, and it is is
+reasonable to infer the newly drawn guide line passes through them,
+the exact location of the line is then known.
+
+\subsection{Visual Feedback}
+
+No recognition system can be 100\% accurate. SkruiFab will provide
+visual feedback to the user in response to recognized input. This
+cound include coloring or rectifying input, or the system might ask
+the user to disambiguate or clarify their input in some way.
+
+In the spirit of being a good conversation partner, the feedback
+should be respectful. If the system were to change things too much, or
+change things incorrectly, it would distract the user. This would be
+like somebody interrupting you to finish your sentence and saying the
+wrong thing.
+
+The feedback should also be simple and consistent, even when
+wrong. This lets the user working without having think too hard about
+what the computer is trying to say. The response should imitate the
+kind of drawn notation people already make. For example, people
+commonly use a small pair of lines that join at a 90-degree angle near
+a corner to indicate it is a square junction. This will not only be an
+expected input phrase, but it will also be used to communicate back to
+the user. If the system strongly believes a square corner has been
+drawn, it will reflect this belief by drawing a 90-degree angle symbol
+in the correct location.
+
+\subsection{Tight Loop for Learning}
+
+Users will likely find the system somewhat awkward to begin with,
+partly because they will not be experienced with sketch-based
+interaction, and partly because the specific visual language is not
+fully shared between the user and computer.
+
+As noted above the system will give feedback in ways that are
+graphically similar to what the user might do themselves. This
+provides a good way to teach the user what the computer
+expects. Similarly, the system could learn from the user.
+
 \end{document}  

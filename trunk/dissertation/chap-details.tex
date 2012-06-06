@@ -9,23 +9,100 @@ This will be a dry chapter but it should be the most useful to anybody
 else who wants to work on this. Should be enough that a smart grad
 student can implement things based on just what is here.
 
-\section{Technique N}
+\section{Ink Parsing}
 
-\section{Technique N}
+There are three stages of ink parsing: (1) processing while the pen is
+down, (2) immediately when the pen is lifted, and (3) later when the
+magic button is pressed or timeout is reached.
 
-\section{Technique N}
+In stage 1, only two things are going one: the system records and
+draws pen activity, and ``pen down'' recognizers are
+invoked. Currently the only ``pen down'' recognizer is for erasure. It
+has to be very efficient to avoid introducing lag.
 
-\section{Technique N}
+The other two stages are more complex. On pen up:
 
-\section{Technique N}
+\begin{itemize}
+\item Find corners/segments, and associate that structured ink with raw ink. 
+\item Apply recognizers to raw ink
+\item Disambiguate results of raw ink recognizers
+\item For all recognized items, take the appropriate action
+  (e.g. latch) and remove related raw ink.
+\item For remaining raw ink, add the raw ink to an 'unprocessed' list
+  for later analysis.
+\item If any actions were taken based on recognition, request a
+  snapshot.
+\end{itemize}
 
-\section{Technique N}
+Stage 3 operates on the 'unprocessed' list made from stage 2. So
+anything that was recognized in stage 2 does not make it this far.
 
-\section{Technique N}
+\begin{itemize}
+\item Get structured ink related to unprocessed ink.
+\item Remove hooks
+\item Add all new structured ink to the model
+\item Apply post-hoc recognizers to new structured ink
+\item Disambiguate any conflicting results using (a) context in the
+  model and (b) preset rules like right-angle wins over same-length
+  (filterRecognizedItems())
+\item Apply remaining recognized items. This removes the related
+  structured ink from the model.
+\item Auto-latch remaining segments with each other and existing model
+  segments.
+\item Search for cutouts (don't call them stencils anymore)
+\item Wake up constraint solver
+\item Request state snapshot
+\end{itemize}
 
-\section{Technique N}
+\begin{itemize}
+\item 
+\end{itemize}
 
-\section{Technique N}
+\begin{itemize}
+\item 
+\end{itemize}
 
-\section{Technique N}
+\begin{itemize}
+\item 
+\end{itemize}
 
+\section{Sketch Interaction Techniques}
+
+\subsection{Latching}
+
+Four kinds: automatic, endpoint, continuation, and t-junction.
+
+\subsection{Erase}
+
+\subsection{Same length}
+
+\subsection{Specific length}
+
+\subsection{Right angle}
+
+\subsection{Same angle}
+
+\subsection{Flow selection}
+
+\subsection{Undo and Redo}
+
+\subsection{Camera Control: Pan and Zoom}
+
+\section{Model and Constraint Solver}
+
+Data structures are simple: we have points and low-level
+constraints. List all the low-level constraints and give an example of
+the anatomy of one, especially how it measures error and how it
+`knows' how to offer advice to correct that error.
+
+Next talk about the higher-level user constraints: a user constraint
+for right angle is implemented with several low-level constraints. 
+
+Now for the iterative, numeric solving algorithm. While explaining how
+it works, can justify the randomness by showing graphs of total error
+when the solver did not use much randomness.
+
+Explain how the solver relates to the rest of the tool: in a separate
+thread, sending out signals when it is done or after taking a step (to
+redraw), and how it is capable of being paused when the user is doing
+something. This makes the system responsive at all times.

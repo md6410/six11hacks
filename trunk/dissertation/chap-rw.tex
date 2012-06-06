@@ -1,38 +1,74 @@
 \chapter{Related Work}
 
-summarize first: will talk about sketch-based interaction in context
-of design, and how design sketching can be supported by computation if
-only we figure out how interaction ought to work.
+Two big, high level topics: Design and Sketching.
 
-\section{Traditional Design Sketching}
+\section{Design for Rapid Fabrication}
 
-things people do with pencils on paper, markers on whiteboards, and
-why we borrow the waitress's pen to draw on bar napkins.
+There are many domains where people use rapid fabrication and prototyping machines:
 
-\section{Sketch Recognition}
+\begin{itemize}
+\item Mechanical Engineering
+\item Architecture
+\item Crafts
+\item Industrial Design
+\item ... and so on
+\end{itemize}
 
-overview of sketch recognition as an AI field. introduces concepts of
-ambiguity, domain, isomorphism, and computational techniques for
-performing recognition.
+Often people in these domains are engaged in ``physical hacking'', and
+while they may have different domain expertise, these people use the
+same kinds of tools:
 
-\section{Sketch-based Interaction Techniques}
+\begin{itemize}
+\item Software modeling tools (e.g. CAD)
+\item Physical modeling tools (e.g. clay, wood, foam, paper)
+\item Rapid fabrication machines
+\end{itemize}
 
-Individual techniques for supporting conversation between a human and
-the system. there are lots of isolated techniques, but few examples of
-systems that integrate them.
+Among the rapid fab machines, we have:
 
-\section{Sketch-based Interfaces and Modeling (SBIM)}
+\begin{itemize}
+\item 3D printing
+\item CNC Mills
+\item Water jet cutters
+\item Laser cutters
+\end{itemize}
 
-While there has been a SBIM conference for years, we have yet to see
-useful and usable sketch-based design tools outside of labs. Actually,
-if you can find one \textbf{in} a lab, let me know because I'd like to
-see it.
+The focus of this thesis is on a sketch-based tool for laser
+cutting. But while the narrow domain in question is rapid fabrication
+using laser cutters, it is situated in the broader context of digital
+modeling tools, so it should have applications to any designer that
+uses computers to aid design. This accounts for nearly all designers,
+so the implications are very broad.
 
-Note: the conference (and apparently the field) is sketch based
-\textbf{interfaces} and modeling, but it is really much more about
-interface. It's about interaction. Maybe the name was badly chosen by
-chance, or maybe it belies a fundamental lack of understanding by many
-of the central players who purport to be experts.
+\section{Sketching}
 
+Need a paragraph to talk about the relationship between design,
+designers, and their tools. Sketching is a significant activity
+here. 
 
+\subsection{Traditional Sketching}
+
+Copy in the part of the lit review on traditional sketching and edit
+it down. Be sure to also talking about pragmatic vs. epistemic
+actions, and the tentative, explorational nature of design sketching.
+
+\subsection{Computational Support for Sketching}
+
+Distinguish between ``faithful'' and ``faux'' sketching
+systems. Faithful tools respect the tentativeness of physical
+sketching where people don't have all the answers at the start. Faux
+sketching systems are named so because the developers view their tools
+as being fast, but they do not support sketching as on paper.
+
+Within computational support for sketching there are a bunch of
+technical areas to look at. Can crib a lot from the lit review. The
+sections that are most important are:
+
+\begin{itemize}
+\item Ink Parsing (corner finding, segmentation)
+\item Recognition
+\item Domain modeling
+\item Graphics (rectification, rendering)
+\item Interaction techniques, interaction design
+\end{itemize}
 
