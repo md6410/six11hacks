@@ -1,11 +1,5 @@
 \chapter{Introduction}
 
-Mass production enabled industrial economies to grow, allowing
-higher-quality products to be manufactured and delivered efficiently
-and inexpensively to consumers. While this process has clearly
-improved people's quality of life in many ways, it also has brought
-monotony. 
-
 Nearly everything around us has been \textit{designed} and
 \textit{built}. With mass production, a single design can be
 replicated many times. For example, a company might design a coat rack
@@ -53,6 +47,16 @@ learn how to design and use design software. However, most people can
 not dedicate that much time to learn the intricacies and gotchas for
 design software.
 
+% TODO: get a higher rez version of this picture
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/simi-with-cintiq.png}
+  \caption[SIMI on a Wacom Cintiq]{Using Sketch It, Make It on a Wacom
+    Cintiq display tablet. The user sketches with their preferred
+    hand, and uses a single button with their non-dominant hand.}
+  \label{fig:simi-intro}
+\end{figure}
+
 While someone might a hard time using professional design software, it
 is likely that person can \textit{draw} using pencil and paper to
 communicate their ideas with other people. Even if the freehand sketch
@@ -92,20 +96,64 @@ improved design tools.
 \section{Motivation}
 
 This work is motivated by academic and practical perspectives. From an
-academic perspective, we have seen system after system that
-demonstrates some sketching technology. These include recognition
+academic perspective, I am motivated to find a way to bring greater
+coherence to the field of sketch based modeling by providing a
+compelling example of a useful and usable sketching system that
+exhibits a set of mutually harmonious interaction techniques. We have
+dozens of compelling sketch-based systems that demonstrate recognition
 algorithms, corner-finding methods, and interaction techniques, among
 other topics. But as I have said, sketch-based tools don't exist
-outside research labs.
+outside research labs. Because researchers do not share, or have
+complete documentation or working examples to use as a starting point,
+they must build their work from scratch. Consequently, researchers
+interested in one topic (e.g. making new interactive widgets for
+sketching) must spend a substantial amount of time implementing
+functions that are not their research focus (e.g. ink parsing). While
+it might on occasion be useful to re-invent the wheel, I view the
+focus on side-topics as a largely needless distraction.
 
-%% Talk about motivation from both academic and practical
-%% perspectives. From the acad perspective we have an interest in
-%% exploring ways to bring together disparate sketch-based interaction
-%% techniques to form a coherent whole. From a practical perspective we
-%% want more ``natural'' tools that allow us to think more freely,
-%% without being tied down to what some structured tool demands.
+The practical motivation behind this work is based on the observation
+(shared by many people) that current computer-based design tools are
+hard to use, and that ``natural'' techniques like drawing, speaking,
+and gesturing are potentially great methods to design with
+computers. It would be a wonderful turn of events if such a natural,
+easy-to-use tool were available to designers. I believe one of the
+critical steps to making this a reality is to develop an appropriate
+system of interaction. For example, an appropriate system to interact
+with (drive) a car involves foot pedals, a steering wheel, and
+dashboard indicators and knobs. It would be inappropriate (and
+dangerous) to force automobile drivers to control their cars with a
+standard PC setup: keyboard and mouse, complete with software updates
+and dialog boxes. But this is the approach that many researchers take
+when developing sketch based design tools. It is convenient, but
+inappropriate. This dissertation offers an example of an appropriate
+interaction for sketch based design tools.
 
 \section{Thesis Structure}
 
-%% Summarize the rest...
+This chapter introduced the domain of rapid fabrication and the
+culture of hacking and making that is associated with it.  I discussed
+the field of sketch based modeling and introduced my tool,
+\textit{Sketch It, Make It (SIMI)}, a digital modeling tool for
+designing precise items for laser cutters. The following chapters are
+outlined as follows.
 
+Chapter 2 covers background information about rapid fabrication and
+laser cutting, and provides a brief survey of the literature on
+computational support for sketch-based modeling in design. Next, in
+Chapter 3 I describe several formative investigations that informed
+the development of my tool: observations and interviews with
+designers, and an analysis of some of the artifacts made with current
+design tools and laser cutters.
+
+I devote two chapters discussing SIMI. Chapter 4 introduces the tool
+and presents usage scenarios: why and how somebody uses it. This is an
+overview of the system. Chapter 5 details individual interaction
+techniques and other technical aspects to the system likely to be
+useful to others.
+
+Chapter 6 presents several evaluations of the system, including
+results of a quantitative evaluation involving 60 undergraduate
+architecture students. Last, in Chapter 7, I discuss the implications
+SIMI has on digital modeling tools and sketch based design. I also
+describe some additional questions that warrant future work.
