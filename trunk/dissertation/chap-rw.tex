@@ -25,37 +25,64 @@ models uploaded over the web.
 
 Rapid prototying machines are used in many domains: mechanical
 engineering, architecture, craftwork, industrial design, to name a
-few. But users of these machines are often professional, but the
-growing population of Makers are not necessarily trained or schooled
-to design and build things. Instead, members of this group might be
-better described as hobbyists or semi-professionals. They are smart
-and motivated, but do not necessarily have a great abundance of time
-or money.
+few. While many users of these machines are professional, a growing
+population of Makers are not necessarily educated to design and build
+things. Instead, members of this Maker group might be better described
+as hobbyists or semi-professionals. They are smart and motivated, but
+do not necessarily have a great abundance of time or money.
 
 \subsection{Rapid Fabrication Machines}
 
+The software modelling tool discussed later in this thesis targets
+laser cutters, which are just one particular type of rapid fabrication
+machine. I will first describe the broader area of rapid fabrication
+in order to situate the specific machine in question.
+
+There are several related (but not necessarily interchangeable) names
+for machinery to in this space. \textit{Numerical Control (NC)}
+machines were introduced in the 1950s that ran programs encoded on
+punched tape. \textit{Computer Numerical Control (CNC)} introduces a
+computer, capable of performing conditional execution soon
+followed. Modern CNC machines are found anywhere from large automobile
+factories (e.g. as sophisticated robots) to the homebrewed 3D printer
+set up in the hobbyist's garage.
+
+When applied to CNC machines, the terms ``rapid fabrication'' and
+``rapid prototyping'' refer to their role in a design process. While
+industrial CNC robots are engaged in large-scale production work,
+rapid fabrication machines are used primarily by designers to explore
+ideas and construction (preceding large-scale production, if it
+happens at all). Because of their role in the design process it is
+critical that these devices are faster and cheaper than using human
+labor with manual machinery.
+
 The type, quality, and composition of the output depends not only on
 the machine, but also on the designer's skill in creating suitable
-instructions. A computer controlled mill, for example, could be used
-to create a customized office desk. But in order to build the parts
-comprising the desk, somebody must give the machine a digital model
-that indicates not only where the mill will cut, but how the cut will
-be made.
+instructions. A CNC mill, for example, could be used to create a
+customized office desk. But in order to build the parts comprising the
+desk, somebody must give the machine a digital model that indicates
+not only where the mill will cut, but how the cut will be made.
 
-A mill may several axes: it can move in a 2D plane, up and down
+A mill may 3 or more axes: it can move on the x/y plane, up and down
 (z-axis), and some models allow the tool head to rotate. The tool path
 is therefore an important consideration when designing for most types
 of computer controlled manufacturing machines. In many (but not all)
 cases, software tools can compute tool paths automatically. Designers
 must consider a machine's capabilities.
 
-SIMI targets design for laser cutters. This tool was chosen because
-tool path concerns are nearly non-existant. Laser cutters are among
-the more popular rapid fabrication machines. They can be thought of as
-a very fast, strong, and precise automated razor blade, cutting
-through flat material (paper, wood, plastic, metal, etc.) from
-directly above. Many items can be made entirely with a laser cutter,
-aside from the occasional screw or
+SIMI targets design for laser cutters. This tool was chosen for
+several reasons. First, tool path concerns are nearly
+non-existant. Second, a laser cutter executes quickly, giving me a
+faster loop of coding, testing, and debugging. Cutting the parts for a
+toothbrush holder, for example, takes about five minutes on the
+machine in our lab, but our 3D printer would take several hours to
+make a similar object. Last, Laser cutters are among the more popular
+rapid fabrication machines.
+
+They can be thought of as a very fast, strong, and precise
+automated razor blade, cutting through flat material (paper, wood,
+plastic, metal, etc.) from directly above. Many items can be made
+entirely with a laser cutter, aside from the occasional screw or
 glue. Figure~\ref{fig:laser-example} shows several examples of useful
 items made with laser cutters. % TODO get good examples
 
@@ -73,51 +100,297 @@ Today, designers can choose among several modeling tools for laser
 cutter projects. Adobe Illustrator, a general-purpose vector graphics
 editor, is the most commonly used tool. Illustrator is full-featured
 and has an interface new users find familiar. However, participants in
-our formative study had a hard time using Illustrator quickly and
-effectively because they spent a great deal of effort looking for
-appropriate functions among the many features that are irrelevant to
-laser cutters. Specialized CAD tools like Rhino or SolidWorks are
-perhaps more appropriate for this kind of modeling but they also have
-a substantial learning curve. If rapid fabrication is to become
-common, appropriate modeling tools must be made accessible to ordinary
-users~\cite{lipson-homefactory}.
+our formative study (see Section~\ref{sec:formative-interviews}) had a
+hard time using Illustrator quickly and effectively because they spent
+a great deal of effort looking for appropriate functions among the
+many features that are irrelevant to laser cutters. Specialized CAD
+tools like Rhino or SolidWorks are perhaps more appropriate for this
+kind of modeling but they also have a substantial learning curve. If
+rapid fabrication is to become common, appropriate modeling tools must
+be made accessible to ordinary users~\cite{lipson-homefactory}.
 
+\section{Design Sketching}
 
-%% \begin{itemize}
-%% \item Software modeling tools (e.g. CAD)
-%% \item Physical modeling tools (e.g. clay, wood, foam, paper)
-%% \item Rapid fabrication machines
-%% \end{itemize}
+People commonly sketch when problem solving. Some sketches are
+personal, others collaborative. Some help people make quick
+calculations and are quickly forgotten while others serve longer-term
+purposes. For professional designers, sketching is a \textit{process}
+to think about problems. Just as importantly, a sketch (the result of
+the process) is a \textit{record} that communicates ideas. 
 
-%% Among the rapid fab machines, we have:
+Design can be seen as an iterative process of problem-framing and
+exploring possible solutions within the current conception of the
+problem. A sketch is not a contract: it is a proposal that can be
+modified, erased, built upon. The rough look of hand-made sketches
+suggests their provisional nature.
 
-%% \begin{itemize}
-%% \item 3D printing
-%% \item CNC Mills
-%% \item Water jet cutters
-%% \item Laser cutters
-%% \end{itemize}
+Some theories of cognition give the human mind two distinct tasks: to
+perceive the world via our senses, and to reason about what our senses
+provide. In contrast, the late psychologist Rudolf Arnheim argues that
+perception and thinking are inseparable: ``Unless the stuff of the
+senses remains present the mind has nothing to think
+with''~\cite{arnheim-visthink}. Visual thinking is valuable in
+evaluating what is and designing what might be. Sketching allows
+people to give form to notions that are otherwise imaginary; the act
+of seeing fuels the process of reasoning.
 
-%% The focus of this thesis is on a sketch-based tool for laser
-%% cutting. But while the narrow domain in question is rapid fabrication
-%% using laser cutters, it is situated in the broader context of digital
-%% modeling tools, so it should have applications to any designer that
-%% uses computers to aid design. This accounts for nearly all designers,
-%% so the implications are very broad.
+Sketching plays a crucial role in the practice of design. It helps
+people think about problems and offers an inexpensive but effective
+way to communicate ideas to others. The practice of sketching is
+nearly ubiquitous: One recent study of interaction designers and HCI
+practitioners found that 97\% of those surveyed began projects by
+sketching~\cite{myers-behavior-design}. We must understand the purpose
+and practice of sketching as it is done \textit{without} computation
+if we hope to effectively support it \textit{with} computation.
 
-\section{Sketching}
+% Karolina's project management and Shaun's floorplan diagram.
+\input{fig-projman-arch-diagrams.tex}
 
-%% Need a paragraph to talk about the relationship between design,
-%% designers, and their tools. Sketching is a significant activity
-%% here. 
+While designing, we iteratively explore and refine the problem
+definition and proposed solutions. Sketching supports this creative
+search process. We set out on our design task with some high-level
+goals. However, due to the
+ill-structured~\cite{simon-ill-structured-problems} and ``wicked''
+nature of design~\cite{rittel-wicked}, we encounter unforeseen
+opportunities and constraints as designing progresses. Those
+opportunities and constraints may be implicit in the original problem
+description, but designers expose them as they explore. The
+discoveries are incorporated into the understanding of the problem and
+potential solutions. Design problems are ``not the sort of problems or
+puzzles that provide all the necessary and sufficient information for
+their solution~\cite{cross-nature-nurture}.'' So it goes with
+sketching. We draw different views of our model, which allows us to
+perceive the problem in new ways.
 
-\subsection{Traditional Sketching}
+Designers engage in a sort of ``conversation'' with their sketches in
+a tight cycle of drawing, understanding, and
+interpreting~\cite{schon-kinds-of-seeing}. Goldschmidt describes this
+as switching between two reasoning modes: ``seeing that'' and ``seeing
+as''~\cite{goldschmidt-dialectics}. Seeing \textit{that} is the
+process of recognizing the literal, descriptive properties of the
+drawing.  Seeing \textit{as} is figurative and transformative,
+allowing the designer to re-interpret parts of the sketch in different
+ways. Care must be taken to support this conversation when developing
+sketch based modeling tools. If the system interprets drawings too
+aggressively or at the wrong time, it may prevent the human designer
+from seeing alternative meanings; recognize too little and the
+software is no better than paper.
 
-%% Copy in the part of the lit review on traditional sketching and edit
-%% it down. Be sure to also talking about pragmatic vs. epistemic
-%% actions, and the tentative, explorational nature of design sketching.
+\subsection{Prototyping and fidelity}
+\label{sec:traditional-prototyping}
 
-\subsection{Computational Support for Sketching}
+Newman and Landay's ethnographies of web designers focused how
+designers use informal techniques~\cite{newman-web-designers}. They
+found that designers always sketch at the beginning of a web design
+project, exploring numerous high-level options. Frequently this early
+sketching phase is accompanied with construction of low-fidelity
+prototypes made on paper or with Microsoft PowerPoint. As the design
+progresses and designers begin incrementally adding details, they move
+to higher fidelity models. Client meetings are an important forcing
+function in web design projects. When meeting with clients, designers
+want to show polished prototypes produced with computer
+software. Therefore designers used electronic tools earlier in the
+process than they would otherwise have preferred.
+
+Today most software tools support incremental refinement and
+specification of details but do not adequately support idea generation
+or exploration~\cite{terry-creative-ui}. Designers who begin using
+software tools in the early phases of design tend to make superficial
+explorations of possible solutions. Further, because tools are poor
+for exploration but good for specifying details (font, line weight,
+and color), designers tend to focus on nuances that are not yet
+important. Observing that current tools are inadequate for creative
+pursuits, researchers have developed calligraphic tools such as SILK
+and DENIM, which aim to support the early phases of
+design~\cite{landay-silk,lin-denim}.
+
+Paper sketches dominate the early phases of design as people generate
+new ideas, in a process Goel terms ``lateral
+transformations''~\cite{goel-sketches-of-thought}. But as soon as the
+web designer believes he or she will make incremental revisions (which
+Goel calls ``vertical transformations'') they switch to a computer
+tool.
+
+\section{Sketches as a symbol system}
+
+% Cartoon clouds or trees: Overloaded, Ambiguous
+\input{fig-overloaded-ambiguous-cloud.tex}
+
+Goodman provides a comprehensive framework for analyzing the
+properties of various symbol systems, including
+sketches~\cite{goodman-symbols}. Goel places sketching in Goodman's
+framework, noting that sketches have \textit{overloaded semantics},
+they are \textit{ambiguous}, \textit{dense}, and
+\textit{replete}~\cite{goel-sketches-of-thought}. These properties
+describe one particular sense of sketching in which the drawer's marks
+may be idiosyncratic. It is critical to understand these properties
+when developing sketch-based design software.
+
+Sketches have ``overloaded semantics'': The same symbol may mean
+different things depending on context. Further, a sketched symbol may
+be ``ambiguous'', meaning that the symbol affords more than one
+plausible interpretation.  Figure~\ref{fig:cloud} illustrates these
+properties. A lumpy shape can be used to indicate many things
+including clouds, trees, or thought bubbles. We interpret the shape
+differently depending on context.
+
+Sketched symbols are ``dense'', indicating there is a continuous range
+between instances of the same symbol. While there may be minute visual
+discrepancies between symbol instances, Goel claims that such symbols
+are also ``replete'': no aspect of the sketched symbol may be safely
+ignored (Figure~\ref{fig:dense-replete}).
+
+The pen strokes constituting a sketch serve various functions. Ink may
+indicate abstract domain symbols (e.g. diode, treble clef), object
+boundaries, actions (e.g. arrows indicating containment or movement),
+dimensions and units, annotations, region texturing, and so on. Some
+parts of a sketch are more dense and replete than others. For example
+a diode's properties do not change if it is drawn with a slightly
+larger triangle. However, subtle variations in how a desk lamp is
+drawn might lead to substantially different aesthetic responses to it.
+
+% Stick figures: dense and replete
+\input{fig-dense-replete-stick-figures.tex}
+
+Gross and Do discuss some properties of hand-drawn diagrams from the
+perspective of building tools to support design drawing
+activities~\cite{gross-ecn-uist}. The authors distinguish sketches
+from diagrams, noting that diagrams are ``composed of primitive
+elements chosen from a small universe of simple symbols---boxes,
+circles, blobs, lines, arrows.'' This list is certainly not
+exhaustive, but it does illustrate the general idea that diagrams have
+a limited vocabulary. In practice, sketches and diagrams from various
+dialects may be combined (e.g. mathematical notation on the same page
+as circuit diagrams and hand written notes.)
+
+Freehand diagrammatic drawings are abstract, ambiguous, and
+imprecise. \textit{Abstract} symbols denote elements whose identities
+or properties are not (yet) important or known. For example,
+Figure~\ref{fig:sketch-type-pm} on page \pageref{fig:sketch-type-pm}
+shows a project management diagram of two hypothetical projects. The
+activities composing each project are abstract---they could represent
+anything. The value of the sketch is that it shows the project's
+network topology and does not draw attention to what the specific
+activities are. 
+
+An \textit{ambiguous} symbol has many plausible interpretations. The
+floor plan sketch in Figure~\ref{fig:sketch-type-architecture} shows
+several rectangles indicating rooms, furniture, shelves, or
+counters. Human observers can confidently disambiguate the intended
+meaning of some rectangles, but others remain unclear. The
+bottom-right of the sketch shows two armchairs and a sofa with an
+ambiguous rectangle in the middle that could plausibly represent
+either a rug or a coffee table.
+
+Last, freehand diagrams are \textit{imprecise}. Imprecision allows
+designers to work with rough values (e.g. ``about two meters wide'')
+and avoid premature commitment. Imprecision also indicates that the
+design is by no means final.
+
+The notational properties of sketches make them powerful tools for
+supporting visual thinking. Designers may leverage ambiguities in
+their sketches to see new meanings, for example. However, these same
+properties present challenges for accurate software recognition.
+
+The degree to which a drawing is ambiguous, imprecise, and abstract
+varies among instances, and people might interpret them differently. A
+rough sketch is useful to designers, especially for brainstorming and
+incremental development of ideas. But in order for the sketch to be
+transformed into a finished product (e.g. as a digital model supplied
+to a rapid manufacturing device), it must be made unequivocal,
+precise, and concrete. The process of moving from the informal sketch
+to the formal specification involves drawings that are semi-ambiguous,
+partially precise, and with some abstractions given definite
+identities.
+
+\subsection{Summary: traditional sketching and computation}
+\label{ref:traditional-summary}
+
+If we hope to effectively support sketching with computation, we must
+first understand the practical aspects of traditional sketching. 
+
+Sketching is an important---perhaps necessary---tool for doing
+design. It gives us a way to quickly make provisional drawings, which
+help us efficiently make sense of spatial, relational
+information. Sketches let us make marks that are as vague or specific
+as we need. Because sketched elements can easily be ambiguous, rough
+drawings afford different interpretations. We may therefore reflect on
+our sketches and see new meaning in existing marks. People sketch in
+part because they don't know exactly what they are making---sketching
+facilitates exploration.
+
+Low-fidelity prototypes are especially important as tools to test
+ideas during early design. This is because they are easy to make,
+allowing designers to quickly expose problems before committing to
+decisions. Sketching is a common method of creating such prototypes.
+
+In order for computers to recognize sketches, we must develop
+techniques to transform imprecisely made marks into discrete
+symbols. However, some of the properties that make a sketch useful for
+a human (overloaded semantics, ambiguous, imprecise, etc.) complicate
+the task of computer recognition.
+
+%% Be sure to also talking about pragmatic vs. epistemic actions, and
+%% the tentative, explorational nature of design sketching.
+
+\section{Computational Support for Sketching}
+
+\subsection{Sketching Hardware: Tablets and Pens}
+
+Researchers in sketch recognition and interaction typically use tablet
+devices such as a Wacom Bamboo or Cintiq. Some, like the Bamboo,
+simply sense stylus input but do not display feedback. These ``blind''
+tablets require the user to look at one place (their computer display)
+but draw on another surface. This can lead to hand-eye coordination
+trouble. The Cintiq, and various Tablet PC computers, combine display
+and sensing surfaces. In this case, the user's pen comes into contact
+with a drawing plane that is separated from the display plane by only
+a few millimeters. When the user views the display at an angle, this
+parallax difference can be annoying, but it is certainly better than
+the situation with blind tablets.
+
+Input surfaces that are intended to be used with fingers or hands
+offer different interaction experiences than pen-oriented drawing
+surfaces. For example, users may trace shapes with a single finger,
+use two fingers to zoom in or out, or use whole-hand gestures for
+issuing other commands. These interaction techniques provide
+opportunities for developing innovative sketching applications, as
+demonstrated by work by Hinckley \textit{et. al} at Microsoft
+Research~\cite{hinckley-pen-touch}.
+
+Regardless of sensing technology, these devices allow users to provide
+input in a way that is much closer to handwriting than a mouse
+allows. Although pen and mouse input share many properties (both allow
+users to interact with 2D displays) they have several key differences.
+
+Mouse input affords \textit{motion} sensing while pen input
+affords \textit{position} sensing~\cite{hinckley-input-technology}. In
+other words, while mice produce the relative \textit{change} in
+$(x,y)$ locations, pens directly provide absolute $(x,y)$ locations.
+Users can configure tablets to report relative position, thereby
+behaving like a mouse.
+
+Form is also extremely important. A stylus affords people to use the
+fine motor abilities of their fingers to control the tip of the pen,
+whereas hand and forearm muscles dominate mouse usage. Fingers can be
+used to move the mouse, but not with the same dexterity possible with
+a pen. Depending on the type of work, a pen may be ergonomically
+superior to a mouse, or the other way around.
+
+\input{fig-mouse-v-pen.tex}
+
+Some styluses have buttons. While buttons are an indispensable part of
+a mouse, they are often difficult to use on the barrel of a
+pen~\cite{plimmer-pen-usability}. The force of a \textit{mouse} button
+click is orthogonal to the device's plane of use and has negligible
+effect on target accuracy. However, pressing buttons on a
+\textit{stylus} can move the tip of the pen, making it difficult to
+press the button while pointing at particular objects (see
+Figure~\ref{fig:button-force}). Further, pressing a button on a
+computer stylus usually requires the user to adjust the pen in
+hand. This action may be distracting and uncomfortable for long term
+use.
+
 
 %% Distinguish between ``faithful'' and ``faux'' sketching
 %% systems. Faithful tools respect the tentativeness of physical
