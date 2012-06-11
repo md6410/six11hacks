@@ -1,11 +1,260 @@
 \chapter{Formative Studies}
+\label{sec:formative}
+
+% TODO: need a paragraph here to explain the tiny ethnography: why I
+% did it, why it is relevant
+
+To better understand the tasks and problems designers face when
+designing for laser cutters, we conducted two related formative
+studies.  In the first, we interviewed people with experience
+designing these artifacts and watched them work. In the second, we
+surveyed and analyzed laser-cut items found on community web sites to
+identify common features.
 
 \section{Tiny Ethnography}
+\label{sec:formative-tiny-ethnography}
+
+% TODO: this entire section was copied from my workshop paper. Edit it
+% to make it serve the larger point.
+I arranged to “be a fly on the wall” at a well-respected design firm
+in the Pittsburgh area for the purpose of conducting an ethnographic
+study. This report describes my experience so far. As of the time of
+this writing I have spent about twenty hours at the company observing
+and interviewing the designers who work there.
+
+It is important to note that this report describes a professional
+design studio, which is nota- bly different than an educational design
+studio. Differences include the many issues that com- panies (and
+employees) face that are generally not present in an academic
+institution such as billable hours, interacting with paying customers,
+significant differences in age and experience level of collaborators,
+and so on. The purpose of a professional design studio is to practice
+de- sign for a living whereas an academic studio is to practice design
+for learning. A subsequent re- port on this ethnography should examine
+this distinction in closer detail.
+
+This study uses an approach similar to that described in [Bucciarelli
+  1994]--I am visiting the work site, observing people, conducting
+interviews, and at times I have become somewhat in- volved in the
+particular design activity on hand.
+
+In this paper I use a somewhat loose definition of the term “artifact”
+that deserves some elaboration. I consider any information that is a
+result of a designer’s work process to be a po- tential candidate for
+being a design artifact. Using this definition I can include transient
+infor- mation such as conversations, which account for a significant
+portion of the effort when doing design. Another transient artifact is
+time used thinking about a problem.
+
+This company’s culture values collaborative whiteboard sessions. A
+quick tour through the studio shows that most whiteboard surfaces have
+some sort of scribbling on them. Most of these whiteboard sessions
+were made as two or more people stood nearby in conversation. The
+scrib- bles served to represent objects that are named or described
+verbally. In this way, collaborative whiteboard sessions are
+multi-modal design artifacts, because part of their value is static
+(in the form of the scribbles on the whiteboard), while another part
+is transient (in the form of the con- versation that took place at the
+time of the scribbling). This observation is supported in [Ju 2004].
+
+Four of the five designers interviewed showed me their sketches. These
+sketches could be categorized as diagrammatic (using some formal or
+semi-formal notation, such as UML) or a rendering of some physical
+object like a building or electronic gadget. Interestingly, those same
+designers were less inclined to show me computational models such as
+Illustrator files. I do not yet understand why this is the case.
+
+While designers did not typically voluntarily show me computational
+artifacts, they were inclined to show me printed versions of their
+computational models. Nearly all of these printed pages had
+handwriting and sketches on them, sometimes by more than one
+person. People re- ported that they use a process of iterating between
+virtual and paper versions of their designs. The designers would edit
+a computational model with a high functionality application such as
+Photoshop, and then print a paper copy for personal or group use. They
+would then draw or write directly on that page as they explored
+variations or made refinements. If a paper-based editing session was
+useful, the designers would then manually transfer these changes back
+into their application. The process of printing, editing, and manually
+merging changes was seen a number of times.
+
+Each designer is issued blue sketch books with numbered pages. In
+theory they are supposed to use these to record their design ideas
+along with the current date. In practice many of the de- signers find
+this annoying to the point that they do not use the blue books at
+all. The books have lined green paper that may provide distractions or
+impose unnecessary structure to freeform sketching. Instead some
+designers use big, blank white sheets of paper that are grouped
+together with manilla folders by project.
 
 \section{Interviews}
+\label{sec:formative-interviews}
+
+We interviewed six designers from different backgrounds, including
+mechanical engineering, graphic design, and architecture to learn
+about their work practices and to understand how they use their
+tools. All were experienced with designing objects to be made with a
+laser cutter.
+
+Each session lasted approximately one hour, split evenly between an
+interview and using software. We met participants in their workplaces,
+and asked them to describe their design process and to show sketches
+or videos of their work. Although there were differences in their
+process, each followed the same overall pattern.
+
+The designers all said they began by thinking about a problem and
+sketching on paper. They made drawings to think about how to ``frame''
+the project (what it is for). Other sketches helped reason about how
+to make it (how it works and fits together). Some designers explicitly
+noted that sketching is a necessary part of the process: they could
+not move forward without making freehand drawings. Only after the idea
+is well-formed were they ready to translate their hand-made sketch
+into a computer model (Figure~\ref{fig:translate}).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{img/translate-sketch-to-computer.jpg}
+  \caption{A common step of designing for laser cutters: translating a
+    hand-made sketch to a computer modeling tool. The sketch includes
+    a perspective drawing of the desired result, and 2D diagrams of
+    individual parts with key dimensions indicated.}
+  \label{fig:translate}
+\end{figure}
+
+After the interview, we asked participants to copy the sketch shown in
+Figure~\ref{fig:interview-sketch} using a software tool of their
+choice. We wanted to learn what problems people encountered when
+executing the common task of translating a sketch to a computer model.
+
+\begin{figure}[h]
+\centering \subfloat[We asked users to replicate this sketched part.]
+           {
+  \label{fig:interview-sketch-1} 
+  \includegraphics[width=0.7\linewidth]{img/laser-me-1.jpg}
+}
+
+\subfloat[Drawing of the part in context.] {
+    \label{fig:interview-sketch-2}
+    \includegraphics[width=0.7\linewidth]{img/laser-me-2.jpg}
+}
+\caption{We asked participants to model the part at the top using
+  a software of their choice.}
+\label{fig:interview-sketch}
+\end{figure}
+
+Five participants chose to implement the sketch with Illustrator; one
+chose Rhino. All users were comfortable with their tools, but none
+were experts. Every designer's strategy involved common activities:
+creating and editing boundaries, aligning or snapping items, using
+guide lines or reference points, measuring distances, specifying or
+changing lengths and angles, and creating finished ``cut files'' to
+send to the laser cutter.  They also engaged in the usual interaction
+management tasks---selecting and deselecting on-screen elements, and
+view port management such as zooming and panning.
+
+Participants spent a good deal of time on operating overhead
+(approximately 50\%). This included searching for the appropriate tool
+for the next task and recovering from errors. For example, one
+designer, an experienced Illustrator user, was aware of the ``Path
+Finder'' tool and wanted to use it. He searched the program's menu
+structure and hovered over toolbar buttons to read tool tips. Next, he
+invoked various functions of the Path Finder, using the keyboard
+shortcut to undo after each failed attempt, as he searched for the
+correct mode within the subcommand palette. This process lasted
+approximately 80 seconds.
+
+Occasionally participants used features in unorthodox ways. For
+example, to remove an unwanted segment of a polyline, one participant
+(a graphic designer) created an opaque white rectangle to obscure it,
+rather than erase it. (``Don't tell anyone I did this'', he said).
+
+Similar episodes are common: a person \textit{should} know the
+`correct' action, but takes an alternate approach. Although the
+alternative achieves the intended effect, it might be less efficient
+(more operations, longer execution time) or introduce unwanted
+complexity (e.g. the white rectangle).
+
+In short, we found that most common tasks and problems belong to three
+main groups:
+
+\begin{itemize}
+\item \textit{Defining geometry:} Creating/editing boundaries,
+  aligning items, creating and using guide lines or reference points,
+  measuring distances, and specifying lengths or angles.
+\item \textit{Managing the editing tool:} Selecting/deselecting
+  objects, view port management, finding and entering tool modes, and
+  recovering from errors.
+\item \textit{Cut file:} Finalizing the cut file by creating copies of
+  items when more than one is needed, and positioning stencils.
+\end{itemize}
+
 
 \section{Artifact Analysis}
+\label{sec:formative-artifact}
 
 
+The formative study of work practices from the previous section helps
+us understand \textit{how} people create laser cut items. To learn
+more about the characteristics of those objects (\textit{what} people
+create), we analyzed finished items from two web-based communities of
+laser cutter users.
+
+Many users are motivated by the opportunity to share their designs
+with others. Ponoko and Thingiverse are two currently popular web
+sites for selling or sharing items that can be made with rapid
+fabrication machines. Ponoko offers thousands of user-designed items
+for sale, mostly produced by laser cutting. Thingiverse is a warehouse
+of digital models of 3D-printable objects and designs for laser
+cutters. From these two sites we selected a total of 55 laser-cut
+designs. On Ponoko we selected the most recent 45 laser cut items.  On
+Thingiverse we searched for objects with the ``laser cutter'' tag and
+selected ten. Figure~\ref{fig:ponoko} summarizes the feature analysis
+of these 55 projects.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{img/ponoko-graph.pdf}
+  \caption{Frequency of features of 55 laser-cut designs found on
+    Ponoko and Thingiverse.}
+  \label{fig:ponoko}
+\end{figure}
+
+We used ten properties to characterize each project, based on our own
+experience designing objects for laser cutters, as well as
+observations from the formative study. They are:
+
+\begin{itemize}
+\item \textit{Symmetry}: Radial/linear symmetry is present.
+\item \textit{Repeating geometry}: Linework is repeated several times.
+\item \textit{Right Angle}: Edges meet at 90-degree angles.
+\item \textit{Notch and Finger Joints}: Two parts come together using one of
+  the joints illustrated in Figure~\ref{fig:joint}.
+\item \textit{Rounded Corners}: Right-angle corners are slightly blunt.
+\item \textit{Splines}: Curved linework (not counting rounded corners).
+\item \textit{Single Flat}: The project is composed of a single, flat
+  piece of material (e.g. a coaster).
+\item \textit{Fasteners}: Use of glue, screws, or bolts.
+\item \textit{Raster etch}: Laser cutter etched patterns (e.g. words,
+  images) rather than cutting all the way through material.
+\end{itemize}
+
+This list of properties helped us decide what SIMI should (and should
+not) do. Our implementation is discussed next.
+
+\begin{figure}[h]
+\centering 
+\subfloat[Notch joints.] {
+  \label{fig:joint-notch} 
+  \includegraphics[width=0.4\linewidth]{img/joint-notch.png}
+}
+\subfloat[Finger (box) joints.] {
+    \label{fig:joint-finger}
+    \includegraphics[width=0.4\linewidth]{img/joint-finger.png}
+}
+\caption{Two common methods to join parts. Notch joints are used when
+  parts intersect along part midsections; finger joints (box joints)
+  join parts along edges.}
+\label{fig:joint}
+\end{figure}
 
 
