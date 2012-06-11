@@ -211,7 +211,7 @@ web designer believes he or she will make incremental revisions (which
 Goel calls ``vertical transformations'') they switch to a computer
 tool.
 
-\section{Sketches as a symbol system}
+\subsection{Sketches as a symbol system}
 
 % Cartoon clouds or trees: Overloaded, Ambiguous
 \input{fig-overloaded-ambiguous-cloud.tex}
@@ -333,21 +333,25 @@ the task of computer recognition.
 %% Be sure to also talking about pragmatic vs. epistemic actions, and
 %% the tentative, explorational nature of design sketching.
 
-\section{Computational Support for Sketching}
+\section{Hardware: Tablets and Pens}
 
-\subsection{Sketching Hardware: Tablets and Pens}
+Now that I've discussed the role of sketching in design, and some of
+the cognitive aspects of freehand drawing, I will now present topics
+involved in supporting sketching with computers. This section
+discusses hardware people might use to give input to a sketching
+system, and the next enumerates software topics for processing it.
 
 Researchers in sketch recognition and interaction typically use tablet
-devices such as a Wacom Bamboo or Cintiq. Some, like the Bamboo,
-simply sense stylus input but do not display feedback. These ``blind''
-tablets require the user to look at one place (their computer display)
-but draw on another surface. This can lead to hand-eye coordination
-trouble. The Cintiq, and various Tablet PC computers, combine display
-and sensing surfaces. In this case, the user's pen comes into contact
-with a drawing plane that is separated from the display plane by only
-a few millimeters. When the user views the display at an angle, this
-parallax difference can be annoying, but it is certainly better than
-the situation with blind tablets.
+devices such as a Wacom Bamboo or Cintiq. Some surfaces, like the
+Bamboo, simply sense stylus input but do not display feedback. These
+``blind'' tablets require the user to look at one place (their
+computer display) but draw on another surface. This can lead to
+hand-eye coordination trouble. The Cintiq, and various Tablet PC
+computers, combine display and sensing surfaces. In this case, the
+user's pen comes into contact with a drawing plane that is separated
+from the display plane by only a few millimeters. When the user views
+the display at an angle, this parallax difference can be annoying, but
+it is certainly better than the situation with blind tablets.
 
 Input surfaces that are intended to be used with fingers or hands
 offer different interaction experiences than pen-oriented drawing
@@ -391,22 +395,373 @@ computer stylus usually requires the user to adjust the pen in
 hand. This action may be distracting and uncomfortable for long term
 use.
 
+\section{Sketch Recognition}
 
-%% Distinguish between ``faithful'' and ``faux'' sketching
-%% systems. Faithful tools respect the tentativeness of physical
-%% sketching where people don't have all the answers at the start. Faux
-%% sketching systems are named so because the developers view their tools
-%% as being fast, but they do not support sketching as on paper.
+Recognition is the centerpiece of many software prototypes that
+support sketching. Although the research focus of many systems is not
+recognition, such systems use automatic interpretation of sketches to
+explore new methods of interacting with computers and new ways of
+designing~\cite{gross-boe,grundy-maramasketch,lin-denim}. Such
+projects rely on reasonably accurate recognizers. Recognition is
+therefore a topic that affects nearly all aspects of research on
+sketch based systems. For this reason, a substantial portion of this
+review is devoted to aspects of sketch recognition. This includes
+timing issues, determining what to recognize and how those elements
+can be recognized, and interaction issues (see
+Table \ref{tab:recognition-topics}).
 
-%% Within computational support for sketching there are a bunch of
-%% technical areas to look at. Can crib a lot from the lit review. The
-%% sections that are most important are:
+\begin{table}
+\begin{tabular}{p{5cm}| p{2cm} | p{8.5cm}}
+\textbf{Topic} & \textbf{Section} & \textbf{Remark} \\
+\hline \hline
+Recognition accuracy &
+\ref{sec:recognition-accuracy} & Discusses how to measure recognition 
+accuracy, and what acceptable error rates are.
+\\ \hline
+When to recognize & 
+\ref{sec:recognition-when} &
+Recognition is powerful but may also distract users from their
+task. 
+\\ \hline
+What to recognize &
+\ref{sec:recognition-what} & Sketches may represent objects
+(e.g. tables and chairs) and spatial or functional relationships
+between those objects (e.g. chairs positioned around table perimeter).
+\\ \hline
+How to segment &
+\ref{sec:recognition-segmentation} &
+Sketches contain many different symbols that may overlap. Recognizers
+must isolate groups of marks for consideration.
+\\ \hline
+How to recognize &
 
-%% \begin{itemize}
-%% \item Ink Parsing (corner finding, segmentation)
-%% \item Recognition
-%% \item Domain modeling
-%% \item Graphics (rectification, rendering)
-%% \item Interaction techniques, interaction design
-%% \end{itemize}
+\ref{sec:recognition-techniques}, \ref{sec:recognition-hard-coded},
+\ref{sec:recognition-library} &
+
+Many recognition techniques exist, and rely on segmentation
+methods. \\ \hline
+
+Mediating recognition error &
+\ref{sec:recognition-managing-ambiguity} &
+Recognition sometimes results in ambiguous results.
+\\ \hline
+
+\end{tabular}
+\caption{Topics in sketch recognition}
+\label{tab:recognition-topics}
+\end{table}
+
+\subsection{Recognition Accuracy}
+\label{sec:recognition-accuracy}
+
+Recognition accuracy is typically measured by the deviation between
+what the user intended and the machine's interpretation. \textit{Error
+  tolerance} refers to the recognition inaccuracy rate a user is
+willing to accept. One study using a typewriter modified to make
+occasional errors found that typists do not notice a word 0.5\% error
+rate, 1\% is manageable, but 2\% is
+unacceptable~\cite[p. 79]{cole-survey}. 
+
+It is unclear if there are similar accuracy thresholds for sketching,
+though studies have been conducted for related recognition tasks. For
+handwriting recognition, adults find 3\% minimally acceptable, with
+1\% considered ``very
+good''~\cite{lalomia-recognition-accuracy}. Another study examining
+user acceptance of hand gesture recognition error rates found users
+would tolerate mis-recognition up to 10\% when equivalent keyboard
+commands could be employed~\cite{karam-gesture-recognition}.
+
+This is a substantial spread in acceptable error tolerance rates: 1\%
+for typewriters, 3\% for handwriting recognition, and 10\% for hand
+gestures. One possible explanation is that people have higher
+expectations for typewriters (where there is a direct, deterministic
+mapping between input and output) compared with recognition based
+interaction, because we understand that it is possible the system
+might not understand.
+
+\subsection{When to invoke recognition}
+\label{sec:recognition-when}
+
+It is important that sketching systems \textit{aid} design exploration
+and not simply \textit{computerize}
+it~\cite{negroponte-soft-arc-mac}. For example, a sketch recognition
+system might zealously identify parts of the user's drawing as it is
+made, replacing the rough sketch with lines or curves. This removes
+the opportunity for reflection and re-interpretation that is so
+important to the early phases of
+design~\cite{schon-reflective,goldschmidt-dialectics,terry-creative-ui}. Premature
+recognition may interrupt the designer's flow of thought and interfere
+with the task at hand. Instead we may want the computer to eavesdrop
+silently, and provide help only when we need it.
+
+A system can provide the user feedback of sketch recognition on
+different occasions: (1)~in mid-stroke, (2)~immediately after the pen
+is lifted, (3)~when the system infers that feedback may be
+appropriate, (4)~only upon request, or (5)~never. Many interfaces
+attempt immediate recognition of gestures for invoking commands, such
+as with marking menus~\cite{kurtenbach-marking-menus} or PDA device
+character input~\cite{palm}. This is commonly called \textit{eager}
+recognition~\cite{blostein-diagrams-review}. Other
+systems~\cite{gross-ecn-uist,igarashi-suggestive,alvarado-sketchread-uist}
+perform recognition in the background, deferring judgment until
+adequate information is available. This is termed \textit{lazy}
+recognition. Most modern research prototypes take this approach. Last,
+some systems wait until the user explicitly requests
+recognition~\cite{landay-silk}, or avoid recognition
+entirely~\cite{forbus-nusketch-battlespace}. Combinations of these
+approaches are common.
+
+\subsection{What should be recognized}
+\label{sec:recognition-what}
+
+Different kinds of design drawings (``model ink'') in many domains
+might be recognized: artistic sketches, study sketches, drawings,
+diagrams, schematics, blueprints, and so on. In addition to model ink
+comprising those drawing types, user input may be interpreted as a
+command (``command ink''). The particular rules about what should be
+recognized depends on the domain (architecture or circuit design),
+kind of model (floor plan or timing diagram), and other
+application-specific requirements. Sketches often contain hand-written
+labels or annotations, which are common targets of pen based
+recognition.
+
+% TODO: make the above paragraph SIMI-specific
+
+Diagrams usually have a domain-specific grammar describing how
+vocabulary items relate~\cite{lakin-vmacs-89}. For example, boxes may
+connect to other boxes via lines, those lines may have arrowheads to
+indicate direction. Diagrams are good candidates for recognition
+because the various elements and their relations can be described
+formally. Table \ref{tab:what} summarizes various recognizable
+classes.
+
+\begin{landscape}
+\begin{table}
+\label{tab:what}
+\begin{tabular}{ p{4cm} | p{4.5cm} | p{5.5cm} }
+\textbf{``What'' to recognize} & 
+\textbf{Examples} & 
+\textbf{Remark} \\ 
+\hline \hline
+
+Genre &
+Mathematical graph, architectural floor plan, web site layout, circuit design &
+
+It may be sufficient to recognize a sketch is of a certain kind
+without asking the user. The program could assume the sketch is
+in a certain domain.\\ \hline
+
+Characters (writing) & 
+Alphanumerics, math symbols & 
+Usually with other characters, in words and sentences. \\ \hline
+
+Geometric shapes & 
+Dots, lines, rectangles, blobs &
+Geometric shapes are often drawn in relation to others. \\ \hline
+
+Spatial features &
+A is contained in, is above, is larger than B &
+Spatial relations among elements may influence recognition. \\ \hline
+
+Entities &
+Domain-specific notation such as diodes, transistors &
+Contextual clues can help disambiguate semantics of domain symbols. \\ \hline
+
+Artistic nuance &
+Shadows, textures, color &
+Ink that modifies an existing element, perhaps suggesting 3D shape. \\ \hline
+
+Commands &
+Object selection, delete, copy, move, etc. &
+Command ink specifies operations on the drawing. \\ \hline
+
+Intention &
+Drawing's function or behavior, e.g. \textit{circuit breaker} & 
+Requires detailed domain knowledge and reasoning. \\ \hline
+
+\end{tabular}
+\caption{Kinds of elements to be recognized}
+\end{table}
+\end{landscape}
+
+% TODO: make the table relevant to simi
+
+\subsection{Segmentation and grouping}
+\label{sec:recognition-segmentation}
+
+Segmentation and Grouping are related processes of breaking down user
+input and finding related ink. Segmentation involves partitioning
+undifferentiated sketch input into parts (analogous to identifying
+word boundaries in speech recognition~\cite{cole-survey}). Grouping is
+the process of forming logical collections of data (analogous to
+determining which spoken words compose a phrase or sentence).
+
+It is sometimes appropriate to break apart continuous pen strokes into
+multiple segments, for example in recognizing cursive writing, or
+finding corners in continuous pen strokes. Alternately, it may be
+necessary to group related strokes in order to recognize compound
+objects such as a triangle drawn with three distinct strokes. To
+further complicate matters, there may be a number of reasonable ways
+to segment user input~\cite{mankoff-burlap}, based on information such
+as pen speed, stroke order, perceptual qualities, domain knowledge or
+curvature~\cite{kim-segmentation}. 
+
+The technical challenge is simplified if the system requires users to
+complete each symbol before moving on to another, or if each symbol
+must be drawn using a conventional stroke order. However, such
+requirements work against the goal of supporting unconstrained, fluid
+sketching.
+
+A common and effective method for segmenting ink incorporates time
+data. Sezgin's approach combines stylus velocity with curvature to
+identify locations of interest such as corners, or places where the
+drawer may be taking extra care to be precise
+~\cite{sezgin-early-processing,davis-siggraph-tutorial}. Wolin's
+MergeCF corner finder extends this approach by initially over-fitting
+the stroke with corners and iteratively removing them to arrive at a
+better fit. SIMI's ink processing algorithm is based on these.
+
+It is often useful to organize drawn input at higher levels before
+performing semantic recognition.  Gestalt psychologists offer the
+\textit{laws of perceptual organization} to explain how people make
+sense of visual scenes. Humans perceive scenes not only using what is
+shown but also with ``invisible extensions as genuine parts of the
+visible''~\cite{arnheim-visthink}. The rules of perceptual
+organization include \textit{proximity}, \textit{similarity},
+\textit{closure}, \textit{continuation} and \textit{common
+  fate}~\cite{kanizsa-gestalt} (see Figure~\ref{fig:gestalt}). All of
+these features are used by SIMI's sketch recognition system.
+
+\input{fig-gestalt.tex}
+
+Perceptual organization supports grouping at many levels. At a
+low-level, we can use perceptual rules to analyze the relationship
+among individual ink strokes to find plausible groupings for
+recognition. PerSketch and ScanScribe explore how perceptual
+organization rules can be used at higher
+levels~\cite{saund-persketch,saund-perceptual}. 
+
+\subsection{Overview of recognition techniques}
+\label{sec:recognition-techniques}
+
+Regardless of the input device, we identify two broad categories of
+sketch recognition: \textit{on-line} and \textit{off-line}. On-line
+recognition knows how fast and in which order marks are made, and is
+performed as the drawing is made. Off-line recognition happens after
+the drawing is complete, irrespective of the order or speed strokes
+were made. SIMI uses on-line recognition.
+
+On-line recognition strategies are further divided in two categories:
+single-stroke and multi-stroke recognizers. Single-stroke recognizers
+are appropriate for tasks such as interpreting freehand
+gestures. Single-stroke approaches are simpler to implement than
+multi-stroke strategies because user input is clearly divided into
+pieces. This process could be relatively simple: a multi-stroke
+recognizer might simply expect multi-stroke objects to be drawn in a
+prescribed fashion. Or, multi-stroke recognizers might be more
+complex, for example calculating the liklihood that distinct strokes
+(or segments) belong together. SIMI uses both single- and multi-stroke
+recognizers for different purposes.
+
+\subsection{Hard-coded recognizers}
+\label{sec:recognition-hard-coded}
+
+One common approach is to hard-code recognition routines directly. For
+simple or limited graphical vocabularies this may be appropriate. A
+circle (or a zero, or the letter 'O', or the sun, etc.)  can be
+recognized with a short program looking for input points that are
+roughly equidistant from the stroke's centroid. However, ad-hoc,
+hard-coded recognizers are difficult to maintain and extend. For
+example, if we wished to extend our circle recognizer to interpret a
+sun with rays of light coming out of it, we would have to also
+recognize lines, then coordinate the recognizer to consider those
+particular lines together with the circle, and ensure that the lines
+are positioned and angled correctly. Further, sketch recognition
+applications must be able to discern different kinds of elements. The
+recognizers for each of these elements may conflict. A new recognizer
+may cause an existing recognizer to stop working correctly, leading to
+maintenance, debugging, and testing problems.
+
+SIMI uses hard-coded recognizers in situations when performance is
+critical (e.g. erasing and undo/redo).
+
+\subsection{Pattern matching}
+\label{sec:recognition-library}
+
+Another strategy for representing classes is to create a library of
+pattern templates. These approaches can be separated into two groups:
+those that use \textit{visual} templates, and those that use
+\textit{textual} templates.
+
+Template matching strategies are often
+\textit{feature-based}. Features include properties such as stroke
+length, stroke path, minimum or maximum angle, or aspect ratio. The
+system holds a library of templates, each of which has feature
+values. The system computes feature values for user input, and
+compares those values with those contained in the library. SIMI uses
+textual templates, but not the visual kind.
+
+Examples of the visual template method include the Ledeen
+recognizer~\cite{newman-sproull-graphics-2}, the Rubine
+recognizer~\cite{rubine-recognizer}, Kara's
+recognizer~\cite{kara-recognizer-cg}, and the \$1
+Recognizer~\cite{wobbrock-dollar}.
+
+Textual templates may be described using a programming
+language~\cite{pasternak-adik,bimber-sketch-bnf,costagliola-xpg,hammond-ladder}. These
+notations have two primary strengths. First, humans can read (and
+edit) them. For example, a television symbol may be described with
+natural language as ``a square with a slightly smaller circle
+positioned at its center.'' A formal symbolic language for that
+statement is still quite legible (assuming one understands the
+function semantics):
+
+\begin{verbatim}
+      (define television 
+              (and (centered square circle)
+                   (slightly-smaller circle square)))
+\end{verbatim}
+
+Another strength of this kind of notation is that it allows the
+developer to describe entities at a level of abstraction that
+accommodates variability between entity
+instances. An \textit{abstract} triangle is a three-sided,
+two-dimensional shape whose internal angles add up to
+180\degree. A \textit{particular} triangle may have side lengths of 3,
+4, and 5, and be oriented so that its long edge is horizontal. We may
+define triangles and other entities as abstractly or concretely as the
+language allows.
+
+Many of the recognizers in SIMI use textual templates roughly based on
+the approaches described by Hammond~\cite{hammond-ladder} and
+Alvarado~\cite[Chapter 4]{alvarado-phd-thesis}.
+
+\subsection{Managing ambiguity}
+\label{sec:recognition-managing-ambiguity}
+
+Futrelle's classification scheme of types of ambiguity in diagrams
+includes two high-level categories: lexical and structural
+ambiguity~\cite{futrelle-ambigutiy}. Lexical ambiguity refers to the
+``word'' level, when the meaning of a particular symbol is in
+question. Structural ambiguity refers to confusion arising from the
+composition of symbols.
+
+Shilman augments this scheme with two additional types of ambiguity
+that arise in sketch recognition: label and attribute
+ambiguity~\cite{shilman-parsing}. Label ambiguity is present when the
+symbol's identity is unclear. For example, a quickly drawn rectangle
+might be interpreted as a circle. Attribute ambiguity refers to the
+features of a sketched element: the exact location of a quickly drawn
+rectangle's corner may be unclear.
+
+BURLAP~\cite{mankoff-burlap} is a calligraphic application based on
+SILK~\cite{landay-silk} that enables people to draw user
+interfaces. As the user draws, BURLAP forms a list of plausible
+interpretations. At some point the system may need to pick one
+interpretation. Mankoff \textit{et. al} call this process
+\textit{mediation}, performed by agents called
+\textit{mediators}. Some mediators may engage the user by displaying a
+pick-list of choices or visually indicating the ambiguity. Other
+mediators automatically execute and do not involve the user. SIMI
+uses this automatic way to disambiguate contending interpretations.
 
