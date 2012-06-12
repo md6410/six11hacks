@@ -4,7 +4,15 @@
 % TODO: need a paragraph here to explain the tiny ethnography: why I
 % did it, why it is relevant
 
-To better understand the tasks and problems designers face when
+The previous chapter covered background literature and prior work
+carried out by other researchers. In this chapter, I present original
+work studying design culture, specifically related to rapid
+fabrication with laser cutters.
+
+There are three studies. First, I give observations of people working
+at a professional design studio. This gives a firsthand account of the
+processes that real designers use when practing their craft. Second,
+to better understand the tasks and problems designers face when
 designing for laser cutters, we conducted two related formative
 studies.  In the first, we interviewed people with experience
 designing these artifacts and watched them work. In the second, we
@@ -16,59 +24,50 @@ identify common features.
 
 % TODO: this entire section was copied from my workshop paper. Edit it
 % to make it serve the larger point.
-I arranged to “be a fly on the wall” at a well-respected design firm
-in the Pittsburgh area for the purpose of conducting an ethnographic
-study. This report describes my experience so far. As of the time of
-this writing I have spent about twenty hours at the company observing
-and interviewing the designers who work there.
+I arranged to ``be a fly on the wall'' at a well-respected design firm
+in the Pittsburgh area to observe how designers work. I spent about
+twenty hours at the company observing and interviewing the designers
+who work there. This study was inspired by Bucciarelli's ethnographies
+of engineers~\cite{bucciarelli-designing-engineers}. While this work
+pre-dates my focus on design for laser cutters, it does provide a
+solid connection between my narrow topic and the broader context of
+design practice.
 
-It is important to note that this report describes a professional
-design studio, which is nota- bly different than an educational design
-studio. Differences include the many issues that com- panies (and
-employees) face that are generally not present in an academic
-institution such as billable hours, interacting with paying customers,
-significant differences in age and experience level of collaborators,
-and so on. The purpose of a professional design studio is to practice
-de- sign for a living whereas an academic studio is to practice design
-for learning. A subsequent re- port on this ethnography should examine
-this distinction in closer detail.
+A professional studio is notably different than an educational design
+studio. For example, many issues companies face are generally not
+present in an academic institution. These include billable hours,
+interacting with paying customers, significant differences in age and
+experience level of collaborators, and so on. 
 
-This study uses an approach similar to that described in [Bucciarelli
-  1994]--I am visiting the work site, observing people, conducting
-interviews, and at times I have become somewhat in- volved in the
-particular design activity on hand.
+This company's culture places high value on collaborative whiteboard
+sessions. At any time, the majority whiteboard surfaces throughout the
+office have some sort of scribbling on them. Most whiteboard sessions
+were made as two or more people gathered in conversation. The
+whiteboarded scribbles served to represent objects that are sometimes
+labeled with markers, but usually just described verbally. In this
+way, collaborative whiteboard sessions are multi-modal design
+artifacts, because part of their value is static (scribbles on the
+whiteboard), while another part is transient (the conversation at the
+time of the scribbling)~\cite{ju-navigator}. These whiteboard sessions
+are consistent with Ferguson's \textit{talking
+  sketches}~\cite{ferguson-engineering}.
 
-In this paper I use a somewhat loose definition of the term “artifact”
-that deserves some elaboration. I consider any information that is a
-result of a designer’s work process to be a po- tential candidate for
-being a design artifact. Using this definition I can include transient
-infor- mation such as conversations, which account for a significant
-portion of the effort when doing design. Another transient artifact is
-time used thinking about a problem.
-
-This company’s culture values collaborative whiteboard sessions. A
-quick tour through the studio shows that most whiteboard surfaces have
-some sort of scribbling on them. Most of these whiteboard sessions
-were made as two or more people stood nearby in conversation. The
-scrib- bles served to represent objects that are named or described
-verbally. In this way, collaborative whiteboard sessions are
-multi-modal design artifacts, because part of their value is static
-(in the form of the scribbles on the whiteboard), while another part
-is transient (in the form of the con- versation that took place at the
-time of the scribbling). This observation is supported in [Ju 2004].
-
-Four of the five designers interviewed showed me their sketches. These
-sketches could be categorized as diagrammatic (using some formal or
-semi-formal notation, such as UML) or a rendering of some physical
+Four of the five designers I interviewed showed me their paper
+sketches. About half of these drawings were made when the designer was
+alone (Ferguson's \textit{thinking sketch}), and the rest resulted
+from collaborative sessions like the whiteboard events described
+above. Some paper sketches were diagrammatic (using formal or
+semi-formal notation), while others were renderings of some physical
 object like a building or electronic gadget. Interestingly, those same
-designers were less inclined to show me computational models such as
-Illustrator files. I do not yet understand why this is the case.
+designers were less inclined to show computational models like
+Illustrator files because they felt the sketches contained the
+``real'' work.
 
-While designers did not typically voluntarily show me computational
+While designers did not typically voluntarily show computational
 artifacts, they were inclined to show me printed versions of their
 computational models. Nearly all of these printed pages had
 handwriting and sketches on them, sometimes by more than one
-person. People re- ported that they use a process of iterating between
+person. People reported that they use a process of iterating between
 virtual and paper versions of their designs. The designers would edit
 a computational model with a high functionality application such as
 Photoshop, and then print a paper copy for personal or group use. They
@@ -76,21 +75,15 @@ would then draw or write directly on that page as they explored
 variations or made refinements. If a paper-based editing session was
 useful, the designers would then manually transfer these changes back
 into their application. The process of printing, editing, and manually
-merging changes was seen a number of times.
-
-Each designer is issued blue sketch books with numbered pages. In
-theory they are supposed to use these to record their design ideas
-along with the current date. In practice many of the de- signers find
-this annoying to the point that they do not use the blue books at
-all. The books have lined green paper that may provide distractions or
-impose unnecessary structure to freeform sketching. Instead some
-designers use big, blank white sheets of paper that are grouped
-together with manilla folders by project.
+merging changes was seen repeatedly. This pattern recurs in the
+following section on laser cutter users.
 
 \section{Interviews}
 \label{sec:formative-interviews}
 
-We interviewed six designers from different backgrounds, including
+\input{fig-translate-sketch.tex}
+
+I interviewed six designers from different backgrounds, including
 mechanical engineering, graphic design, and architecture to learn
 about their work practices and to understand how they use their
 tools. All were experienced with designing objects to be made with a
@@ -111,36 +104,12 @@ not move forward without making freehand drawings. Only after the idea
 is well-formed were they ready to translate their hand-made sketch
 into a computer model (Figure~\ref{fig:translate}).
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.7\linewidth]{img/translate-sketch-to-computer.jpg}
-  \caption{A common step of designing for laser cutters: translating a
-    hand-made sketch to a computer modeling tool. The sketch includes
-    a perspective drawing of the desired result, and 2D diagrams of
-    individual parts with key dimensions indicated.}
-  \label{fig:translate}
-\end{figure}
-
 After the interview, we asked participants to copy the sketch shown in
 Figure~\ref{fig:interview-sketch} using a software tool of their
 choice. We wanted to learn what problems people encountered when
 executing the common task of translating a sketch to a computer model.
 
-\begin{figure}[h]
-\centering \subfloat[We asked users to replicate this sketched part.]
-           {
-  \label{fig:interview-sketch-1} 
-  \includegraphics[width=0.7\linewidth]{img/laser-me-1.jpg}
-}
-
-\subfloat[Drawing of the part in context.] {
-    \label{fig:interview-sketch-2}
-    \includegraphics[width=0.7\linewidth]{img/laser-me-2.jpg}
-}
-\caption{We asked participants to model the part at the top using
-  a software of their choice.}
-\label{fig:interview-sketch}
-\end{figure}
+\input{fig-interview-sketch.tex}
 
 Five participants chose to implement the sketch with Illustrator; one
 chose Rhino. All users were comfortable with their tools, but none
@@ -192,7 +161,6 @@ main groups:
 \section{Artifact Analysis}
 \label{sec:formative-artifact}
 
-
 The formative study of work practices from the previous section helps
 us understand \textit{how} people create laser cut items. To learn
 more about the characteristics of those objects (\textit{what} people
@@ -211,13 +179,7 @@ Thingiverse we searched for objects with the ``laser cutter'' tag and
 selected ten. Figure~\ref{fig:ponoko} summarizes the feature analysis
 of these 55 projects.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{img/ponoko-graph.pdf}
-  \caption{Frequency of features of 55 laser-cut designs found on
-    Ponoko and Thingiverse.}
-  \label{fig:ponoko}
-\end{figure}
+\input{fig-feature-analysis.tex}
 
 We used ten properties to characterize each project, based on our own
 experience designing objects for laser cutters, as well as
@@ -238,23 +200,11 @@ observations from the formative study. They are:
   images) rather than cutting all the way through material.
 \end{itemize}
 
-This list of properties helped us decide what SIMI should (and should
-not) do. Our implementation is discussed next.
+This list of properties helped inform what SIMI should (and should
+not) do. 
 
-\begin{figure}[h]
-\centering 
-\subfloat[Notch joints.] {
-  \label{fig:joint-notch} 
-  \includegraphics[width=0.4\linewidth]{img/joint-notch.png}
-}
-\subfloat[Finger (box) joints.] {
-    \label{fig:joint-finger}
-    \includegraphics[width=0.4\linewidth]{img/joint-finger.png}
-}
-\caption{Two common methods to join parts. Notch joints are used when
-  parts intersect along part midsections; finger joints (box joints)
-  join parts along edges.}
-\label{fig:joint}
-\end{figure}
+\input{fig-notch-types.tex}
+
+
 
 
