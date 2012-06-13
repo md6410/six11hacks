@@ -83,15 +83,24 @@ example, is ineffective if it is 0.1 mm too large or small.
 
 \input{fig-picture-frame.tex}
 
-To introduce Sketch It, Make It we show how we use it to make the
-picture stand shown in Figure~\ref{fig:simi-example}. We begin with
-the idea of a stand with two horizontal rails as a base and a
-five-part vertical support structure, joined with notches.
+To introduce Sketch It, Make It I will explain how it could be used to
+make the picture stand shown in Figure~\ref{fig:simi-example}. This
+narrative helps explain the overall user experience while exposing
+technical aspects (which are discussed in much greater detail in the
+following chapter).
 
-We first draw the rough profile of the vertical support piece using
-curved and straight segments. SIMI captures our drawing, straightening
-lines, smoothing curves, and connecting curved and straight segments.
- 
+We begin with the idea of a stand with two horizontal rails as a base
+and a five-part vertical support structure, joined with notches. Using
+SIMI on a tablet device like the Wacom Cintiq shown in
+Figure~\ref{fig:simi-intro}, we first draw the rough profile of the
+vertical support piece using curved and straight segments. After a
+brief period of inactivity, SIMI captures our drawing, straightening
+lines, smoothing curves, and connecting curved and straight
+segments. We may optionally press a button with our non-dominant hand
+to ask SIMI to do this immediately. If we make a mistake (or if we
+change our mind), we can recover quickly by scratching out the
+unwanted ink, or use an Undo gesture.
+
 After sketching the rough outlines of our two parts, we begin to
 refine the design and make it precise.  We square the corners by
 drawing right-angle braces (Figure~\ref{fig:motivating}a).  Now as we
@@ -116,78 +125,93 @@ SIMI's cut file area to prepare a PDF file for cutting, and then send
 it to the laser cutter.  Finally we assemble the cut parts to make the
 picture stand in Figure~\ref{fig:simi-example}.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics{img/motivating-example.pdf}
-  \caption{Key steps taken when making the picture stand.}
-  \label{fig:motivating}
-\end{figure}
-
-
-%% The second example is cribbed from the video. It is of the user
-%% designing a picture frame holder. It involves:
-
-%% \begin{itemize}
-%% \item Using a tablet, most likely a `blind' tablet with separate
-%%   display. Introduces hand/eye coordination issues.
-%% \item Having the idea in the first place
-%% \item Drawing roughly
-%% \item Mistakes: errors (the user or the system makes errors) vs. ``on
-%%   second thought'' mistakes
-%% \item Adding details
-%% \item Imagining 3D construction. Admit the tool should support this
-%%   directly
-%% \item Fabrication: making the cutfile, laser cutting, and assembling
-%% \item (maybe) another iteration
-%% \end{itemize}
+\input{fig-motivating-example.tex}
 
 \section{Technical Challenges Met By SIMI}
 
-%% The above section describes the user's needs, and how the user
-%% interacts with the system. This section introduces broadly how the
-%% system is built to support those needs and interaction. Briefly, the
-%% technical aspects are:
+The above section describes the user's needs, and how the user
+interacts with the system. This section summarizes several categories
+of technical challenges the system has to meet in order to support
+those user needs. These categories are printed in bold text. Most of
+the following topics are described in great detail in the next
+chapter.
 
-%% \begin{itemize}
-%% \item Ink parsing (finding corners and segments, removing hooks)
-%% \item Recognition (dynamic or post-hoc)
-%%   \begin{itemize}
-%%   \item Glyphs (akin to character recognition, like right angles)
-%%   \item Gesture (recognizes grammatical patterns like erase or
-%%     encircle)
-%%   \end{itemize}
-%% \item Disambiguation of recognized things
-%% \item Data model and constraints
-%%   \begin{itemize}
-%%   \item User sketches things, system reates/maintains constraints
-%%   \item Uses iterative, numerical relaxation method
-%%   \item Only has X basic constraint types underlying everything
-%%   \item High-level ``user constraints'' composed of low-level constraints
-%%   \end{itemize}
-%% \item Cutfile generation
-%%   \begin{itemize}
-%%   \item Basic typewriter algorithm. nothing fancy
-%%   \item Scales things appropriately
-%%   \item PDF output for Illustrator, SVG output for Ponoko (explain why
-%%     format matters)
-%%   \end{itemize}
-%% \end{itemize}
+A fundamental task is \textbf{ink parsing}. While the pen is down, the
+system looks for erase gestures. When the user lifts the pen,
+non-erase gestures are parsed for corners, and sections of ink are
+identified as primitive sub-shapes like lines, curves, and so forth.
 
-%% From the user's perspective, SIMI gives a new kind of experience
-%% because it:
+SIMI must be able to dependably \textbf{recognize user input}.
+Because input is often made quickly and inaccurately, occasional
+recognition errors can not be avoided. There are several kinds of
+recognized elements. Input might be linework that specifies the
+model's geometry. Or, input might be identified as a gesture that
+edits the model by removing ink or adding constraints. Last, input
+might be as part of a multi-stroke phrase that controls the modeling
+environment (e.g. undo/redo, zooming, or panning).
 
-%% \begin{itemize}
-%% \item Is ``modeless''. Should describe the mode problem, why
-%%   overcoming it is such an important thing, and why it is especially
-%%   pertinent to sketch-based interaction. (because if we have modes, we
-%%   are essentially on slippery-slope to MouseCAD)
-%% \item Is incremental, rather than one-big-batch style recognition that
-%%   is so popular
-%% \item Uses ``more natural'' input. The pen is easier to manipulate
-%%   than the mouse. Naturalness is a common term but is ultimately
-%%   meaningless because all design tools are artificial. Could say it
-%%   has less cognitive and ergonomic demands than modal, mouse-based
-%%   tools
-%% \item From a domain perspective it is not over featured, so it is
-%%   clear how to proceed.
-%% \end{itemize}
+There is one recognizer per recognizable pattern. Each recognizer has
+access to the model state, but they do not communicate directly with
+each other. Inevitably more than one recognizer will signal a positive
+result, so it is necessary for SIMI to \textbf{disambiguate}
+contending recognition results. For example, the user may draw two
+short strokes that are recognized as both a right angle symbol and a
+same-length gesture. To resolve this ambiguity, SIMI uses a series of
+tests that involve context (e.g. if the input is correctly positioned
+in a corner or not) as well as static precedence rules that defer to
+the interpretation that causes the least trouble in the event it is
+wrong.
+
+\missingfigure{Need a figure of the recognizer architecture. Several
+  kinds of recognizers (linework, dynamic, pen-up, and delayed), and
+  two different opportunities to disambiguate contending input}
+
+The user's work is stored as a \textbf{data model} consisting of
+points, segments (e.g. line, arc), and high-level constraints
+(e.g. right angle, same length). SIMI lets the user edit the model to
+create, merge, or erase these elements. The \textbf{constraint engine}
+is closely associated with the data model. This lets the designer
+indicate geometric rules that the system will try to maintains, even
+as the user edits the model. SIMI's constraint engine is an iterative,
+numerical solver using a relaxation method in the tradition of
+Sketchpad~\cite{sutherland-sketchpad}.
+
+When it is time for the user's work to be given to a laser cutter, the
+designer asks SIMI to \textbf{generate a cutfile}. This is a 2D vector
+graphics file specifying geometry of cutouts. The current
+implementation is a rather simplistic ``typewriter'' algorithm---it
+uses the bounding box of each cutout, placing one next to the other
+from left to right, and moving to the next ``line'' when placing a
+piece would extend beyond the material bounds.
+
+\section{Coherent Sketch Based Interaction}
+
+TODO...
+
+From the user's perspective, SIMI gives a new kind of experience
+because it:
+
+\begin{itemize}
+\item Is ``modeless''. Should describe the mode problem, why
+  overcoming it is such an important thing, and why it is especially
+  pertinent to sketch-based interaction. (because if we have modes, we
+  are essentially on slippery-slope to MouseCAD)
+\item Is incremental, rather than one-big-batch style recognition that
+  is so popular
+\item Uses ``more natural'' input. The pen is easier to manipulate
+  than the mouse. Naturalness is a common term but is ultimately
+  meaningless because all design tools are artificial. Could say it
+  has less cognitive and ergonomic demands than modal, mouse-based
+  tools
+\item From a domain perspective it is not over featured, so it is
+  clear how to proceed.
+\end{itemize}
+
+\section{Implementation Architecture}
+
+TODO...
+
+Here try to give a concise description of the system architecture. The
+next chapter is about individual interaction techniques, but it
+doesn't talk about how they are coordinated. So I should do that here,
+and hand-wave about how individual techniques work.
