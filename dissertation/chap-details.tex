@@ -74,6 +74,19 @@ Four kinds: automatic, endpoint, continuation, and t-junction.
 
 \subsection{Erase}
 
+Wrote this somewhere else: For example, the Erase gesture went through
+a number of design iterations. Each version was only slightly better
+than the last, and users were only able to successfully execute the
+scribble gesture about half the time. When it failed, the scribble
+would be interpreted as linework, which would then require users to
+erase that. I then completely changed the erase gesture recognizer so
+it would operate as the pen was down. When it found a scribble, a
+colored 'X' appeared over the scribble to indicate that the user's
+erasure will succeed. This lets users scribble until an X appears,
+giving them confidence the system has understood. This reduced the
+number of recognition errors substantially.
+
+
 \subsection{Same length}
 
 \subsection{Specific length}

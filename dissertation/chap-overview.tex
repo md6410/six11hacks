@@ -186,28 +186,93 @@ piece would extend beyond the material bounds.
 
 \section{Coherent Sketch Based Interaction}
 
-TODO...
+Sketch It, Make It presents a fluid interface for making laser cut
+parts. The smooth interaction is made possible by combining many
+sketch-based techniques into a set of interaction methods that work
+very well together. The fluidity is \textit{not} the result of any one
+technique, nor is it simply the result of throwing several existing
+methods together.
 
-From the user's perspective, SIMI gives a new kind of experience
-because it:
+The interaction techniques offered by SIMI were carefully tuned to
+work with one another. Each gesture is as distinct from the others as
+possible. This does not completely avoid recognition error but it does
+mitigate it because the gestures are not often confused with one
+another.
 
-\begin{itemize}
-\item Is ``modeless''. Should describe the mode problem, why
-  overcoming it is such an important thing, and why it is especially
-  pertinent to sketch-based interaction. (because if we have modes, we
-  are essentially on slippery-slope to MouseCAD)
-\item Is incremental, rather than one-big-batch style recognition that
-  is so popular
-\item Uses ``more natural'' input. The pen is easier to manipulate
-  than the mouse. Naturalness is a common term but is ultimately
-  meaningless because all design tools are artificial. Could say it
-  has less cognitive and ergonomic demands than modal, mouse-based
-  tools
-\item From a domain perspective it is not over featured, so it is
-  clear how to proceed.
-\end{itemize}
+SIMI gives visual feedback when appropriate which helps to resolve
+possible conflicts. For example, a selected point will move if a
+gesture begins nearby. Without visual feedback that the pen is near
+enough, it was easy to inadvertently draw linework when the intention
+was to move the point.
+
+The interaction techniques have conservative failure states. The
+automatic latching algorithm is a good example. The auto-latcher has
+parameters about the distance between points and relative angle of
+segments. These parameters were intentionally set to err on the side
+of not latching segments together, because the consequences of
+latching inappropriately are worse than not latching when the user
+wanted. To recover from a missed latch opportunity, SIMI provides a
+very simple latching gesture.
+
+SIMI's interaction differs from standard design tools and other sketch
+based modeling prototypes in several ways.
+
+\subsection{``The mode problem''}
+
+A traditional design tool like Adobe Illustrator is built around the
+concept of input modes such as \textit{select}, \textit{draw line}, or
+\textit{fill color}. Users activate modes by selecting a menu option,
+clicking an onscreen widget, or pressing a keyboard button. The
+program interprets user input in terms of the active tool. Sometimes
+users are unaware of which mode the program is in, or are unsure how
+to change to the desired mode. Managing modes often introduces
+cognitive load by forcing users to think about the tool rather than
+their work. This is called ``the mode
+problem''~\cite{tesler-mode-problem}.
+
+SIMI's interaction lacks persistent mode. The user can always draw on
+any part of the drawing canvas, and the input's meaning is determined
+via recognition: an input stroke might be an erasure scribble or a
+right angle symbol or a straight line that completes a shape. There is
+no `erase mode', no `right angle mode', and no 'draw line mode'. Some
+operations, such as flow selection, include transient mode changes
+where the meaning of user input is interpreted differently based on
+recent interaction. For this reason it is not strictly correct to
+label SIMI's interaction as \textit{modeless}.
+
+\subsection{Conversational Interface}
+
+One property that characterizes sketch based systems is \textit{when}
+recognition is performed (see
+Section~\ref{sec:recognition-when}). SIMI's recognizers operate at
+three different times. First, dynamic recognizers (like Erase) operate
+while the pen is down. A second class of recognizers are invoked when
+the pen is lifted. If there are positive results from these ``pen up''
+recognizers, action is taken immediately. An example of this kind is
+latching. The third kind of recognizer is triggered after a period of
+inactivity (currently 1.5 seconds). The user may optionally press a
+button with their non-dominant hand to invoke these recognizers on
+demand. These recognizers include those that establish constraints
+like right angles, or create linework like circles and splines.
+
+Many sketch based design tools operate in batch mode, where a lot of
+raw ink is analyzed at the same time. The rationalle for this approach
+is that recognizers have more data (unrecognized ink) to work with and
+can use statistical methods to generate the most likely
+interpretations for the entire sketch.
+
+SIMI takes a different approach involving short sequences of input
+followed by recognition that fix the meaning of input by graphically
+representing results. Subsequent iterations use these identified
+elements as contextual clues that improve recognition
+performance. Because the user and system take turns on such a regular
+basis, I call this a \textit{conversational interface}. The user and
+the system constantly check each other's states to ensure that meaning
+is shared. 
 
 \section{Implementation Architecture}
+
+\input{fig-recog-arch.tex}
 
 TODO...
 
