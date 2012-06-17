@@ -9,37 +9,15 @@ This will be a dry chapter but it should be the most useful to anybody
 else who wants to work on this. Should be enough that a smart grad
 student can implement things based on just what is here.
 
-\section{Ink Parsing}
-
-There are three stages of ink parsing: (1) processing while the pen is
-down, (2) immediately when the pen is lifted, and (3) later when the
-magic button is pressed or timeout is reached.
-
-In stage 1, only two things are going one: the system records and
-draws pen activity, and ``pen down'' recognizers are
-invoked. Currently the only ``pen down'' recognizer is for erasure. It
-has to be very efficient to avoid introducing lag.
-
-The other two stages are more complex. On pen up:
-
-\begin{itemize}
-\item Find corners/segments, and associate that structured ink with raw ink. 
-\item Apply recognizers to raw ink
-\item Disambiguate results of raw ink recognizers
-\item For all recognized items, take the appropriate action
-  (e.g. latch) and remove related raw ink.
-\item For remaining raw ink, add the raw ink to an 'unprocessed' list
-  for later analysis.
-\item If any actions were taken based on recognition, request a
-  snapshot.
-\end{itemize}
+\section{Corner Finder and Segmentation}
+\label{sec:corner-finder}
 
 Stage 3 operates on the 'unprocessed' list made from stage 2. So
 anything that was recognized in stage 2 does not make it this far.
 
 \begin{itemize}
-\item Get structured ink related to unprocessed ink.
 \item Remove hooks
+\item Get structured ink related to unprocessed ink.
 \item Add all new structured ink to the model
 \item Apply post-hoc recognizers to new structured ink
 \item Disambiguate any conflicting results using (a) context in the
@@ -101,21 +79,5 @@ number of recognition errors substantially.
 
 \subsection{Camera Control: Pan and Zoom}
 
-\section{Model and Constraint Solver}
 
-Data structures are simple: we have points and low-level
-constraints. List all the low-level constraints and give an example of
-the anatomy of one, especially how it measures error and how it
-`knows' how to offer advice to correct that error.
-
-Next talk about the higher-level user constraints: a user constraint
-for right angle is implemented with several low-level constraints. 
-
-Now for the iterative, numeric solving algorithm. While explaining how
-it works, can justify the randomness by showing graphs of total error
-when the solver did not use much randomness.
-
-Explain how the solver relates to the rest of the tool: in a separate
-thread, sending out signals when it is done or after taking a step (to
-redraw), and how it is capable of being paused when the user is doing
-something. This makes the system responsive at all times.
+\section{Constraint Solver}

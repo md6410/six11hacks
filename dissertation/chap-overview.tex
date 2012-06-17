@@ -162,9 +162,10 @@ in a corner or not) as well as static precedence rules that defer to
 the interpretation that causes the least trouble in the event it is
 wrong.
 
-\missingfigure{Need a figure of the recognizer architecture. Several
-  kinds of recognizers (linework, dynamic, pen-up, and delayed), and
-  two different opportunities to disambiguate contending input}
+
+\missingfigure{Need a figure of the overall architecture. Include all
+  the parts talked about in this section: ink parsing, recognition,
+  disambiguation, data model, and cutfile generation.}
 
 The user's work is stored as a \textbf{data model} consisting of
 points, segments (e.g. line, arc), and high-level constraints
@@ -244,39 +245,173 @@ label SIMI's interaction as \textit{modeless}.
 
 One property that characterizes sketch based systems is \textit{when}
 recognition is performed (see
-Section~\ref{sec:recognition-when}). SIMI's recognizers operate at
-three different times. First, dynamic recognizers (like Erase) operate
-while the pen is down. A second class of recognizers are invoked when
-the pen is lifted. If there are positive results from these ``pen up''
+Section~\ref{sec:recognition-when}). Many sketch based design tools
+operate in batch mode, where a substantual amount of raw ink is
+analyzed at the same time. The rationalle for this approach is that
+recognizers have more data (unrecognized ink) to work with and can use
+statistical methods to generate the most likely interpretations for
+the entire sketch.
+
+SIMI takes a different approach involving short sequences of input
+followed by recognition that fix the meaning of input by graphically
+representing results. Because the meaning of onscreen elements are
+known, the next round of recognition can use that knowledge to provide
+unambiguous contextual clues. As the user and system take turns on
+such a regular basis, I call this a \textit{conversational
+  interface}. The user and the system constantly check each other's
+states to ensure that meaning is shared.
+
+\section{Recognition Architecture}
+
+SIMI's recognizers operate at three different times. First,
+\textit{Dynamic} recognizers (like Erase) operate while the pen is
+down. A second class of recognizers are invoked when the pen is
+lifted. If there are positive results from these \textit{Pen Up}
 recognizers, action is taken immediately. An example of this kind is
 latching. The third kind of recognizer is triggered after a period of
 inactivity (currently 1.5 seconds). The user may optionally press a
 button with their non-dominant hand to invoke these recognizers on
 demand. These recognizers include those that establish constraints
-like right angles, or create linework like circles and splines.
-
-Many sketch based design tools operate in batch mode, where a lot of
-raw ink is analyzed at the same time. The rationalle for this approach
-is that recognizers have more data (unrecognized ink) to work with and
-can use statistical methods to generate the most likely
-interpretations for the entire sketch.
-
-SIMI takes a different approach involving short sequences of input
-followed by recognition that fix the meaning of input by graphically
-representing results. Subsequent iterations use these identified
-elements as contextual clues that improve recognition
-performance. Because the user and system take turns on such a regular
-basis, I call this a \textit{conversational interface}. The user and
-the system constantly check each other's states to ensure that meaning
-is shared. 
-
-\section{Implementation Architecture}
+like right angles, or create linework like circles and splines. This
+last type is called \textit{Delayed} because it does not happen
+immediately after the pen lifts.
 
 \input{fig-recog-arch.tex}
 
-TODO...
+Each recognizer class addresses a different need. Dynamic recognizers
+allow the user to make gestures that must be recognized as they are
+made, when timing is very important. Pen Up recognizers allow the user
+to make distinct gestures that are acted on immediately, eliminating
+lag and making the interface seem much more responsive. The Pen Up
+recognizers are reserved for common actions that are unlikely to
+interrupt the user when their associated actions are taken. By their
+nature, both Dynamic and Pen Up recognizers must work on single stroke
+gestures. Last, the Delayed recognizers may work on one ore more
+strokes, and typically have related actions that might distract the
+user if they were invoked right away. The overall recognition
+architecture is illustrated in Figure~\ref{fig:recog-arch}.
 
-Here try to give a concise description of the system architecture. The
-next chapter is about individual interaction techniques, but it
-doesn't talk about how they are coordinated. So I should do that here,
-and hand-wave about how individual techniques work.
+\subsection{Dynamic Recognizers}
+
+Dynamic recognizers use raw pen data that is generated as the user
+draws. They are invoked after each new pen movement event, which
+typically happen at a rate of once per 15--20 milliseconds. They must
+execute very efficiently in order to avoid causing the interface to
+seem unresponsive. If the user interface is redrawn at 60 Hz, each
+frame must be drawn in less than 16 ms. Therefore it is very important
+that all dynamic recognizers execute in much less than this time
+period in order to give the graphics subsystem time to draw the
+screen.
+
+When a dynamic recognizer finds a positive result, all other Dynamic
+recognizers are temporarily turned off, and the associated ink stroke
+will not be passed on to the Pen Up recognizers. For example, if the
+scribble recognizer determines that the user is erasing, it displays a
+visual indication that it recognizers the erasure, and when the user
+lifts the pen, it will attempt to erase something. Further, the
+Dynamic recognizer might change how the current ink stroke is drawn.
+
+\subsection{Pen Up Recognizers}
+
+If no Dynamic reconizer claimed an ink stroke, it is processed by the
+Pen Up recognizers when the user lifts the stylus. The first step is
+to parse the raw ink to identify corners and segments. The
+implementation details of SIMI's corner finder are given in
+Section~\ref{sec:corner-finder}. The Ink Parser supplies a set of
+segments, which may be any of the following types: Dots, Lines,
+Elliptical Arcs, Splines, Circles, Ellipses, or Blobs (a spline that
+starts and ends at a common point).
+
+Pen Up recognizers operate on this set of new segments. Each
+recognizer operates independently of the others. They test if segments
+comprising the most recent pen stroke match a pattern. It is possible
+for several recognizers to positively identify their gesture, but only
+one such gesture is valid. If any positive results are found, a
+subsequent process resolves conflicts.
+
+The conflicts are mediated in two ways. First, sometimes a gesture
+makes more sense than others in context. A context checker will report
+how well a gesture matches the current drawing state with a Yes, No,
+or Maybe. If only one contending gesture receives a `Yes' vote, the
+other interpretations are discarded. Second, if the context checker
+can not resolve the problem, then a static rule list is used. This
+list ranks each recognizer type, and the interpretation that is
+highest on the list is accepted (the rest are rejected).  
+
+The order of this rule list important. Recognizers that edit the model
+are lower on the list than recognizers whose effects can be
+ignored. For example, a Latch gesture edits the model, while the
+gesture to display the Pan/Zoom widget has only a temporary
+response. If the wrong interpretation is made, SIMI will err on the
+side of the inconsequential or easily recoverable.
+
+If a positive result is found, it is activated without delay. This
+means that the action (defined by the gesture) is applied (which is
+defined by the context of the gesture). The related action for a Latch
+gesture will combine points and possibly destroy and create segments,
+which edits the model and causes the graphical representation to
+change.
+
+Last, any ink associated with a positive result is removed from the
+model and will not be available to the delayed recognizers.
+
+\subsection{Delayed Recognizers}
+
+Delayed recognizers follow a similar process to Pen Up
+recognizers. The delayed recognizers are automatically invoked after
+the user has not interacted with the system for a short period
+(currently 1.5 seconds). The user may optionally speed invocation by
+pressing a button with their non-dominant hand.
+
+By this point, any ink that was positively recognized by a Dynamic or
+Pen Up recognizer is not available. Every time the pen is lifted, the
+ink is processed in the Pen Up recognition step. Any segments that are
+not recognized by the Pen Up step are placed in a set of segments for
+the Delayed recognizers. This means Delayed recognizers may operate on
+segments made in one, two, or (potentially) many more strokes.
+
+Like in the previous recognition step, each Delayed recognizer
+operates independently of the others and may produce a positive
+result. \textit{Unlike} the previous step, it is possible that several
+results are valid, as long as they are composed of different
+strokes. This makes it possible, for example, to issue two Right Angle
+gestures and a Same Length command in the same batch, all of which can
+be recognized. If two potential results involve some of the same
+segments, SIMI eploys the same resolution process from the Pen Up
+recognizer step.
+
+When conflicts are resolved, there may be zero, one, or more positive
+results. The positive results are activated in no particular
+order. This could theoretically cause problems (for example if one
+action renders another action nonsensical), but this situation has not
+been relevant in the current system.
+
+Any segments that are not associated with positive recognizer results
+are interpreted as geometry. This is how the user creates linework
+that define laser cut parts. This geometry is then included in the
+model with definite identities, which are used in later recognition
+processes.
+
+\section{Model: Geometry, Constraints, Cutouts}
+
+\missingfigure{Figure showing the relationship between points,
+  segments, low-level constraints, and user constraints.}
+
+%% Data structures are simple: we have points and low-level
+%% constraints. List all the low-level constraints and give an example of
+%% the anatomy of one, especially how it measures error and how it
+%% `knows' how to offer advice to correct that error.
+
+%% Next talk about the higher-level user constraints: a user constraint
+%% for right angle is implemented with several low-level constraints. 
+
+%% Now for the iterative, numeric solving algorithm. While explaining how
+%% it works, can justify the randomness by showing graphs of total error
+%% when the solver did not use much randomness.
+
+%% Explain how the solver relates to the rest of the tool: in a separate
+%% thread, sending out signals when it is done or after taking a step (to
+%% redraw), and how it is capable of being paused when the user is doing
+%% something. This makes the system responsive at all times.
+
+
