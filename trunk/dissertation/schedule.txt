@@ -5,8 +5,8 @@ Chapter		# days (predicted)  # days (actual)       days
 1 Introduction		3		2		June 6  -- June 7
 2 Related Work		4		4		June 7  -- June 11
 3 Formative		2		1		June 11 -- June 12
-4 Overview		5				June 12 -- (June 18 probably)
-5 Details		13
+4 Overview		5		9		June 12 -- June 20
+5 Details		13				June 20 --
 6 Summative		2
 7 Conclusion		4
 
