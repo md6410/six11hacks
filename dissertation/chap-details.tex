@@ -1,19 +1,22 @@
 \chapter{Sketch It, Make It: Details}
 
-This is the details chapter. It describes the recognition strategy
-involving ink parsing, and how it recognizes various things like
-glyphs (rotation invariant pictograms) or gestures (grammar-based like
-erase).
+The previous chapter gave an overview of SIMI's architecture. This
+included an introduction of SIMI's recognition process.
+(Section~\ref{sec:recognition-architecture}). This chapter gives
+details on how each recognizer works. 
 
-This will be a dry chapter but it should be the most useful to anybody
-else who wants to work on this. Should be enough that a smart grad
-student can implement things based on just what is here.
+First, SIMI's corner finding and segmentation strategy is
+described. This process is necessary to most recognition, and is what
+produces geometric output like lines and arcs. Next, the three types
+of recognizers are described: including Dynamic, Pen Up, and Delayed
+recognizers. All sketch based interaction techniques are detailed in
+these sections.
 
 \section{Corner Finder and Segmentation}
 \label{sec:corner-finder}
 
-Stage 3 operates on the 'unprocessed' list made from stage 2. So
-anything that was recognized in stage 2 does not make it this far.
+
+
 
 \begin{itemize}
 \item Remove hooks
@@ -32,9 +35,20 @@ anything that was recognized in stage 2 does not make it this far.
 \item Request state snapshot
 \end{itemize}
 
-\section{Sketch Interaction Techniques}
+\section{Dynamic Recognizers}
 
 \subsection{Erase}
+
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
 
 Wrote this somewhere else: For example, the Erase gesture went through
 a number of design iterations. Each version was only slightly better
@@ -48,23 +62,125 @@ erasure will succeed. This lets users scribble until an X appears,
 giving them confidence the system has understood. This reduced the
 number of recognition errors substantially.
 
+\subsection{Undo and Redo}
+
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
+
 \subsection{Flow selection}
 
-\subsection{Undo and Redo}
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
+
+\section{Pen Up Recognizers}
 
 \subsection{Latching}
 
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
+
 Four kinds: automatic, endpoint, continuation, and t-junction.
 
+\subsection{Pan and Zoom}
+
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
+
+\subsection{Select point}
+
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
+
+\section{Delayed Recognizers}
 
 \subsection{Same length}
 
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
+
 \subsection{Specific length}
+
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
 
 \subsection{Right angle}
 
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
+
 \subsection{Same angle}
 
-\subsection{Camera Control: Pan and Zoom}
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
 
-\section{Constraint Solver}
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
