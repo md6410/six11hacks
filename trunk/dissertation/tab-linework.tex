@@ -1,0 +1,62 @@
+% in the ``tabular'' environment, indicate columns separated by pipe
+% characters. options are:
+%   l           left aligned column
+%   c           center aligned column
+%   r           right aligned column
+%   p{width}    paragraph column, text at the top
+%   m{width}    ''                ''   in the middle
+%   b{width}    ''                ''   at the bottom
+
+\begin{table}%[h] % [h]ere [t]op [b]ottom [p]age
+\centering
+\begin{tabular}{l | p{12cm}}
+\textbf{Segment Type} & \textbf{Remark} \\
+\hline
+\\
+
+Line &
+
+Straight line connecting two points.
+
+\\
+
+Elliptical Arc &
+
+Arc that passes through two points on an ellipse. The ellipse is
+defined with a centroid, a major and minor radius, and an angle of
+rotation. The endpoints are defined with angular offsets.
+
+\\
+
+Ellipse &
+
+An ellipse defined like the elliptical arc, except it is a closed
+shape.  
+
+\\ 
+
+Circle &
+
+A circle is a closed shape defined by a center point and radius. SIMI
+does not include a corresponding circular arc.
+
+\\ 
+
+Spline &
+
+A cardinal spline composed of start/end points, and a list of
+parameters that determine control point locations relative to the
+start and end points.
+
+\\ 
+
+Blob &
+
+A Blob is a closed spline.
+
+\\ \hline
+
+\end{tabular}
+\caption[Segment types]{Segment types in SIMI.}
+\label{tab:segment-types}
+\end{table}

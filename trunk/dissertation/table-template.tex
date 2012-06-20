@@ -1,0 +1,26 @@
+% in the ``tabular'' environment, indicate columns separated by pipe
+% characters. options are:
+%   l           left aligned column
+%   c           center aligned column
+%   r           right aligned column
+%   p{width}    paragraph column, text at the top
+%   m{width}    ''                ''   in the middle
+%   b{width}    ''                ''   at the bottom
+
+\begin{table}%[h] % [h]ere [t]op [b]ottom [p]age
+\centering
+\begin{tabular}{p{5cm}| p{2cm} | p{8.5cm}}
+\textbf{Topic} & \textbf{Number} & \textbf{Remark} \\
+\hline \hline % two horizontal lines to distinguish header
+Text &
+17 & 
+More text
+\\ \hline % ends a row, shows a horizontal line
+Hello & 
+292 &
+Foobar
+\\ \hline
+\end{tabular}
+\caption{$caption$}
+\label{tab:$label$}
+\end{table}
