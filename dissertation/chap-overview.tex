@@ -394,7 +394,6 @@ processes.
 
 \section{Model: Geometry, Constraints, Cutouts}
 
-
 The data model underlying SIMI is fairly simple. It contains
 \textit{named points, segments, constraints, and cutouts}. All these
 data are the result of sketch recognition---no raw, unprocessed ink is
@@ -422,6 +421,18 @@ points. Table~\ref{tab:constraints} lists all SIMI's constraint types.
 
 \input{tab-constraints.tex} % table 
 
+The final output of this design tool is a \textit{cutfile} that
+contains \textit{Cutouts}. A cutout is a 2D shape defining the
+boundary of a part to laser cut. SIMI identifies cutouts automatically
+by analyzing the model, searching for closed paths. Cutouts are
+graphically shaded. Users may place a cutout in the cutfile region on
+the screen to add one or more copies to cutfile.
+
+\subsection{Constraint Solving}
+
+Many user actions trigger the constraint solver. This section
+describes how the SIMI's solver works.
+
 Figure~\ref{fig:solving} illustrates the relationship between points,
 segments, and constraints. In the first pane, the system has
 recognized the user's input as two lines that meet at a common
@@ -446,30 +457,41 @@ differently, so it is not appropriate to directly compare error values
 from two kinds of constraints. For example, the ``Same Length''
 constraint calculates the mean length of all its segments, and reports
 error as the sum of absolute deviation from that mean. A ``Right
-Angle'' constraint reports error as the absolute difference in
+Angle'' constraint reports error as the absolute difference between
 expected and actual angles. While these numbers are clearly not
-directly comparable, they both have the property of becoming very
-small when the constraint is reasonably satisfied.
+directly comparable (radians vs linear distance), they both have the
+property of becoming very small when the constraint is reasonably
+satisfied.
 
 \input{fig-constraint-solving.tex}
 
 If the total error from all constraints is greater than some
 threshold, the solver will proceed, beginning with
-Figure~\ref{fig:solving-angle-1}. Each constraint calculates a
-\textit{change vector} for each related point. Each constraint type
-does this differently. The Right Angle constraint, for example,
-operates on pairs of points---in this case, L1 (points P1 and P2) and
-L2 (P2 and P3). It will rotate each each line about its
-midpoint. Because P2 is involved in both L1 and L2, it will be rotated
-\textit{twice}, as shown in
-panel~\textit{\subref{fig:solving-angle-2}}. Change vectors are
-accumulated in named points. By
-panel~\textit{\subref{fig:solving-accum-1}}, all (two) constraints
-have produced change vectors. P2 has a total of four---two from the
-right angle constraint, and two from the same length constraint. The
-next step is to add each point's change vectors into a \textit{total
-  change vector}, which describes the direction it could move
-(panel~\textit{\subref{fig:solving-accum-2}}).
+Figure~\ref{fig:solving-angle-1}. Each constraint calculates
+\textit{change vectors} for each related point. A change vector
+describes both a direction and the desired distance to move in that
+direction. 
+
+Each constraint computes change vectors differently. For example, the
+Right Angle constraint is composed of two \textit{low-level
+  constraints} that work together to achieve the desired effect. For
+Right Angles, they are Orientation constraints that rotate a line
+(e.g. L1) about its midpoint. The high-level constraint coordinates
+the low-level constraints on each iteration by supplying a rotation
+parameter based on their current and desired angles.
+
+In this case, the low-level constraints operate on L1 (points P1 and
+P2) and L2 (P2 and P3). Because P2 is involved in both L1 and L2, it
+will be rotated \textit{twice}, as shown in
+panel~\textit{\subref{fig:solving-angle-2}}. Named points accumulate
+related change vectors. The accumulation process continues until
+panel~\textit{\subref{fig:solving-accum-1}}, when all constraints have
+computed change vectors. P2 has a total of four---two from the Right
+Angle constraint, and two from the Same Length constraint.
+
+The next step is to add each point's change vectors into a
+\textit{total change vector}, which describes the direction it could
+move (panel~\textit{\subref{fig:solving-accum-2}}).
 
 The last step is to translate each point along its total change vector
 (panel~\textit{\subref{fig:solving-total-change}}). It is likely (and
@@ -478,21 +500,25 @@ points oscillate between two or more states. To avoid this, SIMI moves
 each point a random distance by multiplying its total change vector by
 random number between zero and one.
 
-%% Data structures are simple: we have points and low-level
-%% constraints. List all the low-level constraints and give an example of
-%% the anatomy of one, especially how it measures error and how it
-%% `knows' how to offer advice to correct that error.
+\input{fig-jessica-constraint-error.tex}
 
-%% Next talk about the higher-level user constraints: a user constraint
-%% for right angle is implemented with several low-level constraints. 
+Figure~\ref{fig:jessica} illustrates the need for randomness in SIMI's
+constraint engine. The user has drawn a cutout that contains 20
+vertices, 20 line segments, and several high-level constraints
+comprising 45 low-level constraints. When the user moves a corner, the
+constraint solver is invoked in order to satisfy the constraints. The
+upper right graph shows the solver coming close to a solution fairly
+quickly, but getting `stuck' for several thousand iterations, taking
+about five seconds to settle down. During this time, the onscreen
+representation jitters. In this case, \textit{weak randomness} is
+used, and it is applied only to the total change vectors. The effect
+of the randomness increases over time. However, this approach was not
+satisfactory because it took too long and caused visual jitter.
 
-%% Now for the iterative, numeric solving algorithm. While explaining how
-%% it works, can justify the randomness by showing graphs of total error
-%% when the solver did not use much randomness.
-
-%% Explain how the solver relates to the rest of the tool: in a separate
-%% thread, sending out signals when it is done or after taking a step (to
-%% redraw), and how it is capable of being paused when the user is doing
-%% something. This makes the system responsive at all times.
-
+I handled this problem by modifying the constraint solver to apply
+randomness to each individual change vector. For vertices with more
+than one change vector, this means the total change vector's direction
+is subject to randomness, as well as its magnitude. The results are
+satisfactory, as the system of constraints is satisfied in about 1/8
+of the number of iterations compared with the weak random case.
 
