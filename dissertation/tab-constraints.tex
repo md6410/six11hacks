@@ -1,0 +1,51 @@
+\begin{table}
+\centering
+\begin{tabular}{l | p{12cm}}
+\textbf{Constraint Type} &\textbf{Remark} \\
+\hline
+\\
+
+Same Length &
+
+Constraints two or more segments to be the same length. On each step,
+it calculates the mean segment length and expands or contracts
+segments to conform to the mean.
+
+\\
+
+Specific Length &
+
+Like the Same Length constraint, this can refer to two or more
+segments. It uses a specific numerical value for the expected segment
+length.
+
+\\
+
+Right Angle &
+
+Constraint two line segments to form a 90 degree angle. As there are
+two possible orientations (e.g., $\bot$ vs. $\top$), it chooses the
+nearest solution when calculating error and change vectors. It rotates
+each point about its line segment midpoint.
+
+\\
+
+Same Angle &
+
+Like Right angle, this constraint rotates points about their line
+segment midpoints. It operates on two or more angles, polling its
+constituent angles to find a mean value to calculate error and change
+vectors.
+
+\\
+
+Colinear Points &
+
+Constrains three or more points to be on the same line. The expected
+line is made by the two points farthest away from each other.
+
+\\ \hline
+\end{tabular}
+\caption[Constraint Types]{Constraint Types in SIMI.}
+\label{tab:constraints}
+\end{table}

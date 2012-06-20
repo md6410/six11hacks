@@ -1,5 +1,26 @@
 %% dkoes 5/10/2006
 
+% The source for this is pulled from a variety of sources and people.
+% Here's a partial list of people who may or may have not contributed:
+%
+%        bnoble   = Brian Noble
+%        caruana  = Rich Caruana
+%        colohan  = Chris Colohan
+%        jab      = Justin Boyan
+%        josullvn = Joseph O'Sullivan
+%        jrs      = Jonathan Shewchuk
+%        kosak    = Corey Kosak
+%        mjz      = Matt Zekauskas (mattz@cs)
+%        pdinda   = Peter Dinda
+%        pfr      = Patrick Riley
+%        dkoes    = David Koes (me)
+
+% My main contribution is putting everything into a single class files and small
+% template since I prefer this to some complicated sprawling directory tree with
+% makefiles.
+
+
+
 \LoadClassWithOptions{book}
 
 
