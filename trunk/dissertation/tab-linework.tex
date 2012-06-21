@@ -22,9 +22,9 @@ Straight line connecting two points.
 
 Elliptical Arc &
 
-Arc that passes through two points on an ellipse. The ellipse is
-defined with a centroid, a major and minor radius, and an angle of
-rotation. The endpoints are defined with angular offsets.
+Elliptical arc that passes through two points on an ellipse. The
+ellipse is defined with a centroid, a major and minor radius, and an
+angle of rotation. The endpoints are defined with angular offsets.
 
 \\
 
@@ -44,15 +44,21 @@ does not include a corresponding circular arc.
 
 Spline &
 
-A cardinal spline composed of start/end points, and a list of
-parameters that determine control point locations relative to the
-start and end points.
+A cardinal spline made of start/end points, and a parameter list
+determining control point locations relative to the start and end.
 
 \\ 
 
 Blob &
 
 A Blob is a closed spline.
+
+\\ 
+
+Dot &
+
+A Dot is represented as a single point. It is recognized when the
+input stroke is very short.
 
 \\ \hline
 
