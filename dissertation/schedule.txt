@@ -5,8 +5,19 @@ Chapter		# days (predicted)  # days (actual)       days
 1 Introduction		3		2		June 6  -- June 7
 2 Related Work		4		4		June 7  -- June 11
 3 Formative		2		1		June 11 -- June 12
-4 Overview		5		9		June 12 -- June 20
-5 Details		13				June 20 --
+4 Overview		5		9		June 12 -- June 21
+5 Details	       11		?		June 21 --
+  -- Ink Parsing	1		?		June 22
+  -- Erase		1
+  -- Undo/Redo		1
+  -- Flow Selection	1
+  -- Latching		1
+  -- Pan/Zoom		1
+  -- Select point	1
+  -- Same length	1
+  -- Specific length	1
+  -- Right angle	1
+  -- Same angle		1
 6 Summative		2
 7 Conclusion		4
 
