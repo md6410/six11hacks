@@ -83,7 +83,7 @@ the sign is determined by the cross product.
   \begin{array}{r l}
     \theta_{unsigned} & \quad \text{if } |v_a \times v_b| \geq 0\text{,}\\
     -\theta_{unsigned} & \quad \text{otherwise}\\
-  \end{array} \right\}
+  \end{array} %\right\}
 \end{equation}
 \begin{samepage}
 
@@ -171,8 +171,9 @@ closed &
   \begin{array}{r l}
     true & \quad \text{if } closeness \leq .1\text{,}\\
     false & \quad \text{otherwise}\\
-  \end{array} \right\} \\
+  \end{array} \\ %\right\} \\
 \end{array}
+\label{eqn:ellipse}
 \end{equation}
 
 Circles and Ellipses are identified with the same finder. If the input
@@ -212,8 +213,8 @@ In order for the input to be considered a Circle or Ellipse, the total
 error must be less than 1.0. This value was determined experimentally,
 given a discretization of 60 points. To distinguish between a Circle
 and an Ellipse, the fit ellipse's eccentricity used. Eccentricity
-describes how flattned the ellipse is is defined in terms of its major
-and minor radii:
+describes how flattened the ellipse is as defined by its major and
+minor radii:
 
 \begin{equation}
 Eccentricity = \sqrt{\dfrac{major^2-minor^2}{major^2}}
@@ -224,11 +225,88 @@ it is an Ellipse.
 
 \subsubsection{Blob Finder}
 
+A \textit{Blob} is a spline than wraps around on itself to form a
+closed loop. Recall that SIMI identifies a closed shape when a
+stroke's start and end points are close relative to stroke length. To
+transform the rough input into a smooth shape, additional processing
+is necessary because the start and end of the stroke are not
+continuous.
+
+\input{fig-blob.tex}
+
+There are two possible situations: there is a \textit{gap} between the
+stroke's start and end, or there is an \textit{overlap}. These cases
+are illustrated in Figure~\ref{fig:blob}. The Blob Finder identifies a
+gap when the first point $p_0$ is closer to the last point $p_{n-1}$
+than it is to the last point's neighbors $p_{n-i}$, where i is in the
+range $[2..10]$. An overlap is when $p_0$ is closer to one of the
+$p_{n-i}$ points.
+
+In case of a gap, the next action is simple: the first and last points
+are connected. When an overlap is detected, the algorithm removes
+points from the end of the stroke until there is no overlap
+(e.g. there is a gap). Then the Blob's start and end are connected as
+before.
+
+The control points for Blob and Spline types are computed and stored
+in the same manner. This representation is discussed in the Spline
+section.
+
 \subsubsection{Line Finder}
+
+Lines are typically the most common segment type. Like arcs and
+splines, lines are open segment types. A single ink stroke may contain
+any number of open segment types. All open segment type finders
+operate on regions between (and including) corners---they do
+\textit{not} operate on the entire stroke, unless the stroke happens
+to contain no corners.
+
+The line finder fits a region of points to an idealized line, and
+measure its error. If the error is below some threshold, it reports a
+positive result. The idealized line begins and ends at the corners on
+either side of the region. A raw point's individual error is
+calculated as the shortest (orthogonal) distance between the point and
+the idealized line. The total error for the region is:
+
+\begin{equation}
+Line\:Error = \dfrac{\sqrt{\sum OrthoDistance^2(p_i, line)}}{n-2}
+\end{equation}
+
+If the error is below the threshold (currently 1.5), the region is
+identified as a line segment.
 
 \subsubsection{Arc Finder}
 
+Arcs in SIMI are portions of ellipses. If a region is not a line, the
+Arc Finder attempts to identify an elliptical arc. It does this by
+using the same math as Ellipse shapes, including the error metric in
+Equation~\ref{eqn:ellipse}. If the total error is less than 0.5, the
+region is identified as an elliptical arc.
+
+Note that the arc is only a portion of the ellipse. The portion is
+recorded using the start and end angles, and (to determine which
+direction the arc traverses the ellipse) a median angle.
+
 \subsubsection{Spline Finder}
+
+Splines are the fallback segment type: if nothing else fits, a region
+is classified as a spline. SIMI uses natural cubic splines to render
+these curves.
+
+As mentioned earlier, Blobs are modeled in the same way as
+Splines. Both variations are composed of two primary points $A$ and
+$B$ (for splines, the start and end points; for blobs, the start point
+and initial centroid point). Using these two points, a third point $C$
+is found by rotating $B$ about $A$ by 90 degrees. These three points
+form the basis for a barycentric coordinate system that identify
+locations of the Spline/Blob's control points. This way, when $A$ or
+$B$ move, the control point locations are easily recalculated.
+
+A control point is defined with a pair of numbers: one in the
+$A\rightarrow B$ direction, another in the $A\rightarrow C$ direction. A
+value of one indicates full movement from the start to end point.
+
+\input{fig-spline-control-points.tex}
 
 \section{Dynamic Recognizers}
 
