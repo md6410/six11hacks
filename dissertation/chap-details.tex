@@ -85,7 +85,7 @@ the sign is determined by the cross product.
     -\theta_{unsigned} & \quad \text{otherwise}\\
   \end{array} %\right\}
 \end{equation}
-\begin{samepage}
+\end{samepage}
 
 It is tempting to use $\arctan$ to calculate curvature because it is a
 simple calculation. However, this leads to discontinuities when the
@@ -310,75 +310,188 @@ value of one indicates full movement from the start to end point.
 
 \section{Dynamic Recognizers}
 
+As mentioned in \ref{sec:overview-dynamic-recognizers}, Dynamic
+recognizers attempt to identify gestures as the pen is down. In order
+to maintain a responsive user interface, these recognizers must
+execute very quickly because they are invoked at high frequency. When
+any dynamic recognizer has a positive result, the others are
+suppressed until the next stroke. They each give distinct graphic
+feedback to let the user know that the recognizer has triggered.
+
 \subsection{Erase}
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+%% What is it for? State obvious use quickly, and give detail on any
+%% non-obvious uses.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+The \textit{Erase} gesture allows the user to delete segments. It lets
+users recover from errors or lets them change their minds. Unlike Undo
+(discussed below), Erase gives access to any linework in the
+model. Erase can also be used as part of a deliberate process, for
+example to cut away segments to create notches (as
+in~\cite{zeleznik-lineogrammer}).
 
-What (if any) visual feedback is there?
+\input{fig-erase.tex}
 
-What actions are taken if it is positively recognized and not
-filtered?
+%% Recognition process: What kind of data does it use? What is the
+%% context-free recognition like? What context does it use?
 
-Wrote this somewhere else: For example, the Erase gesture went through
-a number of design iterations. Each version was only slightly better
-than the last, and users were only able to successfully execute the
-scribble gesture about half the time. When it failed, the scribble
-would be interpreted as linework, which would then require users to
-erase that. I then completely changed the erase gesture recognizer so
-it would operate as the pen was down. When it found a scribble, a
-colored 'X' appeared over the scribble to indicate that the user's
-erasure will succeed. This lets users scribble until an X appears,
-giving them confidence the system has understood. This reduced the
-number of recognition errors substantially.
+SIMI users depend on being able to erase quickly and easily. While it
+may seem that an efficient and easy to use gesture recognizer would be
+easy to write, this is not the case. During development, the Erase
+gesture went through a number of design iterations. Initially, it was
+implemented as a Delayed recognizer (executing after the pen was
+lifted). Users were only able to successfully execute the gesture
+about half the time. When it failed, the scribble was interpreted as
+linework, requiring users to erase or undo the unwanted linework. This
+was a common and frustrating event. The recognition algorithm was only
+part of the problem. Proper visual feedback was also a necessary part
+of the solution.
+
+Erase was reimplemented as a dynamic recognizer so it would operate as
+the pen was down. The lets it identify erase gestures in mid-stroke,
+showing a colored 'X' to indicate that the user's erasure will
+succeed. This gives users confidence the system has understood and
+reduces the number of recognition errors substantially.
+
+The dynamic erase gesture is implemented as follows. It involves
+several parameters that may be tuned for different
+circumstances. These parameters are summarized in
+Table~\ref{tab:erase-params} after the description.
+
+First we assign each point $P_i$ with a time stamp $T_i$, a
+curvilinear distance $D_i$, and a heading vector $H_i$. Curvilinear
+distance is the path length along the stroke from the first point:
+$D_0=0$, and the rest are $D_i = D_{i-1} + distance(P_{i-1}, P_i)$.
+
+The heading $H_i$ is a normalized vector from $P_{i-k}$ to $P_{i+k}$,
+using a window size $k$. The first $k$ points use $H_k$ for their
+heading.
+
+Next we add points to a list of sample points $S$. If the curvilinear
+distance between $D_i$ and the most recently added sample point is
+greater than $min_{sd}$, $P_i$ is added to $S$. When a new sample
+point is added, a sub-list $R$ is assembled containing recent sample
+points that occurred within $t$ milliseconds. If the angle between the
+new sample point's heading and any point heading in $R$ is greater
+than some angle threshold value $min_\theta$ (we use $\pi$ radians),
+it increments a `corner' count value for the current pen stroke. When
+more than $min_c$ corners are found in a stroke, the stroke is a
+strong candidate to be interpreted as an erase. When the corner count
+has reached $min_c$, the system checks to see if the input resembles a
+circle. This final check is necessary to avoid confusing a latch
+gesture as an erase gesture. 
+
+If the circle check fails, the stroke is interpreted as an
+erasure. The system draws feedback to alert the user that the gesture
+has been recognized and halts recognition until the pen is lifted.
+
+
+Because the sample list depends on a relatively short duration, the
+user must scribble vigorously to activate the erase gesture. Erasing
+is a destructive process. Even though the user may quickly recover
+from an unwanted erasure with the Undo command, they are nonetheless
+disconcerting. The requirement that users scribble vigorously helps to
+avoid false positives.
+
+When the user lifts their pen, SIMI determines which (if any) segments
+should be removed from the model. The simplest approach would be to
+identify any segment that intersects the erase gesture's convext
+hull. However, this leads to poor results because users often want to
+erase items that are near other items that should be kept. If this
+strategy were applied, both the line and the arc in
+Figure~\ref{fig:erase-basic} would be erased.
+
+When executing an erasure, the first step is to collect all the
+segments that are under the erase gesture's convex hull. Next, SIMI
+calculates the percentage of each segment's length that is under the
+hull. 
+
+It is common that users would like to erase several items with the
+same gesture. To support this, SIMI chooses the segment that has the
+highest percentage and any segment whose coverage is at least $C\%$ of
+that value. In Figure~\ref{fig:erase-basic} about 10\% of the line is
+under the hull, while about 50\% of the arc is. In the current version
+of SIMI, $C=70$, so any segment that is at least 70\% of 50 (in other
+words, 35\%) would be erased. Since the line is only 10\% under the
+hull, it remains.
+
+This set of segments are then removed from the model. Further, any
+constraints that are no longer relevant are also removed.
+
+\input{tab-erase-params.tex}
 
 \subsection{Undo and Redo}
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+There is very little \textit{recognition} involved with SIMI's
+\textit{Undo/Redo} recognizer. The user presses the button with their
+non-dominant hand and then drags the stylus left (to undo) or right
+(to redo). It is the only technique that can not be performed entirely
+with the pen. While it might not require recognition like the others,
+it does have to fit into the same framework.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+The undo/redo events are triggered with each 40 pixel change in
+the~$x$ dimension. Each event shows a preview of what the model looked
+like at some point in time. Releasing the external button commits the
+change by replacing the current state with the previewed state. The
+user may lift the pen, reposition their hand, and continue
+gesturing. This allows the user to smoothly `scrub' through their
+model's design history. Each `page' in SIMI's user interface has a
+separate design history.
 
-What (if any) visual feedback is there?
-
-What actions are taken if it is positively recognized and not
-filtered?
+Each state in the design history stores a complete snapshot of the
+model (containing points, segments, constraints, and cutouts) as well
+as a cached graphic. This is a fast memory-intensive strategy that
+requires only minimal computation. Snapshots are made when the user
+adds, modifies, or removes geometry or constraints.
 
 \subsection{Flow selection}
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+\input{fig-flow-selection.tex}
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+\textit{Flow selection} is a time-based selection and operation
+technique that lets users deform \textit{regions} of curved
+segments~\cite{johnson-flow-selection}. This is useful for fixing
+errors, or simply playing with curves to achieve an esthetically
+pleasing effect.
 
-What (if any) visual feedback is there?
+Flow selection is triggered by holding the pen still for a brief
+period (e.g. 800 milliseconds). Once triggered, it begins selecting
+points on segment nearest the stylus (see
+Figure~\ref{fig:flow-selection-example}). The selection slowly grows
+along the curve, as its points begins to `heat up' near the
+stylus. The longer the pen is held down, the more strongly points are
+selected (e.g. they become `hotter'), and the selection size gets
+bigger. Next, the user can move the stylus without lifting. This moves
+selected points---the more strongly selected, the more they move. The
+process is nicely illustrated by the finite state machine in
+Figure~\ref{fig:flow-selection-fsm}.
 
-What actions are taken if it is positively recognized and not
-filtered?
+Flow selection is graphically presented by highlighting the affected
+region. Points that have positive selection strength are drawn as
+small white dots, and the linework connecting them is drawn in a shade
+of red. The stronger the surrounding points, the brighter red the
+curve is drawn.
 
 \section{Pen Up Recognizers}
 
-\begin{itemize}
-\item Remove hooks
-\item Get structured ink related to unprocessed ink.
-\item Add all new structured ink to the model
-\item Apply post-hoc recognizers to new structured ink
-\item Disambiguate any conflicting results using (a) context in the
-  model and (b) preset rules like right-angle wins over same-length
-  (filterRecognizedItems())
-\item Apply remaining recognized items. This removes the related
-  structured ink from the model.
-\item Auto-latch remaining segments with each other and existing model
-  segments.
-\item Search for cutouts (don't call them stencils anymore)
-\item Wake up constraint solver
-\item Request state snapshot
-\end{itemize}
+Introduce the pre-processing done at this point.
+
+%% \begin{itemize}
+%% \item Remove hooks
+%% \item Get structured ink related to unprocessed ink.
+%% \item Add all new structured ink to the model
+%% \item Apply post-hoc recognizers to new structured ink
+%% \item Disambiguate any conflicting results using (a) context in the
+%%   model and (b) preset rules like right-angle wins over same-length
+%%   (filterRecognizedItems())
+%% \item Apply remaining recognized items. This removes the related
+%%   structured ink from the model.
+%% \item Auto-latch remaining segments with each other and existing model
+%%   segments.
+%% \item Search for cutouts (don't call them stencils anymore)
+%% \item Wake up constraint solver
+%% \item Request state snapshot
+%% \end{itemize}
 
 \subsection{Latching}
 
