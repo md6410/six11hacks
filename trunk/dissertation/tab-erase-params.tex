@@ -1,0 +1,75 @@
+% in the ``tabular'' environment, indicate columns separated by pipe
+% characters. options are:
+%   l           left aligned column
+%   c           center aligned column
+%   r           right aligned column
+%   p{width}    paragraph column, text at the top
+%   m{width}    ''                ''   in the middle
+%   b{width}    ''                ''   at the bottom
+
+\begin{table}%[h] % [h]ere [t]op [b]ottom [p]age
+\centering
+\begin{tabular}{p{1.5cm}| p{1.5cm} | p{12cm}}
+\textbf{Param.} & \textbf{Value} & \textbf{Remark} 
+\\ \hline
+ & &
+\\
+$k$ &
+
+1 &
+
+Number of points in heading vector window. For higher resolution input
+surfaces $k$ should be larger because the input points will be much
+closer together.
+
+\\
+
+$min_{sd}$ & 
+
+20 &
+
+Minimum curvilinear distance between sample points. Smaller values
+allow users to make smaller erase gestures, but might also introduce
+false positives. 
+
+\\
+
+$t$ &
+
+100ms &
+
+Limits the sample history so only the most recent samples are
+used. Samples older than this may be discarded.
+
+\\
+
+$min_\theta$ &
+
+$\pi/2$ rad. &
+
+Minimum corner angle between a recent sample heading and the current
+sample heading. 
+
+\\
+
+$min_c$ &
+
+5 &
+
+Minimum number of corners required for a stroke to be an erasure.
+
+\\
+
+$C$ &
+
+$70$ &
+
+A percentage value in the range [0..100] describing how strictly to
+choose erasure targets. A low value indicates few targets. Using zero
+means only the most specific segment is erased; 100 means all segments
+that intersect the erase gesture would be erased.
+
+\end{tabular}
+\caption{Parameters involved in detecting erase gestures.}
+\label{tab:erase-params}
+\end{table}

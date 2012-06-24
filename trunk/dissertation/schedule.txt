@@ -7,10 +7,10 @@ Chapter		# days (predicted)  # days (actual)       days
 3 Formative		2		1		June 11 -- June 12
 4 Overview		5		9		June 12 -- June 21
 5 Details	       11		?		June 21 --
-  -- Ink Parsing	1		?		June 22
-  -- Erase		1
-  -- Undo/Redo		1
-  -- Flow Selection	1
+  -- Ink Parsing	1		1		June 22 -- June 22
+  -- Erase		1		0		June 24 -- June 24
+  -- Undo/Redo		1		0		June 24 -- June 24	
+  -- Flow Selection	1		1		June 24 -- June 24
   -- Latching		1
   -- Pan/Zoom		1
   -- Select point	1
