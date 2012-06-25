@@ -474,67 +474,193 @@ curve is drawn.
 
 \section{Pen Up Recognizers}
 
-Introduce the pre-processing done at this point.
+If no dynamic recognizer claimed a user's stroke, the \textit{Pen Up}
+recognizers are invoked. There are two pre-processing steps before
+this happens. The first is Ink Parsing---corner finding and segment
+identification. This was discussed at length earlier in the
+chapter. The second pre-processing step is called \textit{hook
+  removal}.
 
-%% \begin{itemize}
-%% \item Remove hooks
-%% \item Get structured ink related to unprocessed ink.
-%% \item Add all new structured ink to the model
-%% \item Apply post-hoc recognizers to new structured ink
-%% \item Disambiguate any conflicting results using (a) context in the
-%%   model and (b) preset rules like right-angle wins over same-length
-%%   (filterRecognizedItems())
-%% \item Apply remaining recognized items. This removes the related
-%%   structured ink from the model.
-%% \item Auto-latch remaining segments with each other and existing model
-%%   segments.
-%% \item Search for cutouts (don't call them stencils anymore)
-%% \item Wake up constraint solver
-%% \item Request state snapshot
-%% \end{itemize}
+A \textit{hook} is a short region of ink made accidentally as the user
+presses down or lifts the stylus from the digitizing tablet. Many
+tablet surfaces are smooth, so there is little frictional resistance
+to prevent this from happening. Unless hooks are removed, they
+frustrate recognition efforts.
+
+Hook removal occurs after ink parsing but before recognizers are
+invoked. The hook remover receives a set of newly made segments. A
+hook is a segment that has two properties: (a) it was made from ink
+appearing at the beginning or end of the user's stroke, and (b) its
+curvilinear length is less than 10\% of the longest segment from the
+same ink stroke. Hooks are simply removed from the model and not
+passed on for recognition.
+
+The Pen Up recognizers have access to both the structured data
+including corners and segment types, as well as the original raw data.
 
 \subsection{Latching}
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+\input{fig-latch.tex}
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+Users often want lines to meet at a common point. In the formative
+work practices study, we observed Illustrator users struggling to make
+lines co-terminate. Sometimes the designer would simply extend lines
+past each other to ensure that the laser will correctly cut the
+corner.
 
-What (if any) visual feedback is there?
+Latching is the process of adjusting adjacent segments to meet at a
+common point~\cite{herot-latch-corners}. All linework in SIMI is meant
+to compose cutouts, which are closed sequences of latched
+segments. The designer must therefore be able to find and fix
+un-latched segments to form cutouts. SIMI draws a red marker at
+`lonely endpoints' (endpoints associated with only one segment) to
+make it obvious when there is a latching opportunity.
 
-What actions are taken if it is positively recognized and not
-filtered?
+SIMI will automatically latch segments (shown in
+Figure~\ref{fig:latch}) under fairly conservative circumstances. Users
+may also manually latch endpoints in three orientations
+(Figures~\ref{fig:latch-endpoint}--\ref{fig:latch-tjunct}). Both
+automatic and manual latching is performed as a result of a Pen Up
+recognizer.
 
-Four kinds: automatic, endpoint, continuation, and t-junction.
+\subsubsection{Automatic Latching}
+
+The automatic latching process examines linework for cases where the
+user likely meant their segments to connect, and adjusts one or more
+segments to meet. However, this can pose problems if it is too zealous
+because users must erase or undo to recover, which interrupts the flow
+of work. Therefore the automatic latcher is intentionally conservative
+to avoid frustrating users.
+
+The auto-latcher is \textit{not} activated with the Pen Up
+recognizers---it is actually a Delayed recognizer. It is discussed
+here because it is closely related to the manual latching techniques,
+which are Pen Up recognizers.
+
+The auto-latcher iterates through all newly made segments, and
+compiles a list of those with lonely endpoints. For each lonely
+endpoint, an \textit{endcap} formed. This is a short line segment
+centered at the lonely point. The endcap length is X\% of its
+associated segment (SIMI sets this parameter at 10\%). The endcap
+orientation is tangent to the segment at the lonely point. They are
+represented as the light blue shaded regions in
+Figure~\ref{fig:latch-auto}.
+
+The endcap length and orientation are parameterized in this way to
+avoid latching segments that do not visually appear to meet. This
+approach was inspired by the gestalt principle of common fate.
+
+Next, each endcap is intersected with nearby endcaps from either new
+or existing lonely point endcaps (with their own length and
+orientations). When two endcaps intersect, the auto-latcher reports a
+positive result, and the two related segments will merge. The merging
+process is discussed below, after the manual latchers.
+
+\subsubsection{Manual Latching}
+
+There are three ways users manually latch segments together,
+illustrated in Figure~\ref{fig:latch}. They are activated by the same
+recognizer, but the action taken is distinguished by the particular
+configuration of segments below the gesture.
+
+The three kinds of manual latching are: \textit{endpoint},
+\textit{continuation}, and \textit{T-Junction}, but the gesture (a
+small lasso, discussed shortly) is the same for all of them. The
+meaning of the latch gesture depends on what the user targets: in
+other words, what elements are beneath the user's input? If the user
+targets two endpoints, it is either an endpoint latch (when the two
+segments are not close to the same orientation) or a continuation
+latch (when they are about the same orientation). If the user targets
+an endpoint and the mid-section of another segment, it is a
+T-Junction.
+
+The encircle gesture is recognized as follows. The gesture curvilinear
+length must be less than a threshold (currently 200 px). This helps
+distinguish linework (which tends to be large) from latch gestures
+(which are small). Second, the input must be \textit{closed} using
+logic similar to the closed segment type finders (e.g. Blob
+Finder). In this context the input is closed if any of the last 10\%
+of points were within 7 pixels of the initial point.
+
+\subsubsection{Merging Segments}
+
+\input{tab-latch.tex}
+
+If either the automatic or manual latching algorithm found a positive
+result, two segments must be merged. Table~\ref{tab:latch} summarizes
+the inputs, where the merge occurs, and the results. In each case, two
+segments are merged, but the output depends on the latch
+type. Automatic and endpoint latching result in two segments that have
+been joined at segment ends. Continuation latching results in a single
+segment---the two original segments are replaced by one longer
+one. With T-Junction latching, one segment is split in the interior
+region into two segments, and the other segment is merged with them
+where the split occured.
+
+Points and segments are created and destroyed in this process. This
+must be reflected in the model. Any constraints that referenced a
+deleted segment must be re-evaluated to see if (and which) new
+segments apply.
 
 \subsection{Pan and Zoom}
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+SIMI lets users control the view port. Tapping the pen twice
+immediately displays a pan/zoom widget shown in
+Figure~\ref{fig:panzoom}. To pan, drag starting in the left square in
+any direction. To zoom, start in the right square: up to zoom in, down
+to zoom out (the horizontal dimension is not used). The controls
+disappear after two seconds of non-use.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+Many parameters used in other recognizers are sensitive to the zoom
+factor. When the user zooms in or out, distance factors must change
+accordingly because there is a disparity between physical and model
+coordinate distances. For example, if the zoom factor is $2x$, the
+latch gesture considers the input closed using $7/2=3.5$ model
+units rather than $7$ as it would without zooming.
 
-What (if any) visual feedback is there?
+\input{fig-panzoom.tex}
 
-What actions are taken if it is positively recognized and not
-filtered?
+\subsection{Select Points and Segments}
 
-\subsection{Select point}
+Users can move points by selecting, and then dragging them. To select
+a point, users make a quickly made swirling gesture that is recognized
+as a \textit{Dot} segment type. If the dot is made within 9 pixels of
+a segment endpoint, the closest endpoint is chosen to be
+selected. Once a point is selected, hovering the pen nearby shows a
+hand cursor, letting the user know that dragging the stylus will move
+the selected point.
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+Selected points can be deselected by drawing a latch gesture around it
+(discussed above). The point is deselected if no latch recognizer
+would have an effect.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+Segments may be selected as part of the process to specify \text{Same
+  Length} constraints. To select a segment, the user overtraces a
+portion. It is not necessary to overtrace the entire segment. To
+recognize a segment selection gesture, the system compares the rough
+input with the segments nearby. To be a segment selection gesture, the
+average orthogonal distance to the segment must be less than 5 px, the
+maximum distance less than 15, and (for line segments) the orientation
+must be within 20 degrees.
 
-What (if any) visual feedback is there?
-
-What actions are taken if it is positively recognized and not
-filtered?
+A selected segment is graphically with a thick blue line
+weight. Additionally, the segment's length is displayed nearby. Users
+deselect segments by overtracing again.
 
 \section{Delayed Recognizers}
+
+\subsection{Specific length}
+
+What is it for? State obvious use quickly, and give detail on any
+non-obvious uses.
+
+Recognition process: What kind of data does it use? What is the
+context-free recognition like? What context does it use?
+
+What (if any) visual feedback is there?
+
+What actions are taken if it is positively recognized and not
+filtered?
 
 \subsection{Same length}
 
@@ -549,18 +675,6 @@ What (if any) visual feedback is there?
 What actions are taken if it is positively recognized and not
 filtered?
 
-\subsection{Specific length}
-
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
-
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
-
-What (if any) visual feedback is there?
-
-What actions are taken if it is positively recognized and not
-filtered?
 
 \subsection{Right angle}
 

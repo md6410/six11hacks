@@ -1,0 +1,47 @@
+
+\begin{table}%[h] % [h]ere [t]op [b]ottom [p]age
+\centering
+\begin{tabular}{l | p{11cm}}
+\textbf{Action Type} & \textbf{Description} \\
+\hline
+&\\
+
+Persistent mode change & 
+
+Change the tool input state so subsequent input is interpreted in
+context of that tool (e.g. line drawing mode). User must enter another
+persistent mode to exit the first.
+
+\\
+
+Specify value &
+
+Specify a dimension or location.
+
+\\
+
+Specify target &
+
+Indicate (select) an element for a subsequent operation.
+
+\\
+
+Transformation &
+
+Apply an operation that changes existing model elements (e.g. move or
+erase something).
+
+\\
+
+Transient mode change &
+
+Temporarily change the tool mode so input is interpreted
+differently. This kind of mode change is part of a phrase, and will
+revert to another mode when the phrase is complete.
+
+\\
+\hline
+\end{tabular}
+\caption{Action types used in the task-tool protocol analysis.}
+\label{tab:task-tool-protocol}
+\end{table}

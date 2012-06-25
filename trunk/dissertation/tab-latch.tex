@@ -1,0 +1,61 @@
+% in the ``tabular'' environment, indicate columns separated by pipe
+% characters. options are:
+%   l           left aligned column
+%   c           center aligned column
+%   r           right aligned column
+%   p{width}    paragraph column, text at the top
+%   m{width}    ''                ''   in the middle
+%   b{width}    ''                ''   at the bottom
+
+\begin{table}%[h] % [h]ere [t]op [b]ottom [p]age
+\centering
+\begin{tabular}{p{2.5cm}| p{5.4cm} | p{3.5cm} | p{3cm}}
+\textbf{Latch Type} & \textbf{Input} & \textbf{Merge Point} & \textbf{Output} \\
+\hline
+& & & \\
+
+Automatic &
+
+Two segments with endpoints & 
+
+Endcap intersection &
+
+Two segments
+
+\\ 
+
+Endpoint &
+
+Two segments with endpoints & 
+
+Endpoint centroid &
+
+Two segments
+
+\\ 
+
+Continuation &
+
+Two segments with endpoints & 
+
+None &
+
+One segment
+
+\\ 
+
+T-Junction &
+
+Segment + endpoint, \par segment + inner point & 
+
+Inner point &
+
+Three segments
+
+\\ 
+
+\end{tabular}
+\caption[Summary of latching]{Four variations of latching with
+  different input, merge point, and output.}
+\label{tab:latch}
+\end{table}
