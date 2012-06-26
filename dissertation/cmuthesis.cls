@@ -94,6 +94,8 @@
     Pittsburgh, PA 15213
 \end{center}
 
+\vskip 2em
+
 \begin{center}
     {\bf Thesis Committee:} \\
     \@committee

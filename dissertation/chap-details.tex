@@ -647,36 +647,122 @@ A selected segment is graphically with a thick blue line
 weight. Additionally, the segment's length is displayed nearby. Users
 deselect segments by overtracing again.
 
+\vspace{16pt}
+\textbf{Specific Length Constraint}
+
+Users make establish \textit{specific length constraints} by selecting
+a line segment and then \textit{typing} a value on the keyboard. This
+is the only interaction technique the violates the guidelines of not
+depending on the keyboard. It was necessary to implement in order to
+let users make things with specific dimensions, which is a common
+need. Ideally, users would employ a pen-centric approach to set
+specific length constraints. The obvious candidate in this case is
+handwriting recognition. Because that is an active and well-developed
+topic, so it seemed appropriate to focus my effort elsewhere.
+
 \section{Delayed Recognizers}
 
-\subsection{Specific length}
+The delayed recognizers activate after one of two events has occured:
+either the user has pressed the button with their non-drawing hand, or
+there has not been stylus activity for a brief time period. Delayed
+recognizers are invoked only on input that was not positively
+identified by either Dynamic or Pen Up recognizers.
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+Like Pen Up recognizers, Delayed recognizers could operate on either
+raw ink data or the set of segments found in Ink Parsing. However in
+practice, the three recognizers in this category only use segment
+data.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+Unlike Pen Up recognizers, Delayed recognizers must be able to handle
+several ink strokes. The input might be anything: linework, a
+constraint, linework and constraints, two Same Length and two Right
+Angle constraints, and so on. 
 
-What (if any) visual feedback is there?
+\input{fig-delayed-example.tex}
 
-What actions are taken if it is positively recognized and not
-filtered?
+For example, consider the scenario pictured in
+Figure~\ref{fig:fig-delayed-example} where the user draws a spline,
+two right angles, and a Same Length gesture. The recognizers operate
+on \textit{segments}, not \textit{strokes}. The ink processor found
+seven segments: the spline at top, and six short line segments in the
+other strokes. Each recognizer receives these seven segments as input
+and must identify as many instances of its type as it can. The Right
+Angle recognizer, for example, looks for two short line segments of
+approximately the same length that appear to meet at roughly a 90
+degree angle. 
 
-\subsection{Same length}
+Given an input set of $n$ strokes, the Right Angle recognizer has
+$n^2=49$ possible pairings to examine. Each pairing has four possible
+relative orientations. A recognizer that requires more segments has
+vastly more combinations. This process is also fraught with subjective
+noise: it looks for \textit{short} line segments of
+\textit{approximately} the same length that \textit{appear} to meet at
+\textit{roughly} 90 degrees. When finished, several recognizers may
+claim segments that belong to other positive interpretations.
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+In sum, there are three main challenges in this situation: (1) the
+search space is potentially very large, (2) subjective assessments
+like \textit{approximately} must be made computable with numbers, and
+(3) conflicting results must be mediated.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+Alvarado addressed these problem in her thesis
+work~\cite[Ch. 4]{alvarado-phd-thesis}. I have re-implemented her
+approach to address the first two problems. It prunes the search space
+considerably, and fixes the meaning of vague measurements. The third
+problem---determining which interpretation is most likely---is handled
+differently.
 
-What (if any) visual feedback is there?
+Recognition mediation in SIMI uses two processes to determine which is
+correct. The first process ranks contending results by how relevant
+they are in context. The next process is invoked only if the first is
+inconclusive. Second is a list that ranks recognizers in order of most
+to least common.
 
-What actions are taken if it is positively recognized and not
-filtered?
+\subsection{Same Length}
 
+The \textit{Same Length} gesture establishes a constraint that keeps
+two or more line segments the same length. The exact value for this
+length is not specified directly. Instead, the constraint computes the
+average length and will attempt to lengthen or shorten line segments
+to that length. Users may add segments to an existing Same Length
+constraint, or combine two such constraints. 
 
-\subsection{Right angle}
+\input{fig-same-length.tex}
+
+Figure~\ref{fig:same-length} shows how the Same Length gesture is made
+and how it can be used. In panel~\textit{\subref{fig:same-length-1}}
+the user draws the gesture on two sides of a quadrilateral to make
+those sides the same length. The Delayed recognizer identifies this,
+and the system creates and enforces the Same Length constraint
+(panel~\textit{\subref{fig:same-length-2}}. The user creates a second
+constraint by waiting until the first has been recognized, and drawing
+the gesture over the remaining lines of the quadrilateral
+(panel~\textit{\subref{fig:same-length-3}}). Next the user decides to
+combine these constraints by drawing a hash mark over one constrained
+line from each existing Same Length constraint
+(pane~\textit{\subref{fig:same-length-4}}}). Panel~\textit{\subref{fig:same-length-5}}
+shows the result. This shape could have been made in a single
+recognition phase by hashing all four line segments. That would be
+equivalent to the state shown in the last panel.
+
+A Same Length gesture is recognized when it finds two or more short
+input line segments $(in_0, in_1, ...)$ that cross corresponding
+existing line segments $(S_0, S_1, ...)$. All input lines $in_i$ must
+be at least 40\% the length of the longest one. In addition, each
+$in_i$ must be within 30\% of $S_i$'s length to $S_i$'s
+midpoint. Users tend to naturally follow these rules. The hash mark is
+a convention in pencil-and-paper sketching, and it is consistent with
+the Same Length constraint's visual appearance.
+
+Graphically, any existing Same Length gesture is drawn as a set of
+short red lines passing through the midpoint of each $S_i$ at a 45
+degree angle (relative to $S_i$). Like other constraints, the
+constraint is drawn in a brighter red when the stylus hovers
+nearby. This serves two purposes. First, it reduces the visual clutter
+of the whole screen. Second, it lets the user see which linework is
+related to a single Same Length constraint. 
+
+\subsection{Right Angle}
 
 What is it for? State obvious use quickly, and give detail on any
 non-obvious uses.

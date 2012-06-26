@@ -14,8 +14,8 @@ Chapter		# days (predicted)  # days (actual)       days
   -- Latching		1		1		June 25 -- June 25
   -- Pan/Zoom		1		0		June 25 -- June 25
   -- Select point/seg	1		0		June 25 -- June 25
-  -- Same length	1
-  -- Specific length	1
+  -- Specific length	1		0		June 26 -- June 26
+  -- Same length	1		1		June 26 -- June 26
   -- Right angle	1
   -- Same angle		1
 6 Summative		2
