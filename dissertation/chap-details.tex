@@ -485,7 +485,10 @@ A \textit{hook} is a short region of ink made accidentally as the user
 presses down or lifts the stylus from the digitizing tablet. Many
 tablet surfaces are smooth, so there is little frictional resistance
 to prevent this from happening. Unless hooks are removed, they
-frustrate recognition efforts.
+frustrate recognition efforts. Hook removal is shown in
+Figure~\ref{fig:hooks}.
+
+\input{fig-hooks.tex}
 
 Hook removal occurs after ink parsing but before recognizers are
 invoked. The hook remover receives a set of newly made segments. A
@@ -762,28 +765,68 @@ nearby. This serves two purposes. First, it reduces the visual clutter
 of the whole screen. Second, it lets the user see which linework is
 related to a single Same Length constraint. 
 
+\subsection{Same Angle}
+
+Designers can constrain angles to be the same. This is particularly
+useful for creating symmetric parts. The gesture is the same as the
+Same Length gesture, but the user draws the hash marks over line
+segment intersections. A Same Angle constraint is indicated with a red
+arc symbol near the related corners. In Figure~\ref{fig:same-angle},
+the user has created a symmetric trapezoid. The pen hovers near the
+upper left corner, so the visual feedback for the upper Same Angle
+constraint is prominently displayed.
+
+\input{fig-same-angle-symmetry.tex}
+
 \subsection{Right Angle}
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+The Right Angle constraint allows designers to make 90 degree
+angles. Right angles are one of the most common geometric features of
+the artifacts I surveyed in
+Section~\ref{sec:formative-artifact}. Right angles are used to define
+not only the esthetic shape of a cutout, but also for making joints
+for combining parts.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+The gesture for making right angles looks like a half-square
+symbol. It is commonly used in pencil-and-paper sketching. The Right
+Angle recognizer looks for two short segments that meet at roughly a
+right angle. 
 
-What (if any) visual feedback is there?
+The gesture can be made in one or two strokes. It does not require
+users to draw these strokes in any particular way---only that the
+result looks like a half-square. Once it identifies two line segments
+that meet the requirements, it labels the corners as shown at the left
+panel of Figure~\ref{fig:right-angle}. This is done to check context
+around the gesture to determine which (if any) lines the right angle
+applies to.
 
-What actions are taken if it is positively recognized and not
-filtered?
+The context check looks for nearby line segments that are in the right
+location and orientation that supports recognition of a right angle
+constraint.  The following description uses tunable parameters
+summarized in Table~\ref{tab:right-angle-params}. 
 
-\subsection{Same angle}
+The context check finds nearby lines $T_0$ and $T_1$ that share a
+vertex and form an angle that is $90\pm\theta_0$ degrees. This
+requirement might cause the system to miss the intended target, but it
+also reduces the search space. If the user tries to constrain a line
+pair that meets at an overly obtuse angle, they may move vertices
+until they are approximately 90 degrees before applying the Right
+Angle gesture.
 
-What is it for? State obvious use quickly, and give detail on any
-non-obvious uses.
+The line pair's common vertex must be within $d$ pixels of corner $D$
+(depicted in Figure~\ref{fig:right-angle}). The lines must also have
+the appropriate position and orientation. Point $B$ must be within $d$
+px of $T_0$, $C$ within $d$ px of $T_1$, and the angles formed by
+$(T_0, line(AB))$ and $(T_1, line(AC))$ must be $90\pm\theta_1$ degrees.
 
-Recognition process: What kind of data does it use? What is the
-context-free recognition like? What context does it use?
+\input{fig-right-angle.tex}
+\input{tab-right-angle.tex}
 
-What (if any) visual feedback is there?
+The context checker reports one of three confidence levels for each
+nearby line pair: \textit{Yes}, \textit{Maybe}, or \textit{No} (see
+Fig.~\ref{fig:right-angle}). It reports \textit{Yes} if all
+constraints hold, \textit{Maybe} if all but one hold, and \textit{No}
+otherwise. If there is a tie (multiple Yes results, or multiple Maybes
+when there is not a Yes result) the one whose $T_0$--$T_1$
+intersection is closest to point $D$ is chosen.
 
-What actions are taken if it is positively recognized and not
-filtered?
