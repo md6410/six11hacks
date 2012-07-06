@@ -1,25 +1,108 @@
 \chapter{Conclusion}
 
+Rapid fabrication---3D printing, laser cutting, and many other
+processes---can support designers to make in ways that were not
+possible even ten years ago. But to realize this promise, machine
+access is not enough. Users need effective and appropriate design
+tools. 
 
-Start with a few paragraphs that recap everything. Basically just
-summarize the main takeaway of the preceding sections.
+Sketching is cited (often blithely) as a common and necessary part of
+the design process in various domains. Beginning in 1963 with
+Sutherland's Sketchpad system~\cite{sutherland-sketchpad}, researchers
+have developed sketching systems in many such areas, like mechanical
+engineering~\cite{lipson-correlation}, web site
+design~\cite{lin-denim}, and furniture
+production~\cite{oh-fab,saul-sketch-chair}. In this time there has
+been a great deal of work on sketch recognition and on isolated sketch
+based interaction techniques. But there has been little effort in
+exploring how all of this fundamental work can be integrated and
+presented as a coherent and useful whole to take on a real-world
+design problem.
+
+This thesis explored the role of sketch based interaction techniques
+as a basis for rapid fabrication design tools. I bridged the gap
+between an academic treatment of sketch based design and a useful and
+useable system. This work has included a literature review in design
+and computational support for sketching (Chapter~\ref{sec:rw} and the
+survey with my
+committee~\cite{johnson-sketch-review}). Chapter~\ref{sec:formative}
+explored the domain of design for laser cutting by studying both
+artist and the artifact. Last,
+Chapters~\ref{sec:overview}~and~\ref{sec:details} detailed my
+\textit{Sketch It, Make It} system that provides a solid example of
+how a sketch based system can present a set of sketch recognizers and
+(most importantly) interaction techniques to enable real people to do
+real work in a way that was previously not actualized.
+
+While I have made a prototype that many observers find compelling,
+there is still more work that could be done. It raises interesting
+ideas about what else is possible with this form of interaction,
+and questions remain unresolved.
+
+In this chapter I discuss how my work with SIMI can serve as a
+starting point for further work. First I discuss the implications SIMI
+has to research on sketch-based interaction and modeling. Next I will
+describe the most obvious next steps that I would like to take.
 
 \section{Implications to Related Areas}
 
-The important part of the thesis is the contributions. This is the
-spot to discuss the implications of SIMI for various interests. Talk
-about implications for:
+%% \item Rapid (or even \textit{slow}) fab
+%% \item Democratized design
+
+Laser cutters, 3D printers, CNC mills and so forth are called
+\textit{rapid} prototyping machines because they facilitate fast
+machinework. Often, software design tools are the
+bottleneck. Experienced professionals may have overcome the learning
+curve and mastered the software to use it quickly, but the majority of
+current (and certainly potential) users have not. Sketch based
+interaction might be one part of a new kind democratized design
+software that lets hobbyists and amateurs design and make with rapid
+fabrication machines.
+
+Inexpensive, widely available, and \textit{easy-to-use} rapid
+fabrication hardware and software has interesting
+consequences. Economically, it suggests a future where everyday people
+are capable of simply ``printing'' a new object (such as a door knob)
+when one is needed---which is obviously a topic of some concern for
+the hardware store. Socially, it gives regular people the ability to
+play an active role in the design, function, and production of
+everyday things---which is concerning to professional designers and
+engineers. While it is difficult to envision a world without hardware
+stores (or designers and engineers), desktop design and fabrication
+will have serious (and unpredictable) consequences.
+
+Sketch based interaction may be paired with other input paradigms to
+achieve unique results that would not be possible in isolation. While
+sketching, the user's non-dominant hand is free to perform other
+tasks. This can be leveraged to develop new ways to design. 
+
+Touch input is a topic of importance these days, with touch-sensitive
+devices like tablets and smart phones dominating the consumer
+electronics market. Sketching, paired with touch, has recently been
+shown to give compelling results~\cite{hinckley-pen-touch}. New
+technologies, such as Microsoft's distance-sensing Kinect, offer
+additional avenues that might be appropriate to mix with sketch-based
+input. Virtual reality hardware---special glasses that simulate 3D
+projection, volumetric displays, \textit{etc.}---could be used immerse
+designers in augmented reality design tools that lets people draw
+anything anywhere in physical space\cite{jung-lightpen}. These topics
+have been covered to various degrees, but the sketch interaction
+component has always been ad-hoc. I've given a solid example of one
+way to support such interaction, so we might have something to gain by
+revisiting some of these ideas. The input paradigms that pair
+sketching with something else (touch, gesture, VR) have hardly been
+explored enough to consider them known topics.
+
+Currently, sketch interaction is limited to devices that explicitly
+support pen interaction. But ongoing advances in sensing technology
+(e.g. Touché~\cite{sato-touche}) may allow arbitrary surfaces to
+accept sketch and touch input. Further, projection and display
+technology continues to advance. When every available wall and
+tabletop can display graphics and recognize sketch input, that has
+serious consequences for the future of interaction and design.
 
 \begin{itemize}
-\item Rapid (or even \textit{slow}) fab
-\item Democratized design
-\item New combinations of interaction:
-  \begin{itemize}
-  \item Sketching and touch
-  \item Sketching and visual gesture (e.g. Kinect)
-  \item Sketching and VR or AR
-  \item Sketching everywhere (walls, desks, tablets): can go beyond PC-at-a-desk design space
-  \end{itemize}
+
 \item Sketch Interaction and SBIM. 
   \begin{itemize}
   \item Must move beyond isolated toy demonstrations
@@ -37,6 +120,16 @@ about implications for:
 \end{itemize}
 
 \section{Future Work}
+
+% The most interesting research is that which leaves more questions
+% than it answered. Now that I have made a useful and usable system,
+% much of the feedback I receive is in the line of ``cool, but does it
+% recognize X? Can I do Y now?'' Sketch based modeling is made
+% possible by all the previous work on sketch recognition, but an
+% exploration of proper integrative interaction design was necessary
+% for it to move beyond the lab. This work allows SBIM to make that
+% transition, and opens up a lot of interesting questions and new
+% avenues for further work. 
 
 \begin{itemize}
 \item Commercialization is likely
