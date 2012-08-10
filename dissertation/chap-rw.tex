@@ -334,47 +334,6 @@ the task of computer recognition.
 %% Be sure to also talking about pragmatic vs. epistemic actions, and
 %% the tentative, explorational nature of design sketching.
 
-\section{Sketching Sytems for Fabrication}
-
-Makers of physical things sketch throughout their process. In the
-early phases, sketching is used to explore ideas, develop concepts,
-and gradually give detail as the final product comes into
-focus. Later, people annotate renderings and blueprints with freehand
-edits to indicate desired changes. An example of late-phase sketching
-is shown in Figure~\ref{fig:late-phase-annotate}. There is a strong
-tradition in physical design domains to sketch throughout the
-process---from concept generation through fabrication.
-
-\input{fig-late-phase-sketching.tex}
-
-This section discusses several sketch-based design tools that let
-people design objects for physical fabrication. One approach is let
-designers create perspective drawings of 3D
-objects~\cite{kara-3d-styling,lipson-correlation}. This is a common
-activity on paper, so it is an appealing activity to support. However,
-recognizing 3D topology from a 2D sketch is difficult because of
-\textit{Z ambiguity}: for any point on the $(x, y)$ plane, there is an
-infinite number of possible $z$ values. In Kara's automotive styling
-system~\cite{kara-3d-styling}, designer use specific sketch-based
-interaction techniques that result in unambiguous $z$ values. By
-contrast, Lipson's 3D modeling sketching
-tool~\cite{lipson-correlation} does not impose special techniques on
-the user, and instead attempts to derive $z$ values by searching a
-space of possible interpretations weighted by past observations of
-3D-to-2D reverse projections.
-
-The two 3D modeling systems described in the preceding paragraph use
-different approaches to manage ambiguity: In Kara's system, the
-approach is interaction design; in Lipson's, it is pased on perception
-and statistics. Researchers have found success with both
-approaches. SIMI is entirely based on interaction design.
-
-
-% Placeholder: I need to add a section that talks about the most
-% closely related SBIM systems for design and fabrication.
-
-\cite{bloomenthal-sketch-n-make,mori-plushie,oh-fab,saul-sketch-chair,song-modelcraft}
-
 \section{Hardware: Tablets and Pens}
 
 Now that I've discussed the role of sketching in design, and some of
@@ -436,6 +395,64 @@ Figure~\ref{fig:button-force}). Further, pressing a button on a
 computer stylus usually requires the user to adjust the pen in
 hand. This action may be distracting and uncomfortable for long term
 use.
+
+\section{Sketching Sytems for Fabrication}
+
+\textit{Sketch It, Make It} is a sketch-based tool for rapid
+fabrication. This section discusses similar design tools that let
+people design objects for physical fabrication. 
+
+Makers of physical things sketch throughout their process. In the
+early phases, sketching is used to explore ideas, develop concepts,
+and gradually give detail as the final product comes into
+focus. Later, people annotate renderings and blueprints with freehand
+edits to indicate desired changes. An example of late-phase sketching
+is shown in Figure~\ref{fig:late-phase-annotate}. There is a strong
+tradition in physical design domains to sketch throughout the
+process---from concept generation through fabrication.
+
+\input{fig-late-phase-sketching.tex}
+
+Designers often create perspective drawings of 3D objects. This is a
+common activity on paper, so it is an appealing activity to
+support. There are two primary approaches to sketching 3D objects:
+either draw in perspective, or draw 2D planar diagrams that correspond
+to a 3D product. Some researchers combine these approaches.
+
+In the first set (perspective drawing), some systems focus on giving
+the designer interaction techniques to form 3D
+shapes~\cite{kara-3d-styling,bloomenthal-sketch-n-make}, while others
+attempt to infer the 3D shape using statistics and perceptual
+rules~\cite{lipson-correlation}. 
+
+The second set (convert 2D drawings to 3D objects) is a natural fit
+with domains where the finished product is composed of flat
+sheets. Oh's \textit{Furniture Factory}~\cite{oh-fab}, and Saul and
+\textit{et. al}'s \textit{SketchChair}~\cite{saul-sketch-chair} tools
+let designers draw and fabricate furniture. Sketching is done in a 2D
+window, and is mapped to a 3D representation that lets the user see
+their composition. In both systems, the system uses domain knowledge
+to make the process possible. For example, Furniture Factory will
+create appropriate joints where two parts meet. SketchChair does the
+same while adding a physics and ergonomic simulation to see if the
+chair will fall over and be comfortable to sit in.
+
+A combined approach is demonstrated in
+\textit{Plushie}~\cite{mori-plushie}. The user designs plush toys in a
+3D environment similar to Teddy~\cite{igarashi-teddy} and applies
+textures as desired. The shape will eventually be fabricated from
+actual cloth, involving cutting and sewing. Plushie shows the user the
+2D cutout patterns associated with the 3D model. These cutouts can't
+be edited directly, but it does give a sense of how much work is
+involved with physical production.
+
+In contrast with the systems mentioned above, Song's
+\textit{ModelCraft}~\cite{song-modelcraft} system lets designers
+sketch on physical objects to edit virtual models. The objects are
+covered in (or composed of) Annoto paper. This paper has a dot pattern
+that is visible to a special pen that identifies where the pen is
+drawing. ModelCraft users can annotate or edit virtual objects using
+different color ink. 
 
 \section{Sketch Recognition}
 
@@ -806,4 +823,23 @@ interpretation. Mankoff \textit{et. al} call this process
 pick-list of choices or visually indicating the ambiguity. Other
 mediators automatically execute and do not involve the user. SIMI
 uses this automatic way to disambiguate contending interpretations.
+
+Another way to manage ambiguity is to prevent it from arising in the
+first place. Some sketching systems let designers model 3D
+objects. Recognizing 3D topology from a 2D sketch is difficult because
+of \textit{Z ambiguity}: for any point on the $(x, y)$ plane, there is
+an infinite number of possible $z$ values. In Kara's automotive
+styling system~\cite{kara-3d-styling}, designers use specific
+sketch-based interaction techniques to achieve unambiguous $z$
+values. By contrast, Lipson's 3D modeling sketching
+tool~\cite{lipson-correlation} does not impose special techniques on
+the user, and instead attempts to derive $z$ values by searching a
+space of possible interpretations weighted by past observations of
+3D-to-2D reverse projections.
+
+The two 3D modeling systems described in the preceding paragraph use
+different approaches to manage ambiguity: In Kara's system, the
+approach is interaction design; in Lipson's, it is pased on perception
+and statistics. Researchers have found success with both
+approaches. SIMI is entirely based on interaction design.
 
