@@ -334,12 +334,46 @@ the task of computer recognition.
 %% Be sure to also talking about pragmatic vs. epistemic actions, and
 %% the tentative, explorational nature of design sketching.
 
-\section{Sketching Sytems for Design and Fabrication}
+\section{Sketching Sytems for Fabrication}
 
-Placeholder: I need to add a section that talks about the most closely
-related SBIM systems for design and fabrication.
+Makers of physical things sketch throughout their process. In the
+early phases, sketching is used to explore ideas, develop concepts,
+and gradually give detail as the final product comes into
+focus. Later, people annotate renderings and blueprints with freehand
+edits to indicate desired changes. An example of late-phase sketching
+is shown in Figure~\ref{fig:late-phase-annotate}. There is a strong
+tradition in physical design domains to sketch throughout the
+process---from concept generation through fabrication.
 
-\cite{anastacio-plant-sketching,bae-everybody,bae-ilovesketch,bailey-demais,bloomenthal-sketch-n-make,chen-sketching-reality,crayon-physics-deluxe,davis-k-sketch,do-design-sketches-tools,gross-boe,gross-stretch-a-sketch,igarashi-pegasus,igarashi-rigid,igarashi-suggestive,igarashi-teddy,kara-3d-styling,laviola-mathpad,liao-papiercraft-tochi,lin-denim,lipson-correlation,masry-3d-sketch,mitani-3d-sketch,mori-plushie,nealen-fibermesh,oh-fab,saul-sketch-chair,saund-scanscribe,song-modelcraft,sutherland-sketchpad,tsang-3d-sketching,zeleznik-lineogrammer}
+\input{fig-late-phase-sketching.tex}
+
+This section discusses several sketch-based design tools that let
+people design objects for physical fabrication. One approach is let
+designers create perspective drawings of 3D
+objects~\cite{kara-3d-styling,lipson-correlation}. This is a common
+activity on paper, so it is an appealing activity to support. However,
+recognizing 3D topology from a 2D sketch is difficult because of
+\textit{Z ambiguity}: for any point on the $(x, y)$ plane, there is an
+infinite number of possible $z$ values. In Kara's automotive styling
+system~\cite{kara-3d-styling}, designer use specific sketch-based
+interaction techniques that result in unambiguous $z$ values. By
+contrast, Lipson's 3D modeling sketching
+tool~\cite{lipson-correlation} does not impose special techniques on
+the user, and instead attempts to derive $z$ values by searching a
+space of possible interpretations weighted by past observations of
+3D-to-2D reverse projections.
+
+The two 3D modeling systems described in the preceding paragraph use
+different approaches to manage ambiguity: In Kara's system, the
+approach is interaction design; in Lipson's, it is pased on perception
+and statistics. Researchers have found success with both
+approaches. SIMI is entirely based on interaction design.
+
+
+% Placeholder: I need to add a section that talks about the most
+% closely related SBIM systems for design and fabrication.
+
+\cite{bloomenthal-sketch-n-make,mori-plushie,oh-fab,saul-sketch-chair,song-modelcraft}
 
 \section{Hardware: Tablets and Pens}
 
