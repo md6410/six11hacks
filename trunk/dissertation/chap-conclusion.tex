@@ -1,10 +1,10 @@
 \chapter{Conclusion}
 
 Rapid fabrication---3D printing, laser cutting, and many other
-processes---can support designers to make in ways that were not
+processes---can support designers to create in ways that were not
 possible even ten years ago. But to realize this promise, machine
 access is not enough. Users need effective and appropriate design
-tools. 
+tools.
 
 Sketching is cited (often blithely) as a common and necessary part of
 the design process in various domains. Beginning in 1963 with
@@ -76,93 +76,170 @@ achieve unique results that would not be possible in isolation. While
 sketching, the user's non-dominant hand is free to perform other
 tasks. This can be leveraged to develop new ways to design. 
 
-Touch input is a topic of importance these days, with touch-sensitive
+Touch input is a current topic of importance, with touch-sensitive
 devices like tablets and smart phones dominating the consumer
 electronics market. Sketching, paired with touch, has recently been
 shown to give compelling results~\cite{hinckley-pen-touch}. New
 technologies, such as Microsoft's distance-sensing Kinect, offer
 additional avenues that might be appropriate to mix with sketch-based
 input. Virtual reality hardware---special glasses that simulate 3D
-projection, volumetric displays, \textit{etc.}---could be used immerse
-designers in augmented reality design tools that lets people draw
-anything anywhere in physical space\cite{jung-lightpen}. These topics
-have been covered to various degrees, but the sketch interaction
-component has always been ad-hoc. I've given a solid example of one
-way to support such interaction, so we might have something to gain by
-revisiting some of these ideas. The input paradigms that pair
-sketching with something else (touch, gesture, VR) have hardly been
-explored enough to consider them known topics.
+projection, volumetric displays, \textit{etc.}---could be used to
+immerse designers in augmented reality design tools that lets people
+draw anything anywhere in physical space~\cite{jung-lightpen}. These
+topics have been covered to various degrees, but the sketch
+interaction component has always been ad-hoc. I've given a solid
+example of one way to support such interaction, so we might have
+something to gain by revisiting some of these ideas. The input
+paradigms that pair sketching with something else (touch, gesture, VR)
+have hardly been explored enough to consider them known topics.
 
 Currently, sketch interaction is limited to devices that explicitly
 support pen interaction. But ongoing advances in sensing technology
-(e.g. Touché~\cite{sato-touche}) may allow arbitrary surfaces to
+(e.g. Touch\'e~\cite{sato-touche}) may allow arbitrary surfaces to
 accept sketch and touch input. Further, projection and display
 technology continues to advance. When every available wall and
 tabletop can display graphics and recognize sketch input, that has
 serious consequences for the future of interaction and design.
 
-\begin{itemize}
 
-\item Sketch Interaction and SBIM. 
-  \begin{itemize}
-  \item Must move beyond isolated toy demonstrations
-  \item Must move beyond ``works on my computer'' demos. This does not
-    promote building on prior work due to technical difficulty in
-    replicating other work
-  \item Interaction is one of the glaring missing links
-  \item SIMI gives and example of a useful and usable
-    \textit{system}. Its value is its coherence.
-  \item If we have a platform for research, a common starting point
-    for building things, we explore what this mode of interaction can
-    do. But we have to be brave and have vision. Have to move beyond
-    slavish attendance to statistics and laboratory user studies.
-  \end{itemize}
-\end{itemize}
+%% \begin{itemize}
+
+%% \item Sketch Interaction and SBIM. 
+%%   \begin{itemize}
+%%   \item Must move beyond isolated toy demonstrations
+%%   \item Must move beyond ``works on my computer'' demos. This does not
+%%     promote building on prior work due to technical difficulty in
+%%     replicating other work
+%%   \item Interaction is one of the glaring missing links
+%%   \item SIMI gives and example of a useful and usable
+%%     \textit{system}. Its value is its coherence.
+%%   \item If we have a platform for research, a common starting point
+%%     for building things, we explore what this mode of interaction can
+%%     do. But we have to be brave and have vision. Have to move beyond
+%%     slavish attendance to statistics and laboratory user studies.
+%%   \end{itemize}
+%% \end{itemize}
 
 \section{Future Work}
 
-% The most interesting research is that which leaves more questions
-% than it answered. Now that I have made a useful and usable system,
-% much of the feedback I receive is in the line of ``cool, but does it
-% recognize X? Can I do Y now?'' Sketch based modeling is made
-% possible by all the previous work on sketch recognition, but an
-% exploration of proper integrative interaction design was necessary
-% for it to move beyond the lab. This work allows SBIM to make that
-% transition, and opens up a lot of interesting questions and new
-% avenues for further work. 
+The most interesting research is that which leaves more questions than
+it answered. Having built a useful and useful system for laser cut
+designs, much of the feedback I receive focuses on additional
+features. Observers commonly would like to see a tool like SIMI for
+some other domain, such as for 3D modeling.
 
-\begin{itemize}
-\item Commercialization is likely
-\item Most immediate next steps would be:
-  \begin{itemize}
-  \item Support 'doodle' ink: not recognized but may be important
-  \item Handwriting recog. for dimension values
-  \item More constraint types (e.g. parallel, centered)
-  \item Way to visualize how 2D parts compose to make 3D thing
-  \end{itemize}
-\item Machine learning
-  \begin{itemize}
-    \item Learning user preferences, drawing styles
-    \item Learning ad-hoc syntax
-    \item Learning organizational preferences (e.g. cultural norms in
-      company/domain)
-  \end{itemize}
-\item Domain-specific improvements (for laser cutting)
-  \begin{itemize}
-  \item Kerf
-  \item Have a library of common joint types
-  \item Optimize use of material
-  \item Versioning of parts
-  \end{itemize}
-\item Possibiliities beyond laser cutting:
-  \begin{itemize}
-  \item 3D modelling
-  \item 2D graphic design (illustrations or cartooning)
-  \item Other design domains: architecture, mechanical engineering,
-    software development
-  \item Classroom or academic uses: mathematical graphs, physics
-    simulation, box-and-arrow diagrams
-  \item Essentially any domain that makes use of structured or
-    semi-structured diagrams
-  \end{itemize}
-\end{itemize}
+\subsection{Common Feature Requests}
+
+It is likely that Sketch It, Make It (or something like it) will be
+commercialized soon. We have accumulated a long list of feature
+requests that can serve as a starting point for the next set of
+additional features. 
+
+Users like the paper-like feel of the tool, and would prefer to have
+the ability to add ink that is not recognized. This enables designers
+to explore freely, as they would on paper, while still having the
+ability to use these unrecognized portions in future work.
+
+Handwriting recognition is another commonly requested feature. This
+was intentionally not included in the current prototype because it
+would have required a substantial time investment without a
+correspondingly substantial payout. Handmade numbers and text could be
+applied to give dimensions and labels to parts of a drawing.
+
+Users also request additional constraints, for example making two
+lines parallel, or making an object appear at the midpoint between two
+others. This would allow a wider and richer range of output.
+
+Another feature that would likely make SIMI much more useful is the
+ability to assemble 3D constructions from 2D parts. This would let
+users see the relationship between the 2D parts they have designed and
+the final 3D output. This can be useful, for example, to identify
+stylistic or assembly problems before spending time and material on
+the laser cutter.
+
+\subsection{Machine Learning Improvements}
+
+SIMI was built on the idea that it is generally better to give users
+interaction techniques to state their intentions, rather than using
+machine learning routines to deduce what the user wants. However,
+there are a number of cases where machine learning could be used to
+make the overall user experience better.
+
+Each user has a drawing style that is different from any other. The
+differences can be subtle, or might be substantial. In keeping with
+the paper-like interface, an intelligent agent could watch the user
+draw and learn their particular style and preferences. For example, if
+a user consistently fails to make the erase gesture correctly, their
+preferred erasure gesture could be learned and applied (without
+asking). The user could also teach the system new gestures entirely,
+providing new syntax directly.
+
+Sometimes companies or other organizations adopt conventions. These
+conventions may be common within that community but not typically
+found outside. SIMI could learn these social norms, and understand
+when to apply them.
+
+\subsection{Domain Specific Improvements}
+
+Laser cutters and similar machines (water jet, plasma, CNC mills)
+share common properties. If the software could account for these
+properties, the user could incorporate them into their designs. An
+obvious property of laser cutters is the \textit{kerf}---the width of
+the cut path. The laser cutter used throughout SIMI's development
+typically leaves a kerf of approximately 0.4mm. When designing
+press-fit notches for rigid material that is 3mm thick, the kerf size
+is a significant concern. If the tool understood that certain geometry
+was sensitive to kerf thickness, the software could save the user time
+and material costs by making more accurate cuts.
+
+The press-fit notch just mentioned is just one type of
+joint. Currently SIMI does not include a concept of joints. If it did,
+the user would be able to indicate where joints should exist, between
+which parts, what the material properties are---and the software would
+take care of the rest.
+
+Material use is another important consideration, both because it costs
+money, and because supplies are often limited. For example, Ponoko
+sells 15''x15'' squares of acrylic for between \$8 and \$28 depending
+on how thick it is. To make more efficient use of material, the
+software could perform intelligent cutfile layout with a shape-packing
+algorithm. If the system knows where a piece of material has holes,
+the algorithm could also place new parts on used material.
+
+Assemblies often have a lot of parts, and it can frustrate users when
+trying to determine which part goes where. The tool could etch part
+numbers (or joint labels) into the material to aid assembly.
+
+\subsection{Beyond Laser Cutting}
+
+In this work, I set out to demonstrate how a set of interaction
+techniques designed to be used together to make a useful and useable
+system, and show that sketch-based interaction should be taken
+seriously, particularly as a paradigm for doing design. To do this I
+picked a specific domain---laser cutting---but there are other domains
+that would have been appropriate as well. 
+
+3D modeling is an obvious choice. Physical objects are necessarily
+three dimensional, and designers often sketch them in
+perspective. There are interesting challenges associated with ``3D
+sketching'', and many others are working on these research topics.
+
+2D applications will be easier to write based on SIMI's current
+implementation. Graphic design applications like illustrations,
+diagrams, logos, T-shirt designs, or cartooning are areas that SIMI's
+interaction would likely be appropriate.
+
+Teachers famously draw on chalkboards or whiteboards to illustrate
+concepts in many areas, from physics to mathematics. A sketch-based
+education system might be a useful tool for teaching STEM topics at
+all levels---primary, secondary, and post-secondary education.
+
+The techniques presented in this disseration could potentially be used
+in any domain that makes use of structured or semi-structured
+diagrams. It could be used to think about ideas, generate concepts. Or
+it could be a communication tool used to work with others in ongoing
+design projects. Or sketch-based design could simply be used as a
+fast, efficient method of specifying the designer's intent to create
+finished output.
+
+
