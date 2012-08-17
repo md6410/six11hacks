@@ -2,52 +2,57 @@
 
 Nearly everything around us has been \textit{designed} and
 \textit{built}. With mass production, a single design can be
-replicated many times. For example, a company might design a coat rack
-and build 200,000 copies. This model of coat rack is likely to be good
-enough for its users, and while they might prefer this or that to be
-different, it lets them hang up their coats and get on with their
-lives---all for less than \$30. But what if the user \textit{could}
-indicate exactly what they want for the same price?
+replicated many times. This keeps prices low and quality consistent,
+but users must be content with what the designer and manufacturer have
+done.
 
-Machines like 3D printers, CNC mills, and laser cutters are beginning
-to give us a glimpse of what the future might hold. Today, a
-knowledgable person can design and ``print'' parts for a coat rack on
-rapid prototyping machines. And if the designer finds they want to
-change something, they can simply print a revised model. While this is
-not as cost-effective as buying an ``almost good enough''
-mass-produced coat rack at a store, it does enable the consumer to
-directly engage themselves with the design and production of the item.
+But what if the user could indicate exactly what they want for the
+same price and quality? Machines like 3D printers, CNC mills, and
+laser cutters are beginning to give us a glimpse of what the future
+might hold. Today, a knowledgeable person can design and ``print''
+parts on rapid prototyping machines. And if the designer finds they
+want to change something, they can simply print a revision. While this
+is currently not as cost-effective as buying an ``almost good enough''
+mass-produced coat rack at a store, it does enable the user to
+directly engage in designing and making.
 
 Rapid prototyping is a new technological phenomenon with economic and
 social consequences. The machinery that enables regular people to
 ``print'' objects at home was unavailable ten years ago: either it was
-too expensive, or it had not been invented yet. The current crop of
-rapid prototyping machinery is still too expensive for most people to
-buy for personal use. And today's machines produce adequate (but not
-typically compelling) output. Happily, this is quickly changing as
-price decreases while quality improves. It is interesting to see a new
-technology that enables new activities---some that we can predict, but
-others that we can't yet clearly see. It is conceivable that we are
-witnessing the beginning of a shift from an economy entirely based on
-\textit{mass production} to one that includes \textit{mass
-  customization}.
+too expensive, or it had not yet been invented. 
 
-Rapid fabrication gives many people the opportunity to design and
-build things when there was no opportunity before. In the mass
-production model, people are merely consumers. Rapid fabrication
-enables people to play an active role in designing and constructing
-the world around them. But the machines, alone, are insufficient: a
-human must tell them what to make. To support this, people need
-adequate design tools.
+Currently available prototyping machinery is still too expensive for
+most people to buy for personal use. But this likely this will change
+in the coming years as more machines become available. The market for
+rapid fabrication machines is growing quickly: according to industry
+analysts, the market for laser cutters will exceed \$3.8 billion by
+2015, and the 3D printer market will reach \$3.1 billion by
+2016~\cite{laser-cutter-market,3d-printer-market}.
+
+Today's machines produce adequate (but not typically compelling)
+output. This is quickly changing as price decreases while quality
+improves. We are witnessing the start of a technology that enables new
+activities---some that we can predict, but others that we can't yet
+clearly see. It is conceivable that we are witnessing the beginning of
+a shift from an economy entirely based on \textit{mass production} to
+one that includes \textit{mass customization}.
+
+Rapid fabrication gives many people the ability to design and build
+things when there was no opportunity before. In the mass production
+model, people are merely consumers. Rapid fabrication enables people
+to play an active role in designing and constructing the world around
+them. \textit{However, the machines, alone, are insufficient: a human
+  must tell them what to make. To support this, people need adequate
+  design tools}.
 
 This dissertation addresses the observation that people need adequate
 design tools if they are to effectively use rapid fabrication
 machines. Current modeling software targets users who go to school to
 learn how to design and use design software. However, most people can
-not dedicate that much time to learn the intricacies and gotchas for
-design software.
+not dedicate that much time to learn the intricacies of design
+software.
 
-% TODO: get a higher rez version of this picture
+% TODO: get a higher re version of this picture
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.9\linewidth]{img/simi-with-cintiq.png}
@@ -57,24 +62,38 @@ design software.
   \label{fig:simi-intro}
 \end{figure}
 
-While someone might a hard time using professional design software, it
-is likely that person can \textit{draw} using pencil and paper to
-communicate their ideas with other people. Even if the freehand sketch
-is rough, it is an effective method to express ideas about the shape
-of objects and how they relate to one another.
+While someone might have difficulty using professional design
+software, it is likely that person can \textit{draw} using pencil and
+paper to communicate their ideas with other people. Even if the
+freehand sketch is rough, it is an effective method to express ideas
+about the shape of objects and how they relate to one another.
 
-Researchers have tried to leverage sketching as a computational medium
-for at least half a century, and despite many interesting prototypes,
-we have yet to see this effort move beyond academic laboratories. I
-believe the critical element missing from this body of work is the
-lack of a \textit{system of interaction design} for sketch-based
-tools.
+\section{Thesis Statement and Contributions} 
 
-In this dissertation, I fill this missing space by describing a
-\textit{useful} and \textit{usable} modeling tool that exemplifies a
-\textit{coherent set of sketch-based interaction techniques}. The
-software, \textit{Sketch It, Make It (SIMI)}, lets people design
-precise items for laser cutters. 
+\begin{quote}
+\textbf{Thesis Statement}: It is possible to create a useful and
+usable 2D modeling tool precision design that depends entirely on
+sketch-based interaction techniques.
+\end{quote}
+
+Researchers have attempted to leverage sketching as a computational
+medium for at least half a century, but we have yet to see this effort
+move beyond academic laboratories. A critical element missing from
+this body of work is the lack of a \textit{system of interaction
+  design} for sketch-based tools.
+
+I offer several \textbf{Contributions} to support my thesis. First, I
+present a coherent set of sketch-based interaction techniques that
+enables users to make precise designs using only a stylus. Second, I
+developed several new interaction techniques including Flow
+Selection~\cite{johnson-flow-selection}. Last, I offer a recognition
+and disambiguation architecture that aims to support fast and
+user-friendly interaction design.
+
+These contributions are embodied in a \textit{useful} and
+\textit{usable} modeling tool called \textit{Sketch It, Make It
+  (SIMI)} that lets people design precise items for laser
+cutters.
 
 \section{Intended Audience}
 
