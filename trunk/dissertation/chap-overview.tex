@@ -65,7 +65,7 @@ are becoming inexpensive enough for schools and hacker spaces to own.
 Laser cut designs are composed of parts cut from solid, flat material
 and assembled in various ways: laminated, notched, bolted together,
 \textit{etc}. Various materials require different laser speed and
-intensity settings to achieve a quality cut. The designe uses a
+intensity settings to achieve a quality cut. The designer uses a
 software application to specify part shapes for laser cutting. The
 software outputs vector graphics called a ``cut file'' that defines
 these shapes. As most joints have small margins of error, lengths,
@@ -80,7 +80,7 @@ whose tolerances are small with respect to kerf. A notch joint, for
 example, is ineffective if it is 0.1 mm too large or small.
 
 
-\section{Motivating Scenario: Pictureframe Holder}
+\section{Motivating Scenario: Picture frame Holder}
 
 \input{fig-picture-frame.tex}
 
@@ -118,7 +118,7 @@ length: We draw tick marks on each segment, and right-angle braces to
 keep the notch perpendicular to the edge of the part. The notches must
 have exactly the right dimensions: too wide, the top parts will
 wobble; too narrow and they will not fit. We size the notch by
-overtracing its segments and entering fixed dimensions
+over-tracing its segments and entering fixed dimensions
 (Figure~\ref{fig:motivating}c).
  
 We drag the base part (twice) and the support part (five times) to
@@ -145,7 +145,7 @@ identified as primitive sub-shapes like lines, curves, and so forth.
 SIMI must be able to dependably \textbf{recognize user input}.
 Because input is often made quickly and inaccurately, occasional
 recognition errors can not be avoided. There are several kinds of
-recognized elements. Input might be linework that specifies the
+recognized elements. Input might be line work that specifies the
 model's geometry. Or, input might be identified as a gesture that
 edits the model by removing ink or adding constraints. Last, input
 might be as part of a multi-stroke phrase that controls the modeling
@@ -199,7 +199,7 @@ another.
 SIMI gives visual feedback when appropriate which helps to resolve
 possible conflicts. For example, a selected point will move if a
 gesture begins nearby. Without visual feedback that the pen is near
-enough, it was easy to inadvertently draw linework when the intention
+enough, it was easy to inadvertently draw line work when the intention
 was to move the point.
 
 The interaction techniques have conservative failure states. The
@@ -242,8 +242,8 @@ label SIMI's interaction as \textit{modeless}.
 One property that characterizes sketch based systems is \textit{when}
 recognition is performed (see
 Section~\ref{sec:recognition-when}). Many sketch based design tools
-operate in batch mode, where a substantual amount of raw ink is
-analyzed at the same time. The rationalle for this approach is that
+operate in batch mode, where a substantial amount of raw ink is
+analyzed at the same time. The rationale for this approach is that
 recognizers have more data (unrecognized ink) to work with and can use
 statistical methods to generate the most likely interpretations for
 the entire sketch.
@@ -269,7 +269,7 @@ latching. The third kind of recognizer is triggered after a period of
 inactivity (currently 1.5 seconds). The user may optionally press a
 button with their non-dominant hand to invoke these recognizers on
 demand. These recognizers include those that establish constraints
-like right angles, or create linework like circles and splines. This
+like right angles, or create line work like circles and splines. This
 last type is called \textit{Delayed} because it does not happen
 immediately after the pen lifts.
 
@@ -311,7 +311,7 @@ Dynamic recognizer might change how the current ink stroke is drawn.
 
 \subsection{Pen Up Recognizers}
 
-If no Dynamic reconizer claimed an ink stroke, it is processed by the
+If no Dynamic recognizer claimed an ink stroke, it is processed by the
 Pen Up recognizers when the user lifts the stylus. The first step is
 to parse the raw ink to identify corners and segments. The
 implementation details of SIMI's corner finder are given in
@@ -375,7 +375,7 @@ results are valid, as long as they are composed of different
 strokes. This makes it possible, for example, to issue two Right Angle
 gestures and a Same Length command in the same batch, all of which can
 be recognized. If two potential results involve some of the same
-segments, SIMI eploys the same resolution process from the Pen Up
+segments, SIMI employs the same resolution process from the Pen Up
 recognizer step.
 
 When conflicts are resolved, there may be zero, one, or more positive
@@ -385,7 +385,7 @@ action renders another action nonsensical), but this situation has not
 been relevant in the current system.
 
 Any segments that are not associated with positive recognizer results
-are interpreted as geometry. This is how the user creates linework
+are interpreted as geometry. This is how the user creates line work
 that define laser cut parts. This geometry is then included in the
 model with definite identities, which are used in later recognition
 processes.
@@ -400,7 +400,7 @@ named because they are given textual labels that allow other entities
 to refer to them by name. This makes it easier to debug and to store
 the model to disk. 
 
-\textit{Segments} are a patches of linework. They must be one of the
+\textit{Segments} are a patches of line work. They must be one of the
 types listed in Table~\ref{tab:segment-types}. All segments are
 composed (at least partly) by named points. If the named points change
 locations, the segment's geometry is automatically changed as

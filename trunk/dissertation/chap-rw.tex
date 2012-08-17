@@ -24,8 +24,8 @@ goods~\cite{paulos-citizenscience}. For example, companies such as
 Ponoko fabricate and send users physical output based on digital
 models uploaded over the web.
 
-Rapid prototying machines are used in many domains: mechanical
-engineering, architecture, craftwork, industrial design, to name a
+Rapid prototyping machines are used in many domains: mechanical
+engineering, architecture, craft work, industrial design, to name a
 few. While many users of these machines are professional, a growing
 population of Makers are not necessarily educated to design and build
 things. Instead, members of this Maker group might be better described
@@ -34,7 +34,7 @@ do not necessarily have a great abundance of time or money.
 
 \subsection{Rapid Fabrication Machines}
 
-The software modelling tool discussed later in this thesis targets
+The software modeling tool discussed later in this thesis targets
 laser cutters, which are just one particular type of rapid fabrication
 machine. I will first describe the broader area of rapid fabrication
 in order to situate the specific machine in question.
@@ -45,7 +45,7 @@ machines were introduced in the 1950s that ran programs encoded on
 punched tape. \textit{Computer Numerical Control (CNC)} introduces a
 computer, capable of performing conditional execution soon
 followed. Modern CNC machines are found anywhere from large automobile
-factories (e.g. as sophisticated robots) to the homebrewed 3D printer
+factories (e.g. as sophisticated robots) to the home-brewed 3D printer
 set up in the hobbyist's garage.
 
 When applied to CNC machines, the terms ``rapid fabrication'' and
@@ -71,21 +71,21 @@ of computer controlled manufacturing machines. In many (but not all)
 cases, software tools can compute tool paths automatically. Designers
 must consider a machine's capabilities.
 
-SIMI targets design for laser cutters. This tool was chosen for
-several reasons. First, tool path concerns are nearly
-non-existant. Second, a laser cutter executes quickly, giving me a
-faster loop of coding, testing, and debugging. Cutting the parts for a
-toothbrush holder, for example, takes about five minutes on the
-machine in our lab, but our 3D printer would take several hours to
-make a similar object. Last, Laser cutters are among the more popular
-rapid fabrication machines.
-
 They can be thought of as a very fast, strong, and precise
 automated razor blade, cutting through flat material (paper, wood,
 plastic, metal, etc.) from directly above. Many items can be made
 entirely with a laser cutter, aside from the occasional screw or
 glue. Figure~\ref{fig:laser-example} shows several examples of useful
 items made with laser cutters. % TODO get good examples
+
+SIMI targets design for laser cutters. This tool was chosen for
+several reasons. First, problems related to tool paths are nearly
+non-existent. Second, a laser cutter executes quickly, giving me a
+faster loop of coding, testing, and debugging. Cutting the parts for a
+toothbrush holder, for example, takes about five minutes on the
+machine in our lab, but our 3D printer would take several hours to
+make a similar object. Last, laser cutters are among the more popular
+rapid fabrication machines.
 
 The user places material on the laser cutter's \textit{cut
   bed}. Typical sizes for cut beds are in the range of 12''x 18'' to
@@ -105,10 +105,13 @@ our formative study (see Section~\ref{sec:formative-interviews}) had a
 hard time using Illustrator quickly and effectively because they spent
 a great deal of effort looking for appropriate functions among the
 many features that are irrelevant to laser cutters. Specialized CAD
-tools like Rhino or SolidWorks are perhaps more appropriate for this
-kind of modeling but they also have a substantial learning curve. If
-rapid fabrication is to become common, appropriate modeling tools must
-be made accessible to ordinary users~\cite{lipson-homefactory}.
+tools like Rhino or SolidWorks (see Figure~\ref{fig:cad-screenshots})
+are perhaps more appropriate for this kind of modeling but they also
+have a substantial learning curve. If rapid fabrication is to become
+common, appropriate modeling tools must be made accessible to ordinary
+users~\cite{lipson-homefactory}.
+
+\input{fig-cad-screenshots.tex}
 
 \section{Design Sketching}
 
@@ -144,7 +147,7 @@ sketching~\cite{myers-behavior-design}. We must understand the purpose
 and practice of sketching as it is done \textit{without} computation
 if we hope to effectively support it \textit{with} computation.
 
-% Karolina's project management and Shaun's floorplan diagram.
+% Karolina's project management and Shaun's floor plan diagram.
 \input{fig-projman-arch-diagrams.tex}
 
 While designing, we iteratively explore and refine the problem
@@ -248,7 +251,7 @@ dimensions and units, annotations, region texturing, and so on. Some
 parts of a sketch are more dense and replete than others. For example
 a diode's properties do not change if it is drawn with a slightly
 larger triangle. However, subtle variations in how a desk lamp is
-drawn might lead to substantially different aesthetic responses to it.
+drawn might lead to substantially different esthetic responses to it.
 
 % Stick figures: dense and replete
 \input{fig-dense-replete-stick-figures.tex}
@@ -332,7 +335,7 @@ a human (overloaded semantics, ambiguous, imprecise, etc.) complicate
 the task of computer recognition.
 
 %% Be sure to also talking about pragmatic vs. epistemic actions, and
-%% the tentative, explorational nature of design sketching.
+%% the tentative, exploration al nature of design sketching.
 
 \section{Hardware: Tablets and Pens}
 
@@ -396,7 +399,7 @@ computer stylus usually requires the user to adjust the pen in
 hand. This action may be distracting and uncomfortable for long term
 use.
 
-\section{Sketching Sytems for Fabrication}
+\section{Sketching Systems for Fabrication}
 
 \textit{Sketch It, Make It} is a sketch-based tool for rapid
 fabrication. This section discusses similar design tools that let
@@ -449,7 +452,7 @@ involved with physical production.
 In contrast with the systems mentioned above, Song's
 \textit{ModelCraft}~\cite{song-modelcraft} system lets designers
 sketch on physical objects to edit virtual models. The objects are
-covered in (or composed of) Annoto paper. This paper has a dot pattern
+covered in (or composed of) Anoto paper. This paper has a dot pattern
 that is visible to a special pen that identifies where the pen is
 drawing. ModelCraft users can annotate or edit virtual objects using
 different color ink. 
@@ -643,7 +646,7 @@ Requires detailed domain knowledge and reasoning. \\ \hline
 \end{table}
 \end{landscape}
 
-% TODO: make the table relevant to simi
+% TODO: make the table relevant to SIMI
 
 \subsection{Segmentation and grouping}
 \label{sec:recognition-segmentation}
@@ -718,7 +721,7 @@ multi-stroke strategies because user input is clearly divided into
 pieces. This process could be relatively simple: a multi-stroke
 recognizer might simply expect multi-stroke objects to be drawn in a
 prescribed fashion. Or, multi-stroke recognizers might be more
-complex, for example calculating the liklihood that distinct strokes
+complex, for example calculating the likelihood that distinct strokes
 (or segments) belong together. SIMI uses both single- and multi-stroke
 recognizers for different purposes.
 
@@ -839,7 +842,7 @@ space of possible interpretations weighted by past observations of
 
 The two 3D modeling systems described in the preceding paragraph use
 different approaches to manage ambiguity: In Kara's system, the
-approach is interaction design; in Lipson's, it is pased on perception
+approach is interaction design; in Lipson's, it is based on perception
 and statistics. Researchers have found success with both
 approaches. SIMI is entirely based on interaction design.
 

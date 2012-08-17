@@ -32,7 +32,7 @@ Figure~\ref{fig:distance-measures}.
 
 \input{fig-distance-measures.tex}
 
-SIMI's ink parsing strategy is simpler than many other approches from
+SIMI's ink parsing strategy is simpler than many other approaches from
 the SBIM literature. Others, like the strategies taken by
 Sezgin~\cite{sezgin-early-processing} or Wolin~\cite{wolin-smr},
 combine both \textit{time} and \textit{curvature} information when
@@ -44,7 +44,7 @@ assigns a curvature value to each point. Next, a corner finder uses
 this data to identify which (if any) points along the stroke are
 corners. Last, the system analyzes the regions between corners to
 determine the most likely segment type. The output of this process is
-the set of segmets formed in the last step. I will detail each of
+the set of segments formed in the last step. I will detail each of
 these steps now.
 
 \subsection{Curvature}
@@ -111,7 +111,7 @@ beginning to the end of the cluster is 9, the corner is the point in
 the cluster that is nearest to the interpolated point 4.5 units from
 the cluster beginning. 
 
-In addition to the corners discoved in this process, the stroke's
+In addition to the corners discover in this process, the stroke's
 first and last points are also included as `corners'. This is for the
 convenience of the next step where segments are identified.
 
@@ -126,7 +126,7 @@ segment finders are identified by examining the raw ink directly, and
 do not use corner data.
 
 Like semantic sketch recognizers, it is possible for multiple segment
-finders to positivly identify ink. To mitigate this, segment finders
+finders to positively identify ink. To mitigate this, segment finders
 operate on a priority system. The priority is: Dot, Circle, Ellipse,
 Blob, Line, Arc, and Spline. In other words, if the Dot finder
 identifies a dot, there is no possibility of the associated ink being
@@ -155,7 +155,7 @@ divided by the hull's area. If $ratio/(0.3 + density)$ is less than
 \subsubsection{Circle and Ellipse Finder}
 
 Circles, Ellipses, and (in the next part) Blobs are the three
-\textit{closed} segment types. A segment is closed if the begining and
+\textit{closed} segment types. A segment is closed if the beginning and
 end points are close, relative to the overall length of the
 stroke. More formally given start and end points $p_{start}$ and
 $p_{end}$:
@@ -290,7 +290,7 @@ direction the arc traverses the ellipse) a median angle.
 
 \subsubsection{Spline Finder}
 
-Splines are the fallback segment type: if nothing else fits, a region
+Splines are the fall-back segment type: if nothing else fits, a region
 is classified as a spline. SIMI uses natural cubic splines to render
 these curves.
 
@@ -326,7 +326,7 @@ feedback to let the user know that the recognizer has triggered.
 
 The \textit{Erase} gesture allows the user to delete segments. It lets
 users recover from errors or lets them change their minds. Unlike Undo
-(discussed below), Erase gives access to any linework in the
+(discussed below), Erase gives access to any line work in the
 model. Erase can also be used as part of a deliberate process, for
 example to cut away segments to create notches (as
 in~\cite{zeleznik-lineogrammer}).
@@ -343,7 +343,7 @@ gesture went through a number of design iterations. Initially, it was
 implemented as a Delayed recognizer (executing after the pen was
 lifted). Users were only able to successfully execute the gesture
 about half the time. When it failed, the scribble was interpreted as
-linework, requiring users to erase or undo the unwanted linework. This
+line work, requiring users to erase or undo the unwanted line work. This
 was a common and frustrating event. The recognition algorithm was only
 part of the problem. Proper visual feedback was also a necessary part
 of the solution.
@@ -396,7 +396,7 @@ avoid false positives.
 
 When the user lifts their pen, SIMI determines which (if any) segments
 should be removed from the model. The simplest approach would be to
-identify any segment that intersects the erase gesture's convext
+identify any segment that intersects the erase gesture's convex
 hull. However, this leads to poor results because users often want to
 erase items that are near other items that should be kept. If this
 strategy were applied, both the line and the arc in
@@ -469,7 +469,7 @@ Figure~\ref{fig:flow-selection-fsm}.
 
 Flow selection is graphically presented by highlighting the affected
 region. Points that have positive selection strength are drawn as
-small white dots, and the linework connecting them is drawn in a shade
+small white dots, and the line work connecting them is drawn in a shade
 of red. The stronger the surrounding points, the brighter red the
 curve is drawn.
 
@@ -513,10 +513,10 @@ past each other to ensure that the laser will correctly cut the
 corner.
 
 Latching is the process of adjusting adjacent segments to meet at a
-common point~\cite{herot-latch-corners}. All linework in SIMI is meant
+common point~\cite{herot-latch-corners}. All line work in SIMI is meant
 to compose cutouts, which are closed sequences of latched
 segments. The designer must therefore be able to find and fix
-un-latched segments to form cutouts. SIMI draws a red marker at
+non-latched segments to form cutouts. SIMI draws a red marker at
 `lonely endpoints' (endpoints associated with only one segment) to
 make it obvious when there is a latching opportunity.
 
@@ -529,7 +529,7 @@ recognizer.
 
 \subsubsection{Automatic Latching}
 
-The automatic latching process examines linework for cases where the
+The automatic latching process examines line work for cases where the
 user likely meant their segments to connect, and adjusts one or more
 segments to meet. However, this can pose problems if it is too zealous
 because users must erase or undo to recover, which interrupts the flow
@@ -580,7 +580,7 @@ T-Junction.
 
 The encircle gesture is recognized as follows. The gesture curvilinear
 length must be less than a threshold (currently 200 px). This helps
-distinguish linework (which tends to be large) from latch gestures
+distinguish line work (which tends to be large) from latch gestures
 (which are small). Second, the input must be \textit{closed} using
 logic similar to the closed segment type finders (e.g. Blob
 Finder). In this context the input is closed if any of the last 10\%
@@ -599,7 +599,7 @@ been joined at segment ends. Continuation latching results in a single
 segment---the two original segments are replaced by one longer
 one. With T-Junction latching, one segment is split in the interior
 region into two segments, and the other segment is merged with them
-where the split occured.
+where the split occurred.
 
 Points and segments are created and destroyed in this process. This
 must be reflected in the model. Any constraints that referenced a
@@ -634,12 +634,12 @@ selected. Once a point is selected, hovering the pen nearby shows a
 hand cursor, letting the user know that dragging the stylus will move
 the selected point.
 
-Selected points can be deselected by drawing a latch gesture around it
-(discussed above). The point is deselected if no latch recognizer
+Selected points can be de-selected by drawing a latch gesture around it
+(discussed above). The point is de-selected if no latch recognizer
 would have an effect.
 
 Segments may be selected as part of the process to specify \text{Same
-  Length} constraints. To select a segment, the user overtraces a
+  Length} constraints. To select a segment, the user over-traces a
 portion. It is not necessary to overtrace the entire segment. To
 recognize a segment selection gesture, the system compares the rough
 input with the segments nearby. To be a segment selection gesture, the
@@ -649,7 +649,7 @@ must be within 20 degrees.
 
 A selected segment is graphically with a thick blue line
 weight. Additionally, the segment's length is displayed nearby. Users
-deselect segments by overtracing again.
+deselect segments by over-tracing again.
 
 \vspace{16pt}
 \textbf{Specific Length Constraint}
@@ -666,7 +666,7 @@ topic, so it seemed appropriate to focus my effort elsewhere.
 
 \section{Delayed Recognizers}
 
-The delayed recognizers activate after one of two events has occured:
+The delayed recognizers activate after one of two events has occurred:
 either the user has pressed the button with their non-drawing hand, or
 there has not been stylus activity for a brief time period. Delayed
 recognizers are invoked only on input that was not positively
@@ -678,8 +678,8 @@ practice, the three recognizers in this category only use segment
 data.
 
 Unlike Pen Up recognizers, Delayed recognizers must be able to handle
-several ink strokes. The input might be anything: linework, a
-constraint, linework and constraints, two Same Length and two Right
+several ink strokes. The input might be anything: line work, a
+constraint, line work and constraints, two Same Length and two Right
 Angle constraints, and so on. 
 
 \input{fig-delayed-example.tex}
