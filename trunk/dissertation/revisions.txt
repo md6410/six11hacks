@@ -1,15 +1,23 @@
-Gabe:
 
-Congratulations (again) on a successful dissertation defense with an interesting discussion. To complete the dissertation please attend to the following items:
+• You claim that in SIMI, the set of interaction techniques work well
+  together. Accepting this claim, what principles might future
+  researchers and developers learn from your experience, and apply to
+  achieve a harmonious set of interaction techniques?
 
-• Explain the limitations of the tool/task analysis comparing Illustrator vs SIMI (including lack of inter-rater reliability): it's okay to include the study as is, but explain limitations.
+• Explain the possible broader application of the recognition
+  architecture. This will make your work relevant and interesting to
+  researchers and developers in domains beyond sketching.
 
-• You claim that in SIMI, the set of interaction techniques work well together. Accepting this claim, what principles might future researchers and developers learn from your experience, and apply to achieve a harmonious set of interaction techniques?
+Jason mentioned that, although many/most recognition based systems use
+a similar approach, we are unfamiliar with a clear architectural
+explanation as you have articulated it.  Specifically: (a) If (for
+example) one were to add a new recognizer to the system, how would one
+know where in the architecture to insert it? (b) (How) might this
+architecture be useful to recognizer based systems in other domains?
+"Capturing all three in a single gestural phrase" is a powerful idea:
+elaborate.
 
-• Explain the possible broader application of the recognition architecture. This will make your work relevant and interesting to researchers and developers in domains beyond sketching.
-Jason mentioned that, although many/most recognition based systems use a similar approach, we are unfamiliar with a clear architectural explanation as you have articulated it.
-Specifically: (a) If (for example) one were to add a new recognizer to the system, how would one know where in the architecture to insert it? (b) (How) might this architecture be useful to recognizer based systems in other domains? "Capturing all three in a single gestural phrase" is a powerful idea: elaborate.
-
-• Provide a more thorough conclusion including a prospectus for future work.
+• Provide a more thorough conclusion including a prospectus for future
+  work.
 
 Mark

@@ -6,8 +6,8 @@ possible even ten years ago. But to realize this promise, machine
 access is not enough. Users need effective and appropriate design
 tools.
 
-Sketching is cited (often blithely) as a common and necessary part of
-the design process in various domains. Beginning in 1963 with
+Sketching is often cited as a common and necessary part of the design
+process in various domains. Beginning in the early 1960s with
 Sutherland's Sketchpad system~\cite{sutherland-sketchpad}, researchers
 have developed sketching systems in many such areas, like mechanical
 engineering~\cite{lipson-correlation}, web site
@@ -15,7 +15,7 @@ design~\cite{lin-denim}, and furniture
 production~\cite{oh-fab,saul-sketch-chair}. In this time there has
 been a great deal of work on sketch recognition and on isolated sketch
 based interaction techniques. But there has been little effort in
-exploring how all of this fundamental work can be integrated and
+exploring how all this fundamental work can be integrated and
 presented as a coherent and useful whole to take on a real-world
 design problem.
 
@@ -46,30 +46,34 @@ describe the most obvious next steps that I would like to take.
 
 \section{Implications to Related Areas}
 
-%% \item Rapid (or even \textit{slow}) fab
-%% \item Democratized design
+%% 
+%% Implications to RAPID FABRICATION and surrounding communities
+%% 
+\subsection{Rapid Fabrication and Maker Communities}
 
 Laser cutters, 3D printers, CNC mills and so forth are called
 \textit{rapid} prototyping machines because they facilitate fast
-machine-work. Often, software design tools are the
-bottleneck. Experienced professionals may have overcome the learning
-curve and mastered the software to use it quickly, but the majority of
-current (and certainly potential) users have not. Sketch based
-interaction might be one part of a new kind democratized design
+machine-work. Often, software design tools are the bottleneck in a
+designer's work-build process. While experienced professionals might
+master the software to use rapid fabrication machines quickly, the
+majority of current (and certainly potential) users have not. Sketch
+based interaction might be one part of a new kind democratized design
 software that lets hobbyists and amateurs design and make with rapid
 fabrication machines.
 
 Inexpensive, widely available, and \textit{easy-to-use} rapid
 fabrication hardware and software has interesting
-consequences. Economically, it suggests a future where everyday people
-are capable of simply ``printing'' a new object (such as a door knob)
-when one is needed---which is obviously a topic of some concern for
-the hardware store. Socially, it gives regular people the ability to
-play an active role in the design, function, and production of
-everyday things---which is concerning to professional designers and
-engineers. While it is difficult to envision a world without hardware
-stores (or designers and engineers), desktop design and fabrication
-will have serious (and unpredictable) consequences.
+consequences. Economically, it suggests a future where people can
+simply ``print'' new objects like door knobs as needed---obviously a
+topic of concern for hardware stores and manufacturers. Socially, it
+gives regular people the ability to play an active role in the design,
+function, and production of everyday things---which is concerning to
+professional designers and engineers. While it is difficult to
+envision a world without hardware stores (or designers and engineers),
+desktop design and fabrication will have serious (and unpredictable)
+consequences.
+
+\subsection{Interaction Design}
 
 Sketch based interaction may be paired with other input paradigms to
 achieve unique results that would not be possible in isolation. While
@@ -101,24 +105,41 @@ technology continues to advance. When every available wall and
 tabletop can display graphics and recognize sketch input, that has
 serious consequences for the future of interaction and design.
 
+\subsection{Sketch Based Interaction and Modeling}
 
-%% \begin{itemize}
+This thesis claims that SIMI exemplifies sketch-based interaction
+techniques that work well together. However, the particular set is
+tuned to the laser cutter domain, and to the features SIMI
+provides. How can future researchers generalize this contribution?
 
-%% \item Sketch Interaction and SBIM. 
-%%   \begin{itemize}
-%%   \item Must move beyond isolated toy demonstrations
-%%   \item Must move beyond ``works on my computer'' demos. This does not
-%%     promote building on prior work due to technical difficulty in
-%%     replicating other work
-%%   \item Interaction is one of the glaring missing links
-%%   \item SIMI gives and example of a useful and usable
-%%     \textit{system}. Its value is its coherence.
-%%   \item If we have a platform for research, a common starting point
-%%     for building things, we explore what this mode of interaction can
-%%     do. But we have to be brave and have vision. Have to move beyond
-%%     slavish attendance to statistics and laboratory user studies.
-%%   \end{itemize}
-%% \end{itemize}
+The recognition and resolution architecture from
+Chapter~\ref{sec:overview} (Fig.~\ref{fig:recog-arch}) gives
+programmers a structure that guides development of new
+techniques. While a programming structure is helpful, there are other
+important aspects to consider when designing new sketching gestures.
+
+%% heuristics:
+
+%% 1. Understand contexts. A circle around two unlatched endpoints is
+%% semantically different from a circle around a cutout. This means
+%% you can overload gesture syntax by letting context determine
+%% meaning.
+
+%% 2. Greater shape differences improve recognition. It is tempting to
+%% create many gestures that are different in subtle ways. However
+%% users will have a difficult time (a) remembering the differences
+%% and (b) executing the differences even if they remember.
+
+%% 3. Rely on visual reinforcement and physical metaphors. The right
+%% angle visual is drawn just like the gesture that creates it. When
+%% there is not a visual, the gesture should make physical sense: the
+%% circle gesture to latch points together feels like tying the points
+%% together with a string.
+
+%% 4. Make use of the stage architecture. Some gestures should be
+%% acted upon immediately, while others could (or should) be deferred
+%% until later. For dynamic recognizers, effective visual feedback is
+%% critical.
 
 \section{Future Work}
 
