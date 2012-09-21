@@ -1,23 +1,35 @@
+Revisions:
 
-• You claim that in SIMI, the set of interaction techniques work well
-  together. Accepting this claim, what principles might future
-  researchers and developers learn from your experience, and apply to
-  achieve a harmonious set of interaction techniques?
+* Explain limitations of task/tool analysis. 
 
-• Explain the possible broader application of the recognition
+    --> Added paragraphs at the end of the relevant section.
+
+* What principles might future researchers and developers learn from
+  your experience, and apply to achieve a harmonious set of
+  interaction techniques?
+
+    --> Expanded the "Implications to Related Areas" section in the
+        concluding chapter. I explain four heuristics: (1) leverage
+        context; (2) Substantial shape differences improve recognition
+        and user experience; (3) Rely on visual reinforcement and
+        physical metaphors; (4) Make use of the staged architecture.
+
+* Explain the possible broader application of the recognition
   architecture. This will make your work relevant and interesting to
   researchers and developers in domains beyond sketching.
 
-Jason mentioned that, although many/most recognition based systems use
-a similar approach, we are unfamiliar with a clear architectural
-explanation as you have articulated it.  Specifically: (a) If (for
-example) one were to add a new recognizer to the system, how would one
-know where in the architecture to insert it? (b) (How) might this
-architecture be useful to recognizer based systems in other domains?
-"Capturing all three in a single gestural phrase" is a powerful idea:
-elaborate.
+    --> Added a subsection in the Overview chapter that talks about
+        where new recognizers might be put as a function of when it is
+        necessary to activate them, and how many strokes are involved.
 
-• Provide a more thorough conclusion including a prospectus for future
+* Speculate about how the recog architecture could be used in other
+  domains.
+* "Capturing all three in a single gestural phrase" is a powerful
+  idea: elaborate.
+
+    --> Added two paras to the 'Interaction Design' subsection in the
+conclusion.
+
+
+* Provide a more thorough conclusion including a prospectus for future
   work.
-
-Mark

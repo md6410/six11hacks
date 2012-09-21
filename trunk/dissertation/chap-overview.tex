@@ -270,7 +270,7 @@ inactivity (currently 1.5 seconds). The user may optionally press a
 button with their non-dominant hand to invoke these recognizers on
 demand. These recognizers include those that establish constraints
 like right angles, or create line work like circles and splines. This
-last type is called \textit{Delayed} because it does not happen
+last type is called \textit{Deferred} because it does not happen
 immediately after the pen lifts.
 
 \input{fig-recog-arch.tex}
@@ -283,7 +283,7 @@ lag and making the interface seem much more responsive. The Pen Up
 recognizers are reserved for common actions that are unlikely to
 interrupt the user when their associated actions are taken. By their
 nature, both Dynamic and Pen Up recognizers must work on single stroke
-gestures. Last, the Delayed recognizers may work on one ore more
+gestures. Last, the Deferred recognizers may work on one ore more
 strokes, and typically have related actions that might distract the
 user if they were invoked right away. The overall recognition
 architecture is illustrated in Figure~\ref{fig:recog-arch}.
@@ -343,7 +343,7 @@ gesture to display the Pan/Zoom widget has only a temporary
 response. If the wrong interpretation is made, SIMI will err on the
 side of the inconsequential or easily recoverable.
 
-If a positive result is found, it is activated without delay. This
+If a positive result is found, it is activated immediately. This
 means that the action (defined by the gesture) is applied (which is
 defined by the context of the gesture). The related action for a Latch
 gesture will combine points and possibly destroy and create segments,
@@ -351,12 +351,12 @@ which edits the model and causes the graphical representation to
 change.
 
 Last, any ink associated with a positive result is removed from the
-model and will not be available to the delayed recognizers.
+model and will not be available to the deferred recognizers.
 
-\subsection{Delayed Recognizers}
+\subsection{Deferred Recognizers}
 
-Delayed recognizers follow a similar process to Pen Up
-recognizers. The delayed recognizers are automatically invoked after
+Deferred recognizers follow a similar process to Pen Up
+recognizers. The deferred recognizers are automatically invoked after
 the user has not interacted with the system for a short period
 (currently 1.5 seconds). The user may optionally speed invocation by
 pressing a button with their non-dominant hand.
@@ -365,10 +365,10 @@ By this point, any ink that was positively recognized by a Dynamic or
 Pen Up recognizer is not available. Every time the pen is lifted, the
 ink is processed in the Pen Up recognition step. Any segments that are
 not recognized by the Pen Up step are placed in a set of segments for
-the Delayed recognizers. This means Delayed recognizers may operate on
+the Deferred recognizers. This means Deferred recognizers may operate on
 segments made in one, two, or (potentially) many more strokes.
 
-Like in the previous recognition step, each Delayed recognizer
+Like in the previous recognition step, each Deferred recognizer
 operates independently of the others and may produce a positive
 result. \textit{Unlike} the previous step, it is possible that several
 results are valid, as long as they are composed of different
@@ -389,6 +389,43 @@ are interpreted as geometry. This is how the user creates line work
 that define laser cut parts. This geometry is then included in the
 model with definite identities, which are used in later recognition
 processes.
+
+\subsection{Discussion of Recognition Architecture}
+
+SIMI's recognition and resolution architecture provides a framework
+for developing other sketch-recognition applications. The staged
+approach allows recognizers to work in batches at different times. The
+properties of each stage suggests there are natural places for new
+recognizers to fit into this scheme. Future developers can use the
+following logic to determine the appropriate stage for new recognizers
+to operate.
+
+If the gesture's effect should be immediate, Dynamic or Pen Up
+recognizers are apt. Actions that require visual feedback while the
+pen is down (e.g. Flow Selection) must be Dynamic; others (e.g. Latch)
+should be run with Pen Up recognizers.
+
+Actions that are composed from several strokes must be implemented
+with a Deferred recognizer. The Same Length gesture, for example, can
+be composed of two or more hash marks.
+
+Actions that are composed of a single stroke may be Dynamic, Pen Up,
+or Deferred. Because Pen Up recognizers activate immediately it is
+best to reserve this stage for operations that are made quickly and
+with minimal potential for ambiguity. 
+
+%% Explain the possible broader application of the recognition
+%% architecture. This will make your work relevant and interesting to
+%% researchers and developers in domains beyond sketching.
+
+%% Jason mentioned that, although many/most recognition based systems use
+%% a similar approach, we are unfamiliar with a clear architectural
+%% explanation as you have articulated it.  Specifically: (a) If (for
+%% example) one were to add a new recognizer to the system, how would one
+%% know where in the architecture to insert it? (b) (How) might this
+%% architecture be useful to recognizer based systems in other domains?
+%% "Capturing all three in a single gestural phrase" is a powerful idea:
+%% elaborate.
 
 \section{Model: Geometry, Constraints, Cutouts}
 
@@ -420,7 +457,7 @@ points. Table~\ref{tab:constraints} lists all SIMI's constraint types.
 \input{tab-constraints.tex} % table 
 
 The final output of this design tool is a \textit{cutfile} that
-contains \textit{Cutouts}. A cutout is a 2D shape defining the
+contains \textit{cutouts}. A cutout is a 2D shape defining the
 boundary of a part to laser cut. SIMI identifies cutouts automatically
 by analyzing the model, searching for closed paths. Cutouts are
 graphically shaded. Users may place a cutout in the cutfile region on

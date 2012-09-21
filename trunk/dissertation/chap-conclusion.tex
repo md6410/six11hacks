@@ -46,6 +46,10 @@ describe the most obvious next steps that I would like to take.
 
 \section{Implications to Related Areas}
 
+This research has implications to several areas, including rapid
+fabrication hardware and surrounding communities, interaction design,
+and research on sketch-based interaction and modeling.
+
 %% 
 %% Implications to RAPID FABRICATION and surrounding communities
 %% 
@@ -70,7 +74,7 @@ gives regular people the ability to play an active role in the design,
 function, and production of everyday things---which is concerning to
 professional designers and engineers. While it is difficult to
 envision a world without hardware stores (or designers and engineers),
-desktop design and fabrication will have serious (and unpredictable)
+desktop design and fabrication will have serious and unpredictable
 consequences.
 
 \subsection{Interaction Design}
@@ -84,18 +88,18 @@ Touch input is a current topic of importance, with touch-sensitive
 devices like tablets and smart phones dominating the consumer
 electronics market. Sketching, paired with touch, has recently been
 shown to give compelling results~\cite{hinckley-pen-touch}. New
-technologies, such as Microsoft's distance-sensing Kinect, offer
-additional avenues that might be appropriate to mix with sketch-based
-input. Virtual reality hardware---special glasses that simulate 3D
-projection, volumetric displays, \textit{etc.}---could be used to
-immerse designers in augmented reality design tools that lets people
-draw anything anywhere in physical space~\cite{jung-lightpen}. These
-topics have been covered to various degrees, but the sketch
-interaction component has always been ad-hoc. I've given a solid
-example of one way to support such interaction, so we might have
-something to gain by revisiting some of these ideas. The input
-paradigms that pair sketching with something else (touch, gesture, VR)
-have hardly been explored enough to consider them known topics.
+technologies, such as voice recognition or Microsoft's
+distance-sensing Kinect, offer additional avenues that might be
+appropriate to mix with sketch-based input. Virtual reality
+hardware---special glasses that simulate 3D projection, volumetric
+displays, \textit{etc.}---could be used to immerse designers in
+augmented reality design tools that let people draw anything anywhere
+in physical space~\cite{jung-lightpen}. These topics have been covered
+to various degrees, but the sketch interaction component has always
+been ad-hoc. This thesis gives a solid example of one way to support
+such interaction. Input paradigms that pair sketching with something
+else (touch, gesture, VR) have hardly been explored enough to consider
+them known topics. 
 
 Currently, sketch interaction is limited to devices that explicitly
 support pen interaction. But ongoing advances in sensing technology
@@ -105,6 +109,23 @@ technology continues to advance. When every available wall and
 tabletop can display graphics and recognize sketch input, that has
 serious consequences for the future of interaction and design.
 
+The recognition and resolution architecture from
+Chapter~\ref{sec:overview} might be useful to researchers and
+developers working on other kinds of recognition-based systems. For
+example, multitouch devices or Kinect-style hand or body recognition
+could use the staged approach to simplify the recognition
+process. However, because there are multiple contemporaneous sample
+points to consider, future developers might have to extend the
+architecture discussed here.
+
+Perhaps most importantly, the staged recognition architecture lets
+designers interact with computers using easy-to-make gestures that
+richly specify \textit{an action}, \textit{to which objects}, and
+\textit{in which way}. This seems to reduce users' cognitive load by
+removing the need to enter persistent modes or the needs to set up
+sequences of atomic operations to achieve a desired
+outcome. Additional work on this topic is warranted.
+
 \subsection{Sketch Based Interaction and Modeling}
 
 This thesis claims that SIMI exemplifies sketch-based interaction
@@ -113,33 +134,44 @@ tuned to the laser cutter domain, and to the features SIMI
 provides. How can future researchers generalize this contribution?
 
 The recognition and resolution architecture from
-Chapter~\ref{sec:overview} (Fig.~\ref{fig:recog-arch}) gives
-programmers a structure that guides development of new
-techniques. While a programming structure is helpful, there are other
-important aspects to consider when designing new sketching gestures.
+Section~\ref{sec:recognition-architecture} guides programmers and
+interaction designers to develop new techniques. While a programming
+structure is helpful, there are other important aspects to consider
+when designing new sketching gestures.
 
-%% heuristics:
+I provide several heuristics for developing sketch-based interaction
+techniques in other applications:
 
-%% 1. Understand contexts. A circle around two unlatched endpoints is
-%% semantically different from a circle around a cutout. This means
-%% you can overload gesture syntax by letting context determine
-%% meaning.
+\textit{Leverage context}. Gesture syntax can be overloaded by letting
+context determine meaning. For example, a circle drawn around two
+unlatched end points is semantically different from a circle drawn
+around a cutout. Overloading gestures means less work for the
+programmer, and fewer gestures for the user to learn and
+remember. However, care must be taken to ensure that the contexts are
+separate enough that they will not be confused.
 
-%% 2. Greater shape differences improve recognition. It is tempting to
-%% create many gestures that are different in subtle ways. However
-%% users will have a difficult time (a) remembering the differences
-%% and (b) executing the differences even if they remember.
+\textit{Substantial shape differences improve recognition and user
+  experience}. Strive to develop gestures that are substantially
+different from one another. It is tempting to create many gestures
+that are different in subtle ways because it is easy to
+program. However, users will have a difficult time remembering and
+executing the differences.
 
-%% 3. Rely on visual reinforcement and physical metaphors. The right
-%% angle visual is drawn just like the gesture that creates it. When
-%% there is not a visual, the gesture should make physical sense: the
-%% circle gesture to latch points together feels like tying the points
-%% together with a string.
+\textit{Rely on visual reinforcement and physical metaphors}. SIMI's
+right angle constraint's appearance echos the gesture used to create
+it. When there is not a visual, the gesture should make physical
+sense: the circle gesture used to latch points together feels like
+tying the points together with a string; the erase gesture is based on
+scratching over unwanted marks on physical paper.
 
-%% 4. Make use of the stage architecture. Some gestures should be
-%% acted upon immediately, while others could (or should) be deferred
-%% until later. For dynamic recognizers, effective visual feedback is
-%% critical.
+\textit{Make use of the stage architecture}. Some gestures should be
+acted upon immediately, while others could (or should) be deferred
+until later. For dynamic recognizers, effective visual feedback is
+critical. While the staged architecture eases programming, its true
+purpose is to improve user experience.
+
+
+
 
 \section{Future Work}
 
@@ -223,7 +255,7 @@ Material use is another important consideration, both because it costs
 money, and because supplies are often limited. For example, Ponoko
 sells 15''x15'' squares of acrylic for between \$8 and \$28 depending
 on how thick it is. To make more efficient use of material, the
-software could perform intelligent cutfile layout with a shape-packing
+software could perform intelligent cut file layout with a shape-packing
 algorithm. If the system knows where a piece of material has holes,
 the algorithm could also place new parts on used material.
 
