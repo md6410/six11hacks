@@ -9,7 +9,7 @@ details on how each recognizer works.
 First, SIMI's corner finding and segmentation strategy is
 described. This process is necessary to most recognition, and is what
 produces geometric output like lines and arcs. Next, the three types
-of recognizers are described: including Dynamic, Pen Up, and Delayed
+of recognizers are described: including Dynamic, Pen Up, and Deferred
 recognizers. All sketch based interaction techniques are detailed in
 these sections.
 
@@ -82,9 +82,9 @@ the sign is determined by the cross product.
 \begin{equation}
   \theta = \left\{ 
   \begin{array}{r l}
-    \theta_{unsigned} & \quad \text{if } |v_a \times v_b| \geq 0\text{,}\\
+    \theta_{unsigned} & \quad \text{if } v_a \times v_b \geq 0\text{,}\\
     -\theta_{unsigned} & \quad \text{otherwise}\\
-  \end{array} %\right\}
+  \end{array} \right .
 \end{equation}
 \end{samepage}
 
@@ -340,7 +340,7 @@ SIMI users depend on being able to erase quickly and easily. While it
 may seem that an efficient and easy to use gesture recognizer would be
 easy to write, this is not the case. During development, the Erase
 gesture went through a number of design iterations. Initially, it was
-implemented as a Delayed recognizer (executing after the pen was
+implemented as a Deferred recognizer (executing after the pen was
 lifted). Users were only able to successfully execute the gesture
 about half the time. When it failed, the scribble was interpreted as
 line work, requiring users to erase or undo the unwanted line work. This
@@ -537,7 +537,7 @@ of work. Therefore the automatic latcher is intentionally conservative
 to avoid frustrating users.
 
 The auto-latcher is \textit{not} activated with the Pen Up
-recognizers---it is actually a Delayed recognizer. It is discussed
+recognizers---it is actually a Deferred recognizer. It is discussed
 here because it is closely related to the manual latching techniques,
 which are Pen Up recognizers.
 
@@ -664,20 +664,20 @@ specific length constraints. The obvious candidate in this case is
 handwriting recognition. Because that is an active and well-developed
 topic, so it seemed appropriate to focus my effort elsewhere.
 
-\section{Delayed Recognizers}
+\section{Deferred Recognizers}
 
-The delayed recognizers activate after one of two events has occurred:
+The deferred recognizers activate after one of two events has occurred:
 either the user has pressed the button with their non-drawing hand, or
-there has not been stylus activity for a brief time period. Delayed
+there has not been stylus activity for a brief time period. Deferred
 recognizers are invoked only on input that was not positively
 identified by either Dynamic or Pen Up recognizers.
 
-Like Pen Up recognizers, Delayed recognizers could operate on either
+Like Pen Up recognizers, Deferred recognizers could operate on either
 raw ink data or the set of segments found in Ink Parsing. However in
 practice, the three recognizers in this category only use segment
 data.
 
-Unlike Pen Up recognizers, Delayed recognizers must be able to handle
+Unlike Pen Up recognizers, Deferred recognizers must be able to handle
 several ink strokes. The input might be anything: line work, a
 constraint, line work and constraints, two Same Length and two Right
 Angle constraints, and so on. 
@@ -736,7 +736,7 @@ constraint, or combine two such constraints.
 Figure~\ref{fig:same-length} shows how the Same Length gesture is made
 and how it can be used. In panel~\textit{\subref{fig:same-length-1}}
 the user draws the gesture on two sides of a quadrilateral to make
-those sides the same length. The Delayed recognizer identifies this,
+those sides the same length. The Deferred recognizer identifies this,
 and the system creates and enforces the Same Length constraint
 (panel~\textit{\subref{fig:same-length-2}}. The user creates a second
 constraint by waiting until the first has been recognized, and drawing
@@ -744,7 +744,7 @@ the gesture over the remaining lines of the quadrilateral
 (panel~\textit{\subref{fig:same-length-3}}). Next the user decides to
 combine these constraints by drawing a hash mark over one constrained
 line from each existing Same Length constraint
-(pane~\textit{\subref{fig:same-length-4}}}). Panel~\textit{\subref{fig:same-length-5}}
+(pane~\textit{\subref{fig:same-length-4}}). Panel~\textit{\subref{fig:same-length-5}}
 shows the result. This shape could have been made in a single
 recognition phase by hashing all four line segments. That would be
 equivalent to the state shown in the last panel.

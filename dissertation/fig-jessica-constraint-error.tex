@@ -1,9 +1,9 @@
 \begin{landscape}
 \begin{figure}
   \centering
-  \begin{subfigure}[t]{0.6\textwidth}
+  \begin{subfigure}[t]{0.44\textwidth}
     \centering
-    \includegraphics[width=0.8\linewidth]{img/jessica-constraint-example.png}
+    \includegraphics[width=0.7\linewidth]{img/jessica-constraint-example.png}
     \caption{initial state with 20 vertices, 20 line segments,
       and 45 low-level constraints. The user will move a corner, which
       violates many constraints. The following graphs illustrate error
@@ -11,27 +11,27 @@
     \label{fig:jessica-initial}
   \end{subfigure}
   \hspace{0.03\textwidth}
-  \begin{subfigure}[t]{0.6\textwidth}
+  \begin{subfigure}[t]{0.44\textwidth}
     \centering
-    \includegraphics[width=0.8\linewidth]{img/jessica-norandom.png}
+    \includegraphics[width=\linewidth]{img/jessica-norandom.png}
     \caption{Total error graph with weak randomness. It quickly comes
       close to a solution after 200 iterations, but does not fall
       below tolerance until after 8000 iterations.}
     \label{fig:jessica-norandom}
   \end{subfigure}
 
-  \begin{subfigure}[t]{0.6\textwidth}
+  \begin{subfigure}[t]{0.44\textwidth}
     \centering
-    \includegraphics[width=0.8\linewidth]{img/jessica-norandom-closeup.pdf}
+    \includegraphics[width=\linewidth]{img/jessica-norandom-closeup.pdf}
     \caption{Zoomed in portion of weak randomness
       Figure~\subref{fig:jessica-norandom}. States are `stuck'
       (iterations 4200 to 4260) oscillating between two states.}
     \label{fig:jessica-closeup}
   \end{subfigure}
   \hspace{0.03\textwidth}
-  \begin{subfigure}[t]{0.6\textwidth}
+  \begin{subfigure}[t]{0.44\textwidth}
     \centering
-    \includegraphics[width=0.8\linewidth]{img/jessica-with-fullrandom.png}
+    \includegraphics[width=\linewidth]{img/jessica-with-fullrandom.png}
     \caption{Total error graph with full randomness converges below
       acceptable threshold after only 1100 iterations.}
     \label{fig:jessica-fullrandom}
