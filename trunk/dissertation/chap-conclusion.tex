@@ -1,30 +1,28 @@
 \chapter{Conclusion}
 
 Rapid fabrication---3D printing, laser cutting, and many other
-processes---can support designers to create in ways that were not
-possible even ten years ago. But to realize this promise, machine
-access is not enough. Users need effective and appropriate design
-tools.
+processes---can support designers in ways that were not possible even
+ten years ago. But to realize this promise, machine access is not
+enough. Users need effective and appropriate design tools.
 
 Sketching is often cited as a common and necessary part of the design
-process in various domains. Beginning in the early 1960s with
+process in many domains. Beginning in the early 1960s with
 Sutherland's Sketchpad system~\cite{sutherland-sketchpad}, researchers
-have developed sketching systems in many such areas, like mechanical
+have developed sketching systems in many areas, like mechanical
 engineering~\cite{lipson-correlation}, web site
 design~\cite{lin-denim}, and furniture
-production~\cite{oh-fab,saul-sketch-chair}. In this time there has
-been a great deal of work on sketch recognition and on isolated sketch
-based interaction techniques. But there has been little effort in
-exploring how all this fundamental work can be integrated and
-presented as a coherent and useful whole to take on a real-world
-design problem.
+production~\cite{oh-fab,saul-sketch-chair}. During this time there has
+been a great deal of work on sketch recognition and on isolated
+sketch-based interaction techniques. But there has been little effort
+in exploring how all this fundamental work can be integrated and
+presented as a coherent and useful whole to address real-world design.
 
 This thesis explored the role of sketch based interaction techniques
 as a basis for rapid fabrication design tools. I bridged the gap
-between an academic treatment of sketch based design and a useful and
-usable system. This work has included a literature review in design
-and computational support for sketching (Chapter~\ref{sec:rw} and the
-survey with my
+between an academic treatment of sketch-based design and a real-world
+useful and usable system. This work has included a literature review
+in design and computational support for sketching
+(Chapter~\ref{sec:rw} and the survey with my
 committee~\cite{johnson-sketch-review}). Chapter~\ref{sec:formative}
 explored the domain of design for laser cutting by studying both
 artist and the artifact. Last,
@@ -35,9 +33,9 @@ how a sketch based system can present a set of sketch recognizers and
 real work in a way that was previously not actualized.
 
 While I have made a prototype that many observers find compelling,
-there is still more work that could be done. It raises interesting
-ideas about what else is possible with this form of interaction, and
-questions remain unresolved.
+there is still more work to do. It raises interesting ideas about what
+else is possible with this form of interaction, and questions remain
+unresolved.
 
 In this chapter I discuss how my work with SIMI can serve as a
 starting point for further work. First I discuss the rationalle for
@@ -68,15 +66,12 @@ This research has implications to several areas, including rapid
 fabrication hardware and surrounding communities, interaction design,
 and research on sketch-based interaction and modeling.
 
-%% 
-%% Implications to RAPID FABRICATION and surrounding communities
-%% 
 \subsection{Rapid Fabrication and Maker Communities}
 
 Laser cutters, 3D printers, CNC mills and so forth are called
 \textit{rapid} prototyping machines because they facilitate fast
 machine-work. Often, software design tools are the bottleneck in a
-designer's work-build process. While experienced professionals might
+designer's work/build process. While experienced professionals might
 master the software to use rapid fabrication machines quickly, the
 majority of current (and certainly potential) users have not. Sketch
 based interaction might be one part of a new kind democratized design
@@ -92,8 +87,8 @@ gives regular people the ability to play an active role in the design,
 function, and production of everyday things---which is concerning to
 professional designers and engineers. While it is difficult to
 envision a world without hardware stores (or designers and engineers),
-desktop design and fabrication will have serious and unpredictable
-consequences.
+desktop design and fabrication will have serious, unpredictable, and
+positive consequences.
 
 \subsection{Interaction Design}
 
@@ -111,13 +106,13 @@ distance-sensing Kinect, offer additional avenues that might be
 appropriate to mix with sketch-based input. Virtual reality
 hardware---special glasses that simulate 3D projection, volumetric
 displays, \textit{etc.}---could be used to immerse designers in
-augmented reality design tools that let people draw anything anywhere
-in physical space~\cite{jung-lightpen}. These topics have been covered
-to various degrees, but the sketch interaction component has always
-been ad-hoc. This thesis gives a solid example of one way to support
-such interaction. Input paradigms that pair sketching with something
-else (touch, gesture, VR) have hardly been explored enough to consider
-them known topics. 
+augmented reality design tools that let people draw anywhere in
+physical space~\cite{jung-lightpen}. These topics have been covered to
+various degrees, but the sketch interaction component has always been
+ad-hoc. This thesis gives a solid example of one way to support such
+interaction. Input paradigms that pair sketching with something else
+(touch, gesture, VR) have hardly been explored enough to consider them
+known topics.
 
 Currently, sketch interaction is limited to devices that explicitly
 support pen interaction. But ongoing advances in sensing technology
@@ -148,7 +143,7 @@ outcome. Additional work on this topic is warranted.
 
 This thesis claims that SIMI exemplifies sketch-based interaction
 techniques that work well together. However, the particular set is
-tuned to the laser cutter domain, and to the features SIMI
+tuned to the laser cutter domain and to the features SIMI
 provides. How can future researchers generalize this contribution?
 
 The recognition and resolution architecture from
@@ -172,12 +167,12 @@ separate enough that they will not be confused.
 \textit{Substantial shape differences improve recognition and user
   experience}. Strive to develop gestures that are substantially
 different from one another. It is tempting to create many gestures
-that are different in subtle ways because it is easy to
-program. However, users will have a difficult time remembering and
-executing the differences.
+that are different in subtle ways because it is easy to program the
+related recognizers. However, users will have a difficult time
+remembering and executing these subtly different gestures.
 
 \textit{Rely on visual reinforcement and physical metaphors}. SIMI's
-right angle constraint's appearance echos the gesture used to create
+right angle constraint appearance echos the gesture used to create
 it. When there is not a visual, the gesture should make physical
 sense: the circle gesture used to latch points together feels like
 tying the points together with a string; the erase gesture is based on
@@ -189,11 +184,10 @@ should) be deferred until later. For dynamic recognizers, effective
 visual feedback is critical. While the staged architecture eases
 programming, its true purpose is to improve user experience.
 
-
 \section{Future Work}
 
-The most interesting research is that which leaves more questions than
-it answered. Having built a useful and useful system for laser cut
+The most interesting research leaves more questions than it
+answered. Having built a useful and useful system for laser cut
 designs, much of the feedback I receive focuses on additional
 features. Observers commonly would like to see a tool like SIMI for
 some other domain, such as for 3D modeling.
@@ -268,13 +262,14 @@ the user would be able to indicate where joints should exist, between
 which parts, what the material properties are---and the software would
 take care of the rest.
 
-Material use is another important consideration, both because it costs
-money, and because supplies are often limited. For example, Ponoko
-sells 15''x15'' squares of acrylic for between \$8 and \$28 depending
-on how thick it is. To make more efficient use of material, the
-software could perform intelligent cut file layout with a shape-packing
-algorithm. If the system knows where a piece of material has holes,
-the algorithm could also place new parts on used material.
+Using material is another important consideration, both because it
+costs money, and because supplies are often limited. For example,
+Ponoko sells 15''x15'' squares of acrylic for between \$8 and \$28
+depending on thickness. To make more efficient use of material, the
+software could perform intelligent cut file layout with a
+shape-packing algorithm. If the system knows where a piece of material
+has holes, the algorithm could also place new parts on used material,
+saving a lot of money.
 
 Assemblies often have a lot of parts, and it can frustrate users when
 trying to determine which part goes where. The tool could etch part
@@ -295,9 +290,9 @@ perspective. There are interesting challenges associated with ``3D
 sketching'', and many others are working on these research topics.
 
 2D applications will be easier to write based on SIMI's current
-implementation. Graphic design applications like illustrations,
-diagrams, logos, T-shirt designs, or cartooning are areas that SIMI's
-interaction would likely be appropriate.
+implementation. Graphic design applications for illustrations,
+diagrams, logos, T-shirt designs, or cartooning are appropriate areas
+for SIMI's interaction.
 
 Teachers famously draw on chalk boards or whiteboards to illustrate
 concepts in many areas, from physics to mathematics. A sketch-based
@@ -312,17 +307,17 @@ design projects. Or sketch-based design could simply be used as a
 fast, efficient method of specifying the designer's intent to create
 finished output.
 
-
 \section{Looking Forward}
 
-Nearly everything in our environment was deliberately designed by a
-human being. An artifact's users are not often the same people that
-designed or built it. The recent introduction and success of
-affordable, fast fabrication machinery suggests the gulf between
+Nearly everything in our environment was deliberately designed and
+built by a human being. An artifact's users are not often the same
+people that designed or built it. The recent introduction and success
+of affordable, fast fabrication machinery suggests the gulf between
 \textit{designers} and \textit{users} may narrow as desktop
 manufacturing lets ordinary people design and build things on their
 own. One remaining bottleneck is software: access to fabrication
-machinery is not enough. People need design software that is easy to
+machinery is not enough. Democratized fabrication requires
+democratized design tools: People need design software that is easy to
 use and gives the means to express ideas. But for ordinary people,
 current CAD software is expensive, hard to learn, and hard to use.
 
@@ -333,7 +328,7 @@ other application areas were mentioned above, such as STEM
 applications for students, 3D modeling, animation, and business
 diagrams. This line of research is important not simply because it
 enables users to do one thing marginally better than before. It is
-important because it could empower people to design and make many
-kinds of things that were previously impossible. This is a powerful
-idea, and the consequences are far-reaching. 
+important because it will empower people to design and make many kinds
+of things that were previously impossible. This is a powerful idea,
+and the consequences are far-reaching.
 
