@@ -24,9 +24,9 @@ There are several principles that guided SIMI's design and development.
   based interaction should be usable by a majority of people. For this
   reason I target avocational designers, not professionals. 
 \item \textbf{Sketch based}: The user should never feel obliged to set
-  down their pen. In the past, many sketch based design tools have
-  relied on keyboard input, or used interface widgets that are
-  appropriate for mice but are uncomfortable to use with a stylus
+  down their pen. In the past, many sketch based design tools relied
+  on keyboard input, or used interface widgets that are appropriate
+  for mice, but are uncomfortable to use with a stylus
   (e.g. hierarchic menus).
 \item \textbf{Coherence of interaction techniques is key}: The tool
   presents a set of sketch based interaction techniques that work well
@@ -39,9 +39,9 @@ There are several principles that guided SIMI's design and development.
 \item \textbf{Useful and usable}: Last, the system lets people make
   real things in a real domain (namely, laser cut objects). The
   current implementation of the tool is efficient and highly
-  responsive. In informal demonstrations, more than one person has
-  noted that the system seems more like a commercial product than a
-  research system. This is intentional.
+  responsive. In informal demonstrations, more than one person noted
+  that the system seems more like a commercial product than a research
+  system. This is intentional.
 \end{itemize}
 
 \section{Rapid Fabrication and Laser Cutting}
@@ -54,7 +54,7 @@ textiles, etc.).
 \input{fig-laser-prices.tex}
 
 The price of laser cutters is quickly declining, making it possible
-that more people have access to them. Figure~\ref{fig:prices} shows
+that more people can access to them. Figure~\ref{fig:prices} shows
 prices for a comparable~25-Watt,~16''x12'' laser cutter model from
 Universal Laser Systems (these values were found on hobbyist web
 forums). While these data may not be exact, they do show the price of
@@ -63,14 +63,14 @@ ten years. While still out of reach for most people to afford, they
 are becoming inexpensive enough for schools and hacker spaces to own.
 
 Laser cut designs are composed of parts cut from solid, flat material
-and assembled in various ways: laminated, notched, bolted together,
+and assembled in various ways: laminated, notched, bolted, glued,
 \textit{etc}. Various materials require different laser speed and
 intensity settings to achieve a quality cut. The designer uses a
 software application to specify part shapes for laser cutting. The
 software outputs vector graphics called a ``cut file'' that defines
 these shapes. As most joints have small margins of error, lengths,
-angles, and relative position must be specified precisely so that
-parts fit together properly.
+angles, and relative position must be specified precisely so parts fit
+together properly.
 
 Tools for designing laser cut objects must allow users to precisely
 specify dimensions. Like a physical saw, the laser leaves a gap in its
@@ -78,7 +78,6 @@ wake, called a \textit{kerf}, (between 0.2mm and 0.5mm on a 40 watt
 cutter). This is an important consideration when designing facets
 whose tolerances are small with respect to kerf. A notch joint, for
 example, is ineffective if it is 0.1 mm too large or small.
-
 
 \section{Motivating Scenario: Picture frame Holder}
 
@@ -95,12 +94,12 @@ and a five-part vertical support structure, joined with notches. Using
 SIMI on a tablet device like the Wacom Cintiq shown in
 Figure~\ref{fig:simi-intro}, we first draw the rough profile of the
 vertical support piece using curved and straight segments. After a
-brief period of inactivity, SIMI captures our drawing, straightening
-lines, smoothing curves, and connecting curved and straight
-segments. We may optionally press a button with our non-dominant hand
-to ask SIMI to do this immediately. If we make a mistake (or if we
-change our mind), we can recover quickly by scratching out the
-unwanted ink, or use an Undo gesture.
+brief period of user inactivity, SIMI recognizes and renders the
+drawing by straightening lines, smoothing curves, and connecting
+curved and straight segments. We may optionally press a button with
+our non-dominant hand to ask SIMI to do this immediately. If we make a
+mistake (or if we change our mind), we can recover quickly by
+scratching out the unwanted ink, or use an Undo gesture.
 
 After sketching the rough outlines of our two parts, we begin to
 refine the design and make it precise.  We square the corners by
@@ -109,7 +108,7 @@ adjust the shapes of the two parts by selecting and dragging endpoints
 and re-shaping curves, SIMI maintains the right-angle constraints
 we've established.
  
-Next, we add notches to the two parts for the joints. We draw five
+Next, we add notches to the two parts to make joints. We draw five
 small notches on the base rail. For each notch we draw three lines
 inside the outline of the part, and then use the erase gesture to
 remove the residual outline segment (Figure~\ref{fig:motivating}b).
@@ -122,9 +121,9 @@ over-tracing its segments and entering fixed dimensions
 (Figure~\ref{fig:motivating}c).
  
 We drag the base part (twice) and the support part (five times) to
-SIMI's cut file area to prepare a PDF file for cutting, and then send
-it to the laser cutter.  Finally we assemble the cut parts to make the
-picture stand in Figure~\ref{fig:simi-example}.
+SIMI's cut file area to prepare a vector file, and then send it to the
+laser cutter. Finally we assemble the cut parts to make the picture
+stand in Figure~\ref{fig:simi-example}.
 
 \input{fig-motivating-example.tex}
 
@@ -138,38 +137,39 @@ the following topics are described in great detail in the next
 chapter.
 
 A fundamental task is \textbf{ink parsing}. While the pen is down, the
-system looks for erase gestures. When the user lifts the pen,
-non-erase gestures are parsed for corners, and sections of ink are
-identified as primitive sub-shapes like lines, curves, and so forth.
+system looks for gestures such as erasing. When the user lifts the
+pen, the ink is parsed to identify corners and segments, and other
+recognizable elements.
 
-SIMI must be able to dependably \textbf{recognize user input}.
-Because input is often made quickly and inaccurately, occasional
-recognition errors can not be avoided. There are several kinds of
-recognized elements. Input might be line work that specifies the
-model's geometry. Or, input might be identified as a gesture that
-edits the model by removing ink or adding constraints. Last, input
-might be as part of a multi-stroke phrase that controls the modeling
-environment (e.g. undo/redo, zooming, or panning).
+SIMI must be able to dependably \textbf{recognize user input}, which
+often depends on the ink parsing just mentioned. Input is often made
+quickly and inaccurately, so occasional recognition errors can not be
+avoided. There are several kinds of recognized elements. Input might
+be line work that specifies the model's geometry. Or, input might be
+identified as a gesture that edits the model by removing ink or adding
+constraints. Last, input might be as part of a multi-stroke phrase
+that controls the modeling environment (e.g. undo/redo, zooming, or
+panning).
 
 There is one recognizer per recognizable pattern. Each recognizer has
 access to the model state, but they do not communicate directly with
 each other. Inevitably more than one recognizer will signal a positive
-result, so it is necessary for SIMI to \textbf{disambiguate}
-contending recognition results. For example, the user may draw two
-short strokes that are recognized as both a right angle symbol and a
-same-length gesture. To resolve this ambiguity, SIMI uses a series of
-tests that involve context (e.g. if the input is correctly positioned
-in a corner or not) as well as static precedence rules that defer to
-the interpretation that causes the least trouble in the event it is
-wrong.
+result, so it is necessary for SIMI to \textbf{disambiguate (or
+  resolve)} contending recognition results. For example, the user may
+draw two short strokes that are recognized as both a right angle
+symbol and a same-length gesture. To resolve this ambiguity, SIMI uses
+a series of tests that involve context (e.g. if the input is correctly
+positioned in a corner or not) as well as static precedence rules that
+defer to the interpretation that causes the least trouble in the event
+it is wrong.
 
 The user's work is stored as a \textbf{data model} consisting of
 points, segments (e.g. line, arc), and high-level constraints
 (e.g. right angle, same length). SIMI lets the user edit the model to
 create, merge, or erase these elements. The \textbf{constraint engine}
-is closely associated with the data model. This lets the designer
-indicate geometric rules that the system will try to maintains, even
-as the user edits the model. SIMI's constraint engine is an iterative,
+is closely associated with the data model. It lets the designer
+indicate geometric rules that the system will try to maintain, even as
+the user edits the model. SIMI's constraint engine is an iterative,
 numerical solver using a relaxation method in the tradition of
 Sketchpad~\cite{sutherland-sketchpad}.
 
@@ -192,27 +192,32 @@ methods together.
 
 The interaction techniques offered by SIMI were carefully tuned to
 work with one another. Each gesture is as distinct from the others as
-possible. This does not completely avoid recognition error but it does
-mitigate it because the gestures are not often confused with one
-another.
+possible. The distiction is either \textit{syntactic} (e.g. a circle
+is distinct from two short lines) or \textit{contextual} (e.g. a large
+circle around a closed shape is distinct from a small circle around
+loose segment endpoints.) This does not completely avoid recognition
+error but it does mitigate it because the gestures are not often
+confused with one another.
 
 SIMI gives visual feedback when appropriate which helps to resolve
-possible conflicts. For example, a selected point will move if a
-gesture begins nearby. Without visual feedback that the pen is near
-enough, it was easy to inadvertently draw line work when the intention
-was to move the point.
+possible conflicts. For example, a selected point is rendered as a
+colored dot, and changes the cursor to a hand symbol to indicate the
+can move the point by dragging. Without visual feedback that the point
+is selected, or that the pen is near enough, it was easy to
+inadvertently draw line work when the user intends to move the point.
 
 The interaction techniques have conservative failure states. The
 automatic latching algorithm is a good example. The auto-latcher has
-parameters about the distance between points and relative angle of
-segments. These parameters were intentionally set to err on the side
-of not latching segments together, because the consequences of
-latching inappropriately are worse than not latching when the user
-wanted. To recover from a missed latch opportunity, SIMI provides a
+parameters describing the maximim distance between points and relative
+segment angles. These parameters were set to err on the side of not
+latching segments together, because the consequences of latching
+inappropriately are worse than not latching when the user wanted. To
+recover from a missed automatic latch opportunity, SIMI provides a
 very simple latching gesture.
 
 SIMI's interaction differs from standard design tools and other sketch
-based modeling prototypes in several ways.
+based modeling prototypes in several ways. Some of these differences
+are discussed in the sections below.
 
 \subsection{``The mode problem''}
 
@@ -227,11 +232,11 @@ cognitive load by forcing users to think about the tool rather than
 their work. This is called ``the mode
 problem''~\cite{tesler-mode-problem}.
 
-SIMI's interaction lacks persistent mode. The user can always draw on
-any part of the drawing canvas, and the input's meaning is determined
-via recognition: an input stroke might be an erasure scribble or a
-right angle symbol or a straight line that completes a shape. There is
-no `erase mode', no `right angle mode', and no 'draw line mode'. Some
+SIMI lacks persistent mode. The user can always draw on any part of
+the drawing canvas, and the input's meaning is determined via
+recognition: an input stroke might be an erasure scribble or a right
+angle symbol or a straight line that completes a shape. There is no
+`erase mode', no `right angle mode', and no 'draw line mode'. Some
 operations, such as flow selection, include transient mode changes
 where the meaning of user input is interpreted differently based on
 recent interaction. For this reason it is not strictly correct to
@@ -242,11 +247,13 @@ label SIMI's interaction as \textit{modeless}.
 One property that characterizes sketch based systems is \textit{when}
 recognition is performed (see
 Section~\ref{sec:recognition-when}). Many sketch based design tools
-operate in batch mode, where a substantial amount of raw ink is
-analyzed at the same time. The rationale for this approach is that
-recognizers have more data (unrecognized ink) to work with and can use
-statistical methods to generate the most likely interpretations for
-the entire sketch.
+operate in batch mode, where a substantial amount of raw ink
+(e.g. dozens of strokes, or more) is analyzed at the same time. The
+rationale for this approach is that recognizers have more data
+(unrecognized ink) to work with and can use statistical methods to
+generate the most likely interpretations for the entire sketch. The
+larger the sample, the more statistical confidence the recognizer can
+have.
 
 SIMI takes a different approach involving short sequences of input
 followed by recognition that fix the meaning of input by graphically
@@ -267,26 +274,27 @@ lifted. If there are positive results from these \textit{Pen Up}
 recognizers, action is taken immediately. An example of this kind is
 latching. The third kind of recognizer is triggered after a period of
 inactivity (currently 1.5 seconds). The user may optionally press a
-button with their non-dominant hand to invoke these recognizers on
-demand. These recognizers include those that establish constraints
-like right angles, or create line work like circles and splines. This
-last type is called \textit{Deferred} because it does not happen
-immediately after the pen lifts.
+button with their non-dominant hand to recognize input as needed. The
+recognizers include those that establish constraints like right
+angles, or create line work like circles and splines. This last type
+is called \textit{Deferred} because it does not happen immediately
+after the pen lifts.
 
 \input{fig-recog-arch.tex}
 
 Each recognizer class addresses a different need. Dynamic recognizers
-allow the user to make gestures that must be recognized as they are
-made, when timing is very important. Pen Up recognizers allow the user
-to make distinct gestures that are acted on immediately, eliminating
-lag and making the interface seem much more responsive. The Pen Up
-recognizers are reserved for common actions that are unlikely to
-interrupt the user when their associated actions are taken. By their
-nature, both Dynamic and Pen Up recognizers must work on single stroke
-gestures. Last, the Deferred recognizers may work on one ore more
-strokes, and typically have related actions that might distract the
-user if they were invoked right away. The overall recognition
-architecture is illustrated in Figure~\ref{fig:recog-arch}.
+allow the user to make gestures that must be recognized (and possibly
+acted upon) as they are made, when timing is very important. Pen Up
+recognizers allow the user to make distinct gestures that are acted on
+immediately, eliminating lag and making the interface seem much more
+responsive. The Pen Up recognizers are reserved for common actions
+that are unlikely to interrupt the user when their associated actions
+are taken. By their nature, both Dynamic and Pen Up recognizers must
+work on single stroke gestures. Last, Deferred recognizers operate on
+one or more strokes. Their related actions might distract the user if
+they were invoked immediately upon lifting the stylus. The overall
+recognition architecture is illustrated in
+Figure~\ref{fig:recog-arch}.
 
 \subsection{Dynamic Recognizers}
 \label{sec:overview-dynamic-recognizers}
@@ -305,9 +313,10 @@ When a dynamic recognizer finds a positive result, all other Dynamic
 recognizers are temporarily turned off, and the associated ink stroke
 will not be passed on to the Pen Up recognizers. For example, if the
 scribble recognizer determines that the user is erasing, it displays a
-visual indication that it recognizers the erasure, and when the user
-lifts the pen, it will attempt to erase something. Further, the
-Dynamic recognizer might change how the current ink stroke is drawn.
+visual indication that it recognizers the erasure. When the user lifts
+the pen, it will attempt to erase something. Further, the Dynamic
+recognizer might change how the current ink stroke is drawn, as is the
+case with Flow Selection.
 
 \subsection{Pen Up Recognizers}
 
@@ -343,12 +352,10 @@ gesture to display the Pan/Zoom widget has only a temporary
 response. If the wrong interpretation is made, SIMI will err on the
 side of the inconsequential or easily recoverable.
 
-If a positive result is found, it is activated immediately. This
-means that the action (defined by the gesture) is applied (which is
-defined by the context of the gesture). The related action for a Latch
-gesture will combine points and possibly destroy and create segments,
-which edits the model and causes the graphical representation to
-change.
+If a single positive result is found, it is activated immediately. The
+related action for a Latch gesture will combine points, possibly
+destroying or creating segments. This edits the model and causes the
+graphical representation to change.
 
 Last, any ink associated with a positive result is removed from the
 model and will not be available to the deferred recognizers.
@@ -361,34 +368,40 @@ the user has not interacted with the system for a short period
 (currently 1.5 seconds). The user may optionally speed invocation by
 pressing a button with their non-dominant hand.
 
-By this point, any ink that was positively recognized by a Dynamic or
-Pen Up recognizer is not available. Every time the pen is lifted, the
-ink is processed in the Pen Up recognition step. Any segments that are
-not recognized by the Pen Up step are placed in a set of segments for
-the Deferred recognizers. This means Deferred recognizers may operate on
+It should be noted that the button press does not conflict with the
+guidelines presented at the beginning of this chapter. Because the
+button is pressed with the user's non-dominant hand, the stylus can
+remain comfortably gripped in the primary hand---they do not have to
+set it down.
+
+By this point, ink that was positively recognized during the Dynamic
+or Pen Up stages is not available to the Deferred stage. When the pen
+is lifted, the ink is analyzed in the Pen Up recognition step,
+yielding a set of corners and segments. Ink and segments that are not
+recognized by the Pen Up step are placed in a data structure for the
+Deferred recognizers. This means Deferred recognizers operate on
 segments made in one, two, or (potentially) many more strokes.
 
-Like in the previous recognition step, each Deferred recognizer
-operates independently of the others and may produce a positive
-result. \textit{Unlike} the previous step, it is possible that several
-results are valid, as long as they are composed of different
-strokes. This makes it possible, for example, to issue two Right Angle
-gestures and a Same Length command in the same batch, all of which can
-be recognized. If two potential results involve some of the same
-segments, SIMI employs the same resolution process from the Pen Up
-recognizer step.
+As in the Pen Up stage, each Deferred recognizer operates
+independently of the others. \textit{Unlike} the previous step, it is
+possible that several results are valid, as long as they are composed
+of different strokes. This makes it possible, for example, to issue
+two Right Angle gestures and a Same Length command in the same batch,
+all of which can be recognized. If two potential results involve some
+of the same segments, SIMI employs the same resolution process from
+the Pen Up recognizer step.
 
 When conflicts are resolved, there may be zero, one, or more positive
 results. The positive results are activated in no particular
 order. This could theoretically cause problems (for example if one
-action renders another action nonsensical), but this situation has not
-been relevant in the current system.
+action renders another nonsensical), but this situation has not been
+relevant in the current system because the gestures (syntax and
+context) were designed to avoid such conflict.
 
-Any segments that are not associated with positive recognizer results
-are interpreted as geometry. This is how the user creates line work
-that define laser cut parts. This geometry is then included in the
-model with definite identities, which are used in later recognition
-processes.
+Segments that are not associated with positive results are interpreted
+as geometry. This is how the user creates line work that define
+boundaries of laser cut parts. This geometry is then included in the
+model and provide context for later recognition processes.
 
 \subsection{Discussion of Recognition Architecture}
 
@@ -413,19 +426,6 @@ Actions that are composed of a single stroke may be Dynamic, Pen Up,
 or Deferred. Because Pen Up recognizers activate immediately it is
 best to reserve this stage for operations that are made quickly and
 with minimal potential for ambiguity. 
-
-%% Explain the possible broader application of the recognition
-%% architecture. This will make your work relevant and interesting to
-%% researchers and developers in domains beyond sketching.
-
-%% Jason mentioned that, although many/most recognition based systems use
-%% a similar approach, we are unfamiliar with a clear architectural
-%% explanation as you have articulated it.  Specifically: (a) If (for
-%% example) one were to add a new recognizer to the system, how would one
-%% know where in the architecture to insert it? (b) (How) might this
-%% architecture be useful to recognizer based systems in other domains?
-%% "Capturing all three in a single gestural phrase" is a powerful idea:
-%% elaborate.
 
 \section{Model: Geometry, Constraints, Cutouts}
 
@@ -474,29 +474,33 @@ recognized the user's input as two lines that meet at a common
 point. Further, the user has added two constraints indicated the lines
 should meet at a right angle, and the lines should be the same length.
 
-Initially, the constraints are not satisfied. The lines meet at about
-an 80 degree angle, and the top line is longer than the other. When
-constraints are not satisfied, the \textit{constraint solver}
-(sometimes called a constraint \textit{engine}) is called on to make
-corrections.
+Initially, the constraints in the figure are not satisfied. Lines meet
+at about an 80 degree angle, and the top line is longer than the
+other. If constraints are not satisfied, the \textit{constraint
+  solver} (sometimes called a constraint \textit{engine}) is called on
+to make corrections.
 
 SIMI uses an numerical, iterative solver similar to Sutherland's
-relaxation method used in Sketchpad~\cite{sutherland-sketchpad}. 
-
-Each iterative step follows the process illustrated in
+relaxation method used in Sketchpad~\cite{sutherland-sketchpad}. Each
+iterative step follows the process shown in
 Figure~\ref{fig:solving}. Before iterating, the constraint engine
 determines if it should proceed. It polls each constraint to compute
-its error, which is a simple measure of how much change is needed to
-satisfy the constraint. Each constraint type calculates its error
-differently, so it is not appropriate to directly compare error values
-from two kinds of constraints. For example, the ``Same Length''
-constraint calculates the mean length of all its segments, and reports
-error as the sum of absolute deviation from that mean. A ``Right
-Angle'' constraint reports error as the absolute difference between
-expected and actual angles. While these numbers are clearly not
-directly comparable (radians vs linear distance), they both have the
-property of becoming very small when the constraint is reasonably
-satisfied.
+its error, which is a measure of how much change is needed to satisfy
+the constraint. In SIMI, a system of constraints is \textit{satisfied}
+if its error value is less than some small threshold. It is important
+to note that \textit{the satisfactory solution is not necessarily
+  exact}, but rather that the constituent constraints are satisfied to
+within engineering tolerances.
+
+Each constraint type calculates its error differently, so it is not
+appropriate to directly compare error values from two kinds of
+constraints. For example, the ``Same Length'' constraint calculates
+the mean length of all its segments, and reports error as the sum of
+absolute deviation from that mean. A ``Right Angle'' constraint
+reports error as the absolute difference between expected and actual
+angles. While these numbers are clearly not directly comparable
+(radians vs linear distance), they both have the property of becoming
+very small when the constraint is reasonably satisfied.
 
 \input{fig-constraint-solving.tex}
 
@@ -541,19 +545,20 @@ Figure~\ref{fig:jessica} illustrates the need for randomness in SIMI's
 constraint engine. The user has drawn a cutout that contains 20
 vertices, 20 line segments, and several high-level constraints
 comprising 45 low-level constraints. When the user moves a corner, the
-constraint solver is invoked in order to satisfy the constraints. The
-upper right graph shows the solver coming close to a solution fairly
-quickly, but getting `stuck' for several thousand iterations, taking
-about five seconds to settle down. During this time, the onscreen
-representation jitters. In this case, \textit{weak randomness} is
-used, and it is applied only to the total change vectors. The effect
-of the randomness increases over time. However, this approach was not
-satisfactory because it took too long and caused visual jitter.
+constraint solver is invoked to satisfy the system. The upper right
+graph shows the solver approaching a solution fairly quickly, but
+getting `stuck' for several thousand iterations, taking about five
+seconds to settle down. During this time, the onscreen representation
+jitters. In this case, \textit{weak randomness} is used, and it is
+applied only to the total change vectors. The effect of the randomness
+increases over time. However, this approach was not satisfactory
+because it took too long and caused visual jitter.
 
-I handled this problem by modifying the constraint solver to apply
+This problem was addressed by modifying the constraint solver to apply
 randomness to each individual change vector. For vertices with more
-than one change vector, this means the total change vector's direction
-is subject to randomness, as well as its magnitude. The results are
-satisfactory, as the system of constraints is satisfied in about 1/8
-of the number of iterations compared with the weak random case.
+than one change vector, this means the total change vector's
+\textit{direction} is subject to randomness, as well as its
+magnitude. The overall results are satisfactory, as the system of
+constraints is satisfied in about 1/8 of the number of iterations
+compared with the weak random case.
 

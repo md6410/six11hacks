@@ -33,3 +33,22 @@ conclusion.
 
 * Provide a more thorough conclusion including a prospectus for future
   work.
+
+    --> Added a new section at the very end, "Looking Forward". 
+
+
+* Change your thesis title to what you have presented
+
+    --> ok
+
+* Add explanations of SIMI vs Illustrator comparison
+
+    --> Clarified protocol in table 6.1, expanded discussion in ch 6
+        and in conclusion
+
+* Acknowledge and discuss why not features - e.g., symmetry,
+  copy-paste, parallel, etc. rather than implementing a complete list
+  of all possible features, the selected ....
+
+    --> Added section 'Justification of Feature Choices' in
+        conclusion.
