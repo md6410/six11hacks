@@ -1,0 +1,48 @@
+\begin{landscape}
+\begin{table}
+\begin{tabular}{ p{4cm} | p{4.5cm} | p{5.5cm} }
+\textbf{``What'' to recognize} & 
+\textbf{Examples} & 
+\textbf{Remark} \\ 
+\hline \hline
+
+Genre &
+Mathematical graph, architectural floor plan, web site layout, circuit design &
+
+It may be sufficient to recognize a sketch is of a certain kind
+without asking the user. The program could assume the sketch is
+in a certain domain.\\ \hline
+
+Characters (writing) & 
+Alphanumerics, math symbols & 
+Usually with other characters, in words and sentences. \\ \hline
+
+Geometric shapes & 
+Dots, lines, rectangles, blobs &
+Geometric shapes are often drawn in relation to others. \\ \hline
+
+Spatial features &
+A is contained in, is above, is larger than B &
+Spatial relations among elements may influence recognition. \\ \hline
+
+Entities &
+Domain-specific notation such as diodes, transistors &
+Contextual clues can help disambiguate semantics of domain symbols. \\ \hline
+
+Artistic nuance &
+Shadows, textures, color &
+Ink that modifies an existing element, perhaps suggesting 3D shape. \\ \hline
+
+Commands &
+Object selection, delete, copy, move, etc. &
+Command ink specifies operations on the drawing. \\ \hline
+
+Intention &
+Drawing's function or behavior, e.g. \textit{circuit breaker} & 
+Requires detailed domain knowledge and reasoning. \\ \hline
+
+\end{tabular}
+\caption[Elements to Recognize]{Kinds of elements to be recognized}
+\label{tab:what}
+\end{table}
+\end{landscape}

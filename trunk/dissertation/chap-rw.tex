@@ -102,7 +102,7 @@ Today, designers can choose among several modeling tools for laser
 cutter projects. The most commonly used tool is Adobe Illustrator, a
 general-purpose vector graphics editor. It is full-featured and has an
 interface new users find familiar, as it presents interaction with
-menus, toolbars, and persistent tool modes. However, participants in
+menus, tool bars, and persistent tool modes. However, participants in
 our formative study (presented later in
 Section~\ref{sec:formative-interviews}) had a hard time using
 Illustrator quickly and effectively because they spent a great deal of
@@ -186,7 +186,7 @@ aggressively or at the wrong time, it may prevent the human designer
 from seeing alternative meanings; recognize too little and the
 software is no better than paper.
 
-\subsection{Prototyping and fidelity}
+\subsection{Prototyping and Fidelity}
 \label{sec:traditional-prototyping}
 
 Newman and Landay's ethnographies of web designers focused on how
@@ -221,7 +221,7 @@ web designer believes he or she will make incremental revisions (which
 Goel calls ``vertical transformations'') they switch to a computer
 tool.
 
-\subsection{Sketches as a symbol system}
+\subsection{Sketches as a Symbol System}
 
 % Cartoon clouds or trees: Overloaded, Ambiguous
 \input{fig-overloaded-ambiguous-cloud.tex}
@@ -312,7 +312,7 @@ to the formal specification involves drawings that are semi-ambiguous,
 partially precise, and with some abstractions given definite
 identities.
 
-\subsection{Summary: traditional sketching and computation}
+\subsection{Summary: Traditional Sketching and Computation}
 \label{ref:traditional-summary}
 
 If we hope to effectively support sketching with computation, we must
@@ -477,46 +477,7 @@ determining what to recognize and how those elements can be
 recognized, and interaction issues (see Table
 \ref{tab:recognition-topics}).
 
-\begin{table}
-\begin{tabular}{p{5cm}| p{2cm} | p{8.5cm}}
-\textbf{Topic} & \textbf{Section} & \textbf{Remark} \\
-\hline \hline
-Recognition accuracy &
-\ref{sec:recognition-accuracy} & Discusses how to measure recognition 
-accuracy, and what acceptable error rates are.
-\\ \hline
-When to recognize & 
-\ref{sec:recognition-when} &
-Recognition is powerful but may also distract users from their
-task. 
-\\ \hline
-What to recognize &
-\ref{sec:recognition-what} & Sketches may represent objects
-(e.g. tables and chairs) and spatial or functional relationships
-between those objects (e.g. chairs positioned around table perimeter).
-\\ \hline
-How to segment &
-\ref{sec:recognition-segmentation} &
-Sketches contain many different symbols that may overlap. Recognizers
-must isolate groups of marks for consideration.
-\\ \hline
-How to recognize &
-
-\ref{sec:recognition-techniques}, \ref{sec:recognition-hard-coded},
-\ref{sec:recognition-library} &
-
-Many recognition techniques exist, and rely on segmentation
-methods. \\ \hline
-
-Mediating recognition error &
-\ref{sec:recognition-managing-ambiguity} &
-Recognition sometimes results in ambiguous results.
-\\ \hline
-
-\end{tabular}
-\caption{Topics in sketch recognition}
-\label{tab:recognition-topics}
-\end{table}
+\input{tab-topics-in-recognition.tex}
 
 \subsection{Recognition Accuracy}
 \label{sec:recognition-accuracy}
@@ -546,7 +507,7 @@ mapping between input and output) compared with recognition based
 interaction, because we understand that it is possible the system
 might not understand.
 
-\subsection{When to invoke recognition}
+\subsection{When to Invoke Recognition}
 \label{sec:recognition-when}
 
 It is important that sketching systems \textit{aid} design exploration
@@ -578,7 +539,7 @@ recognition~\cite{landay-silk}, or avoid recognition
 entirely~\cite{forbus-nusketch-battlespace}. Combinations of these
 approaches are common.
 
-\subsection{What should be recognized}
+\subsection{What Should be Recognized}
 \label{sec:recognition-what}
 
 Different kinds of design drawings (``model ink'') in many domains
@@ -602,58 +563,11 @@ because the various elements and their relations can be described
 formally. Table \ref{tab:what} summarizes various recognizable
 classes.
 
-\begin{landscape}
-\begin{table}
-\begin{tabular}{ p{4cm} | p{4.5cm} | p{5.5cm} }
-\textbf{``What'' to recognize} & 
-\textbf{Examples} & 
-\textbf{Remark} \\ 
-\hline \hline
-
-Genre &
-Mathematical graph, architectural floor plan, web site layout, circuit design &
-
-It may be sufficient to recognize a sketch is of a certain kind
-without asking the user. The program could assume the sketch is
-in a certain domain.\\ \hline
-
-Characters (writing) & 
-Alphanumerics, math symbols & 
-Usually with other characters, in words and sentences. \\ \hline
-
-Geometric shapes & 
-Dots, lines, rectangles, blobs &
-Geometric shapes are often drawn in relation to others. \\ \hline
-
-Spatial features &
-A is contained in, is above, is larger than B &
-Spatial relations among elements may influence recognition. \\ \hline
-
-Entities &
-Domain-specific notation such as diodes, transistors &
-Contextual clues can help disambiguate semantics of domain symbols. \\ \hline
-
-Artistic nuance &
-Shadows, textures, color &
-Ink that modifies an existing element, perhaps suggesting 3D shape. \\ \hline
-
-Commands &
-Object selection, delete, copy, move, etc. &
-Command ink specifies operations on the drawing. \\ \hline
-
-Intention &
-Drawing's function or behavior, e.g. \textit{circuit breaker} & 
-Requires detailed domain knowledge and reasoning. \\ \hline
-
-\end{tabular}
-\caption{Kinds of elements to be recognized}
-\label{tab:what}
-\end{table}
-\end{landscape}
+\input{tab-elements-to-recognize.tex}
 
 % TODO: make the table relevant to SIMI
 
-\subsection{Segmentation and grouping}
+\subsection{Segmentation and Grouping}
 \label{sec:recognition-segmentation}
 
 Segmentation and Grouping are related processes of breaking down user
@@ -708,7 +622,7 @@ recognition. PerSketch and ScanScribe explore how perceptual
 organization rules can be used at higher
 levels~\cite{saund-persketch,saund-perceptual}. 
 
-\subsection{Overview of recognition techniques}
+\subsection{Overview of Recognition Techniques}
 \label{sec:recognition-techniques}
 
 Regardless of the input device, we identify two broad categories of
@@ -730,7 +644,7 @@ complex, for example calculating the likelihood that distinct strokes
 (or segments) belong together. SIMI uses both single- and multi-stroke
 recognizers.
 
-\subsection{Hard-coded recognizers}
+\subsection{Hard-coded Recognizers}
 \label{sec:recognition-hard-coded}
 
 One common approach is to hard-code recognition routines directly. For
@@ -752,7 +666,7 @@ leading to maintenance, debugging, and testing problems.
 SIMI uses hard-coded recognizers in situations when performance is
 critical (e.g. erasing and undo/redo).
 
-\subsection{Pattern matching}
+\subsection{Pattern Matching}
 \label{sec:recognition-library}
 
 Another strategy for representing classes is to create a library of
@@ -803,7 +717,7 @@ Many of the recognizers in SIMI use textual templates roughly based on
 the approaches described by Hammond~\cite{hammond-ladder} and
 Alvarado~\cite[Chapter 4]{alvarado-phd-thesis}.
 
-\subsection{Managing ambiguity}
+\subsection{Managing Ambiguity}
 \label{sec:recognition-managing-ambiguity}
 
 Futrelle's classification scheme of types of ambiguity in diagrams

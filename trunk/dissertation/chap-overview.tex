@@ -79,7 +79,7 @@ cutter). This is an important consideration when designing facets
 whose tolerances are small with respect to kerf. A notch joint, for
 example, is ineffective if it is 0.1 mm too large or small.
 
-\section{Motivating Scenario: Picture frame Holder}
+\section{Motivating Scenario: Picture Frame Holder}
 
 \input{fig-picture-frame.tex}
 
@@ -174,7 +174,7 @@ numerical solver using a relaxation method in the tradition of
 Sketchpad~\cite{sutherland-sketchpad}.
 
 When it is time for the user's work to be given to a laser cutter, the
-designer asks SIMI to \textbf{generate a cutfile}. This is a 2D vector
+designer asks SIMI to \textbf{generate a cut file}. This is a 2D vector
 graphics file specifying geometry of cutouts. The current
 implementation is a rather simplistic ``typewriter'' algorithm---it
 uses the bounding box of each cutout, placing one next to the other
@@ -192,7 +192,7 @@ methods together.
 
 The interaction techniques offered by SIMI were carefully tuned to
 work with one another. Each gesture is as distinct from the others as
-possible. The distiction is either \textit{syntactic} (e.g. a circle
+possible. The distinction is either \textit{syntactic} (e.g. a circle
 is distinct from two short lines) or \textit{contextual} (e.g. a large
 circle around a closed shape is distinct from a small circle around
 loose segment endpoints.) This does not completely avoid recognition
@@ -208,7 +208,7 @@ inadvertently draw line work when the user intends to move the point.
 
 The interaction techniques have conservative failure states. The
 automatic latching algorithm is a good example. The auto-latcher has
-parameters describing the maximim distance between points and relative
+parameters describing the maximum distance between points and relative
 segment angles. These parameters were set to err on the side of not
 latching segments together, because the consequences of latching
 inappropriately are worse than not latching when the user wanted. To
@@ -219,12 +219,12 @@ SIMI's interaction differs from standard design tools and other sketch
 based modeling prototypes in several ways. Some of these differences
 are discussed in the sections below.
 
-\subsection{``The mode problem''}
+\subsection{``The Mode Problem''}
 
 A traditional design tool like Adobe Illustrator is built around the
 concept of input modes such as \textit{select}, \textit{draw line}, or
 \textit{fill color}. Users activate modes by selecting a menu option,
-clicking an onscreen widget, or pressing a keyboard button. The
+clicking an on-screen widget, or pressing a keyboard button. The
 program interprets user input in terms of the active tool. Sometimes
 users are unaware of which mode the program is in, or are unsure how
 to change to the desired mode. Managing modes often introduces
@@ -257,7 +257,7 @@ have.
 
 SIMI takes a different approach involving short sequences of input
 followed by recognition that fix the meaning of input by graphically
-representing results. Because the meaning of onscreen elements are
+representing results. Because the meaning of on-screen elements are
 known, the next round of recognition can use that knowledge to provide
 unambiguous contextual clues. As the user and system take turns on
 such a regular basis, I call this a \textit{conversational
@@ -456,12 +456,12 @@ points. Table~\ref{tab:constraints} lists all SIMI's constraint types.
 
 \input{tab-constraints.tex} % table 
 
-The final output of this design tool is a \textit{cutfile} that
+The final output of this design tool is a \textit{cut file} that
 contains \textit{cutouts}. A cutout is a 2D shape defining the
 boundary of a part to laser cut. SIMI identifies cutouts automatically
 by analyzing the model, searching for closed paths. Cutouts are
-graphically shaded. Users may place a cutout in the cutfile region on
-the screen to add one or more copies to cutfile.
+graphically shaded. Users may place a cutout in the cut file region on
+the screen to add one or more copies to cut file.
 
 \subsection{Constraint Solving}
 
@@ -548,7 +548,7 @@ comprising 45 low-level constraints. When the user moves a corner, the
 constraint solver is invoked to satisfy the system. The upper right
 graph shows the solver approaching a solution fairly quickly, but
 getting `stuck' for several thousand iterations, taking about five
-seconds to settle down. During this time, the onscreen representation
+seconds to settle down. During this time, the on-screen representation
 jitters. In this case, \textit{weak randomness} is used, and it is
 applied only to the total change vectors. The effect of the randomness
 increases over time. However, this approach was not satisfactory
