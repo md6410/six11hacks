@@ -36,13 +36,31 @@ real work in a way that was previously not actualized.
 
 While I have made a prototype that many observers find compelling,
 there is still more work that could be done. It raises interesting
-ideas about what else is possible with this form of interaction,
-and questions remain unresolved.
+ideas about what else is possible with this form of interaction, and
+questions remain unresolved.
 
 In this chapter I discuss how my work with SIMI can serve as a
-starting point for further work. First I discuss the implications SIMI
-has to research on sketch-based interaction and modeling. Next I will
-describe the most obvious next steps that I would like to take.
+starting point for further work. First I discuss the rationalle for
+providing the particular feature set embodied in this software. Next I
+discuss the implications SIMI has on several areas of research. Last,
+I describe the most obvious next steps that I would like to take.
+
+\section{Justification of Feature Choices}
+
+SIMI includes a set of interaction techniques that let users perform
+actions to create, edit, and build precision models for laser
+cutting. This particular collection chosen because it (a) provided a
+minimal set of features to be useful, (b) it covered a range of
+functions and (c) demonstrated a variety of sketch recognition types.
+
+Some traditional software features were intentionally left out. For
+example, \textit{Copy and Paste} is nearly ubiquitous in interactive
+systems, but it is not found in SIMI. It is often beneficial to
+discard long-standing assumptions of what is necessary to explore
+alternate ways to proceed. By omitting Copy and Paste, I had to focus
+on making it as easy as possible to create geometry and
+constraints. It is possible to create a `copy' of geometry using
+standard SIMI actions. This helps to keep the application simple.
 
 \section{Implications to Related Areas}
 
@@ -135,9 +153,10 @@ provides. How can future researchers generalize this contribution?
 
 The recognition and resolution architecture from
 Section~\ref{sec:recognition-architecture} guides programmers and
-interaction designers to develop new techniques. While a programming
-structure is helpful, there are other important aspects to consider
-when designing new sketching gestures.
+interaction designers to develop new techniques and
+applications. While a programming structure is helpful, there are
+other important aspects to consider when designing new sketching
+gestures.
 
 I provide several heuristics for developing sketch-based interaction
 techniques in other applications:
@@ -164,13 +183,11 @@ sense: the circle gesture used to latch points together feels like
 tying the points together with a string; the erase gesture is based on
 scratching over unwanted marks on physical paper.
 
-\textit{Make use of the stage architecture}. Some gestures should be
-acted upon immediately, while others could (or should) be deferred
-until later. For dynamic recognizers, effective visual feedback is
-critical. While the staged architecture eases programming, its true
-purpose is to improve user experience.
-
-
+\textit{Make use of the staged recognition architecture}. Some
+gestures should be acted upon immediately, while others could (or
+should) be deferred until later. For dynamic recognizers, effective
+visual feedback is critical. While the staged architecture eases
+programming, its true purpose is to improve user experience.
 
 
 \section{Future Work}
@@ -184,9 +201,9 @@ some other domain, such as for 3D modeling.
 \subsection{Common Feature Requests}
 
 It is likely that Sketch It, Make It (or something like it) will be
-made into a commercial product soon. We have accumulated a long list of feature
-requests that can serve as a starting point for the next set of
-additional features. 
+made into a commercial product soon. We have accumulated a long list
+of feature requests that can serve as a starting point for the next
+set of additional features.
 
 Users like the paper-like feel of the tool, and would prefer to have
 the ability to add ink that is not recognized. This enables designers
@@ -196,8 +213,8 @@ ability to use these unrecognized portions in future work.
 Handwriting recognition is another commonly requested feature. This
 was intentionally not included in the current prototype because it
 would have required a substantial time investment without a
-correspondingly substantial pay-out. Handmade numbers and text could be
-applied to give dimensions and labels to parts of a drawing.
+correspondingly substantial pay-out. Handmade numbers and text could
+be applied to give dimensions and labels to parts of a drawing.
 
 Users also request additional constraints, for example making two
 lines parallel, or making an object appear at the midpoint between two
@@ -295,4 +312,28 @@ design projects. Or sketch-based design could simply be used as a
 fast, efficient method of specifying the designer's intent to create
 finished output.
 
+
+\section{Looking Forward}
+
+Nearly everything in our environment was deliberately designed by a
+human being. An artifact's users are not often the same people that
+designed or built it. The recent introduction and success of
+affordable, fast fabrication machinery suggests the gulf between
+\textit{designers} and \textit{users} may narrow as desktop
+manufacturing lets ordinary people design and build things on their
+own. One remaining bottleneck is software: access to fabrication
+machinery is not enough. People need design software that is easy to
+use and gives the means to express ideas. But for ordinary people,
+current CAD software is expensive, hard to learn, and hard to use.
+
+The sketch-based interaction presented in this thesis explicitly
+supports design for laser cut items. This is provided as an example of
+a (potentially) much larger space of sketch-based modeling tools. Many
+other application areas were mentioned above, such as STEM
+applications for students, 3D modeling, animation, and business
+diagrams. This line of research is important not simply because it
+enables users to do one thing marginally better than before. It is
+important because it could empower people to design and make many
+kinds of things that were previously impossible. This is a powerful
+idea, and the consequences are far-reaching. 
 

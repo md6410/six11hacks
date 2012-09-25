@@ -1,17 +1,18 @@
 \chapter{Related Work}
 \label{sec:rw}
 
-This chapter discusses two high level topics. First I discuss design,
-paying close attention to rapid fabrication and laser cutting. Second
-I provide background on research pertaining to sketch based interaction.
+This chapter discusses design (focusing on rapid fabrication and laser
+cutting) and research on physical and computationally-supported
+sketching.
 
 \section{Design for Rapid Fabrication}
 
 A growing community of self-described \textit{makers} design and build
 many kinds of physical things~\cite{gershenfeld-fab}. Some are
 electronic or robotic gizmos, while others are made from traditional
-material. These ``new makers''~\cite{gross-new-makers} are empowered
-by rapid fabrication machines like 3D printers and laser cutters.
+craft material. These ``new makers''~\cite{gross-new-makers} are
+empowered by rapid fabrication machines like 3D printers and laser
+cutters.
 
 It is possible that we are beginning to see a shift from an economy
 based on mass-production (in factories) to one that includes
@@ -25,19 +26,20 @@ Ponoko fabricate and send users physical output based on digital
 models uploaded over the web.
 
 Rapid prototyping machines are used in many domains: mechanical
-engineering, architecture, craft work, industrial design, to name a
-few. While many users of these machines are professional, a growing
-population of Makers are not necessarily educated to design and build
-things. Instead, members of this Maker group might be better described
-as hobbyists or semi-professionals. They are smart and motivated, but
-do not necessarily have a great abundance of time or money.
+engineering, architecture, craft work, industrial design---just to
+name a few. While many users of these machines are professional, a
+growing population of Makers are not necessarily educated (in a
+traditional sense) to design and build things. Instead, members of
+this group might be better described as hobbyists or
+semi-professionals. They are smart and motivated, but do not
+necessarily have a great abundance of time or money.
 
 \subsection{Rapid Fabrication Machines}
 
 The software modeling tool discussed later in this thesis targets
-laser cutters, which are just one particular type of rapid fabrication
+laser cutters, which are one particular type of rapid fabrication
 machine. I will first describe the broader area of rapid fabrication
-in order to situate the specific machine in question.
+to situate the specific machine in question.
 
 There are several related (but not necessarily interchangeable) names
 for machinery to in this space. \textit{Numerical Control (NC)}
@@ -64,50 +66,54 @@ customized office desk. But in order to build the parts comprising the
 desk, somebody must give the machine a digital model that indicates
 not only where the mill will cut, but how the cut will be made.
 
-A mill may 3 or more axes: it can move on the x/y plane, up and down
-(z-axis), and some models allow the tool head to rotate. The tool path
+A mill may operate with 3 or more axes: it can move on the x/y plane,
+and up and down (z-axis). Some models have additional axes that allow
+the tool head to move in other ways, such as rotation. The tool path
 is therefore an important consideration when designing for most types
 of computer controlled manufacturing machines. In many (but not all)
 cases, software tools can compute tool paths automatically. Designers
 must consider a machine's capabilities.
 
-They can be thought of as a very fast, strong, and precise
+Laser cutters can be thought of as a very fast, strong, and precise
 automated razor blade, cutting through flat material (paper, wood,
 plastic, metal, etc.) from directly above. Many items can be made
-entirely with a laser cutter, aside from the occasional screw or
-glue. 
+entirely with a laser cutter, aside from the occasional screw or glue.
 
 SIMI targets design for laser cutters. This tool was chosen for
 several reasons. First, problems related to tool paths are nearly
-non-existent. Second, a laser cutter executes quickly, giving me a
-faster loop of coding, testing, and debugging. Cutting the parts for a
-toothbrush holder, for example, takes about five minutes on the
-machine in our lab, but our 3D printer would take several hours to
-make a similar object. Last, laser cutters are among the more popular
-rapid fabrication machines.
+non-existent. Second, a laser cutter executes quickly, which supports
+a faster loop of coding, testing, and debugging. Fabricating a
+toothbrush holder takes about five minutes on a typical laser cutter,
+but a 3D printer would take four hours to make a similar object. Last,
+laser cutters are among the more popular rapid fabrication machines.
 
-The user places material on the laser cutter's \textit{cut
+Laser cutter users place material on the laser cutter's \textit{cut
   bed}. Typical sizes for cut beds are in the range of 12''x 18'' to
-48'' x 72'' (30.5 x 46 cm to 122 x 183 cm). A laser is directed
-through a series of mirrors that are mounted on robotic arms that move
-to allow the laser to reach any location on the cut bed. A 40 watt
-machine can cut $\frac{1}{4}''$ (6mm) thick wood; a 100 watt machine
-can cut up to 1'' (25mm) plywood.
+48'' x 72'' (30 x 46 cm to 122 x 183 cm). A laser is directed through
+several mirrors mounted on robotic arms. These arms move to allow the
+laser to reach any location on the cut bed. A lens near the end of the
+path focuses the laser to the material to create an optimal cut. A 40
+watt machine can cut $\frac{1}{4}''$ (6mm) thick wood; a 100 watt
+machine can cut up to 1'' (25mm) plywood.
 
 \subsection{Current Design Tools for Laser Cutting}
 
 Today, designers can choose among several modeling tools for laser
-cutter projects. Adobe Illustrator, a general-purpose vector graphics
-editor, is the most commonly used tool. Illustrator is full-featured
-and has an interface new users find familiar. However, participants in
-our formative study (see Section~\ref{sec:formative-interviews}) had a
-hard time using Illustrator quickly and effectively because they spent
-a great deal of effort looking for appropriate functions among the
-many features that are irrelevant to laser cutters. Specialized CAD
-tools like Rhino or SolidWorks (see Figure~\ref{fig:cad-screenshots})
-are perhaps more appropriate for this kind of modeling but they also
-have a substantial learning curve. If rapid fabrication is to become
-common, appropriate modeling tools must be made accessible to ordinary
+cutter projects. The most commonly used tool is Adobe Illustrator, a
+general-purpose vector graphics editor. It is full-featured and has an
+interface new users find familiar, as it presents interaction with
+menus, toolbars, and persistent tool modes. However, participants in
+our formative study (presented later in
+Section~\ref{sec:formative-interviews}) had a hard time using
+Illustrator quickly and effectively because they spent a great deal of
+effort looking for appropriate functions among the many features that
+are irrelevant to laser cutters. 
+
+Specialized CAD tools like Rhino or SolidWorks (see
+Figure~\ref{fig:cad-screenshots}) are perhaps more appropriate for
+this kind of modeling but they also have a substantial learning
+curve. If rapid fabrication is to become common, appropriate modeling
+tools must be made accessible to ordinary
 users~\cite{lipson-homefactory}.
 
 \input{fig-cad-screenshots.tex}
@@ -119,7 +125,8 @@ personal, others collaborative. Some help people make quick
 calculations and are quickly forgotten while others serve longer-term
 purposes. For professional designers, sketching is a \textit{process}
 to think about problems. Just as importantly, a sketch (the result of
-the process) is a \textit{record} that communicates ideas. 
+the process) is a \textit{record} that communicates
+ideas~\cite{ferguson-engineering}.
 
 Design can be seen as an iterative process of problem-framing and
 exploring possible solutions within the current conception of the
@@ -169,12 +176,12 @@ Designers engage in a sort of ``conversation'' with their sketches in
 a tight cycle of drawing, understanding, and
 interpreting~\cite{schon-kinds-of-seeing}. Goldschmidt describes this
 as switching between two reasoning modes: ``seeing that'' and ``seeing
-as''~\cite{goldschmidt-dialectics}. Seeing \textit{that} is the
+as''~\cite{goldschmidt-dialectics}. \textit{Seeing that} is the
 process of recognizing the literal, descriptive properties of the
-drawing.  Seeing \textit{as} is figurative and transformative,
-allowing the designer to re-interpret parts of the sketch in different
+drawing. \textit{Seeing as} is figurative and transformative, allowing
+the designer to re-interpret parts of the sketch in different
 ways. Care must be taken to support this conversation when developing
-sketch based modeling tools. If the system interprets drawings too
+sketch-based modeling tools. If the system interprets drawings too
 aggressively or at the wrong time, it may prevent the human designer
 from seeing alternative meanings; recognize too little and the
 software is no better than paper.
@@ -182,18 +189,18 @@ software is no better than paper.
 \subsection{Prototyping and fidelity}
 \label{sec:traditional-prototyping}
 
-Newman and Landay's ethnographies of web designers focused how
+Newman and Landay's ethnographies of web designers focused on how
 designers use informal techniques~\cite{newman-web-designers}. They
 found that designers always sketch at the beginning of a web design
 project, exploring numerous high-level options. Frequently this early
 sketching phase is accompanied with construction of low-fidelity
-prototypes made on paper or with Microsoft PowerPoint. As the design
-progresses and designers begin incrementally adding details, they move
-to higher fidelity models. Client meetings are an important forcing
-function in web design projects. When meeting with clients, designers
-want to show polished prototypes produced with computer
-software. Therefore designers used electronic tools earlier in the
-process than they would otherwise have preferred.
+prototypes made on paper or with simple software tools like Microsoft
+PowerPoint. As the design progresses and designers incrementally add
+details, they move to higher fidelity models. Client meetings are an
+important forcing function in web design projects. When meeting with
+clients, designers want to show polished prototypes produced with
+computer software. Therefore designers used electronic tools earlier
+in the process than they would otherwise have preferred.
 
 Today most software tools support incremental refinement and
 specification of details but do not adequately support idea generation
@@ -272,9 +279,8 @@ or properties are not (yet) important or known. For example,
 Figure~\ref{fig:sketch-type-pm} on page \pageref{fig:sketch-type-pm}
 shows a project management diagram of two hypothetical projects. The
 activities composing each project are abstract---they could represent
-anything. The value of the sketch is that it shows the project's
-network topology and does not draw attention to what the specific
-activities are. 
+anything. The value of the project sketch is that it shows the network
+structure and does not draw attention to what specific activities are.
 
 An \textit{ambiguous} symbol has many plausible interpretations. The
 floor plan sketch in Figure~\ref{fig:sketch-type-architecture} shows
@@ -313,14 +319,13 @@ If we hope to effectively support sketching with computation, we must
 first understand the practical aspects of traditional sketching. 
 
 Sketching is an important---perhaps necessary---tool for doing
-design. It gives us a way to quickly make provisional drawings, which
+design. It gives a way to quickly make provisional drawings, which
 help us efficiently make sense of spatial, relational
 information. Sketches let us make marks that are as vague or specific
-as we need. Because sketched elements can easily be ambiguous, rough
-drawings afford different interpretations. We may therefore reflect on
-our sketches and see new meaning in existing marks. People sketch in
-part because they don't know exactly what they are making---sketching
-facilitates exploration.
+as needed. Because sketched elements can be ambiguous, rough drawings
+have different interpretations. We may reflect on sketches to see new
+meaning in existing marks. People sketch in part because they don't
+know exactly what they are making: sketching facilitates exploration.
 
 Low-fidelity prototypes are especially important as tools to test
 ideas during early design. This is because they are easy to make,
@@ -366,9 +371,10 @@ demonstrated by work by Hinckley \textit{et. al} at Microsoft
 Research~\cite{hinckley-pen-touch}.
 
 Regardless of sensing technology, these devices allow users to provide
-input in a way that is much closer to handwriting than a mouse
-allows. Although pen and mouse input share many properties (both allow
-users to interact with 2D displays) they have several key differences.
+input in a way that is much closer to handwriting and freehand
+sketching than a mouse allows. Although pen and mouse input share many
+properties (both allow users to interact with 2D displays) they have
+several key differences.
 
 Mouse input affords \textit{motion} sensing while pen input
 affords \textit{position} sensing~\cite{hinckley-input-technology}. In
@@ -392,7 +398,7 @@ pen~\cite{plimmer-pen-usability}. The force of a \textit{mouse} button
 click is orthogonal to the device's plane of use and has negligible
 effect on target accuracy. However, pressing buttons on a
 \textit{stylus} can move the tip of the pen, making it difficult to
-press the button while pointing at particular objects (see
+accurately press the button while pointing at particular objects (see
 Figure~\ref{fig:button-force}). Further, pressing a button on a
 computer stylus usually requires the user to adjust the pen in
 hand. This action may be distracting and uncomfortable for long term
@@ -461,15 +467,15 @@ different color ink.
 Recognition is the centerpiece of many software prototypes that
 support sketching. Although the research focus of many systems is not
 recognition, such systems use automatic interpretation of sketches to
-explore new methods of interacting with computers and new ways of
-designing~\cite{gross-boe,grundy-maramasketch,lin-denim}. Such
-projects rely on reasonably accurate recognizers. Recognition is
-therefore a topic that affects nearly all aspects of research on
-sketch based systems. For this reason, a substantial portion of this
-review is devoted to aspects of sketch recognition. This includes
-timing issues, determining what to recognize and how those elements
-can be recognized, and interaction issues (see
-Table \ref{tab:recognition-topics}).
+explore methods to interact with computers and new ways to
+design~\cite{gross-boe,grundy-maramasketch,lin-denim}. Such projects
+rely on reasonably accurate recognizers. Recognition is therefore a
+topic that affects nearly all aspects of research on sketch-based
+systems. For this reason, a substantial portion of this document is
+devoted to aspects of sketch recognition. This includes timing issues,
+determining what to recognize and how those elements can be
+recognized, and interaction issues (see Table
+\ref{tab:recognition-topics}).
 
 \begin{table}
 \begin{tabular}{p{5cm}| p{2cm} | p{8.5cm}}
@@ -658,14 +664,14 @@ the process of forming logical collections of data (analogous to
 determining which spoken words compose a phrase or sentence).
 
 It is sometimes appropriate to break apart continuous pen strokes into
-multiple segments, for example in recognizing cursive writing, or
-finding corners in continuous pen strokes. Alternately, it may be
-necessary to group related strokes in order to recognize compound
-objects such as a triangle drawn with three distinct strokes. To
-further complicate matters, there may be a number of reasonable ways
-to segment user input~\cite{mankoff-burlap}, based on information such
-as pen speed, stroke order, perceptual qualities, domain knowledge or
-curvature~\cite{kim-segmentation}. 
+multiple segments, for example in recognizing letter boundaries in
+cursive writing, or finding corners in continuous pen
+strokes. Alternately, it may be necessary to group related strokes to
+recognize compound objects such as a triangle drawn with three
+distinct strokes. To further complicate matters, there may be a number
+of reasonable ways to segment user input~\cite{mankoff-burlap}, based
+on information such as pen speed, stroke order, perceptual qualities,
+domain knowledge or curvature~\cite{kim-segmentation}.
 
 The technical challenge is simplified if the system requires users to
 complete each symbol before moving on to another, or if each symbol
@@ -722,7 +728,7 @@ recognizer might simply expect multi-stroke objects to be drawn in a
 prescribed fashion. Or, multi-stroke recognizers might be more
 complex, for example calculating the likelihood that distinct strokes
 (or segments) belong together. SIMI uses both single- and multi-stroke
-recognizers for different purposes.
+recognizers.
 
 \subsection{Hard-coded recognizers}
 \label{sec:recognition-hard-coded}
@@ -738,10 +744,10 @@ sun with rays of light coming out of it, we would have to also
 recognize lines, then coordinate the recognizer to consider those
 particular lines together with the circle, and ensure that the lines
 are positioned and angled correctly. Further, sketch recognition
-applications must be able to discern different kinds of elements. The
-recognizers for each of these elements may conflict. A new recognizer
-may cause an existing recognizer to stop working correctly, leading to
-maintenance, debugging, and testing problems.
+applications must be able to discern different kinds of
+elements. Recognizers for these elements may conflict. A new
+recognizer may cause an existing recognizer to stop working correctly,
+leading to maintenance, debugging, and testing problems.
 
 SIMI uses hard-coded recognizers in situations when performance is
 critical (e.g. erasing and undo/redo).
