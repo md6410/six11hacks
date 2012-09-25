@@ -1,10 +1,10 @@
 \chapter{Sketch It, Make It: Details}
 \label{sec:details}
 
-The previous chapter gave an overview of SIMI's architecture. This
-included an introduction of SIMI's recognition process.
+The previous chapter gave an overview of SIMI's architecture,
+including an introduction of SIMI's recognition process.
 (Section~\ref{sec:recognition-architecture}). This chapter gives
-details on how each recognizer works. 
+details on how each recognizer works.
 
 First, SIMI's corner finding and segmentation strategy is
 described. This process is necessary to most recognition, and is what
@@ -17,8 +17,11 @@ these sections.
 \label{sec:corner-finder}
 
 Ink parsing is the process of identifying useful characteristics of
-raw ink, such as the locations of corners, curvature at specific
-points, and the likely identities of segments like lines or curves.
+freehand digital input, hereafter referred to as `raw ink', `rough
+ink', or simply `ink'. Characteristics include the locations of
+corners, curvature at specific points, and the likely identities of
+segments like lines or curves. Raw ink points are recorded as $(x, y,
+t)$ coordinates that specify where a point is and it was created.
 
 In the following sections, there are two different ways to measure
 distance: Euclidean and Curvilinear (see
@@ -32,12 +35,13 @@ Figure~\ref{fig:distance-measures}.
 
 \input{fig-distance-measures.tex}
 
-SIMI's ink parsing strategy is simpler than many other approaches from
-the SBIM literature. Others, like the strategies taken by
+SIMI's ink parsing strategy is simpler than many other approaches
+found in literature on sketch-based interfaces and modeling
+(SBIM). Others, like the strategies taken by
 Sezgin~\cite{sezgin-early-processing} or Wolin~\cite{wolin-smr},
 combine both \textit{time} and \textit{curvature} information when
-corner finding. SIMI's approach relies only on curvature, but still
-achieves good results.
+corner finding. SIMI's approach for corner-finding relies only on
+curvature, but still achieves good results.
 
 When the user completes a stroke, the ink parser is invoked. First it
 assigns a curvature value to each point. Next, a corner finder uses
@@ -52,23 +56,24 @@ these steps now.
 \input{fig-curvature-diagram.tex}
 
 Figure~\ref{fig:curvature-diagram} illustrates how curvature is
-calculated. A rough ink stroke has a series of points that are not
-evenly spaced out. Sometimes, they may be very close together (for
-example, when the user draws slowly). To determine the curvature at an
-individual point, we must look at a nearby region called a
-\textit{window}, rather than the immediate neighbors. Without this
-window, the curvature would be unreliable when points are very close
-together.
+calculated. A raw ink stroke is composed of a series of unevenly
+distributed points. Sometimes, points may be very close together (as
+when the user draws slowly). To determine the curvature at an
+individual point, the algorithm uses a surrounding region called a
+\textit{window}, rather than only the immediate neighbors. Without
+this window, the curvature would be unreliable when points are very
+close together.
 
-The window's size $w$ is determined by the current zoom factor. When
-the zoom factor is 1 (meaning there is a 1:1 ratio between model and
-screen coordinates), the window size is 20 (corresponding to 20
-pixels). To calculate the window boundaries at point $p_i$, the corner
+The window's size $w$ is measured in pixels, and is determined by the
+current zoom factor. When the zoom factor is 1 (meaning there is a 1:1
+ratio between model and screen coordinates), the window size is
+20px. To calculate the window boundaries at point $p_i$, the corner
 finder begins at $p_i$ and traverses the stroke backwards and forwards
-by half the window size. It computes interpolated points $w_a$ and
-$w_b$ that are exactly $w/2$ units along the stroke to $p_i$. It then
-forms two vectors: $v_a$ from $w_a$ to $p_i$, and $v_b$ from $p_i$ to
-$w_b$.
+by half the window size $(w/2)$. It computes interpolated points $w_a$
+and $w_b$ that are exactly $w/2$ units along the stroke to $p_i$. It
+then forms two vectors: $v_a$ from $w_a$ to $p_i$, and $v_b$ from
+$p_i$ to $w_b$. Note that all distances in this part are measured with
+Curvilinear reckoning.
 
 The signed curvature $\theta$ for $p_i$ is computed directly from
 these two vectors. The magnitude is determined by their dot product;
@@ -109,7 +114,7 @@ cluster's corner is simply the point closest to the curvilinear
 middle. In other words, if the distance along stroke from the
 beginning to the end of the cluster is 9, the corner is the point in
 the cluster that is nearest to the interpolated point 4.5 units from
-the cluster beginning. 
+the cluster beginning.
 
 In addition to the corners discover in this process, the stroke's
 first and last points are also included as `corners'. This is for the
@@ -126,11 +131,12 @@ segment finders are identified by examining the raw ink directly, and
 do not use corner data.
 
 Like semantic sketch recognizers, it is possible for multiple segment
-finders to positively identify ink. To mitigate this, segment finders
-operate on a priority system. The priority is: Dot, Circle, Ellipse,
-Blob, Line, Arc, and Spline. In other words, if the Dot finder
-identifies a dot, there is no possibility of the associated ink being
-identified as a Circle.
+finders to positively identify ink---e.g. a segment might be an arc,
+or it might be a line. To mitigate this, segment finders operate on a
+priority system. The priority is: Dot, Circle, Ellipse, Blob, Line,
+Arc, and Spline. In other words, if the Dot finder identifies a dot,
+there is no possibility of the associated ink being identified as a
+Circle.
 
 \subsubsection{Dot Finder}
 
@@ -144,13 +150,6 @@ not, there is one final check to make. The stroke's point density is
 computed. This is the number of points in the original ink stroke,
 divided by the hull's area. If $ratio/(0.3 + density)$ is less than
 120, it is a dot.
-
-%% The thresholds used in this section (and many others) were determined
-%% by trial and error. Some (such as point density) might need to be
-%% changed dramatically if different hardware is used. For example, these
-%% numbers were found using a default mouse driver, which reports only
-%% integer positions. Ink strokes will be less dense than if a proper
-%% tablet driver reports floating point locations.
 
 \subsubsection{Circle and Ellipse Finder}
 
@@ -179,11 +178,11 @@ closed &
 
 Circles and Ellipses are identified with the same finder. If the input
 stroke is closed, the input is fit to an ellipse. To avoid placing
-restrictions on how users can draw, user may draw ellipses at
-arbitrary angles. SIMI implements a least squares approach described
-by Fitzgibbon \textit{et. al}~\cite{fitzgibbon-ellipse-fitting}. It is
-an efficient algorithm whose complexity grows linearly with the size
-of the input. The output of the ellipse fitting algorithm is a rotated
+restrictions on how users draw, they may draw ellipses at arbitrary
+angles. SIMI implements a least squares approach described by
+Fitzgibbon \textit{et. al}~\cite{fitzgibbon-ellipse-fitting}. It is an
+efficient algorithm whose complexity grows linearly with the size of
+the input. The output of the ellipse fitting algorithm is a rotated
 ellipse, defined by a centroid, a rotation, and major and minor axis
 magnitudes.
 
@@ -228,10 +227,10 @@ it is an Ellipse.
 
 A \textit{Blob} is a spline than wraps around on itself to form a
 closed loop. Recall that SIMI identifies a closed shape when a
-stroke's start and end points are close relative to stroke length. To
-transform the rough input into a smooth shape, additional processing
-is necessary because the start and end of the stroke are not
-continuous.
+stroke's start and end points are close relative to stroke length (as
+given by Equation~\ref{eqn:ellipse}). To transform rough input into a
+smooth shape, additional processing is necessary because the start and
+end of the stroke are discontinuous.
 
 \input{fig-blob.tex}
 
@@ -256,9 +255,9 @@ section.
 \subsubsection{Line Finder}
 
 Lines are typically the most common segment type. Like arcs and
-splines, lines are open segment types. A single ink stroke may contain
-any number of open segment types. All open segment type finders
-operate on regions between (and including) corners---they do
+splines, lines are an open segment type. A single ink stroke may
+contain any number of open segment types. All open segment type
+finders operate on regions between (and including) corners---they do
 \textit{not} operate on the entire stroke, unless the stroke happens
 to contain no corners.
 
@@ -304,8 +303,9 @@ locations of the Spline/Blob's control points. This way, when $A$ or
 $B$ move, the control point locations are easily recalculated.
 
 A control point is defined with a pair of numbers: one in the
-$A\rightarrow B$ direction, another in the $A\rightarrow C$ direction. A
-value of one indicates full movement from the start to end point.
+$A\rightarrow B$ direction, another in the $A\rightarrow C$
+direction. A value of one indicates full movement from the start to
+end point.
 
 \input{fig-spline-control-points.tex}
 
@@ -321,9 +321,6 @@ feedback to let the user know that the recognizer has triggered.
 
 \subsection{Erase}
 
-%% What is it for? State obvious use quickly, and give detail on any
-%% non-obvious uses.
-
 The \textit{Erase} gesture allows the user to delete segments. It lets
 users recover from errors or lets them change their minds. Unlike Undo
 (discussed below), Erase gives access to any line work in the
@@ -332,9 +329,6 @@ example to cut away segments to create notches (as
 in~\cite{zeleznik-lineogrammer}).
 
 \input{fig-erase.tex}
-
-%% Recognition process: What kind of data does it use? What is the
-%% context-free recognition like? What context does it use?
 
 SIMI users depend on being able to erase quickly and easily. While it
 may seem that an efficient and easy to use gesture recognizer would be
@@ -349,63 +343,63 @@ part of the problem. Proper visual feedback was also a necessary part
 of the solution.
 
 Erase was reimplemented as a dynamic recognizer so it would operate as
-the pen was down. The lets it identify erase gestures in mid-stroke,
-showing a colored 'X' to indicate that the user's erasure will
-succeed. This gives users confidence the system has understood and
-reduces the number of recognition errors substantially.
+the pen was down. It identifies erase gestures in mid-stroke, showing
+a colored 'X', indicating the user's erasure will succeed. This gives
+users confidence the system understood, and reduces the number of
+recognition errors substantially.
 
 The dynamic erase gesture is implemented as follows. It involves
 several parameters that may be tuned for different
 circumstances. These parameters are summarized in
 Table~\ref{tab:erase-params} after the description.
 
-First we assign each point $P_i$ with a time stamp $T_i$, a
-curvilinear distance $D_i$, and a heading vector $H_i$. Curvilinear
-distance is the path length along the stroke from the first point:
-$D_0=0$, and the rest are $D_i = D_{i-1} + distance(P_{i-1}, P_i)$.
+First we assign each point $P_i$ with a time stamp $T_i$, a path
+distance $D_i$, and a heading vector $H_i$. Path distance is measured
+as the curvilinear length from the initial point: $D_0=0$, and the
+rest are $D_i = D_{i-1} + distance(P_{i-1}, P_i)$.
 
 The heading $H_i$ is a normalized vector from $P_{i-k}$ to $P_{i+k}$,
 using a window size $k$. The first $k$ points use $H_k$ for their
 heading.
 
-Next we add points to a list of sample points $S$. If the curvilinear
+Next we add points to a list of sample points $S$. If the path
 distance between $D_i$ and the most recently added sample point is
 greater than $min_{sd}$, $P_i$ is added to $S$. When a new sample
 point is added, a sub-list $R$ is assembled containing recent sample
 points that occurred within $t$ milliseconds. If the angle between the
 new sample point's heading and any point heading in $R$ is greater
 than some angle threshold value $min_\theta$ (we use $\pi$ radians),
-it increments a `corner' count value for the current pen stroke. When
-more than $min_c$ corners are found in a stroke, the stroke is a
+it increments a `corner' count value for the current pen stroke. 
+
+When more than $min_c$ corners are found in a stroke, the stroke is a
 strong candidate to be interpreted as an erase. When the corner count
 has reached $min_c$, the system checks to see if the input resembles a
 circle. This final check is necessary to avoid confusing a latch
-gesture as an erase gesture. 
+gesture as an erase gesture.
 
 If the circle check fails, the stroke is interpreted as an
-erasure. The system draws feedback to alert the user that the gesture
-has been recognized and halts recognition until the pen is lifted.
-
+erasure. The system provides visual feedback to alert the user that
+the gesture has been recognized and halts recognition until the pen is
+lifted.
 
 Because the sample list depends on a relatively short duration, the
 user must scribble vigorously to activate the erase gesture. Erasing
-is a destructive process. Even though the user may quickly recover
-from an unwanted erasure with the Undo command, they are nonetheless
-disconcerting. The requirement that users scribble vigorously helps to
-avoid false positives.
+is a destructive process. Even though the Undo command lets the user
+quickly recover from an unwanted erasure, they are nonetheless
+disconcerting. Scribbling vigorously helps to avoid false positives.
 
-When the user lifts their pen, SIMI determines which (if any) segments
-should be removed from the model. The simplest approach would be to
-identify any segment that intersects the erase gesture's convex
-hull. However, this leads to poor results because users often want to
-erase items that are near other items that should be kept. If this
-strategy were applied, both the line and the arc in
-Figure~\ref{fig:erase-basic} would be erased.
+When the user lifts the pen after successfully issuing an erasure,
+SIMI determines which (if any) segments should be removed from the
+model. The simplest approach would be to identify any segment that
+intersects the erase gesture's convex hull. However, this leads to
+poor results because users often want to erase items that are near
+other items that should be kept. If this strategy were applied, both
+the line and the arc in Figure~\ref{fig:erase-basic} would be erased.
 
-When executing an erasure, the first step is to collect all the
+When activating an erasure, the first step is to collect all the
 segments that are under the erase gesture's convex hull. Next, SIMI
 calculates the percentage of each segment's length that is under the
-hull. 
+hull.
 
 It is common that users would like to erase several items with the
 same gesture. To support this, SIMI chooses the segment that has the
@@ -445,13 +439,13 @@ as a cached graphic. This is a fast memory-intensive strategy that
 requires only minimal computation. Snapshots are made when the user
 adds, modifies, or removes geometry or constraints.
 
-\subsection{Flow selection}
+\subsection{Flow Selection}
 
 \input{fig-flow-selection.tex}
 
 \textit{Flow selection} is a time-based selection and operation
 technique that lets users deform \textit{regions} of curved
-segments~\cite{johnson-flow-selection}. This is useful for fixing
+segments~\cite{johnson-flow-selection}. It is useful for fixing
 errors, or simply playing with curves to achieve an esthetically
 pleasing effect.
 
@@ -464,7 +458,7 @@ stylus. The longer the pen is held down, the more strongly points are
 selected (e.g. they become `hotter'), and the selection size gets
 bigger. Next, the user can move the stylus without lifting. This moves
 selected points---the more strongly selected, the more they move. The
-process is nicely illustrated by the finite state machine in
+process is illustrated by the finite state machine in
 Figure~\ref{fig:flow-selection-fsm}.
 
 Flow selection is graphically presented by highlighting the affected
@@ -479,8 +473,11 @@ If no dynamic recognizer claimed a user's stroke, the \textit{Pen Up}
 recognizers are invoked. There are two pre-processing steps before
 this happens. The first is Ink Parsing---corner finding and segment
 identification. This was discussed at length earlier in the
-chapter. The second pre-processing step is called \textit{hook
-  removal}.
+chapter. The Pen Up recognizers have access to both the structured
+data including corners and segment types, as well as the original raw
+data. The second pre-processing step is called \textit{hook removal}.
+
+\subsection{Removing Hooks}
 
 A \textit{hook} is a short region of ink made accidentally as the user
 presses down or lifts the stylus from the digitizing tablet. Many
@@ -499,9 +496,6 @@ curvilinear length is less than 10\% of the longest segment from the
 same ink stroke. Hooks are simply removed from the model and not
 passed on for recognition.
 
-The Pen Up recognizers have access to both the structured data
-including corners and segment types, as well as the original raw data.
-
 \subsection{Latching}
 
 \input{fig-latch.tex}
@@ -513,8 +507,8 @@ past each other to ensure that the laser will correctly cut the
 corner.
 
 Latching is the process of adjusting adjacent segments to meet at a
-common point~\cite{herot-latch-corners}. All line work in SIMI is meant
-to compose cutouts, which are closed sequences of latched
+common point~\cite{herot-latch-corners}. All line work in SIMI is
+meant to compose cutouts, which are closed sequences of latched
 segments. The designer must therefore be able to find and fix
 non-latched segments to form cutouts. SIMI draws a red marker at
 `lonely endpoints' (endpoints associated with only one segment) to
@@ -604,16 +598,17 @@ where the split occurred.
 Points and segments are created and destroyed in this process. This
 must be reflected in the model. Any constraints that referenced a
 deleted segment must be re-evaluated to see if (and which) new
-segments apply.
+segments apply. If constraints depend on segments that are removed,
+the constraint is deleted.
 
 \subsection{Pan and Zoom}
 
-SIMI lets users control the view port. Tapping the pen twice
-immediately displays a pan/zoom widget shown in
-Figure~\ref{fig:panzoom}. To pan, drag starting in the left square in
-any direction. To zoom, start in the right square: up to zoom in, down
-to zoom out (the horizontal dimension is not used). The controls
-disappear after two seconds of non-use.
+SIMI lets users control the view port. Tapping the pen twice displays
+a pan/zoom widget shown in Figure~\ref{fig:panzoom}. To pan, drag
+starting in the left square in any direction. To zoom, start in the
+right square: up to zoom in, down to zoom out (the horizontal
+dimension is not used). The controls disappear after two seconds of
+non-use.
 
 Many parameters used in other recognizers are sensitive to the zoom
 factor. When the user zooms in or out, distance factors must change
@@ -626,8 +621,8 @@ units rather than $7$ as it would without zooming.
 
 \subsection{Select Points and Segments}
 
-Users can move points by selecting, and then dragging them. To select
-a point, users make a quickly made swirling gesture that is recognized
+Users can move points by selecting and dragging them. To select a
+point, users make a quickly made swirling gesture that is recognized
 as a \textit{Dot} segment type. If the dot is made within 9 pixels of
 a segment endpoint, the closest endpoint is chosen to be
 selected. Once a point is selected, hovering the pen nearby shows a
@@ -683,16 +678,15 @@ Angle constraints, and so on.
 
 For example, consider the scenario pictured in
 Figure~\ref{fig:fig-delayed-example} where the user draws a spline,
-two right angles, and a Same Length gesture. The recognizers operate
-on \textit{segments}, not \textit{strokes}. The ink processor found
+two right angles, and a Same Length gesture. The ink processor found
 seven segments: the spline at top, and six short line segments in the
 other strokes. Each recognizer receives these seven segments as input
 and must identify as many instances of its type as it can. The Right
 Angle recognizer, for example, looks for two short line segments of
 approximately the same length that appear to meet at roughly a 90
-degree angle. 
+degree angle.
 
-Given an input set of $n$ strokes, the Right Angle recognizer has
+Given this input set of $n=7$ strokes, the Right Angle recognizer has
 $n^2=49$ possible pairings to examine. Each pairing has four possible
 relative orientations. A recognizer that requires more segments has
 vastly more combinations. This process is also fraught with subjective
@@ -751,9 +745,10 @@ input line segments $(in_0, in_1, ...)$ that cross corresponding
 existing line segments $(S_0, S_1, ...)$. All input lines $in_i$ must
 be at least 40\% the length of the longest one. In addition, each
 $in_i$ must be within 30\% of $S_i$'s length to $S_i$'s
-midpoint. Users tend to naturally follow these rules. The hash mark is
-a convention in pencil-and-paper sketching, and it is consistent with
-the Same Length constraint's visual appearance.
+midpoint. Users tend to naturally follow these rules without prior
+tutoring: the hash mark is a convention in pencil-and-paper sketching,
+and it is consistent with the Same Length constraint's visual
+appearance.
 
 Graphically, any existing Same Length gesture is drawn as a set of
 short red lines passing through the midpoint of each $S_i$ at a 45
@@ -780,10 +775,9 @@ constraint is prominently displayed.
 
 The Right Angle constraint allows designers to make 90 degree
 angles. Right angles are one of the most common geometric features of
-the artifacts I surveyed in
-Section~\ref{sec:formative-artifact}. Right angles are used to define
-not only the esthetic shape of a cutout, but also for making joints
-for combining parts.
+the artifacts surveyed in Section~\ref{sec:formative-artifact}. Right
+angles are used to define not only the esthetic shape of a cutout, but
+also for making joints for combining parts.
 
 The gesture for making right angles looks like a half-square
 symbol. It is commonly used in pencil-and-paper sketching. The Right
@@ -793,15 +787,15 @@ right angle.
 The gesture can be made in one or two strokes. It does not require
 users to draw these strokes in any particular way---only that the
 result looks like a half-square. Once it identifies two line segments
-that meet the requirements, it labels the corners as shown at the left
-panel of Figure~\ref{fig:right-angle}. This is done to check context
-around the gesture to determine which (if any) lines the right angle
-applies to.
+that meet the requirements, corners are labeled as shown in
+Figure~\ref{fig:right-angle} (left panel). This checks context around
+the gesture to determine which (if any) lines the right angle applies
+to.
 
-The context check looks for nearby line segments that are in the right
-location and orientation that supports recognition of a right angle
-constraint.  The following description uses tunable parameters
-summarized in Table~\ref{tab:right-angle-params}. 
+The context check looks for nearby line segments that are in the
+correct location and orientation to supports recognition of a right
+angle constraint.  The following description uses tunable parameters
+summarized in Table~\ref{tab:right-angle-params}.
 
 The context check finds nearby lines $T_0$ and $T_1$ that share a
 vertex and form an angle that is $90\pm\theta_0$ degrees. This
