@@ -9,6 +9,7 @@
 % \usepackage{times}
 \usepackage{fullpage}
 \usepackage{graphicx}
+
 \usepackage[rightcaption]{sidecap}
 
 \usepackage{amsmath}
@@ -38,7 +39,17 @@
 \usepackage[letterpaper,twoside,vscale=.8,hscale=.75,nomarginpar,hmarginratio=1:1]{geometry}
 
 % Provides a draft mark at the top of the document. 
-\draftstamp{Draft generated on \today}{}
+% \draftstamp{Draft generated on \today}{}
+
+% PDF properties
+\hypersetup
+{
+  pdfauthor={Gabe Johnson},
+  pdfsubject={PhD Dissertation},
+  pdftitle={Sketch-based Interaction for Designing Precise Laser Cut Items},
+  pdfkeywords={Sketching, Design, Pen Computing, Laser Cutters, Rapid
+  Prototyping, SBIM, Interaction Design, HCI}
+}
 
 \begin {document} 
 \frontmatter
@@ -83,9 +94,7 @@ Ellen Yi-Luen Do (Georgia Institute of Technology)
 \input{abstract.tex}
 \end{abstract}
 
-\begin{acknowledgments}
-\input{ack.tex}
-\end{acknowledgments}
+\begin{acknowledgments}\input{ack.tex}\end{acknowledgments}
 
 \tableofcontents
 \listoffigures
