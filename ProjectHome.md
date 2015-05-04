@@ -1,0 +1,1 @@
+This is a 'misc. drawer' for various hacks that don't easily fit into pen-ui, six11utils, or sketching-games. This includes source code and papers (in LaTex with supporting files).
